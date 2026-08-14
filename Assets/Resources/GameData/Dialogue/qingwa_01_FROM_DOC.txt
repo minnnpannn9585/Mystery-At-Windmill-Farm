@@ -1,0 +1,1519 @@
+{
+  "module": "qingwa_01_FROM_DOC",
+  "nodes": [
+    {
+      "Type": "Normal",
+      "DocTag": "entry#0",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "NGPlus",
+          "VarType": "bool",
+          "TrueNext": 297,
+          "FalseNext": 80
+        }
+      ],
+      "Next": 80,
+      "id": 0
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-A#1",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u4E00\u80A1\u523A\u9F3B\u7684\u8349\u672C\u751C\u5473\uFF0C\u6DF7\u7740\u6C60\u6C34\u8165\u6C14\uFF09",
+      "Next": 2,
+      "id": 1
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-A#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u4F60\u6765\u4E86\u3002",
+      "Next": 3,
+      "id": 2
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-A#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u6216\u8005\u2026\u2026\u4F60\u53EA\u662F\u8DEF\u8FC7\u8FD9\u7247\u6B7B\u6C34\u3002",
+      "Next": 4,
+      "id": 3
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-A#4",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u2026\u2026\u8FD9\u91CC\u662F\u4F60\u7684\u5730\u65B9\uFF1F",
+      "Next": 5,
+      "id": 4
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-A#5",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u8FD9\u91CC\u662F\u865A\u65E0\u7684\u5730\u65B9\u3002",
+      "Next": 6,
+      "id": 5
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-A#6",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u6211\u5728\u8FD9\u513F\u5750\u4E86\u5F88\u4E45\u4E86\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Frog_FirstMeetShown",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 200,
+      "id": 6
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-B#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u8FD9\u91CC\u6709\u6CA1\u6709\u89C1\u8FC7\u2026\u2026\u4E00\u9897\u86CB\uFF1F",
+      "Next": 17,
+      "id": 16
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-B#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u86CB\u2026\u2026\u4EC0\u4E48\u86CB\u3002",
+      "Next": 18,
+      "id": 17
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-B#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u8FD9\u7247\u6C34\u91CC\uFF0C\u65E9\u5C31\u6CA1\u6709\u65B0\u751F\u4E86\u3002",
+      "Next": 19,
+      "id": 18
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-B#4",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u6240\u4EE5\u662F\u2026\u2026\u6709\uFF0C\u8FD8\u662F\u6CA1\u6709\uFF1F",
+      "Next": 20,
+      "id": 19
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-B#5",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u95EE\u9519\u4E86\u4EBA\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Frog_EggAsked",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 205,
+      "id": 20
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-C#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u8C37\u4ED3\u90A3\u8FB9\u2026\u2026\u4F60\u53BB\u8FC7\u5417\uFF1F",
+      "Next": 22,
+      "id": 21
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-C#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u6211\u53EA\u8DB4\u6C34\u8FB9\u3002",
+      "Next": 23,
+      "id": 22
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-C#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u79BB\u6C34\u8FDC\u7684\u5730\u65B9\u2026\u2026\u8FDE\u865A\u65E0\u90FD\u662F\u5E72\u7684\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Frog_NapSpotAsked",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 205,
+      "id": 23
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u6C34\u602A\u2026\u2026\u8FD9\u6C60\u5858\u91CC\u771F\u7684\u6709\u6C34\u602A\uFF1F",
+      "Next": 25,
+      "id": 24
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#2",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u7F13\u7F13\u8F6C\u5934\uFF0C\u76EE\u5149\u7B2C\u4E00\u6B21\u843D\u8FC7\u6765\uFF0C\u5374\u6563\u7740\uFF09",
+      "Next": 26,
+      "id": 25
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u6C34\u602A\u3002",
+      "Next": 27,
+      "id": 26
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#4",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u2026\u2026\u6CA1\u6709\u6C34\u602A\u3002",
+      "Next": 28,
+      "id": 27
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#5",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u4F46\u6709\u6BD4\u6C34\u602A\u66F4\u8BA9\u4EBA\u5FC3\u788E\u7684\u4E1C\u897F\u3002",
+      "Next": 29,
+      "id": 28
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#6",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u8FD9\u7247\u6C34\u2026\u2026\u770B\u7740\u4E00\u6837\u63A5\u4E00\u6837\u5730\u6D88\u5931\u3002",
+      "Next": 30,
+      "id": 29
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#7",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u6C34\u9762\u5E73\u9759\uFF0C\u4EC0\u4E48\u75D5\u8FF9\u90FD\u6CA1\u7559\u4E0B\uFF09",
+      "Next": 31,
+      "id": 30
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#8",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u7EAF\u51C0\uFF0C\u7B2C\u4E00\u4E2A\u6B7B\u53BB\u3002",
+      "Next": 32,
+      "id": 31
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#9",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u7136\u540E\u2026\u2026\u51B0\u51B7\u7684\u5668\u76BF\u6765\u4E86\u3002",
+      "Next": 33,
+      "id": 32
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#10",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u4F4E\u5934\u76EF\u7740\u6C34\u9762\uFF0C\u4E45\u4E45\u4E0D\u62AC\uFF09",
+      "Next": 34,
+      "id": 33
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#11",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u751F\u547D\u4E4B\u6E90\u2026\u2026\u5728\u67AF\u7AED\u3002",
+      "Next": 35,
+      "id": 34
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#12",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u4E00\u4E2A\u9ED1\u8272\u7684\u6076\u9B54\u2026\u2026",
+      "Next": 36,
+      "id": 35
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#13",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u5589\u5499\u52A8\u4E86\u4E00\u4E0B\uFF0C\u53C8\u54D1\u4F4F\uFF09",
+      "Next": 37,
+      "id": 36
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#14",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u5B83\u5E26\u8D70\u4E86\u5B9D\u73E0\u3002",
+      "Next": 38,
+      "id": 37
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#15",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u4EC0\u4E48\u90FD\u4E0D\u5269\u3002",
+      "Next": 39,
+      "id": 38
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-D#16",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u4F60\u5230\u5E95\u5728\u8BF4\u4EC0\u4E48\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Frog_WaterMonsterQueried",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 205,
+      "id": 39
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-hub-intro#1",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u53C8\u6709\u4E1C\u897F\u6765\u4E86\u3002",
+      "Next": 41,
+      "id": 40
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-hub-intro#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u6216\u8005\u2026\u2026\u53C8\u6709\u4E1C\u897F\u8981\u8D70\u4E86\u3002",
+      "Next": 600,
+      "id": 41
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u4F60\u8EAB\u4E0B\u90A3\u5757\u7EFF\u57AB\u5B50\u2026\u2026\u80FD\u7ED9\u6211\u5417\uFF1F",
+      "Next": 43,
+      "id": 42
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#2",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u8EAB\u4E0B\u538B\u7740\u7EFF\u6CB9\u6CB9\u7684\u4E1C\u897F\uFF0C\u4E00\u9635\u8349\u672C\u751C\u6C14\u4ECE\u90A3\u91CC\u98D8\u8FC7\u6765\uFF09",
+      "Next": 44,
+      "id": 43
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#3",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u4F4E\u5934\u770B\u4E86\u4E00\u773C\u8EAB\u4E0B\uFF0C\u518D\u62AC\u5934\uFF0C\u76EE\u5149\u4ECD\u6563\u7740\uFF09",
+      "Next": 430,
+      "id": 44
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#4",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u6CA1\u6709\u7ACB\u523B\u56DE\u5E94\uFF0C\u89C6\u7EBF\u5728\u6C34\u9762\u4E0A\u505C\u4E86\u4E00\u4F1A\u513F\uFF09",
+      "Next": 472,
+      "id": 46
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#5",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u89C6\u7EBF\u4ECE\u6C34\u9762\u6162\u6162\u79FB\u5230\u8EAB\u4E0B\uFF0C\u53C8\u79FB\u56DE\u6765\uFF09",
+      "Next": 492,
+      "id": 48
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-B#1",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u91CD\u65B0\u76EF\u5411\u6C34\u9762\uFF0C\u4E0D\u518D\u770B\u8FC7\u6765\uFF09",
+      "Next": 51,
+      "id": 50
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-B#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u4F60\u8FD8\u6CA1\u61C2\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Frog_PadRefused",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 605,
+      "id": 51
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#1",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u7F13\u7F13\u632A\u5F00\u8EAB\u4F53\uFF0C\u7EFF\u8272\u7684\u4E1C\u897F\u9732\u51FA\u6765\uFF0C\u8349\u672C\u751C\u6C14\u9AA4\u7136\u52A0\u91CD\uFF09",
+      "Next": 53,
+      "id": 52
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u2026\u2026\u62FF\u53BB\u5427\u3002",
+      "Next": 54,
+      "id": 53
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u5B83\u6563\u53D1\u7740\u8150\u673D\u53C8\u751C\u7684\u6C14\u5473\u2026\u2026",
+      "Next": 55,
+      "id": 54
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#4",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u50CF\u751F\u547D\u6D41\u8D70\u65F6\uFF0C\u90A3\u79CD\u8BA9\u4EBA\u53D1\u6655\u7684\u6C14\u606F\u3002",
+      "Next": 56,
+      "id": 55
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#5",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u65E2\u7136\u4F60\u8981\u628A\u8FD9\u7247\u865A\u65E0\u6536\u8D70\u2026\u2026",
+      "Next": 57,
+      "id": 56
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#6",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u91CD\u65B0\u671B\u5411\u6C34\u9762\uFF0C\u773C\u795E\u6BD4\u521A\u624D\u66F4\u7A7A\uFF09",
+      "Next": 58,
+      "id": 57
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#7",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u2026\u2026\u90A3\u5C31\u90FD\u7ED9\u4F60\u3002",
+      "Next": 59,
+      "id": 58
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#8",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u8FD9\u4E1C\u897F\u2026\u2026\u4F60\u4E00\u76F4\u5750\u5728\u4E0A\u9762\uFF1F",
+      "Next": 60,
+      "id": 59
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#9",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u5B83\u548C\u6211\u4E00\u6837\u2026\u2026\u6B63\u5728\u8150\u70C2\u3002",
+      "Next": 61,
+      "id": 60
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#10",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u4F46\u81F3\u5C11\u8FD8\u7559\u7740\u6C14\u5473\u3002",
+      "Next": 62,
+      "id": 61
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#11",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u8BC1\u660E\u66FE\u7ECF\u5B58\u5728\u8FC7\u3002",
+      "Next": 63,
+      "id": 62
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-C#12",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u4E00\u9635\u98CE\u63A0\u8FC7\uFF0C\u6C34\u9762\u8361\u5F00\uFF0C\u6708\u5F71\u6563\u4E86\u53C8\u805A\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "MintFish_Obtained",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 605,
+      "id": 63
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u6211\u89C1\u8FC7\u597D\u591A\u53EA\u8DDF\u4F60\u4E00\u6837\u7684\u86D9\u3002",
+      "Next": 65,
+      "id": 64
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#2",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u7F13\u7F13\u8F6C\u5934\uFF0C\u76EE\u5149\u7B2C\u4E00\u6B21\u96C6\u4E2D\u8D77\u6765\uFF09",
+      "Next": 66,
+      "id": 65
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u2026\u2026\u4EC0\u4E48\uFF1F",
+      "Next": 67,
+      "id": 66
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#4",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u4E00\u6837\u7684\u53F0\u8BCD\uFF0C\u4E00\u6837\u7684\u59FF\u52BF\uFF0C\u4E00\u6837\u7684\u6C60\u5858\u3002",
+      "Next": 68,
+      "id": 67
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#5",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u4F60\u662F\u8FD9\u4E2A\u5730\u533A\u7684\u7B2C\u4E03\u540D\u3002",
+      "Next": 69,
+      "id": 68
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#6",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u53D1\u5446\u4E86\u597D\u51E0\u79D2\uFF0C\u773C\u775B\u731B\u5730\u5B9A\u4F4F\uFF09",
+      "Next": 70,
+      "id": 69
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#7",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u2026\u2026\u7B2C\u4E03\u3002",
+      "Next": 71,
+      "id": 70
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#8",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u6C89\u9ED8\u7247\u523B\uFF09",
+      "Next": 72,
+      "id": 71
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#9",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u2026\u2026\u7B2C\u4E03\uFF1F",
+      "Next": 73,
+      "id": 72
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#10",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u4F4E\u5934\uFF0C\u6162\u6162\u628A\u8EAB\u4E0B\u7684\u4E1C\u897F\u63A8\u4E86\u51FA\u6765\uFF0C\u4E0D\u8BF4\u8BDD\uFF09",
+      "Next": 74,
+      "id": 73
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-D#11",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u628A\u8EAB\u4F53\u504F\u5411\u53E6\u4E00\u4FA7\uFF0C\u4E0D\u518D\u770B\u8FD9\u8FB9\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "MintFish_Obtained",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 605,
+      "id": 74
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "entry#first",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "Frog_FirstMeetShown",
+          "VarType": "bool",
+          "TrueNext": 81,
+          "FalseNext": 1
+        }
+      ],
+      "Next": 81,
+      "id": 80
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "entry#mint",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "BlackCat_MintFishPending",
+          "VarType": "bool",
+          "TrueNext": 82,
+          "FalseNext": 100
+        }
+      ],
+      "Next": 100,
+      "id": 81
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "entry#mint2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "MintFish_Obtained",
+          "VarType": "bool",
+          "TrueNext": 100,
+          "FalseNext": 40
+        }
+      ],
+      "Next": 100,
+      "id": 82
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro#gate",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "Frog_WaterMonsterQueried",
+          "VarType": "bool",
+          "TrueNext": 150,
+          "FalseNext": 101
+        }
+      ],
+      "Next": 101,
+      "id": 100
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro#poolA",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "RotatePool": [
+        110,
+        120,
+        130,
+        140
+      ],
+      "Next": 200,
+      "id": 101
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v1#1",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u6C34\u9762\u7EB9\u4E1D\u4E0D\u52A8\uFF09",
+      "Next": 111,
+      "id": 110
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v1#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u4ECA\u5929\u7684\u6C34\u2026\u2026\u8DDF\u6628\u5929\u7684\u6C34\u4E00\u6837\u3002",
+      "Next": 112,
+      "id": 111
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v1#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u4F46\u6628\u5929\u5DF2\u7ECF\u6D88\u5931\u4E86\u3002",
+      "Next": 113,
+      "id": 112
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v1#4",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u6240\u4EE5\u5176\u5B9E\u2026\u2026\u4E0D\u4E00\u6837\u3002",
+      "Next": 200,
+      "id": 113
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v2#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u4F60\u597D\u3002",
+      "Next": 121,
+      "id": 120
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v2#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u597D\u4EC0\u4E48\u597D\u3002",
+      "Next": 122,
+      "id": 121
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v2#3",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u6C34\u9762\u91CD\u5F52\u6C89\u9ED8\uFF09",
+      "Next": 123,
+      "id": 122
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v2#4",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u6765\u8FC7\u5C31\u662F\u6765\u8FC7\u3002",
+      "Next": 200,
+      "id": 123
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v3#1",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u6D3B\u7740\uFF0C\u5C31\u662F\u5728\u7B49\u4E00\u4E2A\u4E0D\u4F1A\u6765\u7684\u4E1C\u897F\u3002",
+      "Next": 131,
+      "id": 130
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v3#2",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u7B49\u2026\u2026\u4EC0\u4E48\uFF1F",
+      "Next": 132,
+      "id": 131
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v3#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u4E0D\u77E5\u9053\u3002",
+      "Next": 133,
+      "id": 132
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v3#4",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u53EF\u611F\u89C9\u4E0A\uFF0C\u5C31\u662F\u5728\u7B49\u3002",
+      "Next": 200,
+      "id": 133
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v4#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u519C\u573A\u91CC\u51FA\u4E8B\u4E86\u2026\u2026",
+      "Next": 141,
+      "id": 140
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v4#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u4E00\u76F4\u5728\u51FA\u4E8B\u3002",
+      "Next": 142,
+      "id": 141
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v4#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u53EA\u662F\u4F60\u4EEC\u624D\u521A\u6CE8\u610F\u5230\u3002",
+      "Next": 200,
+      "id": 142
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro#poolB",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "RotatePool": [
+        151,
+        160,
+        165
+      ],
+      "Next": 200,
+      "id": 150
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v5#1",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u91CD\u65B0\u76EF\u5411\u6C34\u9762\uFF0C\u4E0D\u518D\u770B\u8FC7\u6765\uFF09",
+      "Next": 152,
+      "id": 151
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v5#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u4F60\u5DF2\u7ECF\u77E5\u9053\u4E86\u3002",
+      "Next": 153,
+      "id": 152
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v5#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u4F46\u77E5\u9053\u4E86\u4E5F\u6CA1\u6709\u7528\u3002",
+      "Next": 200,
+      "id": 153
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v6#1",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u865A\u65E0\u4E0D\u4F1A\u56E0\u4E3A\u88AB\u53D1\u73B0\u800C\u6D88\u5931\u3002",
+      "Next": 200,
+      "id": 160
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v7#1",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u2026\u2026\u4F60\u8FD8\u597D\u5417\uFF1F",
+      "Next": 166,
+      "id": 165
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "2-hub-intro@v7#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u8FD8\u597D\uFF0C\u662F\u4E00\u79CD\u5F88\u5962\u4F88\u7684\u72B6\u6001\u3002",
+      "Next": 200,
+      "id": 166
+    },
+    {
+      "Type": "Question",
+      "DocTag": "2-hub#menu",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026",
+      "Options": [
+        {
+          "Text": "\u6C34\u602A\u2026\u2026\u8FD9\u6C60\u5858\u91CC\u771F\u7684\u6709\u6C34\u602A\uFF1F",
+          "Next": 24,
+          "DisplayConditions": [
+            {
+              "VarName": "ChickStatus",
+              "VarType": "int",
+              "Op": "\u003E=",
+              "Value": 2
+            },
+            {
+              "VarName": "Frog_WaterMonsterQueried",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u8FD9\u91CC\u6709\u6CA1\u6709\u89C1\u8FC7\u2026\u2026\u4E00\u9897\u86CB\uFF1F",
+          "Next": 16,
+          "DisplayConditions": [
+            {
+              "VarName": "Shufen_CommissionDone",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Frog_EggAsked",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u8C37\u4ED3\u90A3\u8FB9\u2026\u2026\u4F60\u53BB\u8FC7\u5417\uFF1F",
+          "Next": 21,
+          "DisplayConditions": [
+            {
+              "VarName": "E07_ViewNapSpot",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Frog_NapSpotAsked",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u2026\u2026",
+          "Next": -1
+        }
+      ],
+      "id": 200
+    },
+    {
+      "Type": "Question",
+      "DocTag": "2-hub#return#menu",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u8FD8\u6709\u4E8B\u5417\uFF1F",
+      "Options": [
+        {
+          "Text": "\u6C34\u602A\u2026\u2026\u8FD9\u6C60\u5858\u91CC\u771F\u7684\u6709\u6C34\u602A\uFF1F",
+          "Next": 24,
+          "DisplayConditions": [
+            {
+              "VarName": "ChickStatus",
+              "VarType": "int",
+              "Op": "\u003E=",
+              "Value": 2
+            },
+            {
+              "VarName": "Frog_WaterMonsterQueried",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u8FD9\u91CC\u6709\u6CA1\u6709\u89C1\u8FC7\u2026\u2026\u4E00\u9897\u86CB\uFF1F",
+          "Next": 16,
+          "DisplayConditions": [
+            {
+              "VarName": "Shufen_CommissionDone",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Frog_EggAsked",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u8C37\u4ED3\u90A3\u8FB9\u2026\u2026\u4F60\u53BB\u8FC7\u5417\uFF1F",
+          "Next": 21,
+          "DisplayConditions": [
+            {
+              "VarName": "E07_ViewNapSpot",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Frog_NapSpotAsked",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u2026\u2026",
+          "Next": -1
+        }
+      ],
+      "id": 205
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "RotatePool": [
+        301,
+        305,
+        310,
+        320
+      ],
+      "Next": -1,
+      "id": 296
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus#gate",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "Next": 298,
+      "id": 297
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "RotatePool": [
+        301,
+        305,
+        310,
+        320
+      ],
+      "Next": -1,
+      "id": 298
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v1#1",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u5B9D\u73E0\u2026\u2026\u6628\u591C\u53C8\u6D6E\u4E0A\u6765\u4E86\u3002",
+      "Next": 302,
+      "id": 301
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v1#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u6C89\u5165\u6DF1\u6E0A\u7684\uFF0C\u4ECE\u6765\u53EA\u662F\u5012\u5F71\u3002",
+      "Next": 303,
+      "id": 302
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v1#3",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u6C34\u9762\u5E73\u9759\uFF0C\u6708\u5F71\u5B8C\u6574\uFF09",
+      "Next": -1,
+      "id": 303
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v2#1",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u6CA1\u6709\u8F6C\u5934\uFF09",
+      "Next": 306,
+      "id": 305
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v2#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u9ED1\u8272\u7684\u6076\u9B54\u2026\u2026\u4E5F\u8BB8\u53EA\u662F\u6068\u81EA\u5DF1\u7684\u5012\u5F71\u3002",
+      "Next": 307,
+      "id": 306
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v2#3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u6068\u7684\uFF0C\u4E0D\u6B62\u5B83\u4E00\u4E2A\u3002",
+      "Next": -1,
+      "id": 307
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v3#1",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u751F\u547D\u4E4B\u6E90\u2026\u2026\u4ECD\u5728\u88AB\u8200\u8D70\u3002",
+      "Next": 311,
+      "id": 310
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v3#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u865A\u65E0\u4F9D\u7136\u5B58\u5728\u3002",
+      "Next": 312,
+      "id": 311
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v3#3",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u8BE5\u67E5\u7684\uFF0C\u90FD\u67E5\u5B8C\u4E86\u3002",
+      "Next": 313,
+      "id": 312
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v3#4",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u67E5\u5B8C\u4EC0\u4E48\u2026\u2026\u865A\u65E0\u8FD8\u662F\u865A\u65E0\u3002",
+      "Next": -1,
+      "id": 313
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v4#1",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u90A3\u5757\u8150\u673D\u6D6E\u6728\u8D70\u4E86\u2026\u2026",
+      "Next": 321,
+      "id": 320
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v4#2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u8EAB\u4E0B\u7A7A\u4E86\uFF0C\u51B0\u51C9\u3002",
+      "Next": 322,
+      "id": 321
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v4#3",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u86D9\u53F9\u4E86\u4E00\u53E3\u6C14\uFF09",
+      "Next": 323,
+      "id": 322
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus@v4#4",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u2026\u2026\u5012\u4E5F\u5951\u5408\u3002",
+      "Next": -1,
+      "id": 323
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#gate",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "Mouse_MintFishPaid",
+          "VarType": "bool",
+          "TrueNext": 422,
+          "FalseNext": 42
+        }
+      ],
+      "Next": 42,
+      "id": 421
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#supplement",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "E12_ViewGreenPad",
+          "VarType": "bool",
+          "TrueNext": 42,
+          "FalseNext": 423
+        }
+      ],
+      "Next": 42,
+      "id": 422
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#supplement#set",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "",
+      "SetVariables": [
+        {
+          "VarName": "E12_ViewGreenPad",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 42,
+      "id": 423
+    },
+    {
+      "Type": "Question",
+      "DocTag": "3-A#r1",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u4F60\u6765\u8FD9\u91CC\uFF0C\u662F\u56E0\u4E3A\u4EC0\u4E48\uFF1F",
+      "Options": [
+        {
+          "Text": "\u6211\u6765\u62FF\u4F60\u8EAB\u4E0B\u90A3\u5757\u7EFF\u57AB\u5B50\u3002",
+          "Next": 606
+        },
+        {
+          "Text": "\u56E0\u4E3A\u6211\u5728\u627E\u4E22\u5931\u7684\u86CB\u3002",
+          "Next": 607
+        },
+        {
+          "Text": "\u2026\u2026\u4E0D\u77E5\u9053\u3002\u611F\u89C9\u5230\u4E86\uFF0C\u5C31\u6765\u4E86\u3002",
+          "Next": 608
+        }
+      ],
+      "id": 430
+    },
+    {
+      "Type": "Question",
+      "DocTag": "3-A#r2",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u4F60\u61C2\u4EC0\u4E48\u53EB\u5931\u53BB\u5417\uFF1F",
+      "Options": [
+        {
+          "Text": "\u61C2\u3002\u4E22\u4E86\u8FD8\u80FD\u627E\u56DE\u6765\u3002",
+          "Next": 609
+        },
+        {
+          "Text": "\u61C2\u3002\u6211\u4E22\u8FC7\u91CD\u8981\u7684\u4E1C\u897F\u3002",
+          "Next": 610
+        },
+        {
+          "Text": "\u2026\u2026\u4E0D\u61C2\u3002\u6216\u8005\u8BF4\uFF0C\u61C2\u4E86\u53C8\u600E\u6837\u3002",
+          "Next": 611
+        }
+      ],
+      "id": 472
+    },
+    {
+      "Type": "Question",
+      "DocTag": "3-A#r3",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4ECB\u5165",
+      "Dialogue": "\u5B83\u4E00\u76F4\u966A\u7740\u6211\u2026\u2026\u76F4\u5230\u73B0\u5728\u3002",
+      "Options": [
+        {
+          "Text": "\u90A3\u4F60\u7559\u7740\u5427\u3002\u6211\u4E0D\u62FF\u4E86\u3002",
+          "Next": 612
+        },
+        {
+          "Text": "\u4F46\u5B83\u73B0\u5728\u8BE5\u8BA9\u4EBA\u5E26\u8D70\u4E86\u3002",
+          "Next": 613
+        },
+        {
+          "Text": "\u2026\u2026\u966A\u7740\uFF0C\u4E5F\u662F\u4E00\u79CD\u6D88\u8017\u3002",
+          "Next": 614
+        }
+      ],
+      "id": 492
+    },
+    {
+      "Type": "Question",
+      "DocTag": "3-hub#menu",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026",
+      "Options": [
+        {
+          "Text": "\u4F60\u8EAB\u4E0B\u90A3\u5757\u7EFF\u57AB\u5B50\u2026\u2026\u80FD\u7ED9\u6211\u5417\uFF1F",
+          "Next": 421,
+          "DisplayConditions": [
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": false
+            }
+          ],
+          "DisplayAnyConditions": [
+            {
+              "VarName": "E12_ViewGreenPad",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_MintFishPaid",
+              "VarType": "bool",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Text": "\u2026\u2026\u6211\u89C1\u8FC7\u597D\u591A\u53EA\u8DDF\u4F60\u4E00\u6837\u7684\u86D9\u3002",
+          "Next": 64,
+          "DisplayConditions": [
+            {
+              "VarName": "Mouse_FrogFallbackGiven",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u2026\u2026",
+          "Next": -1
+        }
+      ],
+      "id": 600
+    },
+    {
+      "Type": "Question",
+      "DocTag": "3-hub#return#menu",
+      "NpcName": "\u60B2\u4F24\u86D9",
+      "NpcSprite": "\u4E27",
+      "Dialogue": "\u2026\u2026\u55EF\u3002",
+      "Options": [
+        {
+          "Text": "\u4F60\u8EAB\u4E0B\u90A3\u5757\u7EFF\u57AB\u5B50\u2026\u2026\u80FD\u7ED9\u6211\u5417\uFF1F",
+          "Next": 421,
+          "DisplayConditions": [
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": false
+            }
+          ],
+          "DisplayAnyConditions": [
+            {
+              "VarName": "E12_ViewGreenPad",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_MintFishPaid",
+              "VarType": "bool",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Text": "\u2026\u2026\u6211\u89C1\u8FC7\u597D\u591A\u53EA\u8DDF\u4F60\u4E00\u6837\u7684\u86D9\u3002",
+          "Next": 64,
+          "DisplayConditions": [
+            {
+              "VarName": "Mouse_FrogFallbackGiven",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u2026\u2026",
+          "Next": -1
+        }
+      ],
+      "id": 605
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r1#pick-A",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u6211\u6765\u62FF\u4F60\u8EAB\u4E0B\u90A3\u5757\u7EFF\u57AB\u5B50\u3002",
+      "Next": 50,
+      "id": 606
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r1#pick-B",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u56E0\u4E3A\u6211\u5728\u627E\u4E22\u5931\u7684\u86CB\u3002",
+      "Next": 50,
+      "id": 607
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r1#pick-C",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u4E0D\u77E5\u9053\u3002\u611F\u89C9\u5230\u4E86\uFF0C\u5C31\u6765\u4E86\u3002",
+      "Next": 46,
+      "id": 608
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r2#pick-A",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u61C2\u3002\u4E22\u4E86\u8FD8\u80FD\u627E\u56DE\u6765\u3002",
+      "Next": 50,
+      "id": 609
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r2#pick-B",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u61C2\u3002\u6211\u4E22\u8FC7\u91CD\u8981\u7684\u4E1C\u897F\u3002",
+      "Next": 50,
+      "id": 610
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r2#pick-C",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u4E0D\u61C2\u3002\u6216\u8005\u8BF4\uFF0C\u61C2\u4E86\u53C8\u600E\u6837\u3002",
+      "Next": 48,
+      "id": 611
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r3#pick-A",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u90A3\u4F60\u7559\u7740\u5427\u3002\u6211\u4E0D\u62FF\u4E86\u3002",
+      "Next": 50,
+      "id": 612
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r3#pick-B",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u4F46\u5B83\u73B0\u5728\u8BE5\u8BA9\u4EBA\u5E26\u8D70\u4E86\u3002",
+      "Next": 50,
+      "id": 613
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "3-A#r3#pick-C",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u966A\u7740\uFF0C\u4E5F\u662F\u4E00\u79CD\u6D88\u8017\u3002",
+      "Next": 52,
+      "id": 614
+    }
+  ]
+}

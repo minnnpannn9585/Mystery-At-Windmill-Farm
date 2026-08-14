@@ -5,19 +5,20 @@ alwaysApply: true
 
 # XiaoHuoRen_EggRescue 开发约定
 
-唯一可运行 Scene：`Assets/Scenes/Mechanics_Code.unity`（Addressables 分组 `Mechanics_Code`）。  
+唯一可运行 Scene：`Assets/Scenes/Mechanics_Code.unity`（PC Build Settings 入口）。  
+运行时逻辑在 **C#**（`Assets/Scripts/Runtime/`），由 `GameBootstrap` 启动。Lua + 抖音 SDK 仅作对照，不要再往 `Assets/luaScripts/` 加新功能。  
 旧美术验证场景 `ArtTest_MRL.unity` 不再作为日常开发入口。
 
 开发前先读：
-- `docs/IMPLEMENTATION.md` — 代码架构、Lua 模块、数据流、Editor 管线
-- `docs/DIALOGUE_INDEX.md` — Lua 对话文件与角色对照（含拼音命名解码）
+- `docs/IMPLEMENTATION.md` — C# 运行时、数据转换、遗留 Lua 对照
+- `docs/DIALOGUE_INDEX.md` — 对话文件与角色对照（含拼音命名解码）
 - `MissingEggDoc-main/docs/17-全局游戏状态变量.md` — 变量名唯一对照表
 - 改对话 / E 点 / 笔记本时，交叉查阅 `13`、`09`、`07` 对应章节
 
-逻辑在 Lua（`Assets/luaScripts/`），数据在 `Assets/Data/`。改变量须先登记 doc 17，再改 `GlobalVariables.lua` 与对话 / ClueTrigger / BookController。
+改变量须先登记 doc 17，再改 `Assets/Data/GlobalData/GlobalVariables.lua` 与对话 / ClueTrigger / BookController，然后执行 **Tools/Egg Rescue/PC/Convert Lua Data To JSON**（写入 `Assets/Resources/GameData/`）。
 
-对话数据：`Assets/Data/DialogueData/`（定稿）与 `…/FROM_DOC/`（树状生成稿）→ Scene 中 `DialogueData/{luaModuleName}` DouyinScript。NPC 分支：`Assets/Data/GlobalData/NPCData_Config.lua`。
+对话定稿仍在 `Assets/Data/DialogueData/`（含 `FROM_DOC/`）。NPC 分支：`Assets/Data/GlobalData/NPCData_Config.lua`。
 
-**树状 md → lua（混合式）**：[`doc_to_lua.py`](../MissingEggDoc-main/scripts/doc_to_lua.py) 只辅助批量台词（`--no-entry`）；**路由由 Agent 读 md §路由规则直接改 lua**，禁止为单个 NPC 扩展生成器 entry/profile。详见 [`TREE_TO_LUA_SPEC.md`](../docs/TREE_TO_LUA_SPEC.md) §1。`apply_routing.py` 已 deprecated。
+**树状 md → lua（混合式）**：[`doc_to_lua.py`](../MissingEggDoc-main/scripts/doc_to_lua.py) 只辅助批量台词（`--no-entry`）；**路由由 Agent 读 md §路由规则直接改 lua**，禁止为单个 NPC 扩展生成器 entry/profile。详见 [`TREE_TO_LUA_SPEC.md`](../docs/TREE_TO_LUA_SPEC.md) §1。
 
-**打包 / 发布前**：确认 [`NpcDialogueManager.lua`](Assets/luaScripts/NpcDialogueManager.lua) 中 `DIALOGUE_DEBUG = false`；[`GlobalVariablesManager.lua`](Assets/luaScripts/GlobalVariablesManager.lua) 中 `VAR_DEBUG_UI_ENABLED = false`、`KEEP_NPC_BRANCH_FOR_TEST = false`。详见 `docs/DIALOGUE_PIPELINE.md` §6、`docs/IMPLEMENTATION.md` §5.4。
+PC 场景接线：`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`。存档：F5 保存 / F9 读取（玩家包启动自动读档；Editor Play 不自动读档）。N 开关笔记本。

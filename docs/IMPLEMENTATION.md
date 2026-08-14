@@ -1,9 +1,9 @@
-# 实现架构（Mechanics_Code）
+# 实现架构（PC C# Runtime + 遗留 Lua）
 
 > **用途**：代码侧技术地图，供开发者和 AI 快速理解「怎么跑」。  
 > **策划文档**：玩法 / 叙事 / 变量语义见 [`MissingEggDoc-main/`](../MissingEggDoc-main/README.md)。  
-> **主开发 / 可运行 Scene**：`Assets/Scenes/Mechanics_Code.unity`（Addressables 分组 `Mechanics_Code`，非传统 Build Settings 入口）。  
-> **遗留**：`ArtTest_MRL.unity` 为早期美术白盒场景，新功能与点测以 Mechanics_Code 为准。
+> **主开发 / 可运行 Scene**：`Assets/Scenes/Mechanics_Code.unity`（PC 已写入 Build Settings；Addressables 分组 `Mechanics_Code` 仅为抖音遗留发布入口）。  
+> **遗留**：`ArtTest_MRL.unity` 为早期美术白盒场景。Lua + 抖音 SDK 仍在仓库中作对照，**新逻辑只写 C#**。
 
 ---
 
@@ -11,14 +11,22 @@
 
 | 层级 | 技术 |
 |------|------|
-| 引擎 | Unity + URP 12.1.8 |
-| 平台 | 抖音小火人 World SDK（`DouyinVCreateSDK`、`com.douyin.*` 本地包） |
-| 游戏逻辑 | **Lua**（挂载于 `DouyinScript` 组件） |
-| 对话 / 状态数据 | Lua 表（`DialogueConfig`、`GlobalVariables`、`NPCData`） |
-| 编辑器 | C# 自定义窗口（对话图、NPC 管理） |
-| 发布 | Addressables（`Assets/AddressableAssetsData/`，分组 **`Mechanics_Code`**） |
+| 引擎 | Unity 2021.3.14f1 + URP 12.1.8 |
+| 平台 | **PC Standalone**（第三人 WASD + 鼠标视角 + E/点击交互） |
+| 游戏逻辑 | **C#**（`Assets/Scripts/Runtime/`） |
+| 对话 / 状态数据 | JSON TextAsset（`Assets/Resources/GameData/`，由 Lua 表转换） |
+| 遗留 | 抖音 World SDK + Lua（`Assets/luaScripts/`），发布前用菜单禁用 DouyinScript |
+| 编辑器 | C# 自定义窗口 + `Tools/Egg Rescue/PC/*` |
 
-C# 业务脚本极少，主要是工具：`MeshCombiner`、`MergeModelToFbxExporter`、`EditorMeshCountChecker`、`DialogueGraphEditorWindow`、`NPCAssetManagerWindow`。
+C# 运行时入口：`GameBootstrap`（Play 后自动生成，不依赖抖音注入角色）。玩家占位胶囊，模型可后换。
+
+### 1.1 从 Lua 迁到 C# 后怎么跑
+
+1. 打开 `Mechanics_Code`，菜单 **`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`**（写入出生点、禁用 DouyinScript、接线立绘）。
+2. Play：WASD 移动、空格跳、鼠标视角、E 或左键交互。F5 存档，F9 读档，Esc 解锁鼠标。
+3. 改对话 lua 后执行 **`Tools/Egg Rescue/PC/Convert Lua Data To JSON`**（或 `dotnet run --project MissingEggDoc-main/scripts/LuaToJson/LuaToJson.csproj`）。
+
+数据转换脚本：[`MissingEggDoc-main/scripts/lua_to_json.py`](../MissingEggDoc-main/scripts/lua_to_json.py)（需 Python）与 [`MissingEggDoc-main/scripts/LuaToJson/`](../MissingEggDoc-main/scripts/LuaToJson/)（dotnet）。
 
 ---
 
@@ -309,10 +317,10 @@ SetGlobalVar（对话 / ClueTrigger / 老鼠商店）
 | 环境 E 点 | 13 | ✅ Scene 已挂 ClueTrigger |
 | 侦探笔记本 | 09 | ✅ 33 主线条目 + 老鼠 prefab 动态生成 + 15 连线 + 13 修饰 |
 | 全局变量表 | 17 | ✅ GlobalVariables.lua 基本对齐 |
-| 存档持久化 | — | ❌ 仅内存，重启丢失 |
+| 存档持久化 | — | ✅ PC JSON 存档（F5/F9；玩家包启动自动读档） |
 | 奶酪碎经济 `CheeseCount` | 13 §13.5 | ✅ 48 个场景散点 + HUD + 一/五/八块商店扣费 |
 | 老鼠兄弟对话 | 老鼠兄弟-* | ✅ 墙缝 hub、盲盒情报、薄荷鱼付费/免费开池、蛙兜底 |
-| 漫画收束 `Comic_Revealed` | 漫画收束-* | ❌ 变量已定义，无 E20 演出 |
+| 漫画收束 `Comic_Revealed` | 漫画收束-* | ✅ `ComicGateTrigger` + `EndingController` |
 | 二周目 `NGPlus` | 07 §7.4 | ⚠️ 变量已定义，部分 NPC 树未完整 |
 | 平台跳跃硬闸 | 03、08 | ⚠️ 场景有几何，逻辑主要靠 E 点变量 |
 
@@ -339,15 +347,19 @@ SetGlobalVar（对话 / ClueTrigger / 老鼠商店）
 |------|------|
 | **Lua 文件 ↔ 角色对照（含拼音解码）** | [`docs/DIALOGUE_INDEX.md`](./DIALOGUE_INDEX.md) |
 | 可运行 Scene | `Assets/Scenes/Mechanics_Code.unity` |
-| 运行时 Lua 逻辑 | `Assets/luaScripts/*.lua` |
+| **C# 运行时** | `Assets/Scripts/Runtime/`（Core / Player / Dialogue / Interaction / NPC / UI / Audio / Economy / Ending） |
+| C# 运行时 JSON | `Assets/Resources/GameData/` |
+| Lua→JSON | `MissingEggDoc-main/scripts/LuaToJson/` · `Tools/Egg Rescue/PC/Convert Lua Data To JSON` |
+| PC 场景接线 | `Tools/Egg Rescue/PC/Setup Scene For PC Runtime` |
+| 运行时 Lua 逻辑（遗留对照） | `Assets/luaScripts/*.lua` |
 | 全局变量定义 | `Assets/Data/GlobalData/GlobalVariables.lua` |
 | NPC 配置 | `Assets/Data/GlobalData/NPCData_Config.lua` |
-| 对话数据（运行时） | `Assets/Data/DialogueData/*.lua` |
+| 对话数据（定稿 lua） | `Assets/Data/DialogueData/*.lua` |
 | 对话数据（编辑源） | `Assets/Editor/DialogueData/*.lua` |
 | NPC / 变量（编辑源） | `Assets/Editor/EditData/` |
 | 对话图编辑器 | `Assets/Editor/DialogueGraphEditorWindow.cs` |
 | NPC 编辑器 | `Assets/Editor/NPCAssetManagerWindow.cs` |
-| 一键发布 | `Assets/Editor/EggRescuePublishMenu.cs` |
+| 一键发布（抖音遗留） | `Assets/Editor/EggRescuePublishMenu.cs` |
 | 对话管线手册 | [`docs/DIALOGUE_PIPELINE.md`](./DIALOGUE_PIPELINE.md) |
 | doc→lua 试点 | `MissingEggDoc-main/scripts/doc_to_lua.py` |
 | 变量校验 | `MissingEggDoc-main/scripts/validate_lua_vars.py` |
@@ -358,12 +370,13 @@ SetGlobalVar（对话 / ClueTrigger / 老鼠商店）
 
 ## 10. 开发备忘
 
-- Scene 物体名 `MianController` 为历史拼写，脚本为 `MainController.lua`。
-- `DialogueTrigger` 通过 `GameObject.Find("DialogueData")` 查找对话数据，Scene 中该节点名不可改。
-- `_DialogueManager` 在 `NpcDialogueManager.Awake()` 注册；`DialogueTrigger.Start()` 会检查其是否存在。
-- 对话进行中会 `DouyinUIService.SetUIVisible(false)`，结束后恢复。
-- 测试全局变量：Scene 内 Canvas 调试区 `ShowBtn` / `SearchBtn` / `InfoText`。
+- PC：`GameBootstrap` Play 后自动生成玩家胶囊与第三人称相机；菜单 `Tools/Egg Rescue/PC/Setup Scene For PC Runtime` 写入 `PlayerSpawn`、按 lua 名迁移 C# 组件并禁用 `DouyinScript`。
+- 操作：WASD 移动、空格跳、鼠标视角、E / 左键交互；对话中空格 / Enter / E 下一句；N 开关笔记本；F5 存档、F9 读档、Esc 解锁鼠标。
+- 存档：`Application.persistentDataPath/windmill_farm_save.json`（变量 + NPC 分支 + 奶酪拾取 + BranchFlag + 已发现交互点）。Editor Play **不**自动读档；玩家包启动自动读档。
+- 对话 JSON 漏字段会卡主线：`ShopAction`、`RotatePool`、`ChainDialogue`、`BranchFlag`、`DisplayConditions`。
+- Scene 物体名 `MianController` 为历史拼写。Lua `DialogueTrigger` 仍通过 `GameObject.Find("DialogueData")` 读 DouyinScript；C# 改为 `Resources/GameData/Dialogue`。
+- 不要移植 `ClueTrigger.Awake` 的全量 bool 重置。
 
 ---
 
-*最后更新：2026-06-29 · 主开发 Scene：Mechanics_Code*
+*最后更新：2026-08-14 · PC C# Runtime · 主开发 Scene：Mechanics_Code*

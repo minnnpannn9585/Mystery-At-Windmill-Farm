@@ -1,0 +1,542 @@
+[
+  {
+    "name": "E01_ViewCharcoal",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E02_ViewFeather",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E03_Overheard",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E05_GrainSoakGet",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E06_ViewNeedLadder",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E06_LadderBorrowed",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E06_LadderPlaced",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E07_ViewNapSpot",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E07_NapSpotAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E08_ViewBurnMark",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E10_ViewWhiteStone",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E12_ViewGreenPad",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E17_ViewEmptyBucket",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E18_ViewBootprints",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E28_ViewTreeScratch",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E30_BlackFurSeen",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E35_CrowTauntShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E36_CrowTauntShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E37_BlackCatTauntShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E38_BlackCatTauntShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E25_ChickenFootprints",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E23_dabble",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E08_TreatingHangover",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E09_AnimalPawPrints",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E34_Glass",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E27_ColorReflective",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E13_ViewDoorBlocked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E14_ViewCatDoor",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E15_ViewFoodBowl",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "E16_ViewFur",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "ChickTraceCount",
+    "type": "int",
+    "value": 0
+  },
+  {
+    "name": "TreeClueCount",
+    "type": "int",
+    "value": 0
+  },
+  {
+    "name": "CheeseCount",
+    "type": "int",
+    "value": 0
+  },
+  {
+    "name": "Mouse_CheapPoolAvailable",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumPoolAvailable",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CanAffordMint8InGame",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "DogStatus",
+    "type": "int",
+    "value": 1
+  },
+  {
+    "name": "Dog_BlackCatSummoned",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_CaseLineDone",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_CaseLineStarted",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_CaseLineFrogSaid",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_CaseLineBucketSaid",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_CaseLineBootSaid",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_MintFishLineDone",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_MintFishPending",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_FrogHelpAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_Entered",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_TreeHardShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_TreeShakeStarted",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "BlackCat_StoneRevealShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "MintFish_Obtained",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Comic_Revealed",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "ChickStatus",
+    "type": "int",
+    "value": 0
+  },
+  {
+    "name": "Chick_WakeDogHintShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Chick_RoofBlockShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Chick_NapSpotAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Chick_Chapter2GuiltShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Chick_NGPlusShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Chick_HubFromSubItem",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_NGPlusShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_CommissionDone",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_NapSpotAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_StoneRevealShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_MasterTrustShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_MasterAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_CrowAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_FrogAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_MouseAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Shufen_DaHuangWakeAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Crow_RoofIntroShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Crow_GlassBeadAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Crow_GlassBeadRemedial",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Crow_NGPlusShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Frog_FirstMeetShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Frog_EggAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Frog_NapSpotAsked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Frog_WaterMonsterQueried",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Frog_PadRefused",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_FirstGreetShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_AreaCalloutShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_BlackCatStareShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_MintFishPaid",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_FrogFallbackGiven",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_MintFishPitchShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumPoolUnlocked",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_01",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_02",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_03",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_04",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_05",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_06",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_07",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_08",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_09",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_CheapSold_10",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_01",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_02",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_03",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_04",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_05",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_06",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_07",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Mouse_PremiumSold_08",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Flash_Stage6Shown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "RedRoof_IntroShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "RedRoof_DoorHintShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "RedRoof_RoofWaitShown",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "NGPlus",
+    "type": "bool",
+    "value": false
+  }
+]

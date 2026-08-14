@@ -1,0 +1,177 @@
+{
+  "npcList": [
+    {
+      "id": "Player_001",
+      "name": "\u73A9\u5BB6",
+      "avatarPath": "",
+      "currentBranchId": 1,
+      "isFolded": true,
+      "storyGraphs": []
+    },
+    {
+      "id": "NPC_004",
+      "name": "\u63CF\u8FF0",
+      "avatarPath": "",
+      "currentBranchId": 1,
+      "isFolded": false,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u63CF\u8FF0\u9700\u8981\u4E00\u4E2A\u68AF\u5B50",
+          "luaModuleName": "miaosu",
+          "luaAssetPath": "Assets/Editor/DialogueData/miaosu.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_005",
+      "name": "\u5927\u9EC4",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/Dog/\u9189\u5012.png",
+      "currentBranchId": 1,
+      "isFolded": true,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u5168\u91CF\u6811\uFF08doc \u6837\u7AE0\uFF0Cdahuang_01_FROM_DOC\uFF09",
+          "luaModuleName": "dahuang_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/dahuang_01_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_488",
+      "name": "\u6DD1\u82AC",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/Hen/\u5B88\u671B.png",
+      "currentBranchId": 1,
+      "isFolded": true,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u6811\u72B6 FROM_DOC\uFF08\u59D4\u6258\u002Bhub\uFF09",
+          "luaModuleName": "shufang_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/shufang_01_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_E03",
+      "name": "E03_Eavesdrop",
+      "avatarPath": "",
+      "currentBranchId": 1,
+      "isFolded": false,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "E03 \u8EAB\u540E\u5077\u542C",
+          "luaModuleName": "xiaojiZTT_e03_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/xiaojiZTT_e03_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_009",
+      "name": "\u5C0F\u9E21\u4FA6\u63A2\u56E2",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/Chicken/\u88C5\u9177.png",
+      "currentBranchId": 1,
+      "isFolded": false,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u6811\u72B6 FROM_DOC\uFF08\u4E3B\u4EA4\u4E92\u002Bhub\uFF09",
+          "luaModuleName": "xiaojiZTT_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/xiaojiZTT_01_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_010",
+      "name": "\u9ED1\u732B",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/Cat/\u9AD8\u50B2.png",
+      "currentBranchId": 1,
+      "isFolded": true,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u6A61\u6811\u4E0B\u002B\u63ED\u7A7F\u002BNGPlus\uFF08\u6811\u72B6\u51C6\u7A3F\uFF09",
+          "luaModuleName": "heimao_03_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/heimao_03_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_011",
+      "name": "\u5927\u6811",
+      "avatarPath": "",
+      "currentBranchId": 1,
+      "isFolded": true,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u5927\u6A61\u6811 ch1\uFF08\u6811\u72B6\u51C6\u7A3F\uFF09",
+          "luaModuleName": "heimao_tree_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/heimao_tree_01_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_012",
+      "name": "\u60B2\u4F24\u86D9",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/Frog/\u4E27.png",
+      "currentBranchId": 1,
+      "isFolded": false,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u6C60\u5858\u002B\u8584\u8377\u9C7C\uFF08\u6811\u72B6\u51C6\u7A3F\uFF09",
+          "luaModuleName": "qingwa_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/qingwa_01_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_013",
+      "name": "\u95EA\u7535\u8717\u725B",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/Snail/\u5F85\u673A.png",
+      "currentBranchId": 1,
+      "isFolded": false,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u9996\u6B21\u5BF9\u8BDD",
+          "luaModuleName": "wuniu_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/wuniu_01_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_014",
+      "name": "\u4E4C\u9E26",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/WuYa/\u5F97\u610F.png",
+      "currentBranchId": 1,
+      "isFolded": false,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u4E4C\u9E26\u5168\u7AE0\uFF08\u6811\u72B6\u51C6\u7A3F\uFF09",
+          "luaModuleName": "wuya_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/wuya_01_FROM_DOC.lua"
+        }
+      ]
+    },
+    {
+      "id": "NPC_015",
+      "name": "\u8001\u9F20\u5144\u5F1F",
+      "avatarPath": "Assets/Res/Model/TouXiang_LiHui/Mouse/\u515C\u552E.png",
+      "currentBranchId": 1,
+      "isFolded": false,
+      "storyGraphs": [
+        {
+          "branchId": 1,
+          "storyDescription": "\u5899\u7F1D\u9ED1\u5E02\uFF08\u6811\u72B6\u51C6\u7A3F\uFF09",
+          "luaModuleName": "laoshu_01_FROM_DOC",
+          "luaAssetPath": "Assets/Editor/DialogueData/FROM_DOC/laoshu_01_FROM_DOC.lua"
+        }
+      ]
+    }
+  ]
+}

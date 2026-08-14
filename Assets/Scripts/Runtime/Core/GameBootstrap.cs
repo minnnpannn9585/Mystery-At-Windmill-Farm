@@ -1,0 +1,465 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace EggRescue
+{
+    public sealed class GameBootstrap : MonoBehaviour
+    {
+        public static GameBootstrap Instance { get; private set; }
+        public Transform playerSpawn;
+        public GameObject playerPrefab;
+        bool _booted;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        static void AutoBoot()
+        {
+            if (FindObjectOfType<GameBootstrap>() != null) return;
+            var go = new GameObject("EggRescue_Runtime");
+            go.AddComponent<GameBootstrap>();
+        }
+
+        void Awake()
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            Boot();
+        }
+
+        public void Boot()
+        {
+            if (_booted) return;
+            _booted = true;
+            GameState.LoadDefaults();
+            NpcRegistry.Load();
+            DialogueDatabase.LoadAll();
+            if (!Application.isEditor)
+                SaveService.Load();
+            EnsureAudio();
+            EnsureDialogue();
+            EnsurePlayer();
+            EnsureSystems();
+            AutoWireWorld();
+            DisableDouyinRuntime();
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F5)) SaveService.Save();
+            if (Input.GetKeyDown(KeyCode.F9)) SaveService.Load();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
+        void EnsureAudio()
+        {
+            if (AudioDirector.Instance != null) return;
+            gameObject.AddComponent<AudioDirector>();
+        }
+
+        void EnsureDialogue()
+        {
+            if (DialogueManager.Instance != null) return;
+            var existing = GameObject.Find("DialogueManager");
+            if (existing != null)
+            {
+                var dm = existing.GetComponent<DialogueManager>();
+                if (dm == null) existing.AddComponent<DialogueManager>();
+                return;
+            }
+            var go = new GameObject("DialogueManager");
+            go.AddComponent<DialogueManager>();
+        }
+
+        void EnsurePlayer()
+        {
+            if (PlayerController.Instance != null) return;
+            Vector3 pos;
+            Quaternion rot;
+            ResolveSpawn(out pos, out rot);
+            GameObject player;
+            if (playerPrefab != null)
+            {
+                player = Instantiate(playerPrefab, pos, rot);
+            }
+            else
+            {
+                player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                player.name = "Player";
+                var col = player.GetComponent<Collider>();
+                if (col != null) col.enabled = false;
+                var cc = player.AddComponent<CharacterController>();
+                cc.height = 1.8f;
+                cc.radius = 0.4f;
+                cc.center = new Vector3(0f, 0.9f, 0f);
+                player.transform.SetPositionAndRotation(pos, rot);
+            }
+            if (player.GetComponent<PlayerController>() == null)
+                player.AddComponent<PlayerController>();
+            if (player.GetComponent<PlayerInteraction>() == null)
+                player.AddComponent<PlayerInteraction>();
+            player.tag = "Player";
+            player.layer = 2;
+            BindCameraToPlayer(player);
+            CreatePrompt(player.GetComponent<PlayerInteraction>());
+        }
+
+        static void BindCameraToPlayer(GameObject player)
+        {
+            var cam = ResolveMainCamera();
+            if (cam == null) return;
+            var tps = cam.GetComponent<ThirdPersonCamera>();
+            if (tps == null) tps = cam.gameObject.AddComponent<ThirdPersonCamera>();
+            var pc = player.GetComponent<PlayerController>();
+            var follow = pc != null && pc.CameraPivot != null ? pc.CameraPivot : player.transform;
+            tps.SetTarget(follow);
+            tps.SnapToTarget();
+        }
+
+        static Camera ResolveMainCamera()
+        {
+            var cam = Camera.main;
+            if (cam != null) return cam;
+            var named = GameObject.Find("Main Camera");
+            if (named != null)
+            {
+                cam = named.GetComponent<Camera>();
+                if (cam != null)
+                {
+                    named.tag = "MainCamera";
+                    return cam;
+                }
+            }
+            var all = Object.FindObjectsOfType<Camera>(true);
+            for (var i = 0; i < all.Length; i++)
+            {
+                if (all[i] != null && all[i].enabled)
+                    return all[i];
+            }
+            return all != null && all.Length > 0 ? all[0] : null;
+        }
+
+        void ResolveSpawn(out Vector3 pos, out Quaternion rot)
+        {
+            if (playerSpawn == null)
+            {
+                var named = GameObject.Find("PlayerSpawn");
+                if (named != null) playerSpawn = named.transform;
+            }
+            if (playerSpawn != null)
+            {
+                pos = playerSpawn.position;
+                rot = playerSpawn.rotation;
+                return;
+            }
+            var shufen = GameObject.Find("淑芬");
+            if (shufen != null)
+            {
+                pos = shufen.transform.position + shufen.transform.forward * 2f + Vector3.up * 0.5f;
+                rot = Quaternion.LookRotation((shufen.transform.position - pos).normalized, Vector3.up);
+                return;
+            }
+            var cam = Camera.main;
+            if (cam != null)
+            {
+                pos = cam.transform.position;
+                rot = Quaternion.Euler(0f, cam.transform.eulerAngles.y, 0f);
+                return;
+            }
+            pos = Vector3.up;
+            rot = Quaternion.identity;
+        }
+
+        void CreatePrompt(PlayerInteraction interaction)
+        {
+            var canvasGo = new GameObject("InteractionPromptCanvas");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasGo.AddComponent<CanvasScaler>();
+            canvasGo.AddComponent<GraphicRaycaster>();
+            var textGo = new GameObject("Prompt");
+            textGo.transform.SetParent(canvasGo.transform, false);
+            var text = textGo.AddComponent<Text>();
+            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            if (text.font == null)
+                text.font = Font.CreateDynamicFontFromOSFont("Arial", 28);
+            text.fontSize = 28;
+            text.alignment = TextAnchor.LowerCenter;
+            text.color = Color.white;
+            var rt = text.rectTransform;
+            rt.anchorMin = new Vector2(0.3f, 0.08f);
+            rt.anchorMax = new Vector2(0.7f, 0.16f);
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+            text.gameObject.SetActive(false);
+            if (interaction != null) interaction.SetPromptLabel(text);
+        }
+
+        void EnsureSystems()
+        {
+            if (FindObjectOfType<MouseBrotherShop>() == null)
+                gameObject.AddComponent<MouseBrotherShop>();
+            if (FindObjectOfType<CheeseRefreshManager>() == null)
+                gameObject.AddComponent<CheeseRefreshManager>();
+            var notebook = GameObject.Find("Notebook");
+            if (notebook != null && notebook.GetComponent<BookController>() == null)
+                notebook.AddComponent<BookController>();
+            if (notebook != null && notebook.GetComponent<CheeseHud>() == null)
+            {
+                var texts = notebook.GetComponentsInChildren<Text>(true);
+                for (var i = 0; i < texts.Length; i++)
+                {
+                    if (texts[i].name != "CheeseCount") continue;
+                    var hud = notebook.AddComponent<CheeseHud>();
+                    hud.countText = texts[i];
+                    break;
+                }
+            }
+            var ending = notebook != null ? notebook.transform.Find("Ending") : null;
+            if (ending != null && ending.GetComponent<EndingController>() == null)
+                ending.gameObject.AddComponent<EndingController>();
+            WireCheeseSpawner();
+        }
+
+        void AutoWireWorld()
+        {
+            WireNpc("淑芬", "淑芬", 0);
+            WireNpc("淑芬2", "淑芬", 0);
+            WireNpc("淑芬3", "淑芬", 0);
+            WireNpc("大黄", "大黄", 0);
+            WireNpc("大黄 2", "大黄", 0);
+            WireNpc("黑猫", "黑猫", 0);
+            WireNpc("悲伤蛙", "悲伤蛙", 0);
+            WireNpc("悲伤蛙2", "悲伤蛙", 0);
+            WireNpc("乌鸦", "乌鸦", 0);
+            WireNpc("小鸡侦探团", "小鸡侦探团", 0);
+            WireNpc("闪电蜗牛", "闪电蜗牛", 0);
+            WireNpc("老鼠兄弟", "老鼠兄弟", 0);
+            WireNpc("大树", "大树", 0);
+            AddIfMissing<DaHuangController>(GameObject.Find("大黄"));
+            AddIfMissing<DaHuangController>(GameObject.Find("大黄 2"));
+            var shufenRoot = FindShuFenRoot();
+            AddIfMissing<ShuFenController>(shufenRoot);
+            AddIfMissing<BeiShangWaController>(FindFrogRoot());
+            AddIfMissing<BlackCatInteractionController>(GameObject.Find("黑猫"));
+            AddIfMissing<CrowInteractionController>(GameObject.Find("乌鸦"));
+            AddIfMissing<E03EavesdropController>(FindNamedStartsWith("E03"));
+            AddIfMissing<E05GrainSoakController>(FindNamedStartsWith("E05"));
+            AddIfMissing<E06LadderController>(FindNamedStartsWith("E06 ·"));
+            AddIfMissing<ComicGateTrigger>(FindNamedStartsWith("E20"));
+            var interactionRoot = GameObject.Find("InteractionPoint");
+            if (interactionRoot != null)
+                AddIfMissing<SecondFloorWindowController>(interactionRoot);
+            WireClues();
+            WireAreaTriggers();
+            var tree = FindNamedContains("TreeDialogue");
+            AddIfMissing<TreeInteractionController>(tree);
+            if (FindObjectOfType<LevelTeleport>() == null)
+            {
+                var spawn = GameObject.Find("PlayerSpawn");
+                var lt = gameObject.AddComponent<LevelTeleport>();
+                if (spawn != null) lt.targetObject = spawn.transform;
+            }
+        }
+
+        static void WireClues()
+        {
+            WireClueAndDesc("E01", "E01_ViewCharcoal", 1);
+            WireClueAndDesc("E02", "E02_ViewFeather", 2);
+            WireClueAndDesc("E05", "E05_GrainSoakGet", 90);
+            WireClueAndDesc("E07", "E07_ViewNapSpot", 14);
+            WireClueAndDesc("E08", "E08_ViewBurnMark", 12);
+            WireClueAndDesc("E09", "E09_AnimalPawPrints", 16);
+            WireClueAndDesc("E10", "E10_ViewWhiteStone", 19);
+            WireClueAndDesc("E12", "E12_ViewGreenPad", 3);
+            WireClueAndDesc("E13", "E13_ViewDoorBlocked", 30);
+            WireClueAndDesc("E14", "E14_ViewCatDoor", 24);
+            WireClueAndDesc("E15", "E15_ViewFoodBowl", 27);
+            WireClueAndDesc("E16", "E16_ViewFur", 29);
+            WireClueAndDesc("E17", "E17_ViewEmptyBucket", 21);
+            WireClueAndDesc("E18", "E18_ViewBootprints", 23);
+            WireClueAndDesc("E23", "E23_dabble", 7);
+            WireClueAndDesc("E25", "E25_ChickenFootprints", 5);
+            WireClueAndDesc("E27", "E27_ColorReflective", 17);
+            WireClueAndDesc("E28", "E28_ViewTreeScratch", 26);
+            WireClueAndDesc("E34", "E34_Glass", 38);
+            WireDesc("E11", 36);
+            WireDesc("E21", 55);
+            WireDesc("E22", 320);
+            WireDesc("E24", 47);
+            WireDesc("E26", 48);
+            WireDesc("E29", 58);
+            WireDesc("E31", 49);
+            WireDesc("E32", 51);
+            WireDesc("E33", 52);
+            var e03 = FindNamedStartsWith("E03");
+            if (e03 != null)
+            {
+                WireNpc(e03.name, "E03_Eavesdrop", 0);
+                AddIfMissing<E03EavesdropController>(e03);
+            }
+        }
+
+        static void WireDesc(string token, int miaosuId)
+        {
+            var go = FindNamedStartsWith(token);
+            if (go == null) return;
+            var dt = go.GetComponent<DialogueTrigger>();
+            if (dt == null) dt = go.AddComponent<DialogueTrigger>();
+            if (string.IsNullOrEmpty(dt.npcName))
+            {
+                dt.npcName = "描述";
+                dt.startId = miaosuId;
+            }
+            if (go.GetComponent<Interactable>() == null)
+                go.AddComponent<Interactable>();
+        }
+
+        static void WireAreaTriggers()
+        {
+            WireArea(FindNamedContains("TreeForceZone"), "大树", 1, null, null);
+            WireArea(FindNamedStartsWith("E39"), "老鼠兄弟", 1, null, "Mouse_AreaCalloutShown");
+            WireArea(FindNamedStartsWith("E35"), "乌鸦", 5, "E06_LadderPlaced", "E35_CrowTauntShown");
+            WireArea(FindNamedStartsWith("E36"), "乌鸦", 7, "E06_LadderPlaced", "E36_CrowTauntShown");
+            WireArea(FindNamedStartsWith("E37"), "黑猫", 170, "BlackCat_Entered", "E37_BlackCatTauntShown");
+            WireArea(FindNamedStartsWith("E38"), "黑猫", 180, "BlackCat_Entered", "E38_BlackCatTauntShown");
+        }
+
+        static void WireArea(GameObject go, string npc, int startId, string requireVar, string blockVar)
+        {
+            if (go == null) return;
+            var area = go.GetComponent<DialogueAreaTrigger>();
+            if (area == null) area = go.AddComponent<DialogueAreaTrigger>();
+            if (string.IsNullOrEmpty(area.npcName))
+            {
+                area.npcName = npc;
+                area.startNodeId = startId;
+                if (!string.IsNullOrEmpty(requireVar))
+                {
+                    area.requireVarName = requireVar;
+                    area.requireVarMustBe = true;
+                }
+                if (!string.IsNullOrEmpty(blockVar))
+                {
+                    area.blockVarName = blockVar;
+                    area.blockWhenTrue = true;
+                }
+            }
+            var col = go.GetComponent<Collider>();
+            if (col != null) col.isTrigger = true;
+        }
+
+        static void WireCheeseSpawner()
+        {
+            var root = GameObject.Find("奶酪散点");
+            if (root == null) return;
+            var spawner = root.GetComponent<CheeseSpawner>();
+            if (spawner == null) spawner = root.AddComponent<CheeseSpawner>();
+            var pickups = root.GetComponentsInChildren<Transform>(true);
+            for (var i = 0; i < pickups.Length; i++)
+            {
+                if (pickups[i].name != "Pickup") continue;
+                if (pickups[i].GetComponent<CheesePickup>() == null)
+                    pickups[i].gameObject.AddComponent<CheesePickup>();
+            }
+        }
+
+        static GameObject FindShuFenRoot()
+        {
+            var a = GameObject.Find("淑芬");
+            if (a != null && a.transform.parent != null) return a.transform.parent.gameObject;
+            return a;
+        }
+
+        static GameObject FindFrogRoot()
+        {
+            var a = GameObject.Find("悲伤蛙");
+            if (a != null && a.transform.parent != null) return a.transform.parent.gameObject;
+            return a;
+        }
+
+        static void WireClueAndDesc(string token, string varName, int miaosuId)
+        {
+            var go = FindNamedContains(token);
+            if (go == null) return;
+            var clue = go.GetComponent<ClueTrigger>();
+            if (clue == null) clue = go.AddComponent<ClueTrigger>();
+            if (string.IsNullOrEmpty(clue.varName1))
+            {
+                clue.varName1 = varName;
+                clue.varType1 = "bool";
+                clue.varValue1 = true;
+            }
+            var dt = go.GetComponent<DialogueTrigger>();
+            if (dt == null) dt = go.AddComponent<DialogueTrigger>();
+            if (string.IsNullOrEmpty(dt.npcName))
+            {
+                dt.npcName = "描述";
+                dt.startId = miaosuId;
+            }
+            if (go.GetComponent<Interactable>() == null)
+                go.AddComponent<Interactable>();
+            if (go.GetComponent<InteractionPointVfx>() == null)
+                go.AddComponent<InteractionPointVfx>();
+        }
+
+        static void WireNpc(string goName, string npcName, int startId)
+        {
+            var go = GameObject.Find(goName);
+            if (go == null) return;
+            var trigger = go.GetComponent<DialogueTrigger>();
+            if (trigger == null) trigger = go.AddComponent<DialogueTrigger>();
+            if (string.IsNullOrEmpty(trigger.npcName))
+            {
+                trigger.npcName = npcName;
+                trigger.startId = startId;
+            }
+            if (go.GetComponent<Interactable>() == null)
+                go.AddComponent<Interactable>();
+        }
+
+        static void AddIfMissing<T>(GameObject go) where T : Component
+        {
+            if (go == null) return;
+            if (go.GetComponent<T>() == null) go.AddComponent<T>();
+        }
+
+        static GameObject FindNamedStartsWith(string token)
+        {
+            GameObject starts = null;
+            GameObject contains = null;
+            var all = FindObjectsOfType<Transform>(true);
+            for (var i = 0; i < all.Length; i++)
+            {
+                var n = all[i].name;
+                if (n == token) return all[i].gameObject;
+                if (starts == null && n.StartsWith(token)) starts = all[i].gameObject;
+                if (contains == null && n.Contains(token)) contains = all[i].gameObject;
+            }
+            return starts != null ? starts : contains;
+        }
+
+        static GameObject FindNamedContains(string token)
+        {
+            return FindNamedStartsWith(token);
+        }
+
+        static void DisableDouyinRuntime()
+        {
+            var behaviours = FindObjectsOfType<MonoBehaviour>(true);
+            var n = 0;
+            for (var i = 0; i < behaviours.Length; i++)
+            {
+                var mb = behaviours[i];
+                if (mb == null) continue;
+                if (mb.GetType().Name != "DouyinScript") continue;
+                mb.enabled = false;
+                n++;
+            }
+            if (n > 0)
+                Debug.Log("[GameBootstrap] disabled DouyinScript x" + n);
+        }
+    }
+}

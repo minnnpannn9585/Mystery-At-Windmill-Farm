@@ -1,0 +1,2462 @@
+{
+  "module": "laoshu_01_FROM_DOC",
+  "nodes": [
+    {
+      "Type": "Normal",
+      "DocTag": "entry#0",
+      "NpcName": "\u8001\u9F20\u5144\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "NGPlus",
+          "VarType": "bool",
+          "TrueNext": 900,
+          "FalseNext": 80
+        }
+      ],
+      "Next": 80,
+      "id": 0
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5582\u2014\u2014\u4F60\uFF01\u522B\u8D70\u4E86\u2014\u2014\u5F80\u7EA2\u9876\u5C4B\u5899\u7F1D\u8FD9\u8FB9\u770B\uFF01",
+      "Next": 2,
+      "id": 1
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u60C5\u62A5\u8D29\u5356\uFF01",
+      "Next": 3,
+      "id": 2
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u7AE5\u53DF\u65E0\u6B3A\u2014\u2014\u8D70\u8FC7\u8DEF\u8FC7\u522B\u9519\u8FC7\u2014\u2014",
+      "Next": 4,
+      "id": 3
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u2026\u2026\u8C01\u5728\u558A\uFF1F",
+      "Next": 5,
+      "id": 4
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u505A\u751F\u610F\u7684\u3002",
+      "Next": 6,
+      "id": 5
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u5899\u7F1D\u2026\u2026\u91CC\u9762\uFF1F",
+      "Next": 7,
+      "id": 6
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5BF9\uFF01\u8981\u804A\u5C31\u51D1\u8FC7\u6765\u2014\u2014",
+      "Next": 8,
+      "id": 7
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u88C2\u53E3\u5904\u660F\u9EC4\u706F\u5149\u6643\u4E86\u4E00\u4E0B\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_AreaCalloutShown",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": -1,
+      "id": 8
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u54DF\uFF0C\u6765\u5BA2\u4EBA\u4E86\u3002",
+      "Next": 21,
+      "id": 20
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4E70\u60C5\u62A5\u7684\uFF1F",
+      "Next": 22,
+      "id": 21
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u2026\u2026\u4F60\u4EEC\u8FD9\u91CC\u5356\u60C5\u62A5\uFF1F",
+      "Next": 23,
+      "id": 22
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8FD9\u519C\u573A\u91CC\u53D1\u751F\u7684\u4E8B\uFF0C\u6211\u4EEC\u77E5\u9053\u7684\u6BD4\u4EFB\u4F55\u4EBA\u90FD\u591A\u3002",
+      "Next": 24,
+      "id": 23
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4FBF\u5B9C\u7684\u4E00\u5757\u5976\u916A\u788E\uFF0C\u8D35\u4E00\u70B9\u7684\u4E94\u5757\u2014\u2014",
+      "Next": 25,
+      "id": 24
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8D27\u771F\u4EF7\u5B9E\u3002",
+      "Next": 26,
+      "id": 25
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u2026\u2026\u5076\u5C14\u63BA\u4E00\u70B9\u70B9\u6C34\u3002",
+      "Next": 27,
+      "id": 26
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u7B97\u76D8\u8F7B\u6572\u4E86\u4E00\u4E0B\u9F20\u5F1F\u7684\u8111\u888B\uFF09",
+      "Next": 28,
+      "id": 27
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u2026\u2026\u55EF\u3002",
+      "Next": 29,
+      "id": 28
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u519C\u573A\u91CC\u6361\u5230\u5976\u916A\u788E\uFF0C\u8BB0\u5F97\u62FF\u6765\u627E\u6211\u4EEC\u6362\u60C5\u62A5\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_FirstGreetShown",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 95,
+      "id": 29
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "entry#wall",
+      "NpcName": "\u8001\u9F20\u5144\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "Mouse_FirstGreetShown",
+          "VarType": "bool",
+          "TrueNext": 95,
+          "FalseNext": 20
+        }
+      ],
+      "Next": 20,
+      "id": 80
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "hub-return",
+      "NpcName": "\u8001\u9F20\u5144\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "NGPlus",
+          "VarType": "bool",
+          "TrueNext": 910,
+          "FalseNext": 95
+        }
+      ],
+      "Next": 95,
+      "id": 94
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "1-hub-revisit-dispatch",
+      "NpcName": "\u8001\u9F20\u5144\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "Mouse_CheapPoolAvailable",
+          "VarType": "bool",
+          "TrueNext": 96,
+          "FalseNext": 98
+        }
+      ],
+      "Next": 96,
+      "id": 95
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "1-hub-revisit-available",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u60F3\u4E70\u4EC0\u4E48\uFF1F",
+      "ConditionBranches": [
+        {
+          "VarName": "Mouse_PremiumPoolAvailable",
+          "VarType": "bool",
+          "TrueNext": 100,
+          "FalseNext": 100
+        }
+      ],
+      "Next": 100,
+      "id": 96
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "1-hub-revisit-empty",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6CA1\u60C5\u62A5\u4E86\uFF0C\u522B\u7684\u8FD8\u6709\u4E8B\u5417\uFF1F",
+      "ConditionBranches": [
+        {
+          "VarName": "Mouse_PremiumPoolAvailable",
+          "VarType": "bool",
+          "TrueNext": 100,
+          "FalseNext": 100
+        }
+      ],
+      "Next": 100,
+      "id": 97
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "1-hub-revisit-premium-only",
+      "NpcName": "\u8001\u9F20\u5144\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "ConditionBranches": [
+        {
+          "VarName": "Mouse_PremiumPoolAvailable",
+          "VarType": "bool",
+          "TrueNext": 96,
+          "FalseNext": 97
+        }
+      ],
+      "Next": 97,
+      "id": 98
+    },
+    {
+      "Type": "Question",
+      "DocTag": "1-hub",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "MenuCap": 0,
+      "Options": [
+        {
+          "Text": "\u4FBF\u5B9C\u7684\uFF0C\u4E00\u5757\u3002",
+          "ShopAction": "cheap",
+          "Next": 95,
+          "DisplayConditions": [
+            {
+              "VarName": "Mouse_CheapPoolAvailable",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "CheeseCount",
+              "VarType": "int",
+              "Op": "\u003E=",
+              "Value": 1
+            }
+          ]
+        },
+        {
+          "Text": "\u8D35\u4E00\u70B9\u7684\uFF0C\u4E94\u5757\u3002",
+          "ShopAction": "premium",
+          "Next": 95,
+          "DisplayConditions": [
+            {
+              "VarName": "Mouse_PremiumPoolAvailable",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "CheeseCount",
+              "VarType": "int",
+              "Op": "\u003E=",
+              "Value": 5
+            }
+          ]
+        },
+        {
+          "Text": "\u90A3\u53EA\u9ED1\u732B\u597D\u50CF\u4E00\u76F4\u76EF\u7740\u4F60\u4EEC\u2026\u2026",
+          "Next": 200,
+          "DisplayConditions": [
+            {
+              "VarName": "Dog_BlackCatSummoned",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_BlackCatStareShown",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u9ED1\u732B\u53EB\u6211\u6765\u627E\u4F60\u2026\u2026",
+          "Next": 210,
+          "DisplayConditions": [
+            {
+              "VarName": "BlackCat_MintFishPending",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_MintFishPaid",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_MintFishPitchShown",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_PremiumPoolUnlocked",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u516B\u5757\u5976\u916A\u788E\uFF0C\u7ED9\u4F60\u3002",
+          "Next": 270,
+          "ShopAction": "pay8_mint",
+          "DisplayConditions": [
+            {
+              "VarName": "BlackCat_MintFishPending",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_MintFishPaid",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_MintFishPitchShown",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_CanAffordMint8InGame",
+              "VarType": "bool",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Text": "\u90A3\u4E2A\u9752\u86D9\uFF0C\u6709\u6CA1\u6709\u4EC0\u4E48\u529E\u6CD5\u641E\u5B9A\uFF1F",
+          "Next": 310,
+          "DisplayConditions": [
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_FrogFallbackGiven",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_MintFishPaid",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u9752\u86D9\u90A3\u8FB9\u6709\u70B9\u9EBB\u70E6\u3002",
+          "Next": 330,
+          "DisplayConditions": [
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_FrogFallbackGiven",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_MintFishPaid",
+              "VarType": "bool",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Text": "\u4F60\u4E0D\u662F\u8BF4\u4E1C\u897F\u8FD8\u5728\u4F60\u624B\u91CC\u5417\uFF1F",
+          "Next": 290,
+          "DisplayConditions": [
+            {
+              "VarName": "MintFish_Obtained",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_MintFishPitchShown",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "Mouse_MintFishPaid",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_PremiumPoolUnlocked",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u6CA1\u4E8B\u4E86\u3002",
+          "Next": -1
+        }
+      ],
+      "Next": -1,
+      "id": 100
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u4E24\u53EA\u8001\u9F20\u540C\u65F6\u5F80\u5899\u7F1D\u91CC\u7F29\u4E86\u534A\u4E2A\u8EAB\u5B50\uFF0C\u9F20\u54E5\u5148\u63A2\u51FA\u5934\u6765\uFF09",
+      "Next": 201,
+      "id": 200
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u2026\u2026\u732B\u5929\u751F\u4E0D\u5BF9\u4ED8\u8001\u9F20\uFF0C\u6B63\u5E38\u3002",
+      "Next": 202,
+      "id": 201
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u54E5\uFF0C\u5B83\u4ECA\u5929\u76EF\u5F97\u7279\u522B\u4E45\u2014\u2014",
+      "Next": 203,
+      "id": 202
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u4F60\u522B\u8BF4\u8BDD\u3002",
+      "Next": 204,
+      "id": 203
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u597D\u3002",
+      "Next": 205,
+      "id": 204
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u5F80\u5927\u6A61\u6811\u65B9\u5411\u626B\u4E86\u4E00\u773C\uFF0C\u540E\u534A\u53E5\u8BDD\u54BD\u56DE\u53BB\uFF0C\u7F29\u8FDB\u5899\u7F1D\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_BlackCatStareShown",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 95,
+      "id": 205
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u505C\u4E86\u4E00\u62CD\uFF0C\u7B97\u76D8\u6CA1\u52A8\u3002\u9F20\u5F1F\u521A\u60F3\u5F00\u53E3\uFF09",
+      "Next": 211,
+      "id": 210
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6211\u6765\u8BF4\u3002",
+      "Next": 212,
+      "id": 211
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u6E05\u4E86\u6E05\u55D3\u5B50\uFF0C\u987F\u4E86\u4E00\u4E0B\uFF09",
+      "Next": 213,
+      "id": 212
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u54E6\uFF0C\u90A3\u4EF6\u4E1C\u897F\u554A\u2026\u2026",
+      "Next": 217,
+      "id": 213
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4E1C\u897F\u8FD8\u5728\u3002",
+      "Next": 215,
+      "id": 214
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u54E5\u2014\u2014",
+      "Next": 216,
+      "id": 215
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u2026\u2026",
+      "Next": 217,
+      "id": 216
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4E1C\u897F\u8FD8\u5728\u6211\u8FD9\uFF0C\u4F60\u8981\u53D6\u56DE\u53BB\uFF1F",
+      "Next": 218,
+      "id": 217
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026\u5BF9\u3002",
+      "Next": 219,
+      "id": 218
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u90A3\u5F53\u7136\u53EF\u4EE5\u3002",
+      "Next": 220,
+      "id": 219
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u53EA\u4E0D\u8FC7\u653E\u6211\u4EEC\u8FD9\u513F\u2014\u2014\u4FDD\u7BA1\u8D39\u516B\u5757\u5976\u916A\u788E\uFF0C\u516C\u9053\u4EF7\u3002",
+      "Next": 229,
+      "id": 220
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "1-E-after-quote-dispatch",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_MintFishPitchShown",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "ConditionBranches": [
+        {
+          "VarName": "MintFish_Obtained",
+          "VarType": "bool",
+          "TrueNext": 350,
+          "FalseNext": 230
+        }
+      ],
+      "Next": 230,
+      "id": 229
+    },
+    {
+      "Type": "Question",
+      "DocTag": "1-E-menu",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "Options": [
+        {
+          "Text": "\u7ED9\u4F60\u3002",
+          "Next": 270,
+          "ShopAction": "pay8_mint",
+          "DisplayConditions": [
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": false
+            },
+            {
+              "VarName": "Mouse_CanAffordMint8InGame",
+              "VarType": "bool",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Text": "\u5148\u4E0D\u7ED9\u3002",
+          "Next": 260,
+          "DisplayConditions": [
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Text": "\u6211\u5DF2\u7ECF\u627E\u5230\u4E86\u3002",
+          "Next": 250,
+          "DisplayConditions": [
+            {
+              "VarName": "Frog_PadRefused",
+              "VarType": "bool",
+              "Value": true
+            }
+          ]
+        }
+      ],
+      "Next": -1,
+      "id": 230
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u627E\u5230\u4E86\uFF1F",
+      "Next": 251,
+      "id": 250
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u8FD8\u5728\u4F60\u8FD9\u513F\uFF1F\u4F60\u7CCA\u5F04\u8C01\u5462\u3002",
+      "Next": 252,
+      "id": 251
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u2026\u2026",
+      "Next": 253,
+      "id": 252
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u90A3\u4F60\u8FD8\u2014\u2014",
+      "Next": 254,
+      "id": 253
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u628A\u8D26\u672C\u5408\u4E0A\uFF0C\u7B97\u76D8\u6CA1\u54CD\uFF09",
+      "Next": 255,
+      "id": 254
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u8FD8\u60F3\u8BF4\u4EC0\u4E48\uFF0C\u751F\u751F\u54BD\u4E86\u56DE\u53BB\uFF09",
+      "Next": 95,
+      "id": 255
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6CA1\u6709\u94B1\uFF0C\u4EC0\u4E48\u90FD\u6CA1\u6709\u3002",
+      "Next": 261,
+      "id": 260
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u94B1\u5305\u591F\u4E86\u968F\u65F6\u56DE\u6765\u2014\u2014",
+      "Next": 95,
+      "id": 261
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u597D\uFF0C\u6211\u53BB\u62FF\u2014\u2014",
+      "Next": 271,
+      "id": 270
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u5F80\u5899\u7F1D\u6DF1\u5904\u63A2\u4E86\u4E00\u4E0B\uFF0C\u56DE\u6765\u65F6\u722A\u5B50\u4E0A\u7A7A\u7A7A\u7684\uFF09",
+      "Next": 272,
+      "id": 271
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u2026\u2026\u7A0D\u5FAE\u6709\u4E2A\u60C5\u51B5\u3002",
+      "Next": 273,
+      "id": 272
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4ECE\u8FD9\u91CC\u5F80\u6C60\u5858\u65B9\u5411\u8DD1\u7684\u65F6\u5019\u2014\u2014",
+      "Next": 274,
+      "id": 273
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u624B\u6ED1\u4E86\u3002\u6389\u5728\u6C60\u5858\u8FB9\u4E00\u5E26\u4E86\u3002",
+      "Next": 275,
+      "id": 274
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u6389\u4E86\uFF1F\uFF01\u4F60\u521A\u8BF4\u8FD8\u5728\u4F60\u8FD9\u91CC\uFF1F",
+      "Next": 276,
+      "id": 275
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u624B\u662F\u6ED1\u4E86\uFF0C\u53EF\u8FD8\u5728\u54B1\u7BA1\u7684\u5730\u754C\u4E0A\u2014\u2014\u7B97\u8FD8\u5728\u3002",
+      "Next": 277,
+      "id": 276
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u65B9\u5411\u7ED9\u4F60\u4E86\uFF01\u8FD9\u53EB\u94B1\u8D27\u4E24\u6E05\uFF01",
+      "Next": 278,
+      "id": 277
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u628A\u8D26\u672C\u7FFB\u4E86\u4E00\u9875\uFF0C\u7B97\u76D8\u6CA1\u505C\uFF09",
+      "Next": 280,
+      "id": 278
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5F80\u6C60\u5858\u90A3\u8FB9\u627E\uFF0C\u5C31\u662F\u4E86\u3002",
+      "Next": 280,
+      "id": 279
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u63A2\u51FA\u5934\u6765\uFF0C\u538B\u4F4E\u58F0\u97F3\uFF09",
+      "Next": 281,
+      "id": 280
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u54E5\uFF0C\u8FD9\u5355\u5927\uFF0C\u8981\u4E0D\u8981\u2026\u2026",
+      "Next": 282,
+      "id": 281
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u2026\u2026\u770B\u5728\u8FD9\u5355\u5927\u7684\u4EFD\u4E0A\uFF0C\u67DC\u91CC\u53C8\u591A\u4E0A\u4E00\u6279\u8D35\u7684\uFF0C\u968F\u65F6\u6765\u6311\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_MintFishPaid",
+          "VarType": "bool",
+          "Value": true
+        },
+        {
+          "VarName": "Mouse_PremiumPoolUnlocked",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 95,
+      "id": 282
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u5F80\u9F20\u54E5\u8EAB\u540E\u4E00\u7F29\uFF0C\u534A\u5F20\u8138\u90FD\u4E0D\u9732\u4E86\uFF09",
+      "Next": 291,
+      "id": 290
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u2026\u2026",
+      "Next": 292,
+      "id": 291
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u9C7C\u6211\u5DF2\u7ECF\u4ECE\u6C60\u5858\u62FF\u56DE\u6765\u4E86\u3002",
+      "Next": 293,
+      "id": 292
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u7B97\u76D8\u4ECE\u722A\u4E0A\u6ED1\u4E0B\u53BB\uFF0C\u6CA1\u63A5\u7A33\uFF09",
+      "Next": 294,
+      "id": 293
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\uFF08\u538B\u58F0\uFF09\u54E5\u2014\u2014",
+      "Next": 295,
+      "id": 294
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u5C0F\u70B9\u58F0\u3002",
+      "Next": 296,
+      "id": 295
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u9ED1\u732B\u90A3\u8FB9\u8981\u662F\u95EE\u8D77\u6765\uFF0C\u6211\u600E\u4E48\u8BF4\uFF0C\u4F60\u4EEC\u6382\u91CF\u3002",
+      "Next": 297,
+      "id": 296
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u6C89\u9ED8\u3002\u9F20\u54E5\u628A\u8D26\u672C\u6309\u5728\u5899\u7F1D\u91CC\uFF0C\u5F88\u4E45\u6CA1\u52A8\uFF09",
+      "Next": 298,
+      "id": 297
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u2026\u2026\u884C\u3002\u8FD9\u7B14\u7B97\u6211\u4EEC\u529E\u7838\u4E86\u3002",
+      "Next": 299,
+      "id": 298
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u67DC\u91CC\u8FD8\u6709\u4E00\u6279\u8D35\u7684\uFF0C\u672C\u6765\u5F97\u642D\u522B\u7684\u8D27\u624D\u80AF\u7ED9\u3002\u73B0\u5728\u968F\u4F60\u6311\u3002",
+      "Next": 300,
+      "id": 299
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u90A3\u6279\u4E0D\u5F97\u518D\u7B49\u7B49\u2014\u2014",
+      "Next": 301,
+      "id": 300
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u5F00\u4EF7\u3002",
+      "Next": 302,
+      "id": 301
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u628A\u5634\u95ED\u7D27\uFF1B\u5899\u7F1D\u91CC\u518D\u6CA1\u6709\u7B97\u76D8\u58F0\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumPoolUnlocked",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 95,
+      "id": 302
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u63A2\u51FA\u5934\u6765\uFF09",
+      "Next": 312,
+      "id": 310
+    },
+    {
+      "Type": "Question",
+      "DocTag": "1-G-menu",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "Options": [
+        {
+          "Text": "\u7ED9\u4F60\u3002",
+          "Next": 320,
+          "ShopAction": "pay8_frog",
+          "DisplayConditions": [
+            {
+              "VarName": "Mouse_CanAffordMint8InGame",
+              "VarType": "bool",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Text": "\u7B97\u4E86\u3002",
+          "Next": 95
+        }
+      ],
+      "Next": -1,
+      "id": 311
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6709\u529E\u6CD5\u3002",
+      "Next": 313,
+      "id": 312
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u516B\u5757\u5976\u916A\u788E\u3002\u6559\u4F60\u4E00\u53E5\u7CCA\u5F04\u5B83\u7684\u3002",
+      "Next": 311,
+      "id": 313
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4E00\u53E3\u4EF7\u3002",
+      "Next": 311,
+      "id": 314
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u63A5\u8FC7\u5976\u916A\uFF0C\u7B97\u76D8\u54CD\u4E86\u4E09\u58F0\uFF09",
+      "Next": 340,
+      "id": 320
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u597D\u3002",
+      "Next": 322,
+      "id": 321
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u628A\u5976\u916A\u6536\u8FDB\u8D26\u672C\u5939\u5C42\uFF0C\u7B97\u76D8\u8F7B\u6572\u4E00\u4E0B\uFF09",
+      "Next": 323,
+      "id": 322
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4ED8\u6E05\u8FD9\u516B\u5757\uFF0C\u540E\u9762\u90A3\u6279\u8D35\u7684\u73B0\u5728\u4E5F\u5F00\u5356\u4E86\u3002",
+      "Next": 324,
+      "id": 323
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u53E3\u8BC0\u5462\u2014\u2014",
+      "Next": 325,
+      "id": 324
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u542C\u597D\u2014\u2014",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_MintFishPaid",
+          "VarType": "bool",
+          "Value": true
+        },
+        {
+          "VarName": "Mouse_PremiumPoolUnlocked",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 95,
+      "id": 325
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u63A2\u51FA\u5934\u6765\uFF0C\u6CA1\u5FCD\u4F4F\uFF09",
+      "Next": 340,
+      "id": 330
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5C31\u90A3\u4E2A\u6574\u5929\u5750\u6C60\u5858\u8FB9\u53F9\u6C14\u7684\uFF1F\u6211\u77E5\u9053\u5B83\uFF01",
+      "Next": 332,
+      "id": 331
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6211\u6765\u8BF4\u3002",
+      "Next": 333,
+      "id": 332
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u628A\u8D26\u672C\u7FFB\u5230\u67D0\u4E00\u9875\uFF0C\u505C\u4E86\u4E00\u4E0B\uFF09",
+      "Next": 334,
+      "id": 333
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8FD9\u672C\u6765\u662F\u8981\u6536\u4F60\u94B1\u7684\u3002",
+      "Next": 335,
+      "id": 334
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5BF9\uFF0C\u8FD9\u662F\u989D\u5916\u670D\u52A1\u2014\u2014",
+      "Next": 336,
+      "id": 335
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4F46\u770B\u5728\u4F60\u90A3\u5355\u5927\u2026\u2026",
+      "Next": 337,
+      "id": 336
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u628A\u8D26\u672C\u5408\u4E0A\uFF0C\u7B97\u76D8\u5728\u6307\u5C16\u8F6C\u4E86\u4E00\u5708\uFF09",
+      "Next": 95,
+      "id": 337
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u90A3\u600E\u4E48\u529E\uFF1F",
+      "Next": 341,
+      "id": 340
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4F60\u5C31\u544A\u8BC9\u5B83\u2014\u2014",
+      "Next": 342,
+      "id": 341
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6211\u8D70\u5357\u95EF\u5317\uFF0C\u89C1\u8FC7\u5F88\u591A\u53EA\u8DDF\u5B83\u4E00\u6A21\u4E00\u6837\u7684\u86D9\uFF0C\u8BF4\u7684\u8BDD\u6211\u90FD\u80FD\u80CC\u51FA\u6765\u4E86\u3002",
+      "Next": 913,
+      "id": 342
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u538B\u4F4E\u58F0\u97F3\uFF09",
+      "Next": 344,
+      "id": 343
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u54E5\u2026\u2026\u4F60\u771F\u7684\u53BB\u6392\u8FC7\u540D\uFF1F",
+      "Next": 345,
+      "id": 344
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u591F\u4E86\u3002",
+      "Next": 346,
+      "id": 345
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u9012\u4E86\u4E2A\u773C\u795E\uFF1A\u5FEB\u53BB\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_FrogFallbackGiven",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 95,
+      "id": 346
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u4F60\u770B\u770B\u8FD9\u662F\u4EC0\u4E48\u3002",
+      "Next": 351,
+      "id": 350
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u628A\u6CBE\u7740\u9752\u86D9\u5473\u513F\u7684\u8584\u8377\u9C7C\u4E3E\u5230\u5899\u7F1D\u524D\uFF09",
+      "Next": 352,
+      "id": 351
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u54E5\u2014\u2014",
+      "Next": 353,
+      "id": 352
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u2026\u2026",
+      "Next": 354,
+      "id": 353
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u516B\u5757\u662F\u5427\uFF1F\u8981\u4E0D\u6211\u628A\u9C7C\u548C\u4F60\u521A\u624D\u90A3\u53E5\u8BDD\u4E00\u8D77\u5E26\u7ED9\u9ED1\u732B\uFF0C\u8BA9\u5B83\u4EB2\u81EA\u6765\u4ED8\uFF1F",
+      "Next": 355,
+      "id": 354
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u4E0D\u7528\u3002",
+      "Next": 356,
+      "id": 355
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u67DC\u91CC\u540E\u9762\u90A3\u6279\uFF0C\u7ED9\u4F60\u5F00\u3002",
+      "Next": 357,
+      "id": 356
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u968F\u4FBF\u6311\uFF01\u521A\u624D\u90A3\u53E5\u2014\u2014\u5F53\u6211\u4EEC\u6CA1\u8BF4\uFF01",
+      "Next": 358,
+      "id": 357
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u8D26\u672C\u540E\u51E0\u9875\u88AB\u98DE\u5FEB\u7FFB\u5F00\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumPoolUnlocked",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 95,
+      "id": 358
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u519C\u573A\u90A3\u6761\u72D7\uFF0C\u5927\u9EC4\uFF0C\u89C1\u8FC7\u5417\uFF1F",
+      "Next": 501,
+      "id": 500
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5B83\u7684\u9879\u5708\u662F\u9540\u94F6\u7684\uFF01",
+      "Next": 502,
+      "id": 501
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u7EA2\u9876\u5C4B\u7684\u4E3B\u4EBA\u81EA\u5DF1\u62A0\u95E8\u5F97\u5F88\uFF0C\u5374\u7ED9\u72D7\u6234\u9540\u94F6\u9879\u5708\u3002",
+      "Next": 503,
+      "id": 502
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u618B\u7B11\uFF0C\u6CA1\u618B\u4F4F\uFF09",
+      "Next": 504,
+      "id": 503
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u8FD9\u4E2A\u519C\u573A\u7684\u94B1\u82B1\u5F97\u592A\u5947\u5999\u4E86\u2026\u2026",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_01",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 504
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6C60\u5858\u90A3\u53EA\u86D9\uFF0C\u89C1\u8FC7\u6CA1\uFF1F",
+      "Next": 511,
+      "id": 510
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5C31\u662F\u6574\u5929\u76EF\u7740\u6C34\u9762\u53F9\u6C14\u7684\u90A3\u53EA\u2014\u2014",
+      "Next": 512,
+      "id": 511
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5B83\u5E74\u8F7B\u65F6\u662F\u6574\u7247\u6C34\u57DF\u516C\u8BA4\u7684\u7B2C\u4E00\u60C5\u5723\u3002",
+      "Next": 513,
+      "id": 512
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u2026\u2026\u4EC0\u4E48\uFF1F",
+      "Next": 514,
+      "id": 513
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u8FFD\u6C42\u5B83\u7684\uFF0C\u80FD\u6392\u51FA\u957F\u961F\uFF01",
+      "Next": 516,
+      "id": 514
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u4E24\u53EA\u8001\u9F20\u540C\u65F6\u6C89\u9ED8\u4E86\u4E00\u4E0B\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_02",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 516
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u9E21\u820D\u90A3\u53EA\u6700\u5927\u7684\u6BCD\u9E21\uFF0C\u6DD1\u82AC\uFF0C\u8BA4\u8BC6\u5417\uFF1F",
+      "Next": 521,
+      "id": 520
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5341\u5E74\u524D\u662F\u9694\u58C1\u6751\u7684\u6597\u9E21\u51A0\u519B\uFF01\u7EA2\u9876\u5C4B\u7684\u4E3B\u4EBA\u82B1\u4E86\u5927\u4EF7\u94B1\u628A\u5979\u4E70\u56DE\u6765\u3002",
+      "Next": 522,
+      "id": 521
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u73B0\u5728\u4E0D\u6253\u4E86\uFF0C\u5B89\u5FC3\u4E0B\u86CB\u3002",
+      "Next": 523,
+      "id": 522
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u2026\u2026\u771F\u4E0D\u6253\u4E86\uFF1F",
+      "Next": 525,
+      "id": 523
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u636E\u8BF4\u662F\u8FD9\u6837\u3002",
+      "Next": 525,
+      "id": 524
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u4E24\u53EA\u8001\u9F20\u5BF9\u89C6\u4E86\u4E00\u773C\uFF0C\u4E00\u8D77\u4E0D\u8BF4\u8BDD\u4E86\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_03",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 525
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u9E21\u820D\u5916\u5BBD\u53F6\u4E0A\u7684\u8717\u725B\uFF0C\u6CE8\u610F\u5230\u6CA1\uFF1F",
+      "Next": 531,
+      "id": 530
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5546\u4E1A\u95F4\u8C0D\uFF01\u9694\u58C1\u519C\u573A\u6D3E\u6765\u7684\uFF01",
+      "Next": 532,
+      "id": 531
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5728\u5077\u7ED8\u8FD9\u4E2A\u519C\u573A\u7684\u5730\u56FE\uFF0C\u5DF2\u7ECF\u4E09\u5E74\u4E86\u3002",
+      "Next": 533,
+      "id": 532
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u2026\u2026\u8717\u725B\uFF1F",
+      "Next": 534,
+      "id": 533
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4E09\u5E74\uFF01\u4E00\u70B9\u4E00\u70B9\u5730\u722C\uFF01",
+      "Next": 535,
+      "id": 534
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u90D1\u91CD\u5730\u70B9\u4E86\u70B9\u5934\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_04",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 535
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u7EA2\u9876\u5C4B\u5E8A\u5E95\u4E0B\u6709\u672C\u4E66\u3002",
+      "Next": 541,
+      "id": 540
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u300A\u6BCD\u9E21\u7684\u4EA7\u540E\u62A4\u7406\u300B\uFF01\uFF01",
+      "Next": 542,
+      "id": 541
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u7EA2\u9876\u5C4B\u90A3\u4F4D\u81EA\u5C01\u9E21\u79D1\u5723\u624B\uFF0C\u5C24\u5176\u7CBE\u901A\u8FD9\u4E00\u672C\u3002",
+      "Next": 543,
+      "id": 542
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4ED6\u6BCF\u6B21\u8FDB\u9E21\u820D\u5BF9\u6DD1\u82AC\u8BF4\u0027\u597D\u5B69\u5B50\u0027\u2014\u2014\u90A3\u662F\u4EA7\u540E\u62A4\u7406\u7B2C\u4E09\u62DB\uFF01\uFF01",
+      "Next": 544,
+      "id": 543
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u6CA1\u518D\u5F80\u4E0B\u8BF4\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_05",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 544
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u90A3\u68F5\u5927\u6A61\u6811\uFF0C\u4ED4\u7EC6\u770B\u4E86\u6CA1\uFF1F",
+      "Next": 551,
+      "id": 550
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5B83\u4F1A\u8D70\u8DEF\u7684\uFF01",
+      "Next": 552,
+      "id": 551
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026",
+      "Next": 553,
+      "id": 552
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4E00\u5E74\u632A\u4E00\u5398\u7C73\u3002\u6839\u7CFB\u628A\u8FD9\u7247\u5730\u5E95\u4E0B\u7684\u6C34\u5206\u5168\u90E8\u5438\u8D70\u4E86\u3002",
+      "Next": 554,
+      "id": 553
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6574\u4E2A\u519C\u573A\u5730\u5E95\u90FD\u662F\u5B83\u7684\u9886\u5730\u2014\u2014",
+      "Next": 555,
+      "id": 554
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u8868\u9762\u4E0A\u770B\uFF0C\u53EA\u662F\u4E00\u68F5\u6811\u3002",
+      "Next": 556,
+      "id": 555
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u4E8C\u4EBA\u4E00\u672C\u6B63\u7ECF\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_06",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 556
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u90A3\u6761\u72D7\u5927\u9EC4\uFF0C\u5076\u5C14\u5077\u559D\u7EA2\u9876\u5C4B\u90A3\u8FB9\u7684\u53D1\u9175\u82F9\u679C\u6E23\u3002",
+      "Next": 561,
+      "id": 560
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6628\u665A\u53C8\u559D\u5927\u4E86\uFF0C\u6574\u665A\u8DB4\u5728\u8C37\u4ED3\u5899\u6839\u51FA\u4E0D\u6765\u2014\u2014",
+      "Next": 914,
+      "id": 561
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u8981\u5F04\u9192\u4ED6\uFF0C\u5C31\u7AEF\u9E21\u820D\u6C34\u69FD\u8FB9\u90A3\u6876\u6CE1\u8F6F\u7684\u8C37\u7269\u8FC7\u53BB\u3002",
+      "Next": 915,
+      "id": 562
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5927\u9EC4\u5E73\u65F6\u7279\u522B\u998B\u90A3\u4E2A\u2014\u2014",
+      "Next": 564,
+      "id": 563
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6211\u4EEC\u4EB2\u773C\u770B\u89C1\u7684\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_07",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 564
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u7EA2\u9876\u5C4B\u7684\u4E3B\u4EBA\u8FD9\u51E0\u5929\uFF0C\u5E38\u8DB4\u7A97\u5F80\u9E21\u820D\u65B9\u5411\u770B\u3002",
+      "Next": 571,
+      "id": 570
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u770B\u5B8C\u53C8\u4E0D\u8FDB\u53BB\uFF01\u5C31\u5728\u5C4B\u91CC\u7FFB\u7BB1\u5012\u67DC\uFF01",
+      "Next": 572,
+      "id": 571
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5FD9\u5F97\u4E0D\u884C\uFF0C\u770B\u4E0D\u51FA\u5728\u5FD9\u4EC0\u4E48\u3002",
+      "Next": 573,
+      "id": 572
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6211\u4EEC\u731C\u4ED6\u662F\u5728\u627E\u4EC0\u4E48\u2014\u2014",
+      "Next": 574,
+      "id": 573
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u731C\u7684\u4E0D\u7B97\u8D27\u3002\u6CA1\u6709\u7ED3\u8BBA\u7684\u4E0D\u5356\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_08",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 574
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u90A3\u7FA4\u6234\u5047\u58A8\u955C\u7684\u5C0F\u9B3C\uFF0C\u6CE8\u610F\u8FC7\u6CA1\uFF1F",
+      "Next": 581,
+      "id": 580
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6628\u665A\u96C6\u4F53\u7F29\u5728\u9E21\u820D\u91CC\uFF0C\u4E00\u6B65\u90FD\u4E0D\u51FA\u6765\uFF01",
+      "Next": 582,
+      "id": 581
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u62B1\u6210\u4E00\u56E2\uFF0C\u5B89\u9759\u5F97\u4E0D\u50CF\u5B83\u4EEC\u3002",
+      "Next": 583,
+      "id": 582
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u50CF\u5728\u7B49\u4EC0\u4E48\u2014\u2014\u7B49\u4EC0\u4E48\uFF0C\u4E0D\u77E5\u9053\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_09",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 583
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u7B49\u7684\u662F\u4EC0\u4E48\uFF0C\u4E0D\u77E5\u9053\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_09",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 584
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8FD9\u6761\u503C\u8FD9\u4E2A\u4EF7\u3002",
+      "Next": 591,
+      "id": 590
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u524D\u5929\u4E0B\u5348\uFF0C\u9ED1\u732B\u81EA\u5DF1\u722C\u4E0A\u4E86\u8C37\u4ED3\u5C4B\u9876\u3002",
+      "Next": 592,
+      "id": 591
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u53D1\u6035",
+      "Dialogue": "\u6CA1\u591A\u5927\u4F1A\u513F\uFF0C\u53C8\u4E0B\u6765\u4E86\uFF0C\u4EC0\u4E48\u4E5F\u6CA1\u8BF4\uFF01\uFF01",
+      "Next": 593,
+      "id": 592
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4E09\u5E74\u5BBF\u4EC7\uFF0C\u7ADF\u7136\u6CA1\u6253\u8D77\u6765\u3002",
+      "Next": 594,
+      "id": 593
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u2026\u2026\u4E0A\u53BB\u5E72\u4EC0\u4E48\uFF1F",
+      "Next": 595,
+      "id": 594
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4E0D\u77E5\u9053\u5C31\u662F\u4E0D\u77E5\u9053\uFF0C\u6211\u4EEC\u4E0D\u7F16\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_10",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 595
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4F60\u77E5\u9053\u90A3\u7FA4\u5C0F\u9E21\u4E3A\u4EC0\u4E48\u6015\u6C34\u602A\u5417\uFF1F",
+      "Next": 601,
+      "id": 600
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u56E0\u4E3A\u6211\u4EEC\u8DDF\u5B83\u4EEC\u8BF4\u6C60\u5858\u90A3\u8FB9\u6709\u6CBC\u6CFD\u6C34\u602A\u2014\u2014\u54C8\u54C8\u2014\u2014",
+      "Next": 602,
+      "id": 601
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u6342\u4F4F\u5634\uFF0C\u505C\u4E0B\u6765\uFF09",
+      "Next": 603,
+      "id": 602
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u2026\u2026\u90A3\u5929\u770B\u89C1\u5B83\u4EEC\u63A8\u4E86\u4E2A\u6CE5\u7CCA\u7CCA\u7684\u5706\u4E1C\u897F\u8DEF\u8FC7\u8C37\u4ED3\uFF0C",
+      "Next": 916,
+      "id": 603
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5C0F\u9E21\u80C6\u5B50\u5C0F\uFF0C\u542C\u534A\u53E5\u80FD\u8865\u5341\u53E5\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_01",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 604
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8C37\u4ED3\u9876\u7684\u4E4C\u9E26\uFF0C\u524D\u5929\u65E9\u4E0A\u4ECE\u9E21\u820D\u95E8\u53E3\u8349\u4E1B\u8FB9\u6361\u4E86\u4E2A\u4E1C\u897F\u3002",
+      "Next": 611,
+      "id": 610
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u767D\u767D\u7684\uFF01\u4EAE\u4EAE\u7684\uFF01\u5927\u5927\u7684\uFF01",
+      "Next": 612,
+      "id": 611
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u98DE\u56DE\u8C37\u4ED3\u9876\u7684\u65F6\u5019\uFF0C\u5174\u594B\u5F97\u50CF\u6361\u5230\u738B\u51A0\u3002",
+      "Next": 613,
+      "id": 612
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u6361\u7684\u662F\u4EC0\u4E48\uFF1F",
+      "Next": 614,
+      "id": 613
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4E0D\u77E5\u9053\u3002\u8FD9\u5C31\u662F\u6211\u4EEC\u80FD\u5356\u7684\u5168\u90E8\u4E86\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_02",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 614
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6628\u665A\u6DF1\u591C\uFF0C\u7EA2\u9876\u5C4B\u91CC\u4EAE\u8D77\u4E00\u4E2A\u9EC4\u706F\u3002",
+      "Next": 621,
+      "id": 620
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u523A\u773C\uFF01\u7A7F\u5899\u7F1D\u7684\u90A3\u79CD\uFF01",
+      "Next": 622,
+      "id": 621
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5899\u91CC\u540C\u65F6\u4F20\u6765\u7EC6\u7EC6\u7684\u55E1\u58F0\uFF0C\u4E00\u76F4\u55E1\u7740\u4E0D\u505C\u6B47\u3002",
+      "Next": 623,
+      "id": 622
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u50CF\u5C4B\u91CC\u591A\u4E86\u4E2A\u4E0D\u4F1A\u843D\u5C71\u7684\u5C0F\u592A\u9633\u2014\u2014\u6709\u5149\u6709\u70ED\u3002",
+      "Next": 624,
+      "id": 623
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u91CC\u9762\u5230\u5E95\u662F\u4EC0\u4E48\uFF0C\u4E0D\u77E5\u9053\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_03",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 624
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6628\u665A\u6DF1\u591C\uFF0C\u7EA2\u9876\u5C4B\u7684\u96E8\u9774\u6765\u56DE\u8D70\u4E86\u4E24\u8D9F\u3002",
+      "Next": 631,
+      "id": 630
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4E00\u8D9F\u56DE\u6765\uFF0C\u5E26\u7740\u6E7F\u6CE5\u6C34\u6C14\uFF01",
+      "Next": 632,
+      "id": 631
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u53E6\u4E00\u8D9F\uFF0C\u811A\u6B65\u671D\u9E21\u820D\u65B9\u5411\u8D70\u8FDC\uFF0C\u53C8\u56DE\u6765\u3002",
+      "Next": 633,
+      "id": 632
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u2026\u2026\u624B\u91CC\u62FF\u4EC0\u4E48\u4E86\uFF1F",
+      "Next": 634,
+      "id": 633
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u770B\u4E0D\u89C1\uFF0C\u53EA\u6709\u58F0\u97F3\u548C\u6C14\u5473\u3002",
+      "Next": 635,
+      "id": 634
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4E00\u8D9F\u6E7F\u6CE5\u3001\u4E00\u8D9F\u671D\u9E21\u820D\u2014\u2014\u633A\u5947\u602A\u7684\uFF0C\u5BF9\u4E0D\u5BF9\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_04",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 635
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u4F60\u77E5\u9053\u6C34\u602A\u58F0\u662F\u600E\u4E48\u6765\u7684\u5417\u2014\u2014",
+      "Next": 641,
+      "id": 640
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6628\u665A\u6DF1\u591C\uFF0C\u9E21\u820D\u65B9\u5411\u4F20\u6765\u4E00\u9635\u4F4E\u95F7\u5E26\u54E8\u97F3\u7684\u58F0\u97F3\u3002",
+      "Next": 642,
+      "id": 641
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u0027\u547C\u565C\u565C\u2014\u2014\u5495\u5471\u2014\u2014\u0027",
+      "Next": 643,
+      "id": 642
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u7ED8\u58F0\u7ED8\u8272\u6F14\u793A\uFF09",
+      "Next": 644,
+      "id": 643
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5473\u9053\u662F\u53D1\u9175\u82F9\u679C\u6E23\u548C\u9189\u72D7\u53E3\u6C14\u3002",
+      "Next": 645,
+      "id": 644
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u60CA\u8BB6",
+      "Dialogue": "\u2026\u2026\u9189\u72D7\uFF1F",
+      "Next": 646,
+      "id": 645
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u90A3\u4E0D\u662F\u6C34\u602A\uFF0C\u662F\u5927\u9EC4\u6253\u7684\u547C\u565C\uFF01\uFF01",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_05",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 646
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5C0F\u9E21\u8BF4\u7684\u6C34\u602A\u4F4E\u543C\u2026\u2026",
+      "Next": 648,
+      "id": 647
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u9189\u72D7\u7684\u9F3E\u58F0\u800C\u5DF2\uFF01",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_05",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 648
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8FD9\u6761\uFF0C\u6211\u4EEC\u6562\u62CD\u80F8\u812F\u3002",
+      "Next": 651,
+      "id": 650
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6628\u665A\u6DF1\u591C\uFF0C\u4ECE\u5899\u7F1D\u4EB2\u773C\u770B\u89C1\u2014\u2014",
+      "Next": 652,
+      "id": 651
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u9ED1\u732B\u5728\u7BF1\u7B06\u8FB9\uFF0C\u548C\u5B83\u81EA\u5DF1\u7684\u5F71\u5B50\uFF0C\u54AC\u8033\u6735\u3002",
+      "Next": 653,
+      "id": 652
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "\u7591\u60D1",
+      "Dialogue": "\u2026\u2026\u54AC\u4EC0\u4E48\uFF1F",
+      "Next": 654,
+      "id": 653
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u54EA\u662F\u54AC\uFF01\u95F7\u58F0\u4E0D\u542D\u3001\u9B3C\u9B3C\u795F\u795F\uFF0C\u5BF9\u7740\u5F71\u5B50\u5600\u5600\u5495\u5495\u2014\u2014",
+      "Next": 655,
+      "id": 654
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u519C\u573A\u9ED1\u5E02\u732B\u5E2E\uFF0C\u6709\u5927\u52A8\u4F5C\u3002",
+      "Next": 656,
+      "id": 655
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u5F1F\u91CD\u91CD\u70B9\u5934\uFF0C\u786C\u628A\u540E\u534A\u53E5\u54BD\u56DE\u53BB\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_06",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 656
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8FD9\u9762\u5899\u5357\u6BB5\uFF0C\u4EE5\u524D\u4F4F\u7740\u53E6\u4E00\u5BB6\u5356\u60C5\u62A5\u7684\uFF0C\u8DDF\u6211\u4EEC\u4E00\u4E2A\u884C\u5F53\u3002",
+      "Next": 661,
+      "id": 660
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u88AB\u6211\u4EEC\u641E\u57AE\u4E86\uFF01",
+      "Next": 662,
+      "id": 661
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4ED6\u4EEC\u5356\u7684\u5168\u662F\u5047\u8D27\uFF0C\u6211\u4EEC\u4E3E\u62A5\u4E86\uFF0C",
+      "Next": 917,
+      "id": 662
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u73B0\u5728\u8FD9\u4E2A\u519C\u573A\u53EA\u6709\u6211\u4EEC\u4E00\u5BB6\u2014\u2014",
+      "Next": 664,
+      "id": 663
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5C31\u6211\u4EEC\u4E24\u5BB6\u5728\u5356\u2014\u2014\u5784\u65AD\u3002",
+      "Next": 665,
+      "id": 664
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u63CF\u8FF0",
+      "NpcSprite": "",
+      "Dialogue": "\uFF08\u9F20\u54E5\u626C\u4E86\u626C\u7B97\u76D8\uFF0C\u5634\u89D2\u7FD8\u5F97\u8001\u9AD8\uFF09",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_07",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 665
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u6628\u665A\u6DF1\u591C\uFF0C\u6211\u4EEC\u4EB2\u773C\u770B\u89C1\u7684\u2014\u2014",
+      "Next": 671,
+      "id": 670
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "Flash\u2014\u2014\u98DE\u8D77\u6765\u4E86\uFF01\uFF01\uFF01",
+      "Next": 672,
+      "id": 671
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u73A9\u5BB6",
+      "NpcSprite": "",
+      "Dialogue": "\u2026\u2026",
+      "Next": 673,
+      "id": 672
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u4ECE\u5BBD\u53F6\u4E0A\u98DE\u8D77\uFF0C\u76D8\u65CB\u4E86\u4E00\u5708\uFF0C\u843D\u56DE\u53BB\u3002",
+      "Next": 674,
+      "id": 673
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6211\u4EEC\u5F53\u65F6\u90FD\u770B\u50BB\u4E86\u2014\u2014",
+      "Next": 675,
+      "id": 674
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5546\u4E1A\u95F4\u8C0D\u7684\u5B9E\u529B\uFF0C\u8D85\u51FA\u6211\u4EEC\u7684\u60F3\u8C61\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumSold_08",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 675
+    },
+    {
+      "Type": "Normal",
+      "DocTag": "NGPlus",
+      "NpcName": "\u8001\u9F20\u5144\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "RotatePool": [
+        1001
+      ],
+      "Next": -1,
+      "id": 900
+    },
+    {
+      "Type": "Question",
+      "DocTag": "NGPlus-hub",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "",
+      "MenuCap": 0,
+      "Options": [
+        {
+          "Text": "\u4FBF\u5B9C\u7684\uFF0C\u4E00\u5757\u3002",
+          "ShopAction": "cheap",
+          "Next": 910,
+          "DisplayConditions": [
+            {
+              "VarName": "Mouse_CheapPoolAvailable",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "CheeseCount",
+              "VarType": "int",
+              "Op": "\u003E=",
+              "Value": 1
+            }
+          ]
+        },
+        {
+          "Text": "\u8D35\u4E00\u70B9\u7684\uFF0C\u4E94\u5757\u3002",
+          "ShopAction": "premium",
+          "Next": 910,
+          "DisplayConditions": [
+            {
+              "VarName": "Mouse_PremiumPoolAvailable",
+              "VarType": "bool",
+              "Value": true
+            },
+            {
+              "VarName": "CheeseCount",
+              "VarType": "int",
+              "Op": "\u003E=",
+              "Value": 5
+            }
+          ]
+        },
+        {
+          "Text": "\u6CA1\u4E8B\u4E86\u3002",
+          "Next": -1
+        }
+      ],
+      "Next": -1,
+      "id": 910
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u7EFC\u5408\u7B97\u4E0B\u6765\uFF0C\u516B\u5757\u5976\u916A\u788E\uFF0C\u516C\u9053\u4EF7\u3002",
+      "Next": 230,
+      "id": 911
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u540E\u9762\u90A3\u6279\u8D35\u7684\uFF0C\u73B0\u5728\u4E5F\u4E00\u5E76\u5F00\u5356\u4E86\u3002",
+      "Next": 324,
+      "id": 912
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5B83\u5728\u8FD9\u4E00\u5E26\u9876\u591A\u6392\u7B2C\u4E03\u3002",
+      "Next": 343,
+      "id": 913
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u5927\u534A\u4E2A\u8EAB\u5B50\u538B\u7740\u4E00\u67B6\u6728\u68AF\uFF01",
+      "Next": 562,
+      "id": 914
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u6DD1\u82AC\u4EE5\u524D\u8FD9\u4E48\u5E72\u8FC7\uFF0C\u7BA1\u7528\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_CheapSold_07",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 94,
+      "id": 915
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u592A\u597D\u73A9\u4E86\uFF0C\u968F\u53E3\u7F16\u7684\u3002",
+      "Next": 604,
+      "id": 916
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u516B\u5366",
+      "Dialogue": "\u540E\u6765\u5899\u88AB\u4FEE\u7F2E\uFF0C\u628A\u90A3\u8FB9\u5835\u6B7B\u4E86\u3002",
+      "Next": 663,
+      "id": 917
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u8FD8\u6709\u6CA1\u4E70\u7684\uFF0C\u81EA\u5DF1\u6765\u6311\u3002",
+      "Next": 1003,
+      "id": 1001
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u5F1F",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5976\u916A\u591F\u7684\u8BDD\uFF0C\u81EA\u5DF1\u6765\u6311\u2014\u2014",
+      "Next": 1003,
+      "id": 1002
+    },
+    {
+      "Type": "Normal",
+      "NpcName": "\u9F20\u54E5",
+      "NpcSprite": "\u515C\u552E",
+      "Dialogue": "\u5976\u916A\u591F\u4E0D\u591F\uFF0C\u662F\u4F60\u4EEC\u7684\u4E8B\u3002",
+      "SetVariables": [
+        {
+          "VarName": "Mouse_PremiumPoolUnlocked",
+          "VarType": "bool",
+          "Value": true
+        }
+      ],
+      "Next": 910,
+      "id": 1003
+    }
+  ]
+}
