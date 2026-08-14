@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!114 &-799245919653585281
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_FakeDecalHighlight1
   m_Shader: {fileID: -6465566751694194690, guid: 823a688a56b12f94d8994e23758f6cd3, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _TYPE_B
   m_InvalidKeywords: []
@@ -30,11 +32,17 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _SampleTexture2D_13d20abe4bb24b60ad19e62a618f0052_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 7520ffec1c026864293c3422b9e4c295, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_13d20abe4bb24b60ad19e62a618f0052_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 7520ffec1c026864293c3422b9e4c295, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -55,6 +63,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_e8045e7534d54281b806590fa15a2e4c_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2d9f6f32bd0b67d49b8fb86768fe150b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_e8045e7534d54281b806590fa15a2e4c_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 2d9f6f32bd0b67d49b8fb86768fe150b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
