@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7612559350633180515}
   - component: {fileID: 8776760303491880939}
-  - component: {fileID: 7562742880158449756}
-  - component: {fileID: 12517305171442381}
   m_Layer: 0
   m_Name: CheesePickup
   m_TagString: Untagged
@@ -50,68 +48,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &7562742880158449756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653259988731356698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 540439951, guid: 3ead8c7f8efe8473b8d110669e8128d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetGUID:
-    n1: 14467739471460882367
-    n2: 5389776206591096765
-  RunContext: 0
---- !u!114 &12517305171442381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653259988731356698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -413692930, guid: c1a957cff7a534cbab677bbff81abab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScriptAsset: {fileID: -4320198879241519195, guid: 993de45daed2340f4b8225dcf3a4063d, type: 3}
-  ParaLuaBindingData:
-  - rid: 3883133806650327041
-  - rid: 3883133806650327042
-  - rid: 3883133806650327043
-  - rid: 3883133806650327044
-  IsServerScript: 0
-  IsManualedVar: 1
-  eNetState: 0
-  autoUpdate: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: 3883133806650327041
-      type: {class: DouyinLuaDataString, ns: , asm: com.douyin.script}
-      data:
-        varName: pickupId
-        Data: 
-    - rid: 3883133806650327042
-      type: {class: DouyinLuaDataVarInt, ns: , asm: com.douyin.script}
-      data:
-        varName: amount
-        Data: 1
-    - rid: 3883133806650327043
-      type: {class: DouyinLuaDataVarBoolean, ns: , asm: com.douyin.script}
-      data:
-        varName: requiresNGPlus
-        Data: 0
-    - rid: 3883133806650327044
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: visualRoot
-        Data: {fileID: 0}
-        varType: UnityEngine.GameObject
 --- !u!1 &8242712886429611714
 GameObject:
   m_ObjectHideFlags: 0
