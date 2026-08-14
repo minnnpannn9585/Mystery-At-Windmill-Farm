@@ -1,0 +1,175 @@
+ManifestFileVersion: 0
+CRC: 794010734
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 15d8589707453dcf80c7a903cdca23d8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ba9995ffb2d4a8f3d88960a80abc8b39
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 111
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 19bb92bc89891d24b84d376d54e56476, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d5488686b8344fdc886c06b3fce8fbb0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc2f6a26b2dca334ca4594d1e11da127, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6d8622311de7cc445a9e45ead74828a8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 03d05810bf6040c08e9740d8a84b79e6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7e641fcc8d384f50bb4df6d46aeeb60c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 913e6d6fb2f244bb9036691fbf588191, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 97d944a116b6493db718da249341e3ca, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d6330a449b27a634e9ff3688d08d3942, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9ba87a7f254b8480b9dcb8fccbeb1ecd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a54f470276f6410eba55347d89f622cd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: edbe57dadb1f4c8fb3f0e6214f83c07a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b4225306325fa40149663f34f4c93c62, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4b502f15e10034c9f9f6ef331e52758a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 04236d8370094b57a46685ca7c6c1b73, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b376ff4323ac848debbb6b91fd99b93a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e8c1311dd2d1808498dce5d4914280fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ac142d1631530418d937db0412527aa9, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+- AssemblyName: com.douyin.object
+  ClassName: DouyinUIHVTransfromData/DouyinUIRootsRecttransformData
+- AssemblyName: com.douyin.world
+  ClassName: DouyinNetworkGuid/NetworkGUID
+Assets:
+- Assets/OriginalResources/AvatarWorld/Animator/Idle.anim
+- Assets/OriginalResources/AvatarWorld/Textures/icon_award.png
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Mesh/HaiHaiNewYear_HC_MSYQ01.fbx
+- Assets/OriginalResources/AvatarWorld/Animator/Effect_HSFS_show.anim
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Mat/HaiHaiNewYear_HC_MSYQ_mat01.mat
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Mesh/HaiHaiNewYear_HC_MSYQ01.controller
+- Assets/OriginalResources/AvatarWorld/Textures/Effect_3D_Stars2.tga
+- Assets/OriginalResources/AvatarWorld/Prefabs/GagasAvatarRoot.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Mesh/HaiHaiNewYear_HC_MSYQ01_Ma01.fbx
+- Assets/OriginalResources/AvatarWorld/Prefabs/Effect_HuaChe_Show.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex02_n.tga
+- Assets/OriginalResources/AvatarWorld/Animator/localplayercontroller.controller
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex03_e.png
+- Assets/OriginalResources/AvatarWorld/UI/NpcDialoguePanel.prefab
+- Assets/OriginalResources/AvatarWorld/Textures/img_dialogue_choice.png
+- Assets/OriginalResources/AvatarWorld/Textures/Effect_star_0082.tga
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex01_d.tga
+- Assets/OriginalResources/AvatarWorld/UI/UISystem.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex03_d.tga
+- Assets/OriginalResources/AvatarWorld/Textures/img_dialogue_panel_h.png
+- Assets/OriginalResources/AvatarWorld/Textures/img_dialogue_head_mask.png
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex02_d.tga
+- Assets/OriginalResources/AvatarWorld/Textures/img_dialogue_panel_v.png
+- Assets/OriginalResources/AvatarWorld/Textures/Gift.png
+- Assets/OriginalResources/AvatarWorld/UI/NpcDialogueChoiceUI.prefab
+- Assets/OriginalResources/AvatarWorld/UI/GagasAvatarTestPanel.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Mat/HaiHaiNewYear_HC_MSYQ_mat02.mat
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex03_n.tga
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC01_tex01_n.png
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/FestoonedVehicleSpawner.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/Matcap010.png
+- Assets/OriginalResources/AvatarWorld/Textures/Effect_prop_bengchuang_0012.tga
+- Assets/OriginalResources/AvatarWorld/Textures/img_dialogue_title.png
+- Assets/OriginalResources/AvatarWorld/Prefabs/FestoonedVehicle.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/NpcAwardIcon.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/FestoonedVehicleLocalPlayer.prefab
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex01_n.tga
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Mat/HaiHaiNewYear_HC_MSYQ_Ma01_mat01.mat
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex01_e.tga
+- Assets/OriginalResources/AvatarWorld/Prefabs/HaiHaiNewYear_Default_Vehicle/Tex/HaiHaiNewYear_HC_MSYQ_tex02_e.tga
+Dependencies: []

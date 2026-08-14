@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 1615889165
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5d8147996ef92948e292dcc8e0043e68
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f1839f0bb9cb6abeafc7c91505c57827
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: f1efaf837cb003c4b93dd7d16326e9b5, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/OriginalResources/FirerBornFX/Firer_BornFX.prefab
+Dependencies: []

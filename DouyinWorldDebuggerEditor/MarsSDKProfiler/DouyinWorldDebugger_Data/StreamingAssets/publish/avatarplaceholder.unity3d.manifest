@@ -1,0 +1,52 @@
+ManifestFileVersion: 0
+CRC: 1215057907
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c3d2d3bdaa9dff42fe4c3f4e4a9ac251
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 58e8fe98c573b7e7c5654cb4c88465aa
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f1a8ba14066345e08996ca1b6aa15fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ed6736b6b11e5194e9d1c42a82b03991, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 437b3fb4707be4eecb700a6cf97540e6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6ba4a180a2ce73b4896df6a0a52187b0, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: com.douyin.avatar
+  ClassName: ExpressTarget
+Assets:
+- Assets/OriginalResources/Avatar/AvatarPlaceHolder.prefab
+Dependencies:
+- D:/ws/image_qjxb_wclwo_xjhab/74669/com.hamlet.client/HamletClient/Assets/StreamingAssets/publish/shaderlists.unity3d

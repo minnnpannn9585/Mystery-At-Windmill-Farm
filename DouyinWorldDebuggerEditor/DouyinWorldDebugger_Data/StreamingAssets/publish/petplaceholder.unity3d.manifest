@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 203277359
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 22b43beb7d854997025d016f46e12d99
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4568106e8bca0c462a557385aa6a08e6
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: e400f9de9e00496abe8d60f97f2767c3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8bcf4232a3484488b033fc4b1b08596d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6ba4a180a2ce73b4896df6a0a52187b0, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/OriginalResources/Avatar/PetPlaceHolder.prefab
+Dependencies: []

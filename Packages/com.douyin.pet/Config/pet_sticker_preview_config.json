@@ -1,0 +1,131 @@
+﻿[
+  {
+    "point": "Point_l_hand",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/hand_example.prefab",
+    "position": [
+      0.02,
+      0,
+      0
+    ],
+    "rotation": [
+      -88,
+      0,
+      -56
+    ],
+    "offset": [0,0,0],
+    "scale": 1
+  },
+  {
+    "point": "Point_r_hand",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/hand_example.prefab",
+    "position": [
+      -0.02,
+      0,
+      0
+    ],
+    "rotation": [
+      -88,
+      0,
+      -56
+    ],
+    "offset": [0,0,0],
+    "scale": 1
+  },
+  {
+    "point": "Point_head",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/head_example.prefab",
+    "position": [
+      0,
+      -0.14,
+      -0.12
+    ],
+    "rotation": [
+      6,
+      0,
+      0
+    ],
+    "offset": [0,0,-0.04],
+    "scale": 1
+  },
+  {
+    "point": "Point_face",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/face_example.prefab",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "offset": [0,0,0.01],
+    "scale": 1
+  },
+  {
+    "id": 5001,
+    "point": "Point_back",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/back_example.prefab",
+    "position": [
+      0,
+      -0.09,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "offset": [0,0,0],
+    "scale": 1
+  },
+  {
+    "point": "Point_l_leg",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/leg_example.prefab",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "offset": [0,0,0],
+    "scale": 0.4
+  },
+  {
+    "point": "Point_r_leg",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/leg_example.prefab",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "offset": [0,0,0],
+    "scale": 0.4
+  },
+  {
+    "point": "Point_tail",
+    "asset_path": "Assets/DouyinVCreateSDK/Pet/ArtAssets/Apparels/tail_example.prefab",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      -40,
+      0,
+      0
+    ],
+    "offset": [0,0.01,-0.01],
+    "scale": 1
+  }
+]

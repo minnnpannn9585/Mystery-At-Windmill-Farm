@@ -1,0 +1,56 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.douyin.common/Config/UI/USS/Main.uss?fileID=7433441132597879392&amp;guid=5a13fde3b7f6c43a0a1297a9827d08c3&amp;type=3#Main" />
+    <Style src="project://database/Packages/com.douyin.pet/Config/UI/USS/PetAIGC.uss?fileID=7433441132597879392&amp;guid=3690a53de1d02ed4a8f3f773cf073143&amp;type=3#PetAIGC" />
+    <ui:VisualElement name="VisualElement" class="tab-container" style="align-items: flex-start; flex-basis: initial; flex-direction: row; -unity-background-image-tint-color: rgb(248, 237, 237); background-color: rgb(40, 40, 40);">
+        <ui:Button text="输入文字" display-tooltip-when-elided="true" name="m_TextInputTab" style="width: 64px; white-space: nowrap; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-top-left-radius: 3px; border-bottom-left-radius: 0; border-top-right-radius: 3px; border-bottom-right-radius: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; font-size: 14px; height: 20px; transform-origin: bottom; -unity-font-style: normal; background-color: rgb(60, 60, 60);" />
+        <ui:Button text="上传图片" display-tooltip-when-elided="true" enable-rich-text="true" focusable="true" tabindex="1" name="m_ImageInputTab" style="flex-direction: row; width: 64px; border-top-left-radius: 3px; border-bottom-left-radius: 0; border-top-right-radius: 3px; border-bottom-right-radius: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; display: flex; height: 20px; transform-origin: bottom; -unity-font-style: normal; background-color: rgba(88, 88, 88, 0); font-size: 14px;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="m_TextInputTabPanel" style="margin-left: 36px; margin-right: 36px; flex-grow: 0; justify-content: flex-start; margin-top: 10px; -unity-text-align: upper-left; width: 448px; height: auto; display: flex;">
+        <ui:VisualElement style="margin-top: 17px;">
+            <ui:VisualElement style="flex-direction: row; margin-top: 8px; height: 106px;">
+                <ui:TextField picking-mode="Ignore" name="m_InputText" text="请输入灵感" multiline="true" class="multi-line-text-input" style="flex-grow: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-left: 0; padding-right: 0; padding-bottom: 0; white-space: normal;" />
+                <ui:Label text="0/200" display-tooltip-when-elided="true" name="m_InputLabel" class="text-gray" style="position: absolute; justify-content: flex-end; -unity-text-align: upper-right; align-items: flex-end; flex-direction: column; width: 83px; right: 8px; bottom: 4px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="m_imageInputTabPanel" style="flex-direction: row; justify-content: center; align-items: center; display: none; height: auto; margin-top: 24px;">
+        <ui:VisualElement name="m_ImageSelect" style="justify-content: center; align-items: flex-start; display: flex;">
+            <ui:Button display-tooltip-when-elided="true" name="m_SelectImageBtn" class="drag-over" style="background-image: none; width: 448px; height: 118px; align-items: center; flex-wrap: nowrap; display: flex; background-color: rgb(48, 48, 48); border-left-color: rgba(238, 238, 238, 0.4); border-right-color: rgba(238, 238, 238, 0.4); border-top-color: rgba(238, 238, 238, 0.4); border-bottom-color: rgba(238, 238, 238, 0.4); flex-direction: column; justify-content: center;">
+                <ui:VisualElement>
+                    <ui:VisualElement name="dragIcon" style="background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/$dragIcon.png?fileID=21300000&amp;guid=c54a971252bd65741bdb3f0fe5d380e0&amp;type=3#$dragIcon&apos;); width: 24px; height: 24px; flex-shrink: 0; margin-top: 0; margin-right: 4px;" />
+                </ui:VisualElement>
+                <ui:VisualElement>
+                    <ui:Label text="点击上传文件或拖拽文件到这里" display-tooltip-when-elided="true" style="font-size: 14px;" />
+                    <ui:Label text="支持 png, jpeg, jpg 格式&#10;图片最大不超过 10M，分辨率最低要求 128*128 " display-tooltip-when-elided="true" style="color: rgb(141, 141, 141);" />
+                </ui:VisualElement>
+            </ui:Button>
+            <ui:VisualElement style="flex-direction: row; justify-content: flex-start; align-items: center; margin-left: 0; margin-top: 10px; -unity-text-align: upper-left; display: none;">
+                <ui:Label text="查看示例" display-tooltip-when-elided="true" name="WarningStaticLabel" class="size-11" style="align-items: center; -unity-text-align: upper-left; overflow: visible; border-left-width: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row; justify-content: center;" />
+                <ui:VisualElement style="background-image: url(&apos;project://database/Packages/com.douyin.common/Config/UI/Icons/info_icon.png?fileID=21300000&amp;guid=a237db8bee26ab04c9f4295f5407b7e9&amp;type=3#info_icon&apos;); width: 13px; height: 12px; flex-shrink: 0; margin-top: 0; margin-right: 4px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="m_imagePreview" style="display: none;">
+            <ui:VisualElement style="margin-left: 0; margin-right: 0; border-top-left-radius: 35px; border-bottom-left-radius: 35px; border-top-right-radius: 35px; border-bottom-right-radius: 35px; margin-top: 0; margin-bottom: 0; align-items: auto;">
+                <ui:VisualElement name="frame" style="background-image: url(&apos;project://database/Packages/com.douyin.common/Config/UI/Icons/pet_frame.png?fileID=2800000&amp;guid=ba799be6af784264aba9b025917f0be4&amp;type=3#pet_frame&apos;); width: 175px; height: 172px; flex-direction: row; align-items: auto;">
+                    <ui:Image name="imageDisplay" class="bg-color-303030 border-color-191919" style="margin-top: 0; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; margin-left: 0; margin-right: 0; margin-bottom: 0; background-image: none; -unity-background-image-tint-color: rgb(255, 255, 255); overflow: hidden; flex-grow: 1; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: flex;" />
+                </ui:VisualElement>
+                <ui:Button display-tooltip-when-elided="true" name="m_ReSelectBtn" style="background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/Frame%202082893083.png?fileID=2800000&amp;guid=042e921bb45e4cd42ae6e6beb51d7137&amp;type=3#Frame 2082893083&apos;); width: 24px; height: 24px; background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); translate: -11px -40px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-direction: row; justify-content: flex-start; align-items: center; margin-left: 35px; margin-top: 10px; -unity-text-align: upper-left;">
+        <ui:Button text="查看示例" display-tooltip-when-elided="true" name="openSampleBtn" class="hyperlink-button" style="margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; color: rgb(255, 255, 255);" />
+        <ui:VisualElement style="background-image: url(&apos;project://database/Packages/com.douyin.common/Config/UI/Icons/info_icon.png?fileID=21300000&amp;guid=a237db8bee26ab04c9f4295f5407b7e9&amp;type=3#info_icon&apos;); width: 13px; height: 12px; flex-shrink: 0; margin-top: 0; margin-right: 4px;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-direction: column; width: auto; height: 98px; margin-top: 40px;">
+        <ui:VisualElement style="align-items: center; flex-direction: column;">
+            <ui:Button text="开始生成" display-tooltip-when-elided="true" name="m_generateButton" class="red-button" style="margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; height: 27px; width: 228px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; align-items: auto;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-left; align-items: stretch; justify-content: center; position: relative; top: 0; margin-top: 10px;">
+            <ui:VisualElement style="flex-direction: row; flex-shrink: 0;">
+                <ui:Toggle name="ToggleButton" focusable="false" text="图片上传已遵守" style="flex-direction: row-reverse; align-items: center; justify-content: center; flex-shrink: 0; left: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; display: flex; opacity: 1;" />
+                <ui:Button text="《AIGC合养精灵创作规范》" display-tooltip-when-elided="true" name="linkButton1" class="hyperlink-button" style="margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

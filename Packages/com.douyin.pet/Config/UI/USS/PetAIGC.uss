@@ -1,0 +1,20 @@
+.drag-over {
+    border-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.unity-progress-bar__progress
+{
+    background-color: #FE2C55;
+    border-radius: 3px;
+}
+
+.unity-progress-bar__background
+{
+    border-radius: 3px;
+}
+
+.unity-base-textfield__input
+{
+    padding-left: 10px;
+}

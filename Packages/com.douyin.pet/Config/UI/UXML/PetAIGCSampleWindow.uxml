@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.douyin.common/Config/UI/USS/Main.uss?fileID=7433441132597879392&amp;guid=5a13fde3b7f6c43a0a1297a9827d08c3&amp;type=3#Main" />
+    <ui:VisualElement name="TextSample" style="display: none;">
+        <ui:VisualElement style="flex-direction: row; justify-content: center; margin-top: 30px;">
+            <ui:VisualElement name="m_item1" style="margin-left: 0; margin-right: 0; border-top-left-radius: 35px; border-bottom-left-radius: 35px; border-top-right-radius: 35px; border-bottom-right-radius: 35px; margin-top: 0; margin-bottom: 0; align-items: center; width: 160px; transition-property: all, ignored; transition-duration: 0s, 0s; transition-timing-function: ease, ease; transition-delay: 0s, 0s; height: auto; justify-content: center;">
+                <ui:VisualElement name="frame" style="background-image: url(&apos;project://database/Packages/com.douyin.common/Config/UI/Icons/pet_frame.png?fileID=2800000&amp;guid=ba799be6af784264aba9b025917f0be4&amp;type=3#pet_frame&apos;); width: auto; height: 160px; flex-direction: column; align-items: auto; flex-grow: 0; justify-content: center; flex-shrink: 0; flex-basis: auto;">
+                    <ui:Image name="imageDisplay" class="bg-color-303030 border-color-191919" style="margin-top: 0; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; margin-left: 0; margin-right: 0; margin-bottom: 0; background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/image%209.png?fileID=2800000&amp;guid=7f59326b6face4b0eb4c4b7074115128&amp;type=3#image 9&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); overflow: hidden; flex-grow: 1; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: flex; width: 160px; height: 160px; flex-basis: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; justify-content: center; margin-top: 10px;">
+            <ui:Label text="叼着奶嘴的独角兽宝宝" display-tooltip-when-elided="true" style="font-size: 14px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="ImageSample">
+        <ui:VisualElement style="margin-left: 10px; margin-top: 10px;">
+            <ui:Label text="支持 png, jpeg, webp 格式，图片最大不超过 10M&#10;分辨率最低要求 128*128 " display-tooltip-when-elided="true" style="color: rgba(141, 141, 141, 255); font-size: 14px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; justify-content: center; align-items: center; flex-wrap: nowrap;">
+            <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; width: 156px; height: 156px;">
+                <ui:Image name="imageDisplay" class="bg-color-303030 border-color-191919" style="margin-top: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/p1.png?fileID=2800000&amp;guid=5c063cfbcae3e4ebb91cfe3d619993ee&amp;type=3#p1&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); overflow: hidden; flex-grow: 1; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: flex; width: 156px; height: 156px; flex-basis: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-left-color: rgba(25, 25, 25, 0); border-right-color: rgba(25, 25, 25, 0); border-top-color: rgba(25, 25, 25, 0); border-bottom-color: rgba(25, 25, 25, 0); background-color: rgba(48, 48, 48, 0);" />
+            </ui:VisualElement>
+            <ui:VisualElement style="height: 42%; flex-direction: row; width: 56px; align-items: center; margin-left: 10px;">
+                <ui:Image name="imageDisplay" class="bg-color-303030 border-color-191919" style="margin-top: 0; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; margin-left: 0; margin-right: 0; margin-bottom: 0; background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/Union.png?fileID=2800000&amp;guid=2f980c6f618cf4e5b8845b4bbb3e07cd&amp;type=3#Union&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); overflow: hidden; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; display: flex; width: 56px; height: 42px; flex-basis: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-left-color: rgba(25, 25, 25, 0); border-right-color: rgba(25, 25, 25, 0); border-top-color: rgba(25, 25, 25, 0); border-bottom-color: rgba(25, 25, 25, 0); background-color: rgba(48, 48, 48, 0); justify-content: center; align-items: center; flex-direction: row; flex-shrink: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="width: 156px; height: 156px; margin-left: 10px;">
+                <ui:Image name="imageDisplay" class="bg-color-303030 border-color-191919" style="margin-top: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/p2.png?fileID=2800000&amp;guid=43409a9f6506f40dea75eff78cee8991&amp;type=3#p2&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); overflow: hidden; flex-grow: 1; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: flex; width: 156px; height: 156px; flex-basis: 0; background-color: rgba(48, 48, 48, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="align-items: center; flex-direction: column; margin-top: 20px;">
+        <ui:Button text="返回" display-tooltip-when-elided="true" name="m_returnButton" style="margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; height: 27px; width: 228px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; align-items: auto;" />
+    </ui:VisualElement>
+</ui:UXML>

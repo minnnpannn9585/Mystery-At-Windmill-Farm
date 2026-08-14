@@ -1,0 +1,10 @@
+{
+	"RedBullCoreSettings":{
+		"ShowDebugInfoPanelSecret":"RRRRRR",
+		"EnableRedBullRuntime":true,
+		"ProjectKey":"__default__",
+		"DiscoverServiceAddress":"",
+		"AllowRedBullRegisterDevice":true,
+		"LogLevel":"Info"
+	}
+}

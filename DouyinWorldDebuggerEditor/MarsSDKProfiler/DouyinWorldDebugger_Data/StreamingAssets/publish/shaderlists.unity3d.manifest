@@ -1,0 +1,53 @@
+ManifestFileVersion: 0
+CRC: 2037739886
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f99d967ce326d6603f50f70caf698486
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 689be02fd51023ca4ed2fc8972c0beb5
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 200
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/GameResAvatar/Shader/BuildInEnvShader/Effect/Effect_VolumeCloud01.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/PBR/AvatarPBR_AlphaTest.shader
+- Assets/DouyinVCreateSDK/Avatar/ToolBox/Shaders/NPR/AvatarNPR_UE_simple_Translucent.shader
+- Assets/GameResAvatar/Shader/BuildInEnvShader/ENVshader/EnvNPR01.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/PBR/AvatarPBR_Optimize.shader
+- Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+- Assets/GameResAvatar/Shader/BuildInEnvShader/Effect/Effect01_Add.shader
+- Assets/DouyinVCreateSDK/Avatar/ToolBox/Shaders/NPR/AvatarNPR_UE_simple_AlphaTest.shader
+- Assets/GameResAvatar/Shader/BuildInEnvShader/ENVshader/Glass.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/NPR/AvatarNPR_Preset_Skin.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/NPR/AvatarNPR_HD_AlphaTest.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/VFX/AvatarVFX_ParticlesUnlit.shader
+- Assets/DouyinVCreateSDK/Avatar/ToolBox/SDK/Shaders/AvatarNPR_AIHaiHai.shader
+- Packages/com.unity.render-pipelines.universal/Shaders/Particles/ParticlesLit.shader
+- Assets/GameResAvatar/Shader/BuildInEnvShader/ItemPBR_AIHaiHai.shader
+- Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/NPR/AvatarNPR_HD_Translucent.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/Impostor/Runtime/DouyinImpostor.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/VFX/AvatarVFX_Rotation.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/NPR/AvatarNPR_HD.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/NPR/AvatarNPR_FaceSDF.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/PBR/AvatarPBR_Preset_Glass.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/PBR/AvatarPBR_Translucent.shader
+- Assets/ShaderList/ShaderLists2.shadervariants
+- Assets/DouyinVCreateSDK/Avatar/ToolBox/SDK/HaiHaiKeywordSVC.shadervariants
+- Assets/DouyinVCreateSDK/Avatar/ToolBox/Shaders/UE_Cloth_Base.shader
+- Assets/ShaderList/ShaderLists.shadervariants
+- Assets/GameResAvatar/UI/Shader/RoundRect.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/NPR/AvatarNPR_Preset_Hair.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/PBR/AvatarPBR.shader
+- Assets/DouyinVCreateSDK/Avatar/ToolBox/Shaders/M_Hide.shader
+- Assets/DouyinVCreateSDK/ToolBox/Shaders/VFX/AvatarVFX.shader
+- Assets/GameResAvatar/Shader/BuildInEnvShader/Effect/Effect01.shader
+- Assets/GameResAvatar/Shader/BuildInEnvShader/ENVshader/Skybox01.shader
+- Assets/DouyinVCreateSDK/Avatar/ToolBox/Shaders/NPR/AvatarNPR_UE_simple.shader
+Dependencies: []

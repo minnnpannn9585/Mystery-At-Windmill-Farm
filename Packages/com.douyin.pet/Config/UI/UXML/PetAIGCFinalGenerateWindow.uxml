@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.douyin.common/Config/UI/USS/Main.uss?fileID=7433441132597879392&amp;guid=5a13fde3b7f6c43a0a1297a9827d08c3&amp;type=3#Main" />
+    <Style src="project://database/Packages/com.douyin.pet/Config/UI/USS/PetAIGC.uss?fileID=7433441132597879392&amp;guid=3690a53de1d02ed4a8f3f773cf073143&amp;type=3#PetAIGC" />
+    <ui:VisualElement name="generateSuccessTip" style="flex-direction: row; margin-top: 10px; color: rgb(255, 255, 255); justify-content: center; display: flex; margin-bottom: 0; padding-top: 0;">
+        <ui:VisualElement style="background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/ic_s_s_checkmarkcircle.png?fileID=21300000&amp;guid=82d5f9c9cdd69d14aadf531c594a887e&amp;type=3#ic_s_s_checkmarkcircle&apos;); width: 20px; height: 20px; flex-shrink: 0; margin-top: 0; margin-right: 4px;" />
+        <ui:Label text="生成完成" display-tooltip-when-elided="true" style="justify-content: center; align-items: auto; translate: 0 1px;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-direction: column; margin-top: 0; justify-content: center; height: auto; margin-bottom: 0; align-items: center; padding-top: 20px;">
+        <ui:VisualElement name="m_item1" style="margin-left: 0; margin-right: 0; border-top-left-radius: 35px; border-bottom-left-radius: 35px; border-top-right-radius: 35px; border-bottom-right-radius: 35px; margin-top: 0; margin-bottom: 0; align-items: center; width: 160px; transition-property: all, ignored; transition-duration: 0s, 0s; transition-timing-function: ease, ease; transition-delay: 0s, 0s; height: auto; justify-content: center;">
+            <ui:VisualElement name="frame" style="background-image: url(&apos;project://database/Packages/com.douyin.common/Config/UI/Icons/pet_frame.png?fileID=2800000&amp;guid=ba799be6af784264aba9b025917f0be4&amp;type=3#pet_frame&apos;); width: auto; height: 160px; flex-direction: column; align-items: auto; flex-grow: 0; justify-content: center; flex-shrink: 0; flex-basis: auto;">
+                <ui:Image name="imageDisplay" class="bg-color-303030 border-color-191919" style="margin-top: 0; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; margin-left: 0; margin-right: 0; margin-bottom: 0; background-image: none; -unity-background-image-tint-color: rgb(255, 255, 255); overflow: hidden; flex-grow: 1; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: flex; width: 160px; height: 160px; flex-basis: 0;">
+                    <ui:VisualElement name="generatingState" />
+                </ui:Image>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="m_progress" style="flex-direction: column; justify-content: center; flex-wrap: nowrap; align-items: center; flex-grow: 0; flex-shrink: 1; flex-basis: auto; margin-top: 0;">
+        <ui:VisualElement style="flex-direction: row; justify-content: center;">
+            <ui:ProgressBar value="0" title=" " name="progressBar" high-value="1" style="width: 250px; height: 8px; margin-top: 10px; opacity: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; justify-content: center; display: flex; align-items: center; margin-top: 10px;">
+            <ui:Label text="生成纹理，并自动绑定骨骼中" display-tooltip-when-elided="true" name="m_progressTips" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="align-items: center; flex-direction: column; height: auto; justify-content: center; rotate: 0; margin-top: 20px; display: flex;">
+        <ui:Button text="取消生成" display-tooltip-when-elided="true" name="cancelButton" style="margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; height: 27px; width: 228px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; align-items: auto;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="align-items: center; flex-direction: row; height: auto; justify-content: center; rotate: 0; display: flex; margin-top: 20px;">
+        <ui:Button text="重新生成" display-tooltip-when-elided="true" name="m_reGrnerateBtn" style="margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; height: 27px; width: 109px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; align-items: auto;" />
+        <ui:Button text="导入场景" display-tooltip-when-elided="true" name="generateFinalButton" class="red-button" style="margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; height: 27px; width: 109px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; align-items: auto; margin-left: 20px;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="justify-content: center; flex-direction: row; display: flex; margin-top: 10px;">
+        <ui:Button display-tooltip-when-elided="false" enable-rich-text="false" name="m_GenerateHistoryBtn" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Packages/com.douyin.pet/Config/UI/Icon/Frame%202082893188.png?fileID=2800000&amp;guid=fd15f87deef50fb43b70a37843db36ed&amp;type=3#Frame 2082893188&apos;); width: 70px; background-color: rgba(88, 88, 88, 0); height: 18px;" />
+    </ui:VisualElement>
+</ui:UXML>

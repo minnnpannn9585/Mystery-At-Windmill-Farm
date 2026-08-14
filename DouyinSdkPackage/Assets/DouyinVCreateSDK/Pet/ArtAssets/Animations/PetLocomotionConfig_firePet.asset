@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1740128530, guid: 356098601839045568fff380cfd32369, type: 3}
+  m_Name: PetLocomotionConfig_firePet
+  m_EditorClassIdentifier: 
+  StandIdle: {fileID: 7400000, guid: 79c4ee69e342b6245bc33028016f23f4, type: 2}
+  SitIdle: {fileID: 7400000, guid: a0264b57d0f394144a8428cdccc107a3, type: 2}
+  WalkForward: {fileID: 7400000, guid: 9cf5971e6d0674d489e4b31f2096f54a, type: 2}
+  RunForward: {fileID: 7400000, guid: ce8ffe882cbb6b041b36acbbe3e4b3a0, type: 2}
+  JumpUp: {fileID: 7400000, guid: 0ea0c1d3edd1488459b3ad3c05510b0f, type: 2}
+  JumpAir: {fileID: 7400000, guid: 0cda972372c4a45498320f14417aabb7, type: 2}
+  JumpFall: {fileID: 7400000, guid: 338de96d199294e4e86a2bc25c91713e, type: 2}
+  FlyUp: {fileID: 7400000, guid: 57aca59f651e15640bff2f031864c553, type: 2}
+  FlyIdle: {fileID: 7400000, guid: fba14ef4975ad18468c3b3876ad08235, type: 2}
+  FlyDown: {fileID: 7400000, guid: dd8914501aebae64492f5d7756c41ec9, type: 2}
+  FlyForward: {fileID: 7400000, guid: 404b3185b92fb4c49828ee0c9552272c, type: 2}
+  Sitting: {fileID: 7400000, guid: fa92702c74a3b744f9f6350bc1cdd61a, type: 2}
+  HoldItem: {fileID: 7400000, guid: deac5b72e7a6ea640a313893fbc25c5e, type: 2}

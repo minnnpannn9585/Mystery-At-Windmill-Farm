@@ -1,0 +1,8408 @@
+﻿--- ⚠️ 本文件由工具自动生成，请勿手动修改
+--- Generated automatically. DO NOT EDIT MANUALLY.
+
+---@meta _
+---@diagnostic disable
+
+--- Actor牵手状态
+---@enum AvatarHoldHandStateType
+local AvatarHoldHandStateType_Enum = {
+}
+AvatarHoldHandStateType = AvatarHoldHandStateType_Enum
+
+--- 多人交互的交互类型
+---@enum DouyinActor.ActorInteractionType
+local ActorInteractionType_Enum = {
+}
+ActorInteractionType = ActorInteractionType_Enum
+
+--- 此对象提供了关于单个数据对象的详细信息。
+---@class DouyinDataInfo
+--- 当前数据版本号
+---@field version number
+--- 键
+---@field key string
+--- 值
+---@field vaule any
+--- 创建时间
+---@field createdTime number
+--- 最后更新时间
+---@field updateedTime number
+local DouyinDataInfo_Impl = {}
+
+--- 获取与当前数据对应的所有用户的自定义元数据。您可以使用DouyinDataSetOptions.SetMetadata()方法以键值对的方式附加元数据。当使用SetData/IncrementData/UpdateData方法更新数据时，将DouyinDataSetOptions对象一起传入，会将附加的元数据一同存储 ，存储成功后会返回DouyinDataInfo对象，元数据会附加在返回的DouyinDataInfo对象中，使用DouyinDataInfo.GetMetaData()方法可以获取设置的元数据。如果需要使用元数据存储附加数据，当使用SetData/IncrementData/UpdateData方法更新数据时，一定要将元数据对应的DouyinDataSetOptions对象一起传入。如果只有value更新了，元数据未更新，也需要将之前的元数据传入，否则会导致元数据丢失。
+---@return any ret table
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GetMetadataFromInfo(info, callback)
+--->    if info == nil then
+--->        return
+--->    end
+--->    local format = "yyyy-MM-dd HH:mm:ss"
+--->    local createdTime = info.createdTime:ToString(format)
+--->    local updatedTime = info.updatedTime:ToString(format)
+--->    local version = info.version
+--->    print(string.format("---GoldDataManager:GetMetadataFromInfo_createdTime=%s_updatedTime=%s_version=%s", createdTime,
+--->        updatedTime, version))
+--->    local meta_data = info:GetMetadata()
+--->    if meta_data then
+--->        for k, v in pairs(meta_data) do
+--->            print("---GoldDataManager:GetMetadataFromInfo=" .. k .. v)
+--->            if callback then callback(k, v) end
+--->        end
+--->    end
+--->end
+--->
+--->function GoldDataManager:SaveGoldDataSample(endgolds, callback, metaTable)
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local options = self:GetSetOptionsSample(metaTable)
+--->            local ok, value, info = self.goldStore:SetData("Golds", endgolds, options)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:SetData Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            GetMetadataFromInfo(info)
+--->            self:GoldsChange(value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GetSetOptionsSample(metaTable)
+--->    if self.goldStore == nil then
+--->        return
+--->    end
+--->    local ok, value, info = self.goldStore:GetData("Golds")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->        return
+--->    end
+--->    local options = DouyinDataService.CreateDataSetOptions()
+--->    GetMetadataFromInfo(info, function(k, v)
+--->        options:SetMetadata(k, v)
+--->    end)
+--->    for k, v in pairs(metaTable) do
+--->        options:SetMetadata(k, v)
+--->    end
+--->
+--->
+--->    local dict = options:GetMetadata()
+--->    for k, v in pairs(dict) do
+--->        print("---GoldDataManager:GetMetadata=" .. "Key:", k, "Value:", v)
+--->    end
+--->    return options
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        SetDataWithOptionsSample()
+--->    end
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function SetDataWithOptionsSample()
+--->    local dt = DouyinUtility.GetServerTime()
+--->    local key = dt:ToString()
+--->    local value = GoldDataManager:GetCoin() + 1
+--->    local metaTable = {}
+--->    metaTable[key] = value
+--->    GoldDataManager:SaveGoldDataSample(value, function(success)
+--->        if success then
+--->            DouyinUtility.Toast("设置元数据成功")
+--->        else
+--->            DouyinUtility.Toast("设置元数据失败")
+--->        end
+--->    end, metaTable)
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataInfo_Impl:GetMetaData() end
+
+--------------------------------------------------------------------------------
+
+--- 这项服务提供了一个 API，用于访问和分页版本列表和排序数据。
+---@class DouyinDataPages
+--- 当前页码
+---@field pageIndex int
+--- 最大页码
+---@field pageCount int
+--- 指定这是否是最后一页
+---@field isFinished boolean
+local DouyinDataPages_Impl = {}
+
+--- 获取当前页面的所有数据。返回的数据存储在表中，表中数据的实际类型取决于 DouoyinDataPages 实例的来源。
+---@return any ret int
+---@return any ret1 table
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:GetGoldSortedData(callback)
+--->    DATASTORE(
+--->        function()
+--->            local page_size = 10
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, pages = self.goldOrderedStore:GetSortedData(false, page_size)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetSortedData Fail:" .. ok .. pages)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            local maxcount = 10
+--->            local index = 0
+--->            repeat
+--->                index = index + 1
+--->                if index > maxcount then
+--->                    return
+--->                end
+--->                local success, page_values = pages:GetCurrentPage()
+--->                if success == 0 then
+--->                    for k, v in pairs(page_values) do
+--->                        print("GoldDataManager:GoldRank_Key=" .. k .. "Value" .. v.value)
+--->                        callback(true, k, v.value)
+--->                    end
+--->                end
+--->            until not pages:AdvanceToNextPage()
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:GetGoldSortedData(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("获取金币排序成功")
+--->            else
+--->                DouyinUtility.Toast("获取金币排序失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataPages_Impl:GetCurrentPage() end
+
+--- 获取指定页上的所有数据。返回的数据存储在表中， 表中数据的实际类型取决于 DouyinDataPages 实例的来源。
+---@param page_index int 指定页码
+---@return any ret int
+---@return any ret1 table
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:GetGoldSortedDataSample(callback)
+--->    DATASTORE(
+--->        function()
+--->            local page_size = 10
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, pages = self.goldOrderedStore:GetSortedData(false, page_size)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetSortedData Fail:" .. ok .. pages)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            local success, page_values = pages:GetPageByIndex(0)
+--->            if success == 0 then
+--->                for k, v in pairs(page_values) do
+--->                    print("GoldDataManager:GoldRank_Key=" .. k .. "Value" .. v.value)
+--->                    callback(true, k, v.value)
+--->                end
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:GetGoldSortedDataSample(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("获取金币排序成功")
+--->            else
+--->                DouyinUtility.Toast("获取金币排序失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataPages_Impl:GetPageByIndex(page_index) end
+
+--- 跳转到下一页
+---@return any ret bool
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:GetGoldSortedData(callback)
+--->    DATASTORE(
+--->        function()
+--->            local page_size = 10
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, pages = self.goldOrderedStore:GetSortedData(false, page_size)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetSortedData Fail:" .. ok .. pages)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            local maxcount = 10
+--->            local index = 0
+--->            repeat
+--->                index = index + 1
+--->                if index > maxcount then
+--->                    return
+--->                end
+--->                local success, page_values = pages:GetCurrentPage()
+--->                if success == 0 then
+--->                    for k, v in pairs(page_values) do
+--->                        print("GoldDataManager:GoldRank_Key=" .. k .. "Value" .. v.value)
+--->                        callback(true, k, v.value)
+--->                    end
+--->                end
+--->            until not pages:AdvanceToNextPage()
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:GetGoldSortedData(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("获取金币排序成功")
+--->            else
+--->                DouyinUtility.Toast("获取金币排序失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataPages_Impl:AdvanceToNextPage() end
+
+--------------------------------------------------------------------------------
+
+--- 这项服务提供统一的 API 用于获取 DataStore 信息
+---@class DouyinDataService
+local DouyinDataService_Impl = {}
+
+--- 创建或获取数据存储对象。数据以键值格式存储，值可以是任何数据类型，如数字、字符串、布尔值或表格。此外，支持跨范围搜索和前缀搜索。每个DataStore实例的键值对存储设计容量上限为1000个独立键值（key）单元，当单个DataStore实例存储的键数量达到1000个时，系统将自动触发写入保护机制，后续所有新增键值的操作将返回错误。已存在键的更新操作不受此限制影响。很多开发者喜欢以playerOpenID或petOpenID作为key，存储玩家数据，但是当用户超过1000人，就会出现存储失败的情况。正确做法是使用playerOpenID或petOpenID作为scope，在GetData()和SetData()时，使用相同的Key。
+---@param name string 数据存储的名称，这是一个唯一标识符。具有相同名称的数据存储中的数据将保存在同一数据空间中。
+---@param scope? string 数据存储的域名，其中数据根据范围独立存储。如果将 all_scope 设置为 false，数据存储中的所有数据键默认都会带有范围前缀。否则，您需要在数据键中指定范围。
+---@param all_scope? boolean 指定所获取的数据存储是否可以跨范围访问域中的所有数据。如果值为 true，您需要在数据键中指定范围，例如，使用 scope:key 格式访问数据。
+---@return any ret int
+---@return any ret1 string 或 DouyinDataStore
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataService_Impl:GetDataStore(name, scope, all_scope) end
+
+--- 获取一个可排序的数据存储对象。数据以键值格式存储，值只能是数字。
+---@param name string 数据存储的名称，这是一个唯一标识符。具有相同名称的数据存储中的数据将保存在同一数据空间中。
+---@param scope? string 数据存储的域名，其中数据根据范围独立存储。如果将 all_scope 设置为 false，数据存储中的所有数据键默认都会带有范围前缀。
+---@return any ret int
+---@return any ret1 string 或 DouyinDataStore
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:GetGoldOrdered(callback)
+--->    DATASTORE(
+--->        function()
+--->            local player = DouyinPlayerService.GetLocalPlayer()
+--->            if not player then
+--->                print("---GoldDataManager:player is nil")
+--->                return
+--->            end
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, value = self.goldOrderedStore:GetData(player.playerOpenID)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetGoldOrdered Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            print("---GoldDataManager:GetGoldOrdered Success:" .. value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataService_Impl:GetOrderedDataStore(name, scope) end
+
+--- 创建一个 DouyinDataSetOptions 对象
+---@return any ret DouyinDataSetOptions
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GetMetadataFromInfo(info, callback)
+--->    if info == nil then
+--->        return
+--->    end
+--->    local format = "yyyy-MM-dd HH:mm:ss"
+--->    local createdTime = info.createdTime:ToString(format)
+--->    local updatedTime = info.updatedTime:ToString(format)
+--->    local version = info.version
+--->    print(string.format("---GoldDataManager:GetMetadataFromInfo_createdTime=%s_updatedTime=%s_version=%s", createdTime,
+--->        updatedTime, version))
+--->    local meta_data = info:GetMetadata()
+--->    if meta_data then
+--->        for k, v in pairs(meta_data) do
+--->            print("---GoldDataManager:GetMetadataFromInfo=" .. k .. v)
+--->            if callback then callback(k, v) end
+--->        end
+--->    end
+--->end
+--->
+--->function GoldDataManager:SaveGoldDataSample(endgolds, callback, metaTable)
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local options = self:GetSetOptionsSample(metaTable)
+--->            local ok, value, info = self.goldStore:SetData("Golds", endgolds, options)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:SetData Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            GetMetadataFromInfo(info)
+--->            self:GoldsChange(value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GetSetOptionsSample(metaTable)
+--->    if self.goldStore == nil then
+--->        return
+--->    end
+--->    local ok, value, info = self.goldStore:GetData("Golds")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->        return
+--->    end
+--->    local options = DouyinDataService.CreateDataSetOptions()
+--->    GetMetadataFromInfo(info, function(k, v)
+--->        options:SetMetadata(k, v)
+--->    end)
+--->    for k, v in pairs(metaTable) do
+--->        options:SetMetadata(k, v)
+--->    end
+--->
+--->
+--->    local dict = options:GetMetadata()
+--->    for k, v in pairs(dict) do
+--->        print("---GoldDataManager:GetMetadata=" .. "Key:", k, "Value:", v)
+--->    end
+--->    return options
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        SetDataWithOptionsSample()
+--->    end
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function SetDataWithOptionsSample()
+--->    local dt = DouyinUtility.GetServerTime()
+--->    local key = dt:ToString()
+--->    local value = GoldDataManager:GetCoin() + 1
+--->    local metaTable = {}
+--->    metaTable[key] = value
+--->    GoldDataManager:SaveGoldDataSample(value, function(success)
+--->        if success then
+--->            DouyinUtility.Toast("设置元数据成功")
+--->        else
+--->            DouyinUtility.Toast("设置元数据失败")
+--->        end
+--->    end, metaTable)
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataService_Impl:CreateDataSetOptions() end
+
+--------------------------------------------------------------------------------
+
+--- 您可以使用这个类来设置传入的元数据表。
+---@class DouyinDataSetOptions
+local DouyinDataSetOptions_Impl = {}
+
+--- 获取当前数据对应的所有用户的自定义元数据。
+---@return any ret table
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取，可以通过GetData来获取金币数据。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GetMetadataFromInfo(info, callback)
+--->    if info == nil then
+--->        return
+--->    end
+--->    local format = "yyyy-MM-dd HH:mm:ss"
+--->    local createdTime = info.createdTime:ToString(format)
+--->    local updatedTime = info.updatedTime:ToString(format)
+--->    local version = info.version
+--->    print(string.format("---GoldDataManager:GetMetadataFromInfo_createdTime=%s_updatedTime=%s_version=%s", createdTime,
+--->        updatedTime, version))
+--->    local meta_data = info:GetMetadata()
+--->    if meta_data then
+--->        for k, v in pairs(meta_data) do
+--->            print("---GoldDataManager:GetMetadataFromInfo=" .. k .. v)
+--->            if callback then callback(k, v) end
+--->        end
+--->    end
+--->end
+--->
+--->function GoldDataManager:SaveGoldDataSample(endgolds, callback, metaTable)
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local options = self:GetSetOptionsSample(metaTable)
+--->            local ok, value, info = self.goldStore:SetData("Golds", endgolds, options)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:SetData Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            GetMetadataFromInfo(info)
+--->            self:GoldsChange(value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GetSetOptionsSample(metaTable)
+--->    if self.goldStore == nil then
+--->        return
+--->    end
+--->    local ok, value, info = self.goldStore:GetData("Golds")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->        return
+--->    end
+--->    local options = DouyinDataService.CreateDataSetOptions()
+--->    GetMetadataFromInfo(info, function(k, v)
+--->        options:SetMetadata(k, v)
+--->    end)
+--->    for k, v in pairs(metaTable) do
+--->        options:SetMetadata(k, v)
+--->    end
+--->
+--->
+--->    local dict = options:GetMetadata()
+--->    for k, v in pairs(dict) do
+--->        print("---GoldDataManager:GetMetadata=" .. "Key:", k, "Value:", v)
+--->    end
+--->    return options
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        SetDataWithOptionsSample()
+--->    end
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function SetDataWithOptionsSample()
+--->    local dt = DouyinUtility.GetServerTime()
+--->    local key = dt:ToString()
+--->    local value = GoldDataManager:GetCoin() + 1
+--->    local metaTable = {}
+--->    metaTable[key] = value
+--->    GoldDataManager:SaveGoldDataSample(value, function(success)
+--->        if success then
+--->            DouyinUtility.Toast("设置元数据成功")
+--->        else
+--->            DouyinUtility.Toast("设置元数据失败")
+--->        end
+--->    end, metaTable)
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataSetOptions_Impl:GetMetaData() end
+
+--- 设置你想传递的元数据。您可以使用DouyinDataSetOptions.SetMetadata()方法以键值对的方式附加元数据。当使用SetData/IncrementData/UpdateData方法更新数据时，将DouyinDataSetOptions对象一起传入，会将附加的元数据一同存储 ，存储成功后会返回DouyinDataInfo对象，元数据会附加在返回的DouyinDataInfo对象中，使用DouyinDataInfo.GetMetaData()方法可以获取设置的元数据。如果需要使用元数据存储附加数据，当使用SetData/IncrementData/UpdateData方法更新数据时，一定要将元数据对应的DouyinDataSetOptions对象一起传入。如果只有value更新了，元数据未更新，也需要将之前的元数据传入，否则会导致元数据丢失。
+---@param metadata table 设置你想传递的元数据
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取，可以通过GetData来获取金币数据。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GetMetadataFromInfo(info, callback)
+--->    if info == nil then
+--->        return
+--->    end
+--->    local format = "yyyy-MM-dd HH:mm:ss"
+--->    local createdTime = info.createdTime:ToString(format)
+--->    local updatedTime = info.updatedTime:ToString(format)
+--->    local version = info.version
+--->    print(string.format("---GoldDataManager:GetMetadataFromInfo_createdTime=%s_updatedTime=%s_version=%s", createdTime,
+--->        updatedTime, version))
+--->    local meta_data = info:GetMetadata()
+--->    if meta_data then
+--->        for k, v in pairs(meta_data) do
+--->            print("---GoldDataManager:GetMetadataFromInfo=" .. k .. v)
+--->            if callback then callback(k, v) end
+--->        end
+--->    end
+--->end
+--->
+--->function GoldDataManager:SaveGoldDataSample(endgolds, callback, metaTable)
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local options = self:GetSetOptionsSample(metaTable)
+--->            local ok, value, info = self.goldStore:SetData("Golds", endgolds, options)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:SetData Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            GetMetadataFromInfo(info)
+--->            self:GoldsChange(value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GetSetOptionsSample(metaTable)
+--->    if self.goldStore == nil then
+--->        return
+--->    end
+--->    local ok, value, info = self.goldStore:GetData("Golds")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->        return
+--->    end
+--->    local options = DouyinDataService.CreateDataSetOptions()
+--->    GetMetadataFromInfo(info, function(k, v)
+--->        options:SetMetadata(k, v)
+--->    end)
+--->    for k, v in pairs(metaTable) do
+--->        options:SetMetadata(k, v)
+--->    end
+--->
+--->
+--->    local dict = options:GetMetadata()
+--->    for k, v in pairs(dict) do
+--->        print("---GoldDataManager:GetMetadata=" .. "Key:", k, "Value:", v)
+--->    end
+--->    return options
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        SetDataWithOptionsSample()
+--->    end
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function SetDataWithOptionsSample()
+--->    local dt = DouyinUtility.GetServerTime()
+--->    local key = dt:ToString()
+--->    local value = GoldDataManager:GetCoin() + 1
+--->    local metaTable = {}
+--->    metaTable[key] = value
+--->    GoldDataManager:SaveGoldDataSample(value, function(success)
+--->        if success then
+--->            DouyinUtility.Toast("设置元数据成功")
+--->        else
+--->            DouyinUtility.Toast("设置元数据失败")
+--->        end
+--->    end, metaTable)
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataSetOptions_Impl:SetMetadata(metadata) end
+
+--------------------------------------------------------------------------------
+
+--- DouyinDataStore 类是抖音数据存储相关的核心类，提供了一系列用于数据存储、检索、更新和删除的方法。
+---@class DouyinDataStore
+local DouyinDataStore_Impl = {}
+
+--- 获取存储数据每个DataStore实例的键值对存储设计容量上限为1000个独立键值（key）单元，当单个DataStore实例存储的键数量达到1000个时，系统将自动触发写入保护机制，后续所有新增键值的操作将返回错误。已存在键的更新操作不受此限制影响。很多开发者喜欢以playerOpenID或petOpenID作为key，存储玩家数据，但是当用户超过1000人，就会出现存储失败的情况。正确做法是使用playerOpenID或petOpenID作为scope，在GetData()和SetData()时，使用相同的Key。
+---@param key string 要获取的数据的键
+---@return any ret int
+---@return any ret1 number,boolean,string，或包含这些类型的表
+---@return any ret2 DouyinDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataStore_Impl:GetData(key) end
+
+--- 设置数据每个DataStore实例的键值对存储设计容量上限为1000个独立键值（key）单元，当单个DataStore实例存储的键数量达到1000个时，系统将自动触发写入保护机制，后续所有新增键值的操作将返回错误。已存在键的更新操作不受此限制影响。很多开发者喜欢以playerOpenID或petOpenID作为key，存储玩家数据，但是当用户超过1000人，就会出现存储失败的情况。正确做法是使用playerOpenID或petOpenID作为scope，在GetData()和SetData()时，使用相同的Key。
+---@param key string 要设置的数据的键
+---@param value any 要设置的数据的值
+---@param options DouyinDataInfo 附加元数据
+---@return any ret int
+---@return any ret1 number,boolean,string，或包含这些类型的表
+---@return any ret2 DouyinDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:SaveGoldData(endgolds, callback)
+--->    self:GoldsChange(endgolds)
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:SetData("Golds", endgolds)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:SetData Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->function GoldDataManager:AddCoinBySetData(goldNum, callback)
+--->    if not goldNum then
+--->        return
+--->    end
+--->    local endgolds = self.golds + goldNum
+--->    self:SaveGoldData(endgolds, callback)
+--->end
+--->
+--->function GoldDataManager:ReduceCoinBySetData(goldNum, callback)
+--->    if not goldNum then
+--->        return
+--->    end
+--->    local endgolds = self.golds - goldNum
+--->    self:SaveGoldData(endgolds, callback)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:AddCoinBySetData(1, function(success)
+--->            if success then
+--->                DouyinUtility.Toast("金币+1")
+--->            else
+--->                DouyinUtility.Toast("保存金币失败")
+--->            end
+--->        end)
+--->    elseif Input.GetKeyDown("1") then
+--->        GoldDataManager:ReduceCoinBySetData(1, function(success)
+--->            if success then
+--->                DouyinUtility.Toast("金币-1")
+--->            else
+--->                DouyinUtility.Toast("保存金币失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataStore_Impl:SetData(key, value, options) end
+
+--- 递增与键对应的值，并返回新的值。未查询到该键对应的值，会返回错误码-10001
+---@param key string 要增加数据的键
+---@param delta number 要增加数据的值
+---@param options DouyinDataInfo 附加元数据
+---@param ok int 如果值为0，则操作成功。后续字段为获取的值和详细信息
+---@param value any 如果操作成功，则返回获取的值。否则，返回错误信息
+---@param info DouyinDataInfo 如果操作成功，则返回详细信息
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:IncrementGoldData(addNum, callback)
+--->    if addNum < 0 and math.abs(addNum) > self.golds then
+--->        print("---GoldDataManager:金币不足")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:IncrementData("Golds", addNum)
+--->            if ok ~= 0 then
+--->                --没有这条数据
+--->                if ok == -10001 then
+--->                    print("---没有数据 调用SetData")
+--->                    ok, value, info = self.goldStore:SetData("Golds", self.golds + addNum)
+--->                    if ok ~= 0 then
+--->                        print("---GoldDataManager:IncrementData Fail:" .. ok .. value)
+--->                        if callback then callback(false) end
+--->                        return
+--->                    end
+--->                else
+--->                    print("---GoldDataManager:UpdateData Fail:" .. ok .. value)
+--->                    if callback then callback(false) end
+--->                    return
+--->                end
+--->            end
+--->            self:GoldsChange(self.golds + addNum)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->function GoldDataManager:AddCoin(goldNum, callback)
+--->    if not goldNum then
+--->        return
+--->    end
+--->    self:IncrementGoldData(goldNum, callback)
+--->end
+--->
+--->function GoldDataManager:ReduceCoin(goldNum, callback)
+--->    if not goldNum then
+--->        return
+--->    end
+--->    self:IncrementGoldData(-goldNum, callback)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:AddCoin(1, function(success)
+--->            if success then
+--->                DouyinUtility.Toast("金币+1")
+--->            else
+--->                DouyinUtility.Toast("保存金币失败")
+--->            end
+--->        end)
+--->    elseif Input.GetKeyDown("1") then
+--->        GoldDataManager:ReduceCoin(1, function(success)
+--->            if success then
+--->                DouyinUtility.Toast("金币-1")
+--->            else
+--->                DouyinUtility.Toast("减少金币失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataStore_Impl:IncrementData(key, delta, options, ok, value, info) end
+
+--- 删除数据
+---@param key string 要删除的数据的键
+---@return any ret int
+---@return any ret1 number,boolean,string，或包含这些类型的表
+---@return any ret2 DouyinDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:DeleteRecord(callback)
+--->    self:GoldsChange(0)
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:RemoveData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:RemoveData Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            print("---GoldDataManager:RemoveData Success:" .. value .. "_" .. value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:DeleteRecord(function(success)
+--->            if success then
+--->                DouyinUtility.Toast("删除用户金币数据成功")
+--->            else
+--->                DouyinUtility.Toast("删除用户金币数据失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataStore_Impl:RemoveData(key) end
+
+--- 通过回调函数更新与键对应的数据。回调函数获取当前值，并根据定义的逻辑返回新值。回调函数一旦执行便不能暂停。未查询到该键对应的值，会返回错误码-10001
+---@param key string 要更新数据的键
+---@param updateFunction any 用于更新数据的函数。
+---@return any ret int
+---@return any ret1 number,boolean,string，或包含这些类型的表
+---@return any ret2 DouyinDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldStore(callback)
+--->    if self.goldStore ~= nil then
+--->        return
+--->    end
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then
+--->        print("---GoldDataManager:player is nil")
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->
+--->    local ok, store = DouyinDataService.GetDataStore("playerData", "GoldData" .. player.playerOpenID)
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:GetDataSotre Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldStore = store
+--->end
+--->
+--->function GoldDataManager:LoadGoldData(callback)
+--->    DATASTORE(
+--->        function()
+--->            if isInit then
+--->                return
+--->            end
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:GetData("Golds")
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetData Fail:" .. ok .. value)
+--->                return
+--->            end
+--->            self:GoldsChange(value)
+--->            isInit = true
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:UpdateGoldData(addNum, callback)
+--->    if not addNum then
+--->        return
+--->    end
+--->    DATASTORE(
+--->        function()
+--->            self:InitGoldStore(callback)
+--->            if self.goldStore == nil then
+--->                return
+--->            end
+--->            if addNum < 0 and math.abs(addNum) > self.golds then
+--->                print("---GoldDataManager:金币不足")
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            local ok, value, info = self.goldStore:UpdateData("Golds", function(curVal, info)
+--->                return curVal + addNum
+--->            end)
+--->            if ok ~= 0 then
+--->                --没有这条数据
+--->                if ok == -10001 then
+--->                    ok, value, info = self.goldStore:SetData("Golds", self.golds + addNum)
+--->                    if ok ~= 0 then
+--->                        print("---GoldDataManager:SetData Fail:" .. ok .. value)
+--->                        if callback then callback(false) end
+--->                        return
+--->                    end
+--->                else
+--->                    print("---GoldDataManager:UpdateData Fail:" .. ok .. value)
+--->                    if callback then callback(false) end
+--->                    return
+--->                end
+--->            end
+--->            self:GoldsChange(value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->function GoldDataManager:GoldsChange(value)
+--->    self.golds = value
+--->    OnGoldsChange(self.golds)
+--->end
+--->
+--->function GoldDataManager:AddCoinByUpdateData(goldNum, callback)
+--->    if not goldNum then
+--->        return
+--->    end
+--->    self:UpdateGoldData(goldNum, callback)
+--->end
+--->
+--->function GoldDataManager:ReduceCoinByUpdateData(goldNum, callback)
+--->    if not goldNum then
+--->        return
+--->    end
+--->    self:UpdateGoldData(goldNum, callback)
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:AddCoinByUpdateData(1, function(success)
+--->            if success then
+--->                DouyinUtility.Toast("金币+1")
+--->            else
+--->                DouyinUtility.Toast("增加金币失败")
+--->            end
+--->        end)
+--->    elseif Input.GetKeyDown("1") then
+--->        GoldDataManager:ReduceCoinByUpdateData(-1, function(success)
+--->            if success then
+--->                DouyinUtility.Toast("金币-1")
+--->            else
+--->                DouyinUtility.Toast("减少金币失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinDataStore_Impl:UpdateData(key, updateFunction) end
+
+--------------------------------------------------------------------------------
+
+--- 这种对象为持久化数据提供统一的 API。只能存储数值数据，不支持元数据或历史版本数据。
+---@class DouyinOrderedDataStore
+local DouyinOrderedDataStore_Impl = {}
+
+--- 获取数据
+---@param key string 要获取的数据的键
+---@return any ret int
+---@return any ret1 number
+---@return any ret2 DouyinOrderedDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:GetGoldOrdered(callback)
+--->    DATASTORE(
+--->        function()
+--->            local player = DouyinPlayerService.GetLocalPlayer()
+--->            if not player then
+--->                print("---GoldDataManager:player is nil")
+--->                return
+--->            end
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, value = self.goldOrderedStore:GetData(player.playerOpenID)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetGoldOrdered Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            print("---GoldDataManager:GetGoldOrdered Success:" .. value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:GetGoldOrdered(function(success)
+--->            if success then
+--->                DouyinUtility.Toast("获取金币数据成功")
+--->            else
+--->                DouyinUtility.Toast("获取金币数据失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinOrderedDataStore_Impl:GetData(key) end
+
+--- 设置数据
+---@param key string 要设置的数据的键
+---@param value int 值
+---@return any ret int
+---@return any ret1 number
+---@return any ret2 DouyinOrderedDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:SaveGoldOrdered(curgolds, callback)
+--->    if not curgolds then
+--->        return
+--->    end
+--->    DATASTORE(
+--->        function()
+--->            local player = DouyinPlayerService.GetLocalPlayer()
+--->            if not player then
+--->                print("---GoldDataManager:player is nil")
+--->                return
+--->            end
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, value = self.goldOrderedStore:SetData(player.playerOpenID, curgolds)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:SaveGoldOrdered Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            print("---GoldDataManager:SaveGoldOrdered Success:" .. value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:SaveGoldOrdered(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("保存金币排序数据成功")
+--->            else
+--->                DouyinUtility.Toast("保存金币排序数据失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinOrderedDataStore_Impl:SetData(key, value) end
+
+--- 递增与键对应的值，并返回新的值。
+---@param key string 要增加的数据的键
+---@param value int 值
+---@return any ret int
+---@return any ret1 number
+---@return any ret2 DouyinOrderedDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:IncrementGoldOrdered(addgolds, callback)
+--->    if not addgolds then
+--->        return
+--->    end
+--->    DATASTORE(
+--->        function()
+--->            local player = DouyinPlayerService.GetLocalPlayer()
+--->            if not player then
+--->                print("---GoldDataManager:player is nil")
+--->                return
+--->            end
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, value = self.goldOrderedStore:IncrementData(player.playerOpenID, addgolds)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:IncrementGoldOrdered Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            print("---GoldDataManager:IncrementGoldOrdered Success:" .. value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:IncrementGoldOrdered(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("保存金币排序数据成功")
+--->            else
+--->                DouyinUtility.Toast("保存金币排序数据失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinOrderedDataStore_Impl:IncrementData(key, value) end
+
+--- 使用函数更新数据。通过回调函数更新与键对应的数据。回调函数获取当前值，并根据定义的逻辑返回新值。回调函数一旦执行就不能暂停。
+---@param key string 要更新的数据的键
+---@param updateFunction any 用于更新数据的函数
+---@return any ret int
+---@return any ret1 number
+---@return any ret2 DouyinOrderedDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:UpdateGoldOrdered(addNum, callback)
+--->    if not addNum then
+--->        return
+--->    end
+--->    DATASTORE(
+--->        function()
+--->            local player = DouyinPlayerService.GetLocalPlayer()
+--->            if not player then
+--->                print("---GoldDataManager:player is nil")
+--->                return
+--->            end
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            if addNum < 0 and math.abs(addNum) > self.golds then
+--->                print("---GoldDataManager:金币不足")
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            local ok, value, info = self.goldOrderedStore:UpdateData(player.playerOpenID, function(curVal, info)
+--->                return curVal + addNum
+--->            end)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:UpdateGoldOrdered Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            print("---GoldDataManager:UpdateGoldOrdered Success:" .. ok .. value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:UpdateGoldOrdered(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("保存金币排序数据成功")
+--->            else
+--->                DouyinUtility.Toast("保存金币排序数据失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinOrderedDataStore_Impl:UpdateData(key, updateFunction) end
+
+--- 删除与指定键对应的数据
+---@param key string 要删除的数据的键
+---@return any ret int
+---@return any ret1 number
+---@return any ret2 DouyinOrderedDataInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:RemoveGoldOrdered(callback)
+--->    DATASTORE(
+--->        function()
+--->            local player = DouyinPlayerService.GetLocalPlayer()
+--->            if not player then
+--->                print("---GoldDataManager:player is nil")
+--->                return
+--->            end
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, value = self.goldOrderedStore:RemoveData(player.playerOpenID)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:RemoveGoldOrdered Fail:" .. ok .. value)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            print("---GoldDataManager:RemoveGoldOrdered Success:" .. ok .. value)
+--->            if callback then
+--->                callback(true)
+--->            end
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:RemoveGoldOrdered(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("删除金币排序数据成功")
+--->            else
+--->                DouyinUtility.Toast("删除金币排序数据失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinOrderedDataStore_Impl:RemoveData(key) end
+
+--- 从 DataStore 中获取所有按值排序的数据集。
+---@param ascending boolean 指定数据是否按升序排序。true 表示数据按升序排序，false 表示相反。
+---@param pageSize int 单页上的数据条目数量。
+---@param minPage? int 起始页码。如果留空此参数，此方法将从页码0开始获取和排序数据。0是最小页码。
+---@param maxDate int 结束页码。如果你不填写这个参数，这个方法会获取并排序所有页面的数据。0是最小的页码。
+---@return any ret int
+---@return any ret1 string/DataStorePage
+--- ***
+--- **代码示例**
+--->```lua
+--->该示例使用了Module相关功能，建议阅读相关文档。
+--->
+--->GoldDataManager = require("DouyinDataScore/GoldDataManager")
+--->--定义金币发生变化的事件，可在显示层监听该事件，在事件中更新UI。
+--->OnGoldsChange = event("OnGoldsChange")
+--->
+--->金币数据管理器，封装了一些数据的存储和读取。
+--->local GoldDataManager = {}
+--->
+--->local isInit = false
+--->GoldDataManager.golds = 0
+--->GoldDataManager.goldStore = nil
+--->GoldDataManager.goldOrderedStore = nil
+--->
+--->function GoldDataManager:InitGoldOrderedStore(callback)
+--->    if self.goldOrderedStore ~= nil then
+--->        return
+--->    end
+--->    local ok, store = DouyinDataService.GetOrderedDataStore("OrderedData", "GoldOrdered")
+--->    if ok ~= 0 then
+--->        print("---GoldDataManager:SetData Fail:" .. ok .. tostring(store))
+--->        if callback then callback(false) end
+--->        return
+--->    end
+--->    self.goldOrderedStore = store
+--->end
+--->
+--->function GoldDataManager:GetGoldSortedData(callback)
+--->    DATASTORE(
+--->        function()
+--->            local page_size = 10
+--->            self:InitGoldOrderedStore(callback)
+--->            if self.goldOrderedStore == nil then
+--->                return
+--->            end
+--->            local ok, pages = self.goldOrderedStore:GetSortedData(false, page_size)
+--->            if ok ~= 0 then
+--->                print("---GoldDataManager:GetSortedData Fail:" .. ok .. pages)
+--->                if callback then callback(false) end
+--->                return
+--->            end
+--->            local maxcount = 10
+--->            local index = 0
+--->            repeat
+--->                index = index + 1
+--->                if index > maxcount then
+--->                    return
+--->                end
+--->                local success, page_values = pages:GetCurrentPage()
+--->                if success == 0 then
+--->                    for k, v in pairs(page_values) do
+--->                        print("GoldDataManager:GoldRank_Key=" .. k .. "Value" .. v.value)
+--->                        callback(true, k, v.value)
+--->                    end
+--->                end
+--->            until not pages:AdvanceToNextPage()
+--->        end
+--->    )
+--->end
+--->
+--->return GoldDataManager
+--->
+--->初始化金币数据。
+--->---@var GoldText:UnityEngine.UI.Text
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->local isInit = false
+--->local onGoldsChangeListener
+--->
+--->function OnPlayerJoined(player)
+--->    if player.isLocal then
+--->        GameInit()
+--->    end
+--->end
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("0") then
+--->        GoldDataManager:GetGoldSortedData(GoldDataManager:GetCoin(), function(success)
+--->            if success then
+--->                DouyinUtility.Toast("获取金币排序成功")
+--->            else
+--->                DouyinUtility.Toast("获取金币排序失败")
+--->            end
+--->        end)
+--->    end
+--->end
+--->
+--->function Start()
+--->    onGoldsChangeListener = OnGoldsChange:CreateListener(function(value)
+--->        GoldText.text = value
+--->    end)
+--->    OnGoldsChange:AddListener(onGoldsChangeListener)
+--->end
+--->
+--->function GameInit()
+--->    if isInit then
+--->        return
+--->    end
+--->    GoldDataManager:LoadGoldData(function(success)
+--->        if success then
+--->            DouyinUtility.Toast("初始化金币数据成功")
+--->        else
+--->            DouyinUtility.Toast("初始化金币数据失败")
+--->        end
+--->    end)
+--->    isInit = true
+--->end
+--->
+--->function OnDestroy()
+--->    OnGoldsChange:RemoveListener(onGoldsChangeListener)
+--->end
+--->
+--->```
+function DouyinOrderedDataStore_Impl:GetSortedData(ascending, pageSize, minPage, maxDate) end
+
+--------------------------------------------------------------------------------
+
+--- 创作者信息类，用来存储创作者信息。
+---@class CreatorInfo
+--- 创作者的SecUID
+---@field secUID string
+--- 创作者的名称
+---@field name string
+--- 创作者的头像
+---@field portrait string
+--- 创作者的粉丝数
+---@field numberOfFans integer
+--- 用户是否关注了创作者
+---@field isFollowing boolean
+--- 创作者是否关注了用户
+---@field isFollowed boolean
+local CreatorInfo_Impl = {}
+
+--------------------------------------------------------------------------------
+
+--- 控制对象类，目前对应着在世界内的每个精灵对象，可通过 isPet 属性来判断是否是精灵。
+---@class DouyinActor
+--- 当用户在世界内进行了切换合养精灵形象时的回调。调试器内是没有切换合养精灵形象的功能都，开发者可以在扫码调试阶段进行测试。
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var logText:UnityEngine.UI.Text
+--->---@end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onActorLoaded:AddListener(SwichActorCallBack)
+--->end
+--->
+--->function SwichActorCallBack(actor)
+--->    if not actor then
+--->        return
+--->    end
+--->    logText.text = string.format("--DouyinActorSystemSample:%s切换了精灵形象", actor.actorID)
+--->    print(string.format("--DouyinActorSystemSample:%s切换了精灵形象", actor.actorID))
+--->end
+--->```
+---@field onActorLoaded UnityEngine.Events.UnityEvent
+--- Actor 落地的事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->
+--->    actor.onFallingGround:AddListener(OnFallingGround)
+--->end
+--->
+--->function OnFallingGround()
+--->    print("--DouyinActor3CSample:落地")
+--->end
+--->```
+---@field onFallingGround UnityEngine.Events.UnityEvent
+--- Actor 跳起的事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->
+--->    actor.onJump:AddListener(OnJumpCallBack)
+--->end
+--->
+--->function OnJumpCallBack()
+--->    print("--DouyinActor3CSample:起跳")
+--->end
+--->```
+---@field onJump UnityEvnet
+--- Actor 开始飞行的事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->
+--->    actor.onFlyStart:AddListener(OnFlyStartCallBack)
+--->end
+--->
+--->function OnFlyStartCallBack()
+--->    print("--DouyinActor3CSample:开始飞行")
+--->end
+--->```
+---@field onFlyStart UnityEngine.Events.UnityEvent
+--- Actor 结束飞行的事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->
+--->    actor.onFlyStop:AddListener(OnFlyStopCallBack)
+--->end
+--->
+--->function OnFlyStopCallBack()
+--->    print("--DouyinActor3CSample:停止飞行")
+--->end
+--->```
+---@field onFlyStop UnityEngine.Events.UnityEvent
+--- Actor 使用表情事件，参数表情名
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onEmotionPlay:AddListener(PlayEmojiCallBack)
+--->end
+--->
+--->function PlayEmojiCallBack(emotion)
+--->    print("--DouyinActorSystemSample:emotion=" .. emotion)
+--->end
+--->```
+---@field onEmotionPlay UnityEngine.Events.UnityEvent
+--- Actor 使用动作事件，参数表情名
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onActionPlay:AddListener(ActionPlayCallBack)
+--->end
+--->
+--->function ActionPlayCallBack(action)
+--->    print("--DouyinActorSystemSample:action=" .. action)
+--->end
+--->```
+---@field onActionPlay UnityEngine.Events.UnityEvent
+--- Actor 开始播放双人动作事件，参数动作ID，动作名，双人交互的ActorID
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onDuoInteractionStart:AddListener(OnDuoInteractionStartCallBack)
+--->end
+--->
+--->function OnDuoInteractionStartCallBack(actionId, actionName, actorID1, actorID2)
+--->    print(string.format("--DouyinActorSystemSample:%d和%d播放了%s动作，动作Id是%s", actorID1, actorID2, actionName,
+--->        tostring(actionId)))
+--->end
+--->```
+---@field onDuoInteractionStart UnityEngine.Events.UnityEvent<DouyinActor.ActorInteractionType, string, int, int>
+--- Actor 结束播放双人动作事件，参数动作ID，动作名，双人交互的Actor ID
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onDuoInteractionEnd:AddListener(OnDuoInteractiontStopCallBack)
+--->end
+--->
+--->function OnDuoInteractiontStopCallBack(actionId, actionName, actorID1, actorID2)
+--->    print(string.format("--DouyinActorSystemSample:%d和%d停止了%s动作，动作Id是%s", actorID1, actorID2, actionName,
+--->        tostring(actionId)))
+--->end
+--->```
+---@field onDuoInteractionEnd UnityEngine.Events.UnityEvent<DouyinActor.ActorInteractionType, string, int, int>
+--- Actor 开始等待播放双人动作事件，参数动作ID，动作名，发起双人交互方的ActorID
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onDuoInteractionWaiting:AddListener(OnDuoInteractionWaitingCallBack)
+--->end
+--->
+--->function OnDuoInteractionWaitingCallBack(actionId, actionName, actorID1)
+--->    print(string.format("--DouyinActorSystemSample:%d等待播放%s动作，动作Id是%s", actorID1, actionName,
+--->        tostring(actionId)))
+--->end
+--->```
+---@field onDuoInteractionWaiting UnityEngine.Events.UnityEvent<DouyinActor.ActorInteractionType, string, int>
+--- Actor进入牵手状态触发该事件
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onHoldHandStart:AddListener(HoldHandStartCallBack)
+--->end
+--->
+--->function HoldHandStartCallBack()
+--->    print("--DouyinActorSystemSample:开始牵手")
+--->end
+--->```
+---@field onHoldHandStart UnityEngine.Events.UnityEvent
+--- Actor结束牵手状态时从触发该事件AvatarHoldHandStateType.None 的时候触发该事件
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor.onHoldHandStop:AddListener(HoldHandStopCallBack)
+--->end
+--->
+--->function HoldHandStopCallBack()
+--->    print("--DouyinActorSystemSample:结束牵手")
+--->end
+--->```
+---@field onHoldHandStop UnityEngine.Events.UnityEvent
+--- Actor捡起物体时，触发该事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --如果需要捡起物体，触发某个逻辑，可以在合适的地方监听该事件；
+--->    --例如：捡起某个物体，可以触发某个机关，就可以在机关类中监听该事件
+--->    actor.onPickup:AddListener(OnActorPickupCallBack)
+--->    --actor.onPickup:RemoveListener(OnActorPickupCallBack)
+--->end
+--->
+--->function OnActorPickupCallBack()
+--->    print("玩家捡起了物体")
+--->end
+--->```
+---@field onPickup UnityEngine.Events.UnityEvent
+--- Actor丢弃某个物体时，触发该事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --如果需要丢弃物体，触发某个逻辑，可以在合适的地方监听该事件；
+--->    actor.onDrop:AddListener(OnActorDropCallBack)
+--->    --actor.onDrop:RemoveListener(OnActorDropCallBack)
+--->end
+--->
+--->function OnActorDropCallBack()
+--->    print("玩家丢弃了物体")
+--->end
+--->```
+---@field onDrop UnityEngine.Events.UnityEvent
+--- Actor坐下时，触发该事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --如果需要Actor坐下时，触发某个逻辑，可以在合适的地方监听该事件；
+--->    actor.onSitDown:AddListener(OnActorSitDownCallBack)
+--->    --actor.onSitDown:RemoveListener(OnActorSitDownCallBack)
+--->end
+--->
+--->function OnActorSitDownCallBack()
+--->    print("玩家坐下")
+--->end
+--->```
+---@field onSitDown UnityEngine.Events.UnityEvent
+--- Actor站起时，触发该事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --如果需要Actor坐下时，触发某个逻辑，可以在合适的地方监听该事件；
+--->    actor.onStandUp:AddListener(OnActorStandUpCallBack)
+--->    --actor.onStandUp:RemoveListener(OnActorStandUpCallBack)
+--->end
+--->
+--->function OnActorStandUpCallBack()
+--->    print("玩家站起")
+--->end
+--->```
+---@field onStandUp UnityEngine.Events.UnityEvent
+--- Actor开始游泳时，触发该事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->
+--->    actor.onSwimStart:AddListener(OnSwimStartCallBack)
+--->end
+--->
+--->function OnSwimStartCallBack()
+--->    print("--DouyinActor3CSample:开始游泳")
+--->end
+--->```
+---@field onSwimStart UnityEngine.Events.UnityEvent
+--- Actor停止游泳时，触发该事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->    actor.onSwimStop:AddListener(OnSwimStopCallBack)
+--->end
+--->
+--->function OnSwimStopCallBack()
+--->    print("--DouyinActor3CSample:停止游泳")
+--->end
+--->```
+---@field onSwimStop UnityEngine.Events.UnityEvent
+--- 移动方向和速度
+---@field velocity any
+--- 获取与 Actor 关联的 GameObject。
+---@field gameObject UnityEngine.GameObject
+--- 获取或设置当前 Actor 实例的世界坐标。
+---@field position UnityEngine.Vector3
+--- 获取或设置当前 Actor 实例在世界坐标中的旋转。
+---@field rotation UnityEngine.Quaternion
+--- 获取或设置当前 Actor 实例的缩放，角色的大小限制在（0,2）之间。
+---@field scale number
+--- 获取当前 Actor 实例的 ID，用来判断是否是同一个玩家。
+---@field actorID integer
+--- 获取当前 Actor 实例的用户名称。
+---@field displayName string
+--- 判断当前 Actor 实例是否为精灵。
+---@field isPet boolean
+--- 当 isPet 为 true 的时候，返回当前 Actor 关联的 DouyinPet；否则返回 null。
+---@field douyinPet DouyinPet
+--- 获取这个用户是否为 Local 玩家。
+---@field isLocal boolean
+--- 获取或设置当前 Actor 的水平飞行速度。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorFlySpeedSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorFlySpeedSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:flySpeed=" .. actor.flySpeed)
+--->    actor.flySpeed = 5
+--->end
+--->```
+---@field flySpeed number
+--- 获取或设置当前 Actor 的垂直飞行速度。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorflyVerticalSpeedSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorflyVerticalSpeedSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:flyVerticalSpeed=" .. actor.flyVerticalSpeed)
+--->    actor.flyVerticalSpeed = 10
+--->end
+--->```
+---@field flyVerticalSpeed number
+--- 获取或设置当前 Actor 的最大飞行高度。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorflyMaxHeightSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorflyMaxHeightSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:flyMaxHeight=" .. actor.flyMaxHeight)
+--->    actor.flyMaxHeight = 10
+--->end
+--->```
+---@field flyMaxHeight number
+--- 获取或设置当前 Actor 的最小飞行高度。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorflyMinHeightSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorflyMinHeightSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:flyMinHeight=" .. actor.flyMinHeight)
+--->    actor.flyMinHeight = 5
+--->end
+--->```
+---@field flyMinHeight number
+--- 获取或设置当前 Actor 的移动速度。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorSpeedSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorSpeedSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local curSpeed = actor.speed
+--->    print("--DouyinActor3CSample:curSpeed=" .. curSpeed)
+--->    actor.speed = 5
+--->end
+--->```
+---@field speed number
+--- 获取或设置当前 Actor 的重力缩放系数。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorGravityScaleSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorGravityScaleSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:gravityScale=" .. actor.gravityScale)
+--->    actor.gravityScale = 10
+--->end
+--->```
+---@field gravityScale number
+--- 获取或设置当前 Actor 在斜坡上最小能站立的角度。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorminSlopeAngleLimit(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorminSlopeAngleLimit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:ActorminSlopeAngleLimit" .. actor.minSlopeAngleLimit)
+--->end
+--->```
+---@field minSlopeAngleLimit number
+--- 获取或设置当前 Actor 能否被其他 Actor 推动。
+---@field allowPushByOtherActor boolean
+--- 开启/禁用用户3D点击，访问用户的信息面板，默认开启
+---@field allowAccessUserPanel boolean
+--- 获取或设置当前Actor的跳跃高度
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorJumpHeightSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorJumpHeightSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:jumpHeight=" .. actor.jumpHeight)
+--->    actor.jumpHeight = 10
+--->end
+--->```
+---@field jumpHeight number
+local DouyinActor_Impl = {}
+
+--- 获取 Actor 指定人体骨骼在世界空间中的位置。
+---@param humanBoneId UnityEngine.HumanBodyBones 
+---@return UnityEngine.Vector3 ret 指定骨骼在世界空间中的位置。如果 DouyinService.Proxy 为 null，则返回 Vector3.zero（即坐标为 (0, 0, 0)的位置）。
+function DouyinActor_Impl:GetBonePosition(humanBoneId) end
+
+--- 获取 Actor 特定骨骼的旋转信息。
+---@param humanBoneId UnityEngine.HumanBodyBones 一个枚举类型的参数，代表人体骨骼的标识。它用来指定要获取旋转信息的具体骨骼。
+---@return UnityEngine.Quaternion ret 指定骨骼在世界空间中的旋转信息。若 DouyinService.Proxy 为 null，则返回 Quaternion.identity，表示无旋转状态。
+function DouyinActor_Impl:GetBoneRotation(humanBoneId) end
+
+--- 获取 Actor 的人骨下的 Transform 对象。
+---@param humanBoneId UnityEngine.HumanBodyBones 一个枚举类型参数，用于指定要获取的 Transform 的人体骨骼
+---@return UnityEngine.Transform ret 返回指定骨骼的 Transform 对象。若 DouyinService.Proxy 为 null，则返回当前 gameObject 的 Transform。
+function DouyinActor_Impl:GetBoneTransform(humanBoneId) end
+
+--- 设置重载的动画状态机。
+---@param animatorController UnityEngine.RuntimeAnimatorController 用于覆盖原有动画控制的运行时动画控制器对象。它定义了动画的切换逻辑、动画状态等相关信息。
+function DouyinActor_Impl:SetOverrideAnimationController(animatorController) end
+
+--- 设置重载动画。
+---@param key string 用于标识要重载的动画的唯一键名。
+---@param clip UnityEngine.AnimationClip 要设置的动画剪辑对象
+---@param callback? fun() 可选参数，是一个回调函数。当动画事件触发时，会调用该回调函数并传 AnimationEvent 对象，方便开发者在特定的动画事件发生时执行自定义逻辑。默认值为 null，表示不设置回调。
+function DouyinActor_Impl:SetOverrideAnimation(key, clip, callback) end
+
+--- 播放一个动作，支持使用 Animation Event，可传回调函数。DouyinAnimatorMaskWholeBody 系统姿态层，用于全身动画；Head 系统姿态层，用于全身动画；UpperBody 系统姿态层，用于上半身动画；LowerBody 系统姿态层，用于下半身动画；Arms 系统姿态层，用于双臂动画；LeftArm 系统姿态层，用于左臂动画；RightArm 系统姿态层，用于右臂动画；LeftHand 系统姿态层，用于左手动画；RightHand 系统姿态层，用于右手动画；
+---@param clip UnityEngine.Animation 指定要播放的动画剪辑
+function DouyinActor_Impl:PlayAnimation(clip) end
+
+--- 停止播放动作。
+function DouyinActor_Impl:StopAnimation() end
+
+--- 显示/隐藏 Actor 名字片
+function DouyinActor_Impl:ShowNameplate() end
+
+--- 获取 Actor 的头顶名字片。
+---@return UnityEngine.GameObject ret 头顶名字片。
+function DouyinActor_Impl:GetNameplate() end
+
+--- 触发当前 Actor 与指定游戏对象的交互逻辑，该方法只对本地玩家有效。
+---@param go UnityEngine.GameObject 代表要与之交互的游戏对象
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->local interationButton_2
+--->local btn2Click = false
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            --Actor捡起物体，目前只支持右手
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    elseif index == 2 then
+--->        btn2Click = true
+--->        localActor:Interact(self.gameObject)
+--->    end
+--->end
+--->
+--->function OnInteract(actor)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    --目前OnInteract方法没有区分具体是哪个按钮点击的逻辑，但是会根据点击的顺序，依次调用OnInteract
+--->    --可以使用标记，来判断当前是哪个按钮的点击逻辑，分别进行处理
+--->    if btn2Click then
+--->        print("--OnInteractorButtonClick:处理对话逻辑")
+--->        btn2Click = false
+--->    end
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_2 = self:AddInteractorButton()
+--->    local interactText_2 = interationButton_2:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_2.text = "对话"
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinActor_Impl:Interact(go) end
+
+--- 获取指定手正在拾取的物体。
+---@return UnityEngine.GameObject ret 非 null: 指定手正在拾取的游戏对象。没有拾取对象时返回 null。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        local pickupObj = localActor:GetPickupInHand()
+--->        if pickupObj then
+--->            print("手中已有物体:name=" .. pickupObj.name)
+--->        end
+--->    end
+--->end
+--->```
+function DouyinActor_Impl:GetPickupInHand() end
+
+--- 手中是否有物体
+---@return boolean ret true：当前手中有物体。false：当前手中没有物体。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    end
+--->end
+--->```
+function DouyinActor_Impl:IsPickup() end
+
+--- 拾取指定物品。注意：当前只支持右手拾取，传入左手无法拾取物体。
+---@param go UnityEngine.GameObject 要拾取的游戏对象
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            --Actor捡起物体，目前只支持右手
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    end
+--->end
+--->
+--->--开发者处理拾取逻辑的地方
+--->function OnPickup(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    if handType ~= CS.HandType.Right then
+--->        return
+--->    end
+--->    local animator = actor.gameObject:GetComponentInChildren(typeof(CS.UnityEngine.Animator))
+--->    if animator ~= nil then
+--->        local bone = animator:GetBoneTransform(CS.UnityEngine.HumanBodyBones.RightHand)
+--->        if bone ~= nil then
+--->            self.transform:SetParent(bone)
+--->        end
+--->        local position, rotation = ActorCalculatePalmTransform(actor, false)
+--->        self.transform.position = position
+--->        self.transform.rotation = rotation
+--->    end
+--->    local interactText = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText.text = "丢弃"
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = "拾取"
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        if interactImg then
+--->            --处理图片的显示
+--->            SetBtnSprite(interactSprite)
+--->        end
+--->    end
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinActor_Impl:Pickup(go) end
+
+--- 丢弃指定物体，该方法只对本地玩家有效。
+---@param go UnityEngine.GameObject 代表要丢弃的游戏对象
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            --Actor捡起物体，目前只支持右手
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    end
+--->end
+--->
+--->function OnDrop(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    if handType ~= CS.HandType.Right then
+--->        return
+--->    end
+--->    self.transform:SetParent(nil)
+--->    local interactText = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText.text = "拾取"
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = "拾取"
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        if interactImg then
+--->            --处理图片的显示
+--->            SetBtnSprite(interactSprite)
+--->        end
+--->    end
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinActor_Impl:Drop(go) end
+
+--- 播放表情。
+---@param emojiIndex integer 代表要播放的表情的索引
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        PlayEmojiSample(localActor)
+--->    end
+--->end
+--->
+--->function PlayEmojiSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    print("--DouyinActorSystemSample:PlayEmojiSample")
+--->    actor:PlayEmoji(1)
+--->end
+--->```
+function DouyinActor_Impl:PlayEmoji(emojiIndex) end
+
+--- 角色重生。
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        RespawnSample(localActor)
+--->    end
+--->end
+--->
+--->function RespawnSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    print("--DouyinActorSystemSample:RespawnSample")
+--->    actor:Respawn()
+--->end
+--->
+--->function OnRespawn()
+--->    print("--DouyinActorSystemSample:玩家重生")
+--->end
+--->```
+function DouyinActor_Impl:Respawn() end
+
+--- 给 Actor 增加标签，无需权限，任何人都可添加。
+---@param tagName string 代表要设置的标签名称
+---@param tagValue? string 可选参数，默认值为空字符串 ""，代表标签对应的值
+function DouyinActor_Impl:SetActorTag(tagName, tagValue) end
+
+--- 获取 Actor 标签。
+---@param tagName string 代表要获取的标签的名称
+---@return string ret 指定标签名称对应的标签值。
+function DouyinActor_Impl:GetActorTag(tagName) end
+
+--- 清除指定 tag，如果参数为空则清除所有 Tags，无需权限，任何人都可清除。
+function DouyinActor_Impl:ClearActorTags() end
+
+--- 获取 Actor 当前的状态。
+---@return AvatarStateType ret 当前的状态。
+function DouyinActor_Impl:GetState() end
+
+--- 切换到指定状态。
+---@param state ActorStateType 指定切换到的状态
+function DouyinActor_Impl:ChangeState(state) end
+
+--- 获取 Actor 状态是否生效。
+---@param type ActorStateType 指定要获取的 Actor 状态
+---@return boolean ret true：指定的 Actor 状态生效。false：指定的 Actor 状态不生效。
+function DouyinActor_Impl:GetStateEnabled(type) end
+
+--- 设置 Actor 状态是否生效。
+---@param type ActorStateType 指定要设置的 Actor 状态
+---@param enable boolean 设置 Actor 状态是否生效
+function DouyinActor_Impl:SetStateEnabled(type, enable) end
+
+--- 控制当前 Actor 跳跃。
+function DouyinActor_Impl:Jump() end
+
+--- 获取当前 Actor 是否在地面。
+---@return boolean ret true：当前 处于地面。false：当前 不在地面。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorIsGrounded(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorIsGrounded(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local isGround = actor:IsGrounded()
+--->    print("--DouyinActor3CSample:IsGrounded=" .. tostring(isGround))
+--->end
+--->```
+function DouyinActor_Impl:IsGrounded() end
+
+--- 判断当前 Actor 是否可以移动。
+---@return boolean ret true: 可以移动。false: 不能移动。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorCanMoveSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorCanMoveSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local canMove = actor:CanMove()
+--->    print("--DouyinActor3CSample:CanMove=" .. tostring(canMove))
+--->end
+--->```
+function DouyinActor_Impl:CanMove() end
+
+--- 停止移动，相当于取消上个 API 的持续移动效果。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorStopMoveSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorStopMoveSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:StopMove()
+--->    print("--DouyinActor3CSample:StopMove")
+--->end
+--->```
+function DouyinActor_Impl:StopMove() end
+
+--- 向某个方向移动，参数是移动速度的倍速（相当于一直朝某个方向推动摇杆，只能平面移动），该方法只对本地玩家有效。
+---@param speed UnityEngine.Vector2 移动速度的倍速
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorMoveContinuously(localActor, Vector2(5, 5))
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorMoveContinuously(actor, speed)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:MoveContinuously(speed)
+--->    print("--DouyinActor3CSample:MoveContinuously")
+--->end
+--->```
+function DouyinActor_Impl:MoveContinuously(speed) end
+
+--- 获取 Actor 是否坐着。
+---@return boolean ret true：坐着。false：站着。
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var sitDownSprite:UnityEngine.Sprite
+--->---@var standUpSprite:UnityEngine.Sprite
+--->---@var seatDownTrans:UnityEngine.Transform
+--->---@var standUpTrans:UnityEngine.Transform
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->-- Start is called before the first frame update
+--->function Start()
+--->end
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    self:DisableInteraction()
+--->end
+--->
+--->function OnInteractorButtonClick(index)
+--->    print("--DouyinInteractionSample:OnInteractorButtonClick:index=" .. index)
+--->    if localActor:IsSitting() then
+--->        localActor:StandUp(self.gameObject)
+--->    else
+--->        localActor:SitDown(self.gameObject)
+--->    end
+--->end
+--->
+--->function OnSeatEntered(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    print("玩家坐下")
+--->    local trans = actor.gameObject.transform
+--->    trans:SetParent(seatDownTrans)
+--->    trans.localPosition = CS.UnityEngine.Vector3.zero
+--->    trans.localRotation = CS.UnityEngine.Quaternion.identity
+--->    local animator = actor.gameObject:GetComponentInChildren(typeof(CS.UnityEngine.Animator))
+--->    if animator ~= nil then
+--->        local currentPlayerBone = animator:GetBoneTransform(CS.UnityEngine.HumanBodyBones.Hips)
+--->        local offset = currentPlayerBone.position - trans.position
+--->        trans.position = trans.position - offset
+--->    end
+--->end
+--->
+--->function OnSeatExited(actor)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    print("玩家站起")
+--->    local trans = actor.gameObject.transform
+--->    trans:SetParent(nil)
+--->    actor.position = standUpTrans.position
+--->    actor.rotation = standUpTrans.rotation
+--->end
+--->
+--->function OnFocus(handType)
+--->    print("--DouyinInteractionSample2:OnFocus")
+--->    local iconSprite
+--->    local inreractStr
+--->    if localActor:IsSitting() then
+--->        iconSprite = sitDownSprite
+--->        inreractStr = "站起"
+--->    else
+--->        iconSprite = standUpSprite
+--->        inreractStr = "坐下"
+--->    end
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = inreractStr
+--->    SetBtnSprite(iconSprite)
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    print("--DouyinInteractionSample2:On LostFocus")
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinActor_Impl:IsSitting() end
+
+--- 坐在指定的座位上，该方法只对本地玩家有效。
+---@param go UnityEngine.GameObject 要坐下的座位的游戏对象
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var sitDownSprite:UnityEngine.Sprite
+--->---@var standUpSprite:UnityEngine.Sprite
+--->---@var seatDownTrans:UnityEngine.Transform
+--->---@var standUpTrans:UnityEngine.Transform
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->-- Start is called before the first frame update
+--->function Start()
+--->end
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    self:DisableInteraction()
+--->end
+--->
+--->function OnInteractorButtonClick(index)
+--->    print("--DouyinInteractionSample:OnInteractorButtonClick:index=" .. index)
+--->    if localActor:IsSitting() then
+--->        localActor:StandUp(self.gameObject)
+--->    else
+--->        localActor:SitDown(self.gameObject)
+--->    end
+--->end
+--->
+--->function OnSeatEntered(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    print("玩家坐下")
+--->    local trans = actor.gameObject.transform
+--->    trans:SetParent(seatDownTrans)
+--->    trans.localPosition = CS.UnityEngine.Vector3.zero
+--->    trans.localRotation = CS.UnityEngine.Quaternion.identity
+--->    local animator = actor.gameObject:GetComponentInChildren(typeof(CS.UnityEngine.Animator))
+--->    if animator ~= nil then
+--->        local currentPlayerBone = animator:GetBoneTransform(CS.UnityEngine.HumanBodyBones.Hips)
+--->        local offset = currentPlayerBone.position - trans.position
+--->        trans.position = trans.position - offset
+--->    end
+--->end
+--->
+--->function OnSeatExited(actor)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    print("玩家站起")
+--->    local trans = actor.gameObject.transform
+--->    trans:SetParent(nil)
+--->    actor.position = standUpTrans.position
+--->    actor.rotation = standUpTrans.rotation
+--->end
+--->
+--->function OnFocus(handType)
+--->    print("--DouyinInteractionSample2:OnFocus")
+--->    local iconSprite
+--->    local inreractStr
+--->    if localActor:IsSitting() then
+--->        iconSprite = sitDownSprite
+--->        inreractStr = "站起"
+--->    else
+--->        iconSprite = standUpSprite
+--->        inreractStr = "坐下"
+--->    end
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = inreractStr
+--->    SetBtnSprite(iconSprite)
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    print("--DouyinInteractionSample2:On LostFocus")
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinActor_Impl:SitDown(go) end
+
+--- 从指定的座位站起，该方法只对本地玩家有效。
+---@param go UnityEngine.GameObject 指定的从哪个座位站起
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var sitDownSprite:UnityEngine.Sprite
+--->---@var standUpSprite:UnityEngine.Sprite
+--->---@var seatDownTrans:UnityEngine.Transform
+--->---@var standUpTrans:UnityEngine.Transform
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->-- Start is called before the first frame update
+--->function Start()
+--->end
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    self:DisableInteraction()
+--->end
+--->
+--->function OnInteractorButtonClick(index)
+--->    print("--DouyinInteractionSample:OnInteractorButtonClick:index=" .. index)
+--->    if localActor:IsSitting() then
+--->        localActor:StandUp(self.gameObject)
+--->    else
+--->        localActor:SitDown(self.gameObject)
+--->    end
+--->end
+--->
+--->function OnSeatEntered(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    print("玩家坐下")
+--->    local trans = actor.gameObject.transform
+--->    trans:SetParent(seatDownTrans)
+--->    trans.localPosition = CS.UnityEngine.Vector3.zero
+--->    trans.localRotation = CS.UnityEngine.Quaternion.identity
+--->    local animator = actor.gameObject:GetComponentInChildren(typeof(CS.UnityEngine.Animator))
+--->    if animator ~= nil then
+--->        local currentPlayerBone = animator:GetBoneTransform(CS.UnityEngine.HumanBodyBones.Hips)
+--->        local offset = currentPlayerBone.position - trans.position
+--->        trans.position = trans.position - offset
+--->    end
+--->end
+--->
+--->function OnSeatExited(actor)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    print("玩家站起")
+--->    local trans = actor.gameObject.transform
+--->    trans:SetParent(nil)
+--->    actor.position = standUpTrans.position
+--->    actor.rotation = standUpTrans.rotation
+--->end
+--->
+--->function OnFocus(handType)
+--->    print("--DouyinInteractionSample2:OnFocus")
+--->    local iconSprite
+--->    local inreractStr
+--->    if localActor:IsSitting() then
+--->        iconSprite = sitDownSprite
+--->        inreractStr = "站起"
+--->    else
+--->        iconSprite = standUpSprite
+--->        inreractStr = "坐下"
+--->    end
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = inreractStr
+--->    SetBtnSprite(iconSprite)
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    print("--DouyinInteractionSample2:On LostFocus")
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinActor_Impl:StandUp(go) end
+
+--- 设置飞行模式。
+---@param mode integer mode：1  正常飞行  mode：0 悬浮
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorSetFlyModeSample(localActor, 0)
+--->        --ActorSetFlyModeSample(localActor, 1)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorSetFlyModeSample(actor, flymode)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActor3CSample:SetFlyMode")
+--->    actor:SetFlyMode(flymode)
+--->end
+--->```
+function DouyinActor_Impl:SetFlyMode(mode) end
+
+--- 开始飞行，可设置初始的离地高度，默认为 1.5m。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        StartFlySample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function StartFlySample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:StartFly()
+--->    print("--DouyinActor3CSample:StartFly")
+--->end
+--->```
+function DouyinActor_Impl:StartFly() end
+
+--- 当前 Actor 停止飞行。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        StopFlySample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function StopFlySample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:StopFly()
+--->    print("--DouyinActor3CSample:StopFly")
+--->end
+--->```
+function DouyinActor_Impl:StopFly() end
+
+--- 获取 Actor 是否可以飞行。
+---@return boolean ret true: 可以飞行。false: 不可以飞行。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        CanFlySample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function CanFlySample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local canfly = actor:CanFly()
+--->    print("--DouyinActor3CSample:CanFly=" .. tostring(canfly))
+--->    actor.flyVerticalSpeed = 10
+--->end
+--->```
+function DouyinActor_Impl:CanFly() end
+
+--- 获取 Actor 当前是否在飞行。
+---@return boolean ret true：当前正在飞行。false：当前不在飞行。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        IsFlyingSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function IsFlyingSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local isflying = actor:IsFlying()
+--->    print("--DouyinActor3CSample:isflying" .. tostring(isflying))
+--->end
+--->```
+function DouyinActor_Impl:IsFlying() end
+
+--- 获取 Actor 是否可以游泳。
+---@return boolean ret true: 可以游泳。flase：不可以游泳。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        CanSwimSample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function CanSwimSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local canswim = actor:CanSwim()
+--->    print("--DouyinActor3CSample:CanSwim=" .. tostring(canswim))
+--->end
+--->```
+function DouyinActor_Impl:CanSwim() end
+
+--- 获取 Actor 当前是否在游泳。
+---@return boolean ret true：当前正在游泳。false：当前不在游泳。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        IsSwimming(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function IsSwimming(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local isSwimming = actor:IsSwimming()
+--->    print("--DouyinActor3CSample:IsSwimming=" .. tostring(isSwimming))
+--->end
+--->```
+function DouyinActor_Impl:IsSwimming() end
+
+--- 设置为 True 时玩家无法通过摇杆移动；只对本地玩家有效。设置为 False 后解除该效果；设置时不改变玩家当前状态，只对后续输入生效。
+---@param immobile boolean true：玩家无法通过摇杆移动  false：玩家可以通过摇杆移动
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ActorImmobilize(localActor, true)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function ActorImmobilize(actor, immobile)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:Immobilize(immobile)
+--->    print("--DouyinActor3CSample:Immobilize")
+--->end
+--->```
+function DouyinActor_Impl:Immobilize(immobile) end
+
+--- 设置当前 Actor 的透明度，alpha 取值范围[0-1]
+---@param alpha number 透明度，取值范围 [0,1]
+function DouyinActor_Impl:SetAlpha(alpha) end
+
+--- 隐藏当前Actor，只隐藏渲染对象Render
+---@param visible boolean 是否隐藏当前Actor
+function DouyinActor_Impl:SetVisible(visible) end
+
+--- 把当前对象设置为可交互对象
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    localActor:EnableInteraction()
+--->end
+--->```
+function DouyinActor_Impl:EnableInteraction() end
+
+--- 把当前对象移除掉可交互对象
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    localActor:DisableInteraction()
+--->end
+--->```
+function DouyinActor_Impl:DisableInteraction() end
+
+--- 计算当前 Actor 手部挂点
+---@param isLeft boolean true: 左手挂点 / false：右手挂点
+---@return UnityEngine.Vector3 position (Out) 返回挂点的位置
+---@return UnityEngine.Quaternion rotation (Out) 返回挂点的旋转信息
+--- ***
+--- **代码示例**
+--->```lua
+--->function ActorCalculatePalmTransform(actor, isLeft)
+--->    local position, rotation = actor:CalculatePalmTransform(isLeft)
+--->    local str = string.format("--DouyinActorSample:position=(%f,%f,%f):rotation=(%f,%f,%f)", position.x, position.y,
+--->        position.z, rotation.eulerAngles.x, rotation.eulerAngles.y,
+--->        rotation.eulerAngles.z)
+--->    print(str)
+--->    return position, rotation
+--->end
+--->```
+function DouyinActor_Impl:CalculatePalmTransform(isLeft) end
+
+--- 开启飞行/悬浮
+---@param showUI? boolean 是否显示飞行按钮， true：显示飞行按钮， false：显示飞行按钮。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        EnableFlySample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function EnableFlySample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:EnableFly()
+--->    print("--DouyinActor3CSample:EnableFly")
+--->end
+--->```
+function DouyinActor_Impl:EnableFly(showUI) end
+
+--- 禁止飞行/悬浮
+---@param hideUI boolean 是否隐藏飞行按钮，true：隐藏飞行按钮，false：将飞行按钮置灰
+--- ***
+--- **代码示例**
+--->```lua
+--->local localActor
+--->
+--->function Update()
+--->    if localActor == nil then
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        DisableFlySample(localActor)
+--->    end
+--->end
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    localActor = actor
+--->end
+--->
+--->function DisableFlySample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:DisableFly()
+--->    print("--DouyinActor3CSample:DisableFly")
+--->end
+--->```
+function DouyinActor_Impl:DisableFly(hideUI) end
+
+--- 开启牵手行为
+---@param showUI? boolean 是否显示交互按钮，true：显示交互按钮，false：显示交互按钮
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        EnableHoldHandSample(localActor)
+--->    end
+--->end
+--->
+--->function EnableHoldHandSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    actor:EnableHoldHand()
+--->    print("--DouyinActorSystemSample:EnableHoldHand=")
+--->end
+--->```
+function DouyinActor_Impl:EnableHoldHand(showUI) end
+
+--- 禁止牵手行为
+---@param hideUI? boolean 是否隐藏交互按钮，true：隐藏交互按钮，false：将交互按钮置灰
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        DisableHoldHandSample(localActor)
+--->    end
+--->end
+--->
+--->function DisableHoldHandSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    actor:DisableHoldHand()
+--->    print("--DouyinActorSystemSample:DisableHoldHand=")
+--->end
+--->```
+function DouyinActor_Impl:DisableHoldHand(hideUI) end
+
+--- 当前Actor是否处于牵手状态
+---@return boolean ret true：当前Actor处于牵手状态false：当前Actor未处于牵手状态
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        IsHoldHandSample(localActor)
+--->    end
+--->end
+--->
+--->function IsHoldHandSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    local isHold = actor:IsHoldHand()
+--->    print("--DouyinActorSystemSample:IsHoldHand=" .. tostring(isHold))
+--->end
+--->```
+function DouyinActor_Impl:IsHoldHand() end
+
+--- 当前 Actor 是否可以牵手
+---@return boolean ret true：当前Actor 可以牵手false：当前 Actor 无法牵手
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        CanHoldHandSample(localActor)
+--->    end
+--->end
+--->
+--->function CanHoldHandSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    local canHold = actor:CanHoldHand()
+--->    print("--DouyinActorSystemSample:CanHoldHand=" .. tostring(canHold))
+--->end
+--->```
+function DouyinActor_Impl:CanHoldHand() end
+
+--- 获取Actor牵手状态
+---@return AvatarHoldHandStateType ret 返回牵手状态的枚举类型
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        GetHoldHandStateSample(localActor)
+--->    end
+--->end
+--->
+--->function GetHoldHandStateSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    local state = actor:GetHoldHandState()
+--->    print("--DouyinActorSystemSample:GetHoldHandState=" .. tostring(state))
+--->end
+--->```
+function DouyinActor_Impl:GetHoldHandState() end
+
+--- 结束当前 Actor 的牵手状态
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        StopHoldHandSample(localActor)
+--->    end
+--->end
+--->
+--->function StopHoldHandSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    actor:StopHoldHand()
+--->    print("--DouyinActorSystemSample:StopHoldHand")
+--->end
+--->```
+function DouyinActor_Impl:StopHoldHand() end
+
+--- Actor发起一次多人交互，调用这个函数的效果和点击多人交互按钮效果是一致的。
+---@param type ActorInteractionType 多人交互类型
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        InviteDuoInteractionSample(localActor)
+--->    end
+--->end
+--->
+--->function InviteDuoInteractionSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->
+--->    print("--DouyinActorSystemSample:InviteDuoInteraction")
+--->    actor:InviteDuoInteraction(CS.DouyinActor.ActorInteractionType.Bubbles)
+--->end
+--->```
+function DouyinActor_Impl:InviteDuoInteraction(type) end
+
+--- Actor接受其他Actor发起的交互，调用这个函数的效果和点击其他玩家发起的交互按钮效果是一致的。
+---@param actor DouyinActor 接受交互的Actor
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        local anotherActor = DouyinActorService.GetActorById(anotherActorID)
+--->        if not localActor or not anotherActor then return end
+--->        AcceptDuoInteractionSample(anotherActor, localActor)
+--->    end
+--->end
+--->
+--->--inviteActor：发起交互的Actor，也就是调用InviteDuoInteraction的Actor
+--->--acceptActor：接受交互的Actor，需要AcceptDuoInteraction的Actor
+--->function AcceptDuoInteractionSample(inviteActor, acceptActor)
+--->    if not acceptActor or not acceptActor.isLocal or not inviteActor then
+--->        return
+--->    end
+--->    acceptActor:AcceptDuoInteraction(inviteActor)
+--->    print(string.format("--DouyinActorSystemSample:%s接受了%s的交互邀请", acceptActor.actorID, inviteActor.actorID))
+--->end
+--->```
+function DouyinActor_Impl:AcceptDuoInteraction(actor) end
+
+--- Actor等待多人交互，当发起多人交互，其他Actor没有接受多人交互的时候，会处于等待状态。
+---@return boolean ret 是否正在等待多人交互。false：未等待true：等待中
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        IsDuoInteractionWaitingSample(localActor)
+--->    end
+--->end
+--->
+--->function IsDuoInteractionWaitingSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local isWaiting = actor:IsDuoInteractionWaiting()
+--->    print("--DouyinActorSystemSample:isWaiting=" .. tostring(isWaiting))
+--->end
+--->```
+function DouyinActor_Impl:IsDuoInteractionWaiting() end
+
+--- 停止交互等待
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        StopDuoInteractionWaiting(localActor)
+--->    end
+--->end
+--->
+--->function StopDuoInteractionWaiting(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    actor:StopDuoInteractionWaiting()
+--->    print("--DouyinActorSystemSample:StopDuoInteractionWaiting=")
+--->end
+--->```
+function DouyinActor_Impl:StopDuoInteractionWaiting() end
+
+--- Actor开始多人交互，交互的对象是传入的actor
+---@param type ActorInteractionType 多人交互类型
+---@param actor DouyinActor 开始多人交互的Actor对象
+---@return boolean ret 是否开始了多人交互false：未开始true：开始
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        local anotherActor = DouyinActorService.GetActorById(anotherActorID)
+--->        if not localActor or not anotherActor then return end
+--->        StartDuoInteractionSample(localActor, anotherActor)
+--->    end
+--->end
+--->
+--->function StartDuoInteractionSample(actor, anotherActor)
+--->    if not actor or not actor.isLocal or not anotherActor then
+--->        return
+--->    end
+--->
+--->    print("--DouyinActorSystemSample:StartDuoInteraction")
+--->    actor:StartDuoInteraction(CS.DouyinActor.ActorInteractionType.Bump, anotherActor)
+--->end
+--->```
+function DouyinActor_Impl:StartDuoInteraction(type, actor) end
+
+--- Actor A开始开始多人交互，交互的对象是传入的actor
+---@param type ActorInteractionType 开始多人交互的类型
+---@param actor DouyinActor 和哪个Actor进行多人交互
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        StopDuoInteractionSample(localActor)
+--->    end
+--->end
+--->
+--->function StopDuoInteractionSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    print("--DouyinActorSystemSample:StopDuoInteraction")
+--->    actor:StopDuoInteraction(function()
+--->        print("--DouyinActorSystemSample:多人交互回调")
+--->    end)
+--->end
+--->```
+function DouyinActor_Impl:StopDuoInteraction(type, actor) end
+
+--- Actor正在多人交互交互中。
+---@return boolean ret 是否正在多人交互。false：未进行交互true：交互中
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        local localActor = DouyinActorService.GetLocalActor()
+--->        if not localActor then return end
+--->        IsDuoInteractingSample(localActor)
+--->    end
+--->end
+--->
+--->function IsDuoInteractingSample(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    local isInteracting = actor:IsDuoInteracting()
+--->    print("--DouyinActorSystemSample:IsDuoInteracting=" .. tostring(isInteracting))
+--->end
+--->```
+function DouyinActor_Impl:IsDuoInteracting() end
+
+--- 动态生成特定坐标位置的网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@param position UnityEngine.Vector3 生成网络对象的位置
+---@param onSpawn? Action<GameObject, int> 回调函数，承载着创建出来的网络对象的GameObject和它的id
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var bloodTextKeyname :string
+--->---@var bloodTextY :float  = 1.5
+--->---@end
+--->
+--->local bloodView
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor.isLocal then
+--->        return
+--->    else
+--->        local targetPos = Vector3(actor.position.x, actor.position.y + bloodTextY, actor.position.z)
+--->        actor:NetSpawn(bloodTextKeyname, targetPos, function(go, id)
+--->            bloodView = go:GetDouyinScript("BloodView")
+--->            bloodView.script.SetTargetActorId(actor.actorID)
+--->        end)
+--->    end
+--->end
+--->```
+function DouyinActor_Impl:NetSpawn(key, position, onSpawn) end
+
+--- 动态生成网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@param onSpawn? Action<GameObject, int> 回调函数，承载着创建出来的网络对象的GameObject和它的id
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var bloodTextKeyname :string
+--->---@var bloodTextY :float  = 1.5
+--->---@end
+--->
+--->local bloodView
+--->local Vector3 = UnityEngine.Vector3
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor.isLocal then
+--->        return
+--->    else
+--->        actor:NetSpawn(bloodTextKeyname, function(go, id)
+--->            bloodView = go:GetDouyinScript("BloodView")
+--->            bloodView.script.SetTargetActorId(actor.actorID)
+--->        end)
+--->    end
+--->end
+--->```
+function DouyinActor_Impl:NetSpawn(key, onSpawn) end
+
+--- 动态生成特定坐标位置，特定旋转的网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@param position UnityEngine.Vector3 指定要生成的网络对象的坐标
+---@param rotation UnityEngine.Vector3 指定要生成的网络对象的旋转
+---@param onSpawn? Action<GameObject, int> 
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var bloodTextKeyname :string
+--->---@var bloodTextY :float  = 1.5
+--->---@end
+--->
+--->local bloodView
+--->local Vector3 = UnityEngine.Vector3
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor.isLocal then
+--->        return
+--->    else
+--->        local targetPos = Vector3(actor.position.x, actor.position.y + bloodTextY, actor.position.z)
+--->        actor:NetSpawn(bloodTextKeyname, targetPos, Vector3(10, 0, 0),function(go, id)
+--->            bloodView = go:GetDouyinScript("BloodView")
+--->            bloodView.script.SetTargetActorId(actor.actorID)
+--->        end)
+--->    end
+--->end
+--->```
+function DouyinActor_Impl:NetSpawn(key, position, rotation, onSpawn) end
+
+--- 动态生成特定坐标位置，特定旋转的网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@param position UnityEngine.Vector3 指定要生成的网络对象的坐标
+---@param rotation UnityEngine.Quaternion 指定要生成的网络对象的旋转
+---@param onSpawn? Action<GameObject, int> 
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var bloodTextKeyname :string
+--->---@var bloodTextY :float  = 1.5
+--->---@end
+--->
+--->local bloodView
+--->local Vector3 = UnityEngine.Vector3
+--->local Quaternion = UnityEngine.Quaternion
+--->
+--->function OnActorSpawned(actor)
+--->    if not actor.isLocal then
+--->        return
+--->    else
+--->        local targetPos = Vector3(actor.position.x, actor.position.y + bloodTextY, actor.position.z)
+--->        local targetRot = Quaternion.Euler(Vector3(10, 0, 0))
+--->        actor:NetSpawn(bloodTextKeyname, targetPos, targetRot,function(go, id)
+--->            bloodView = go:GetDouyinScript("BloodView")
+--->            bloodView.script.SetTargetActorId(actor.actorID)
+--->        end)
+--->    end
+--->end
+--->```
+function DouyinActor_Impl:NetSpawn(key, position, rotation, onSpawn) end
+
+--- 将当前的  Actor  传送到指定位置，且无旋转角度。
+---@param pos UnityEngine.Vector3 指定传送的 Position
+function DouyinActor_Impl:Teleport(pos) end
+
+--- 将当前的 Actor 传送到指定位置，且可定义传送后的角度。
+---@param pos UnityEngine.Vector3 指定传送的 Position
+---@param rot UnityEngine.Quaternion 指定传送后的旋转角度
+function DouyinActor_Impl:Teleport(pos, rot) end
+
+--------------------------------------------------------------------------------
+
+--- 控制对象(Actor)管理类。可以通过各种方式查询并获取当前场景内的可控制对象。
+---@class DouyinActorService
+local DouyinActorService_Impl = {}
+
+---@class Static.DouyinActorService
+local DouyinActorService_Static = {}
+
+--- 获取最大 Actor 数量。
+---@return integer ret 所获取的最大 Actor 数量。
+function DouyinActorService_Static.GetMaxActorCount() end
+
+--- 获取 Actor 列表。
+---@return DouyinActor[] ret 包含当前房间内所有 Actor 的列表。
+function DouyinActorService_Static.GetActors() end
+
+--- 通过 ID 获取 Actor。
+---@param id integer 所要获取的 Actor 的 id
+---@return DouyinActor ret 所要获取的 Actor。若不存在，返回 null。
+function DouyinActorService_Static.GetActorById(id) end
+
+--- 通过 ID 获取 Actor。
+---@param go UnityEngine.GameObject 用于查找对应 Actor 的游戏对象。该对象是游戏场景中已存在的对象
+---@return DouyinActor ret 若在字典中找到与传入的 GameObject 对应的 Actor，则返回该 Actor。若未找到，返回 null。
+function DouyinActorService_Static.GetActor(go) end
+
+--- 获得本地玩家的 Actor。
+---@return DouyinActor ret 若本地玩家存在，返回本地玩家的 Actor。若本地玩家不存在，返回 null。
+function DouyinActorService_Static.GetLocalActor() end
+
+--- 获得拥有参数标签的 Actor。
+---@param tagName string 所要获得的 Actor 的标签名
+---@return DouyinActor[] ret 所有符合参数标签的 Actor 组成的数组。
+function DouyinActorService_Static.GetActorsWithTag(tagName) end
+
+--- 清除 Actor 的标签，默认清除所有 Actor 的标签。
+function DouyinActorService_Static.ClearAllActorsTag() end
+
+
+---@type Static.DouyinActorService
+DouyinActorService = DouyinActorService_Static
+
+--------------------------------------------------------------------------------
+
+--- 用于管理与相机相关的功能，包括相机模式的切换、相机参数的获取和设置等。
+---@class DouyinCameraService
+local DouyinCameraService_Impl = {}
+
+---@class Static.DouyinCameraService
+--- 相机模式发生切换时触发该事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->function Start()
+--->    DouyinCameraService.onCameraModeChanged:AddListener(function(mode)
+--->        if mode == CS.DouyinCameraMode.GamePlay then
+--->            print("处于游戏模式")
+--->        else
+--->            print("处于拍照模式")
+--->        end
+--->    end)
+--->end
+--->```
+---@field onCameraModeChanged DouyinCameraModeEvent
+local DouyinCameraService_Static = {}
+
+--- 获取与主角绑定的相机。
+---@return UnityEngine.Camera ret 若代理服务有效，返回相机。否则返回 null。
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("4") then
+--->        GetCameraSample()
+--->    end
+--->end
+--->
+--->function GetCameraSample()
+--->    local camera = DouyinCameraService.GetCamera()
+--->    print("DouyinCameraServiceSample:GetCamera=" .. camera.gameObject.name)
+--->    return camera
+--->end
+--->```
+function DouyinCameraService_Static.GetCamera() end
+
+--- 获取主相机与主角之间的俯仰角，游戏模式有效
+---@return number ret 若代理服务正常，返回相机与主角之间的俯仰角否则，返回null
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("5") then
+--->        GetPitchSample()
+--->    end
+--->end
+--->
+--->function GetPitchSample()
+--->    local picth = DouyinCameraService.GetPitch()
+--->    print("DouyinCameraServiceSample:GetPitch=" .. picth)
+--->end
+--->```
+function DouyinCameraService_Static.GetPitch() end
+
+--- 设置主相机与主角之间的俯仰角，游戏模式有效。
+---@param pitch number 所要设置的俯仰角
+function DouyinCameraService_Static.SetPitch(pitch) end
+
+--- 获取主相机与主角之间的偏航角，游戏模式有效。
+---@return number ret 若代理服务正常，返回主相机与主角之间的偏航角。否则返回 null。
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("7") then
+--->        GetYawSample()
+--->    end
+--->end
+--->
+--->function GetYawSample()
+--->    local yaw = DouyinCameraService.GetYaw()
+--->    print("DouyinCameraServiceSample:GetYaw=" .. yaw)
+--->end
+--->```
+function DouyinCameraService_Static.GetYaw() end
+
+--- 设置主相机与主角之间的偏航角，游戏模式有效。
+---@param yaw number 要设置的偏航角
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("0") then
+--->        SetYawSample()
+--->    end
+--->end
+--->
+--->function SetYawSample()
+--->    DouyinCameraService.SetYaw(10)
+--->    local yaw = DouyinCameraService.GetYaw()
+--->    print("DouyinCameraServiceSample:SetYaw=" .. yaw)
+--->end
+--->```
+function DouyinCameraService_Static.SetYaw(yaw) end
+
+--- 设置主相机与主角之间的距离，游戏模式有效。
+---@param distance number 所要设置的主相机距主角的距离
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("8") then
+--->        SetDistanceSample()
+--->    end
+--->end
+--->
+--->function SetDistanceSample()
+--->    DouyinCameraService.SetDistance(10)
+--->    print("DouyinCameraServiceSample:SetDistance=10")
+--->end
+--->```
+function DouyinCameraService_Static.SetDistance(distance) end
+
+--- 设置主相机与主角位置偏移，游戏模式有效。
+---@param offset UnityEngine.Vector3 所要设置的位置偏移
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("9") then
+--->        SetOffsetSample()
+--->    end
+--->end
+--->
+--->function SetOffsetSample()
+--->    local offset = Vector3(1, 1, 1)
+--->    DouyinCameraService.SetOffset(offset)
+--->    print(string.format("DouyinCameraServiceSample:SetOffset=((%f,%f,%f))", offset.x, offset.y, offset.z))
+--->end
+--->```
+function DouyinCameraService_Static.SetOffset(offset) end
+
+--- 判断当前相机功能模式的状态
+---@return boolean ret true: 当前处于相机模式false：当前未处于相机模式
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        IsPhotographModeSample()
+--->    end
+--->end
+--->
+--->function IsPhotographModeSample()
+--->    local isPhotoMode = DouyinCameraService.IsPhotographMode()
+--->    print("DouyinCameraServiceSample:IsPhotographMode=" .. tostring(isPhotoMode))
+--->    return isPhotoMode
+--->end
+--->```
+function DouyinCameraService_Static.IsPhotographMode() end
+
+--- 进入相机功能模式
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("2") then
+--->        StartPhotographSample()
+--->    end
+--->end
+--->
+--->function StartPhotographSample()
+--->    print("DouyinCameraServiceSample:StartPhotograph")
+--->    DouyinCameraService.StartPhotograph()
+--->end
+--->```
+function DouyinCameraService_Static.StartPhotograph() end
+
+--- 停止相机功能模式
+--- ***
+--- **代码示例**
+--->```lua
+--->function Update()
+--->    if Input.GetKeyDown("3") then
+--->        StopPhotographSample()
+--->    end
+--->end
+--->
+--->function StopPhotographSample()
+--->    print("DouyinCameraServiceSample:StopPhotograph")
+--->    DouyinCameraService.StopPhotograph()
+--->end
+--->```
+function DouyinCameraService_Static.StopPhotograph() end
+
+
+---@type Static.DouyinCameraService
+DouyinCameraService = DouyinCameraService_Static
+
+--------------------------------------------------------------------------------
+
+--- 封装了一些关于创作者信息的方法，包括获取创作者信息、关注创作者等。
+---@class DouyinCreatorService
+local DouyinCreatorService_Impl = {}
+
+---@class Static.DouyinCreatorService
+local DouyinCreatorService_Static = {}
+
+--- 用于获取创作者信息，调试器模式下获取不到创作者信息。
+---@param callback fun() 回调函数，承载着获取到的创作者信息CreatorInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var Btn_1:UnityEngine.UI.Button
+--->---@var Btn_2:UnityEngine.UI.Button
+--->---@var Btn_3:UnityEngine.UI.Button
+--->---@end
+--->
+--->local secUID
+--->
+--->function Start()
+--->    Btn_1.onClick:AddListener(GetCreatorInfoSample)
+--->end
+--->
+--->function GetCreatorInfoSample()
+--->    DouyinCreatorService.GetCreatorInfo(function (creatorInfo)
+--->        DouyinUtility.Toast("获取创建者信息成功:"..creatorInfo.name)
+--->        secUID = creatorInfo.secUID
+--->    end)
+--->end
+--->```
+function DouyinCreatorService_Static.GetCreatorInfo(callback) end
+
+--- 用于关注创作者
+---@param secUid string 创作者的SecUID
+---@param callback fun() 回调函数，成功时回调函数传入的参数为true，失败时回调函数传入的参数为false
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var Btn_1:UnityEngine.UI.Button
+--->---@var Btn_2:UnityEngine.UI.Button
+--->---@var Btn_3:UnityEngine.UI.Button
+--->---@end
+--->
+--->local secUID
+--->
+--->function Start()
+--->    Btn_1.onClick:AddListener(GetCreatorInfoSample)
+--->    Btn_2.onClick:AddListener(FollowCreatorSample)
+--->end
+--->
+--->function GetCreatorInfoSample()
+--->    DouyinCreatorService.GetCreatorInfo(function (creatorInfo)
+--->        DouyinUtility.Toast("获取创建者信息成功:"..creatorInfo.name)
+--->        secUID = creatorInfo.secUID
+--->    end)
+--->end
+--->
+--->function FollowCreatorSample()
+--->    if secUID == nil then
+--->        DouyinUtility.Toast("secUID is nil")
+--->        return
+--->    end
+--->    DouyinCreatorService.Follow(secUID,function (success)
+--->        if success then
+--->            DouyinUtility.Toast("关注创作者成功:"..secUID)
+--->        else
+--->            DouyinUtility.Toast("关注创作者失败:"..secUID)
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinCreatorService_Static.Follow(secUid, callback) end
+
+--- 用于打开创作者信息
+---@param secUid string 
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var Btn_1:UnityEngine.UI.Button
+--->---@var Btn_2:UnityEngine.UI.Button
+--->---@var Btn_3:UnityEngine.UI.Button
+--->---@end
+--->
+--->local secUID
+--->
+--->function Start()
+--->    Btn_1.onClick:AddListener(GetCreatorInfoSample)
+--->    Btn_3.onClick:AddListener(OpenCreatorInformationSample)
+--->end
+--->
+--->function GetCreatorInfoSample()
+--->    DouyinCreatorService.GetCreatorInfo(function (creatorInfo)
+--->        DouyinUtility.Toast("获取创建者信息成功:"..creatorInfo.name)
+--->        secUID = creatorInfo.secUID
+--->    end)
+--->end
+--->
+--->function OpenCreatorInformationSample()
+--->    if secUID == nil then
+--->        DouyinUtility.Toast("secUID is nil")
+--->        return
+--->    end
+--->    DouyinCreatorService.OpenCreatorInformation(secUID)
+--->    DouyinUtility.Toast("打开创作者信息")
+--->end
+--->```
+function DouyinCreatorService_Static.OpenCreatorInformation(secUid) end
+
+
+---@type Static.DouyinCreatorService
+DouyinCreatorService = DouyinCreatorService_Static
+
+--------------------------------------------------------------------------------
+
+--- DouyinImageService 是一个静态类，提供了图片下载的通用静态方法。
+---@class DouyinImageService
+local DouyinImageService_Impl = {}
+
+---@class Static.DouyinImageService
+local DouyinImageService_Static = {}
+
+--- 通过url下载图片数据，并转换为Texture2D的格式
+---@param url string 图片的下载链接
+---@param callback fun() 回调函数，承载着获取到的 Texture2D 类型的图片数据
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var rawImage:UnityEngine.UI.RawImage
+--->---@end
+--->
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("0") then
+--->        DownloadImageSample()
+--->    end
+--->end
+--->
+--->function DownloadImageSample()
+--->    --图片的下载链接
+--->    local url = ""
+--->    DouyinImageService.DownloadImage(url,function (downloadTex)
+--->        if downloadTex then
+--->            rawImage.texture = downloadTex
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinImageService_Static.DownloadImage(url, callback) end
+
+
+---@type Static.DouyinImageService
+DouyinImageService = DouyinImageService_Static
+
+--------------------------------------------------------------------------------
+
+--- 主要负责管理和处理与用户输入相关的各类事件，涵盖了屏幕点击、移动输入、视角旋转、屏幕缩放以及跳跃等操作的事件监听与响应。
+---@class DouyinInputService
+local DouyinInputService_Impl = {}
+
+---@class Static.DouyinInputService
+--- 屏幕点击事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onTouchEvent:AddListener(function(ver2)
+--->        print(string.format("DouyinInputServiceSample:onTouchEvent=((%f,%f))", ver2.x, ver2.y))
+--->    end)
+--->end
+--->```
+---@field onTouchEvent DouyinTouchEvent
+--- 开始有移动输入。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onMoveInputStart:AddListener(function()
+--->        print("DouyinInputServiceSample:onMoveInputStart")
+--->    end)
+--->end
+--->```
+---@field onMoveInputStart DouyinInputEvent
+--- 持续有移动输入。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onMoveInputPerform:AddListener(function()
+--->        print("DouyinInputServiceSample:onMoveInputPerform")
+--->    end)
+--->end
+--->```
+---@field onMoveInputPerform DouyinInputPerformEvent
+--- 移动输入取消。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onMoveInputCancel:AddListener(function()
+--->        print("DouyinInputServiceSample:onMoveInputCancel")
+--->    end)
+--->end
+--->```
+---@field onMoveInputCancel DouyinInputEvent
+--- 旋转视角（屏幕空白区域）
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onLookInputStart:AddListener(function()
+--->        print("DouyinInputServiceSample:onLookInputStart")
+--->    end)
+--->end
+--->```
+---@field onLookInputStart DouyinInputEvent
+--- 旋转视角（屏幕空白区域）
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onLookInputPerform:AddListener(function(ver2)
+--->        print(string.format("DouyinInputServiceSample:onLookInputPerform=((%f,%f))", ver2.x, ver2.y))
+--->    end)
+--->end
+--->```
+---@field onLookInputPerform DouyinInputPerformEvent
+--- 旋转视角操作取消。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onLookInputCancel:AddListener(function()
+--->        print("DouyinInputServiceSample:onLookInputCancel")
+--->    end)
+--->end
+--->```
+---@field onLookInputCancel DouyinInputEvent
+--- 屏幕缩放（双指）
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onZoomInput:AddListener(function(f)
+--->        print("DouyinInputServiceSample:onZoomInput=" .. f)
+--->    end)
+--->end
+--->```
+---@field onZoomInput DouyinInputZoomEvent
+--- 跳跃。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onJumpInputStart:AddListener(function()
+--->        print("DouyinInputServiceSample:onJumpInputStart")
+--->    end)
+--->end
+--->```
+---@field onJumpInputStart DouyinInputEvent
+--- 跳跃时事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onJumpInputPerform:AddListener(function()
+--->        print("DouyinInputServiceSample:onJumpInputPerform")
+--->    end)
+--->end
+--->```
+---@field onJumpInputPerform DouyinInputEvent
+--- 取消跳跃事件。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- Start is called before the first frame update
+--->function Start()
+--->    DouyinInputService.onJumpInputCancel:AddListener(function()
+--->        print("DouyinInputServiceSample:onJumpInputCancel")
+--->    end)
+--->end
+--->```
+---@field onJumpInputCancel DouyinInputEvent
+local DouyinInputService_Static = {}
+
+
+---@type Static.DouyinInputService
+DouyinInputService = DouyinInputService_Static
+
+--------------------------------------------------------------------------------
+
+--- 管理和操作摇杆控件的相关属性和事件。
+---@class DouyinJoyStickControl
+--- 摇杆对象。
+---@field gameObject UnityEngine.GameObject
+--- 摇杆的背景图片。
+---@field background UnityEngine.UI.Image
+--- 摇杆的前景图片。
+---@field frontground UnityEngine.UI.Image
+--- 摇杆操作默认功能是否起作用。
+---@field overrideFunctionEnabled boolean
+local DouyinJoyStickControl_Impl = {}
+
+--- 注册摇杆拖动事件的回调函数。
+---@param callback fun() 摇杆拖动事件的回调函数，回调参数为一个二维向量，表示拖动的方向和距离。
+function DouyinJoyStickControl_Impl:OnUIDrag(callback) end
+
+--- 注册摇杆按下事件的回调函数。
+---@param callback fun() 摇杆按下事件的回调函数，回调参数为一个二维向量，表示按下的位置。
+function DouyinJoyStickControl_Impl:OnUIPointerDown(callback) end
+
+--- 注册摇杆抬起事件的回调函数。
+---@param callback fun() 
+function DouyinJoyStickControl_Impl:OnUIPointerUp(callback) end
+
+--------------------------------------------------------------------------------
+
+--- 用于管理与网络相关的功能。
+---@class DouyinNetService
+local DouyinNetService_Impl = {}
+
+---@class Static.DouyinNetService
+--- 房间的数据是否同步完成
+---@field isNetworkSettled any
+local DouyinNetService_Static = {}
+
+--- 处理房间数据同步完成后的回调逻辑。当数据同步后，会立即执行传入的回调函数，若未同步，将回调函数添加到委托链中等待数据同步后再执行。
+---@param callback fun() 用于在房间数据同步完成时执行特定的操作
+function DouyinNetService_Static.OnNetworkSettled(callback) end
+
+
+---@type Static.DouyinNetService
+DouyinNetService = DouyinNetService_Static
+
+--------------------------------------------------------------------------------
+
+--- DouyinObject 类用于表示一个具有唯一标识符（UID）的游戏对象。提供了对该对象进行同步和销毁设置的方法。
+---@class DouyinObject
+--- 该类实例的唯一标识符，在对象创建时初始化。
+---@field UID integer
+--- 该类实例关联的 Unity 游戏对象，在对象创建时初始化。
+---@field gameObject UnityEngine.GameObject
+local DouyinObject_Impl = {}
+
+--- 是否开启网络同步，默认是开启的。
+---@param enable boolean true，开启网络同步  false，关闭网络同步
+function DouyinObject_Impl:EnableSync(enable) end
+
+--- 房间内最后一个用户断线的时候，是否当玩家丢弃此对象时立即销毁此对象
+function DouyinObject_Impl:SetDestoryWhenDrop() end
+
+--------------------------------------------------------------------------------
+
+--- DouyinObjectService 是一个静态类，主要用于管理 DouyinObjectService 实例。提供网络对象操作相关功能。
+---@class DouyinObjectService
+local DouyinObjectService_Impl = {}
+
+--- 动态生成网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->local Vector3 = UnityEngine.Vector3
+--->local Quaternion = UnityEngine.Quaternion
+--->
+--->-- Start is called before the first frame update
+--->function Start()
+--->end
+--->
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        NetSpawnSample1()
+--->    end
+--->end
+--->
+--->function NetSpawnSample1()
+--->    local netObj, netid = DouyinObjectService.NetSpawn("NetObject_1", function(obj, id)
+--->        if obj and id then
+--->            print("--DouyinObjectServiceCallBack1:name=" .. obj.name .. "id=" .. id)
+--->        end
+--->    end)
+--->    if netObj and netid then
+--->        print("--DouyinObjectService1:name=" .. netObj.name .. "id=" .. netid)
+--->    end
+--->end
+--->```
+function DouyinObjectService_Impl:NetSpawn(key) end
+
+--- 动态生成特定坐标位置的网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@param position UnityEngine.Vector3 指定要生成的网络对象的坐标
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->local Vector3 = UnityEngine.Vector3
+--->local Quaternion = UnityEngine.Quaternion
+--->
+--->-- Start is called before the first frame update
+--->function Start()
+--->end
+--->
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        NetSpawnSample2()
+--->    end
+--->end
+--->
+--->function NetSpawnSample2()
+--->    local netObj, netid = DouyinObjectService.NetSpawn("NetObject_1", Vector3(1, 1, 1),
+--->    function(obj, id)
+--->            if obj and id then
+--->                print("--DouyinObjectServiceCallBack2:name=" .. obj.name .. "id=" .. id)
+--->            end
+--->        end)
+--->    if netObj and netid then
+--->        print("--DouyinObjectService2:name=" .. netObj.name .. "id=" .. netid)
+--->    end
+--->end
+--->```
+function DouyinObjectService_Impl:NetSpawn(key, position) end
+
+--- 动态生成特定坐标位置，特定旋转的网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@param position UnityEngine.Vector3 指定要生成的网络对象的坐标
+---@param rotation UnityEngine.Vector3 指定要生成的网络对象的旋转
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+function DouyinObjectService_Impl:NetSpawn(key, position, rotation) end
+
+--- 动态生成特定坐标位置，特定旋转的网络对象。
+---@param key string 通过 prefab 创建的网络对象的 prefab 资源名称
+---@param position UnityEngine.Vector3 指定要生成的网络对象的坐标
+---@param rotation UnityEngine.Quaternion 指定要生成的网络对象的旋转
+---@return UnityEngine.GameObject ret 生成的网络对象。
+---@return integer id (Out) 生成的网络对象的唯一标识符
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->local Vector3 = UnityEngine.Vector3
+--->local Quaternion = UnityEngine.Quaternion
+--->
+--->-- Start is called before the first frame update
+--->function Start()
+--->end
+--->
+--->function Update()
+--->    if Input.GetKeyDown("1") then
+--->        NetSpawnSample4()
+--->    end
+--->end
+--->
+--->function NetSpawnSample4()
+--->    local targetRot = Quaternion.Euler(Vector3(45, 45, 45))
+--->    local netObj, netid = DouyinObjectService.NetSpawn("NetObject_1", Vector3(2, 1, 2), targetRot,
+--->        function(obj, id)
+--->            if obj and id then
+--->                print("--DouyinObjectServiceCallBack4:name=" .. obj.name .. "id=" .. id)
+--->            end
+--->        end)
+--->    if netObj and netid then
+--->        print("--DouyinObjectService4:name=" .. netObj.name .. "id=" .. netid)
+--->    end
+--->end
+--->```
+function DouyinObjectService_Impl:NetSpawn(key, position, rotation) end
+
+---@class Static.DouyinObjectService
+local DouyinObjectService_Static = {}
+
+--- 可以销毁所有的网络对象，只有主权方可以销毁物体。
+---@param go UnityEngine.GameObject 要销毁的 unity 游戏对象
+function DouyinObjectService_Static.NetDestroy(go) end
+
+--- 根据网络对象的id获取到对应的DouyinObject对象。
+---@param objectID integer 对应DouyinObject.UID和DouyinObjectService.NetSpawn函数out出来的id，可以通过该值获取到DouyinObject。
+--- ***
+--- **代码示例**
+--->```lua
+--->function GetDouyinObjectSample(netObjID)
+--->    local netObj1 = DouyinObjectService.GetDouyinObject(netObjID)
+--->    if netObj1 and netObj1.gameObject then
+--->        print(string.format("--GetDouyinObjectSample:netObj1name=" .. netObj1.gameObject.name))
+--->    end
+--->end
+--->```
+function DouyinObjectService_Static.GetDouyinObject(objectID) end
+
+
+---@type Static.DouyinObjectService
+DouyinObjectService = DouyinObjectService_Static
+
+--------------------------------------------------------------------------------
+
+--- DouyinPet 类表示游戏中小火人的相关信息和操作。提供了小火人的基本属性和操作方法。
+---@class DouyinPet
+--- 火人的ID，进入房间时会变化
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetIDSample(pet)
+--->    end
+--->end
+--->
+--->function GetPetIDSample(pet)
+--->    if not pet then return end
+--->    print("--DouyinPetSample:petID=" .. pet.petID)
+--->end
+--->```
+---@field petID integer
+--- 合养精灵的唯一标识符，在创建合养精灵对象时进行初始化，属性为只读。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetOpenIDSample(pet)
+--->    end
+--->end
+--->
+--->function GetPetOpenIDSample(pet)
+--->    if not pet then return end
+--->    print("--DouyinPetSample:petOpenID=" .. pet.petOpenID)
+--->end
+--->```
+---@field petOpenID integer
+--- 调用 DouyinService.Proxy.GetpetName 获取合养精灵的名称。如果为 null，返回空字符串。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetNameSample(pet)
+--->    end
+--->end
+--->
+--->function GetPetNameSample(pet)
+--->    if not pet then return end
+--->    print("--DouyinPetSample:petName=" .. pet.petName)
+--->end
+--->```
+---@field petName string
+--- 调用 DouyinService.Proxy.GetPetLevel 方法，获取合养精灵等级。如果为 null，返回 0。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetLevelSample(pet)
+--->    end
+--->end
+--->
+--->function GetPetLevelSample(pet)
+--->    if not pet then return end
+--->    print("--DouyinPetSample:petLevel=" .. pet.petLevel)
+--->end
+--->```
+---@field petLevel integer
+--- 获取该合养精灵的形象，返回合养精灵当前形象的名称
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetAppearanceSample(pet)
+--->    end
+--->end
+--->
+--->function GetPetAppearanceSample(pet)
+--->    if not pet then return end
+--->    print("--DouyinPetSample:petAppearance=" .. pet.petAppearance)
+--->end
+--->```
+---@field petAppearance string
+--- 获取该合养精灵的装扮列表
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var logText:UnityEngine.UI.Text
+--->---@end
+--->
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetAccesorySample(pet)
+--->    end
+--->end
+--->
+--->function GetPetAccesorySample(pet)
+--->    if not pet or not pet.petAccesory then return end
+--->    logText.text = string.format("--DouyinPetSample:装扮数量=%d", pet.petAccesory.Count)
+--->    print(string.format("--DouyinPetSample:装扮数量=%d", pet.petAccesory.Count))
+--->    for i = 0, pet.petAccesory.Count - 1 do
+--->        logText.text = logText.text .. string.format("--DouyinPetSample:petAccesory[%d]=%s", i, pet.petAccesory[i])
+--->        print(string.format("--DouyinPetSample:petAccesory[%d]=%s", i, pet.petAccesory[i]))
+--->    end
+--->end
+--->```
+---@field petAccesory System.Collections.Generic.List
+--- 判断当前用户是不是控制者，属性为只读。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetMasterSample(pet)
+--->    end
+--->end
+--->
+--->function GetPetMasterSample(pet)
+--->    if not pet then return end
+--->    print("--DouyinPetSample:isMaster=" .. tostring(pet.isMaster))
+--->end
+--->```
+---@field isMaster boolean
+local DouyinPet_Impl = {}
+
+--- 通过合养精灵的 ID 获取玩家。
+---@return DouyinActor ret 如果 ID 存在，返回玩家的 Actor 实例。否则返回 null。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetActorSample(pet)
+--->    end
+--->end
+--->
+--->function GetActorSample(pet)
+--->    if not pet then return end
+--->    local actor = pet:GetActor()
+--->    if actor and actor.gameObject then
+--->        print("--DouyinPetSample:gameObjectName=" .. actor.gameObject.name)
+--->    end
+--->end
+--->```
+function DouyinPet_Impl:GetActor() end
+
+--- 获取该DouyinPet的头像
+---@param original boolean true: 获取原始头像 / false: 获取装扮的形象
+---@param callback fun() 回调方法
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetAccesorySample(pet)
+--->    end
+--->end
+--->
+--->function GetPetPortraitSample(pet, original)
+--->    if not pet then return end
+--->    print("--DouyinPetSample:开始加载头像")
+--->    pet:GetPetPortrait(original, function(portrait)
+--->        if portrait then
+--->            if original then
+--->                oPortraitImg.sprite = portrait
+--->            else
+--->                aPortraitImg.sprite = portrait
+--->            end
+--->            print("--DouyinPetSample:头像加载完成")
+--->        else
+--->            print("--DouyinPetSample:portrait is nil")
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinPet_Impl:GetPetPortrait(original, callback) end
+
+--------------------------------------------------------------------------------
+
+--- 负责管理 DouyinPet 的实例。它提供一系列静态方法，用于创建、移除、获取单个或多个 DouyinPet 实例（合养精灵）
+---@class DouyinPetService
+local DouyinPetService_Impl = {}
+
+---@class Static.DouyinPetService
+local DouyinPetService_Static = {}
+
+--- 通过 PetID，获取当前场景内的合养精灵。
+---@param petID integer 要获取的合养精灵的 ID
+---@return DouyinPet ret 非 null：该合养精灵的实例。null：报错找不到对应的实例。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    local pet = actor.douyinPet
+--->    if pet then
+--->        GetPetSample(pet)
+--->    end
+--->end
+--->
+--->function GetPetSample(petID)
+--->    local pet = DouyinPetService.GetPet(petID)
+--->    if pet then
+--->        print("--DouyinPetServiceSample:GetPet():petName=" .. pet.petName .. pet.petOpenID)
+--->    end
+--->    return pet
+--->end
+--->```
+function DouyinPetService_Static.GetPet(petID) end
+
+--- 获取当前玩家控制的合养精灵。
+---@return DouyinPet ret 玩家存在且找到对应的合养精灵实例，返回该合养精灵实例。玩家为 null 或找不到相应的实例，返回 null 并报错。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function Update()
+--->    if Input.GetKeyDown("space") then
+--->        GetLocalPetSample()
+--->    end
+--->end
+--->
+--->function GetLocalPetSample()
+--->    local pet = DouyinPetService.GetLocalPet()
+--->    if pet then
+--->        print("--DouyinPetServiceSample:GetLocalPet():petName=" .. pet.petName .. pet.petOpenID)
+--->    end
+--->    return pet
+--->end
+--->```
+function DouyinPetService_Static.GetLocalPet() end
+
+--- 获取当前场景内所有的合养精灵。
+---@return DouyinPet[] ret 一个包含所有 DouyinPet 实例（合养精灵）的数组。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function Update()
+--->    if Input.GetKeyDown("space") then
+--->        GetPetsSample()
+--->    end
+--->end
+--->
+--->function GetPetsSample()
+--->    local petArr = DouyinPetService.GetPets()
+--->    if petArr then
+--->        for i = 0, petArr.Length - 1 do
+--->            print(string.format("--DouyinPetServiceSample:GetPetsSample():petArr[%d]=%s", i, petArr[i].petName) ..
+--->                petArr[i].petOpenID)
+--->        end
+--->    end
+--->    return petArr
+--->end
+--->```
+function DouyinPetService_Static.GetPets() end
+
+--- 获取当前场景内合养精灵的数量。
+---@return integer ret 当前场景内合养精灵数量。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function Update()
+--->    if Input.GetKeyDown("space") then
+--->        GetPetCountSample()
+--->    end
+--->end
+--->
+--->function GetPetCountSample()
+--->    local count = DouyinPetService.GetPetCount()
+--->    print("--DouyinPetServiceSample:GetPetCount():petCount=" .. count)
+--->    return count
+--->end
+--->```
+function DouyinPetService_Static.GetPetCount() end
+
+
+---@type Static.DouyinPetService
+DouyinPetService = DouyinPetService_Static
+
+--------------------------------------------------------------------------------
+
+--- 玩家类，用来定义一个玩家对象，并获取这些玩家的数据。 每个玩家都与一个 DouyinPlayer 对象关联。
+---@class DouyinPlayer
+--- 与 DouyinPlayer 关联的游戏对象 GameObject。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 玩家进入世界会触发OnPlayerJoined
+--->-- player:DouyinPlayer 加入世界的玩家
+--->-- evt:PlayerJoinEvent 玩家进入世界类型
+--->-- 注意:evt在Lua侧输出是:CreateRoom:0 JoinRoom:1 ReJoinRoom:2
+--->function OnPlayerJoined(player, evt)
+--->    GetPlayerGameObjectSample(player)
+--->end
+--->-- 玩家离开世界会触发OnPlayerLeft
+--->-- player:DouyinPlayer 离开世界的玩家
+--->-- evt:PlayerJoinEvent 玩家离开世界类型
+--->-- 注意:evt在Lua侧输出是:Disconnect:0 ExitRoom:1
+--->function OnPlayerLeft(player, evt)
+--->    GetPlayerGameObjectSample(player)
+--->end
+--->
+--->function GetPlayerGameObjectSample(player)
+--->    if not player or not player.gameObject then return end
+--->    print("--DouyinPlayerSample--" .. "GameObject.name=" .. player.gameObject.name)
+--->end
+--->```
+---@field gameObject UnityEngine.GameObject
+--- 房间内玩家实例 ID，每次进房都会重新生成，客户端可以用该 ID 来标识玩家。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 玩家进入世界会触发OnPlayerJoined
+--->-- player:DouyinPlayer 加入世界的玩家
+--->-- evt:PlayerJoinEvent 玩家进入世界类型
+--->function OnPlayerJoined(player, evt)
+--->    GetPlayerIDSample(player)
+--->end
+--->-- 玩家离开世界会触发OnPlayerLeft
+--->-- player:DouyinPlayer 离开世界的玩家
+--->-- evt:PlayerJoinEvent 玩家离开世界类型
+--->function OnPlayerLeft(player, evt)
+--->    GetPlayerIDSample(player)
+--->end
+--->
+--->function GetPlayerIDSample(player)
+--->    if not player then return end
+--->    print("--DouyinPlayerSample--" .. "PlayerID=" .. player.playerID)
+--->end
+--->```
+---@field playerID integer
+--- 房间内玩家的抖音开放ID，玩家ID的唯一标识
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 玩家进入世界会触发OnPlayerJoined
+--->-- player:DouyinPlayer 加入世界的玩家
+--->-- evt:PlayerJoinEvent 玩家进入世界类型
+--->-- 注意:evt在Lua侧输出是:CreateRoom:0 JoinRoom:1 ReJoinRoom:2
+--->function OnPlayerJoined(player, evt)
+--->    GetPlayerOpenIDSample(player)
+--->end
+--->-- 玩家离开世界会触发OnPlayerLeft
+--->-- player:DouyinPlayer 离开世界的玩家
+--->-- evt:PlayerJoinEvent 玩家离开世界类型
+--->-- 注意:evt在Lua侧输出是:Disconnect:0 ExitRoom:1
+--->function OnPlayerLeft(player, evt)
+--->    GetPlayerOpenIDSample(player)
+--->end
+--->
+--->function GetPlayerOpenIDSample(player)
+--->    if not player then return end
+--->    print("--DouyinPlayerSample--" .. "PlayerOpenID=" .. player.playerOpenID)
+--->end
+--->```
+---@field playerOpenID string
+--- 玩家名称。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 玩家进入世界会触发OnPlayerJoined
+--->-- player:DouyinPlayer 加入世界的玩家
+--->-- evt:PlayerJoinEvent 玩家进入世界类型
+--->-- 注意:evt在Lua侧输出是:CreateRoom:0 JoinRoom:1 ReJoinRoom:2
+--->function OnPlayerJoined(player, evt)
+--->    GetPlayerNameSample(player)
+--->end
+--->-- 玩家离开世界会触发OnPlayerLeft
+--->-- player:DouyinPlayer 离开世界的玩家
+--->-- evt:PlayerJoinEvent 玩家离开世界类型
+--->-- 注意:evt在Lua侧输出是:Disconnect:0 ExitRoom:1
+--->function OnPlayerLeft(player, evt)
+--->    GetPlayerNameSample(player)
+--->end
+--->
+--->function GetPlayerNameSample(player)
+--->    if not player then return end
+--->    print("--DouyinPlayerSample--" .. "PlayerName=" .. player.playerName)
+--->end
+--->```
+---@field playerName string
+--- 是否是本地玩家；true 表示本地玩家，false 表示房间内其他玩家。
+--- ***
+--- **代码示例**
+--->```lua
+--->-- 玩家进入世界会触发OnPlayerJoined
+--->-- player:DouyinPlayer 加入世界的玩家
+--->-- evt:PlayerJoinEvent 玩家进入世界类型
+--->-- 注意:evt在Lua侧输出是:CreateRoom:0 JoinRoom:1 ReJoinRoom:2
+--->function OnPlayerJoined(player, evt)
+--->    IsLocalPlayerSample(player)
+--->end
+--->-- 玩家离开世界会触发OnPlayerLeft
+--->-- player:DouyinPlayer 离开世界的玩家
+--->-- evt:PlayerJoinEvent 玩家离开世界类型
+--->-- 注意:evt在Lua侧输出是:Disconnect:0 ExitRoom:1
+--->function OnPlayerLeft(player, evt)
+--->    IsLocalPlayerSample(player)
+--->end
+--->
+--->function IsLocalPlayerSample(player)
+--->    if not player then return end
+--->    print("--DouyinPlayerSample--" .. "isLocal=" .. tostring(player.isLocal))
+--->    return player.isLocal
+--->end
+--->```
+---@field isLocal boolean
+local DouyinPlayer_Impl = {}
+
+--- 获取当前玩家所控制的对象实例。若玩家尚未创建对象实例，则返回 。
+---@return DouyinActor ret 非null：返回玩家当前控制的对象实例。null：当前玩家尚未控制任何对象。
+--- ***
+--- **代码示例**
+--->```lua
+--->local localPlayer
+--->
+--->-- 玩家进入世界会触发OnPlayerJoined
+--->-- player:DouyinPlayer 加入世界的玩家
+--->-- evt:PlayerJoinEvent 玩家进入世界类型
+--->-- 注意:evt在Lua侧输出是:CreateRoom:0 JoinRoom:1 ReJoinRoom:2
+--->function OnPlayerJoined(player, evt)
+--->    if IsLocalPlayerSample(player) then
+--->        localPlayer = player
+--->    end
+--->end
+--->
+--->-- 创建DouyinActor对象实例时会触发OnActorSpawned
+--->-- actor:DouyinActor
+--->function OnActorSpawned(actor)
+--->    -- 可以通过DouyinActor.isLocal判断该对象是否是属于本地玩家的
+--->    if actor.isLocal then
+--->        -- 本地玩家对应的DouyinActor创建出来了，此时调用GetActor()方法就不会返回null了
+--->        GetPlayerActorSample(localPlayer)
+--->    end
+--->    -- 可以使用DouyinActor.UID==DouyinPlayer.playerOpenID判断Actor和Player是否一一对应
+--->    if localPlayer and actor.UID == localPlayer.playerOpenID then
+--->        -- TODO
+--->    end
+--->end
+--->
+--->function IsLocalPlayerSample(player)
+--->    if not player then return end
+--->    print("--DouyinPlayerSample--" .. "isLocal=" .. tostring(player.isLocal))
+--->    return player.isLocal
+--->end
+--->
+--->function GetPlayerActorSample(player)
+--->    if not player then return end
+--->    local actor = player:GetActor()
+--->    if actor and actor.gameObject then
+--->        print("--DouyinPlayerSample--" .. "DouyinActor.name=" .. actor.gameObject.name)
+--->    end
+--->end
+--->```
+function DouyinPlayer_Impl:GetActor() end
+
+--- 获取玩家的抖音头像。注意：本地调试阶段无法获取到玩家的抖音头像，在扫码测试阶段可以获取到，你可以先将世界上传，然后使用手机进行扫码调试。
+---@param callback fun() 回调函数，承载着获取到的 Sprite 类型的头像数据
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var portraitImg:UnityEngine.UI.Image
+--->---@end
+--->
+--->-- 玩家进入世界会触发OnPlayerJoined
+--->-- player:DouyinPlayer 加入世界的玩家
+--->-- evt:PlayerJoinEvent 玩家进入世界类型
+--->-- 注意:evt在Lua侧输出是:CreateRoom:0 JoinRoom:1 ReJoinRoom:2
+--->function OnPlayerJoined(player, evt)
+--->    GetPlayerPortraitSample(player)
+--->end
+--->
+--->function GetPlayerPortraitSample(player)
+--->    if not player then return end
+--->    print("开始加载头像")
+--->    player:GetPlayerPortrait(function(portrait)
+--->        if portrait then
+--->            portraitImg.sprite = portrait
+--->            print("头像加载完成")
+--->        else
+--->            print("portrait is nil")
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinPlayer_Impl:GetPlayerPortrait(callback) end
+
+--------------------------------------------------------------------------------
+
+--- 用于管理与获取房间内 DouyinPlayer 对象。
+---@class DouyinPlayerService
+local DouyinPlayerService_Impl = {}
+
+---@class Static.DouyinPlayerService
+local DouyinPlayerService_Static = {}
+
+--- 获取本地玩家。
+---@return DouyinPlayer ret 当前本地玩家的实例化对象。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("space") then
+--->        GetLocalPlayerSample()
+--->    end
+--->end
+--->
+--->function GetLocalPlayerSample()
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if player then
+--->        print("--GetLocalPlayer:playerName=" .. player.playerName)
+--->    end
+--->    return player
+--->end
+--->```
+function DouyinPlayerService_Static.GetLocalPlayer() end
+
+--- 通过playerID，获取指定DouyinPlayer
+---@param playerID integer 目标玩家的唯一标识符
+---@return DouyinPlayer ret 与playerId对应的玩家对象实例
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("space") then
+--->        local player = GetLocalPlayerSample()
+--->        if player then
+--->            GetPlayerSample(player.playerID)
+--->        end
+--->    end
+--->end
+--->
+--->function GetPlayerSample(playerID)
+--->    local player = DouyinPlayerService.GetPlayer(playerID)
+--->    if player then
+--->        print("--GetPlayer:playerName=" .. player.playerName)
+--->    end
+--->    return player
+--->end
+--->```
+function DouyinPlayerService_Static.GetPlayer(playerID) end
+
+--- 获取当前房间内所有的DouyinPlayer
+---@return DouyinPlayer[] ret 包含房间内所有玩家的实例的数组，每个元素为DouyinPlayer实例
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("space") then
+--->        GetPlayersSample()
+--->    end
+--->end
+--->
+--->function GetPlayersSample()
+--->    local players = DouyinPlayerService.GetPlayers()
+--->    if players then
+--->        for i = 0, players.Length - 1 do
+--->            print("--GetPlayers:playerName=" .. players[i].playerName)
+--->        end
+--->    end
+--->    return players
+--->end
+--->```
+function DouyinPlayerService_Static.GetPlayers() end
+
+--- 获取当前房间DouyinPlayer的数量
+---@return integer ret 返回一个整数，表示当前房间内的DouyinPlayer数量
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("space") then
+--->        GetPlayerCountSample()
+--->    end
+--->end
+--->
+--->function GetPlayerCountSample()
+--->    local count = DouyinPlayerService.GetPlayerCount()
+--->    print("--GetPlayerCount=" .. count)
+--->    return count
+--->end
+--->```
+function DouyinPlayerService_Static.GetPlayerCount() end
+
+--- 通过playerOpenID，获取指定DouyinPlayer
+---@param playerOpenID string 房间内玩家的抖音开放ID，玩家ID的唯一标识
+---@return DouyinPlayer ret 与playerOpenID对应的玩家对象实例
+function DouyinPlayerService_Static.GetPlayerByOpenID(playerOpenID) end
+
+
+---@type Static.DouyinPlayerService
+DouyinPlayerService = DouyinPlayerService_Static
+
+--------------------------------------------------------------------------------
+
+--- 用户设置类
+---@class DouyinPlayerSettings
+local DouyinPlayerSettings_Impl = {}
+
+---@class Static.DouyinPlayerSettings
+--- 启用/禁用重置出生点，默认设置true
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("0") then
+--->        AllowRespawnSample(true)
+--->    elseif Input.GetKeyDown("1") then
+--->        AllowRespawnSample(false)
+--->    end
+--->end
+--->
+--->function AllowRespawnSample(isAllow)
+--->    DouyinPlayerSettings.allowRespawn = isAllow
+--->end
+--->```
+---@field allowRespawn boolean
+--- 是否允许合养精灵动作功能，默认设置true
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("0") then
+--->        AllowActionSample(true)
+--->    elseif Input.GetKeyDown("1") then
+--->        AllowActionSample(false)
+--->    end
+--->end
+--->
+--->function AllowActionSample(isAllow)
+--->    DouyinPlayerSettings.allowAction = isAllow
+--->end
+--->```
+---@field allowAction boolean
+--- 是否允许使用合养精灵表情功能，默认设置true
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("0") then
+--->        AllowEmotionSample(true)
+--->    elseif Input.GetKeyDown("1") then
+--->        AllowEmotionSample(false)
+--->    end
+--->end
+--->
+--->function AllowEmotionSample(isAllow)
+--->    DouyinPlayerSettings.allowEmotion = isAllow
+--->end
+--->```
+---@field allowEmotion boolean
+--- 是否允许切换合养精灵形象，设置为false后，世界内所有涉及切换合养精灵形象的入口会被禁用，默认为true。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if Input.GetKeyDown("0") then
+--->        AllowActorChangeSample(true)
+--->    elseif Input.GetKeyDown("1") then
+--->        AllowActorChangeSample(false)
+--->    end
+--->end
+--->
+--->function AllowActorChangeSample(isAllow)
+--->    DouyinPlayerSettings.allowActorChange = isAllow
+--->end
+--->```
+---@field allowActorChange boolean
+local DouyinPlayerSettings_Static = {}
+
+
+---@type Static.DouyinPlayerSettings
+DouyinPlayerSettings = DouyinPlayerSettings_Static
+
+--------------------------------------------------------------------------------
+
+--- 排行榜服务，提供了一些设置玩家排行榜的方法。
+---@class DouyinRankService
+local DouyinRankService_Impl = {}
+
+---@class Static.DouyinRankService
+local DouyinRankService_Static = {}
+
+--- 用于设置玩家的排行榜分数。
+---@param score number 
+---@param alias string 
+---@param callback fun() 
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var Btn_1:UnityEngine.UI.Button
+--->---@end
+--->
+--->function Start()
+--->    Btn_1.onClick:AddListener(SetRankDataSample)
+--->end
+--->
+--->function SetRankDataSample()
+--->    DouyinRankService.SetRankData(10, "", function (success)
+--->        if success then
+--->            DouyinUtility.Toast("SetRankData成功")
+--->        else
+--->            DouyinUtility.Toast("SetRankData失败")
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinRankService_Static.SetRankData(score, alias, callback) end
+
+
+---@type Static.DouyinRankService
+DouyinRankService = DouyinRankService_Static
+
+--------------------------------------------------------------------------------
+
+--- 用户信息结构体，用来存储房间信息。
+---@class DouyinRoomInfo
+--- 房间ID
+---@field roomID string
+--- 房间所属的世界ID
+---@field worldID string
+local DouyinRoomInfo_Impl = {}
+
+--------------------------------------------------------------------------------
+
+--- DouyinScript 是抖音开发的用户生成内容（UGC）组件。它实现了类似 Unity 的 MonoBehaviour 组件的功能，允许您创建包含逻辑代码的预制件。
+---@class DouyinScript : UnityEngine.MonoBehaviour
+--- 获取 DouyinObject 对象。
+---@field douyinObject DouyinObject
+--- 当 DouyinScript 作为角色脚本挂载到角色 GameObject 上时，该属性返回对应的 DouyinScript。
+---@field douyinActor DouyinActor
+local DouyinScript_Impl = {}
+
+--- 发送网络事件给当前脚本对应对象的主人。
+---@param method string DouyinScript 的 Lua 文件中定义的函数名称
+---@param args objects[] 变量参数
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SendMessageToOwnerSample()
+--->    end
+--->end
+--->
+--->function SendMessageToOwnerSample()
+--->    print("--DouyinNetSample:发送消息给主权方")
+--->    self:SendMessageToOwner("Method1", 1)
+--->end
+--->
+--->function Method1(index)
+--->    print("--DouyinNetSample:收到SendMessageToOwner消息" .. index)
+--->end
+--->```
+function DouyinScript_Impl:SendMessageToOwner(method, args) end
+
+--- 发送网络事件给所有人，包括自己。
+---@param method string DouyinScript 的 Lua 文件中定义的函数名称
+---@param args object[] 变量参数
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SendMessageToAllSample()
+--->    end
+--->end
+--->
+--->function SendMessageToAllSample()
+--->    print("--DouyinNetSample:发送消息给所有玩家")
+--->    self:SendMessageToAll("Method2", 2)
+--->end
+--->
+--->function Method2(index)
+--->    print("--DouyinNetSample:收到SendMessageToAll消息" .. index)
+--->end
+--->```
+function DouyinScript_Impl:SendMessageToAll(method, args) end
+
+--- 发送网络事件给某人。
+---@param method string DouyinScript 的 Lua 文件中定义的函数名称
+---@param target DouyinPlayer 接收消息的目标玩家
+---@param args object[] 变量参数
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->local anotherPlayerID
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SendMessageToTargetSample()
+--->    end
+--->end
+--->
+--->function OnPlayerJoined(player, evt)
+--->    if player and not player.isLocal then
+--->        anotherPlayerID = player.playerID
+--->        print("--DouyinNetSample:UID=" .. anotherPlayerID)
+--->    end
+--->end
+--->
+--->function SendMessageToTargetSample()
+--->    local player = DouyinPlayerService.GetPlayer(anotherPlayerID)
+--->    if not player then
+--->        print("获取player失败" .. anotherPlayerID)
+--->        return
+--->    end
+--->    print("--DouyinNetSample:发送消息除了自己外的其他玩家")
+--->    self:SendMessageToTarget("Method4", player, 4)
+--->end
+--->
+--->function Method4(index)
+--->    print("--DouyinNetSample:收到SendMessageToTarget消息" .. index)
+--->end
+--->```
+function DouyinScript_Impl:SendMessageToTarget(method, target, args) end
+
+--- 发送网络事件给房间内其他玩家，不包括自己。
+---@param method string DouyinScript 的 Lua 文件中定义的函数名称
+---@param args object[] 变量参数
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SendMessageToOthersSample()
+--->    end
+--->end
+--->
+--->function SendMessageToOthersSample()
+--->    print("--DouyinNetSample:发送消息除了自己外的其他玩家")
+--->    self:SendMessageToOthers("Method3", 3)
+--->end
+--->
+--->function Method3(index)
+--->    print("--DouyinNetSample:收到SendMessageToOthers消息" .. index)
+--->end
+--->```
+function DouyinScript_Impl:SendMessageToOthers(method, args) end
+
+--- 非主权方调用主权方的函数。
+---@param method string DouyinScript 的 Lua 文件中定义的函数名称
+---@param onFinish LuaFunction 远程调用完成时的回调通知
+---@param args object[] 变量参数
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        OwnerCallSample()
+--->    end
+--->end
+--->
+--->function OwnerCallSample()
+--->    print("--DouyinNetSample:调用主权方的某个函数")
+--->    self:OwnerCall("Method5", function(result)
+--->        if result then
+--->            print("--DouyinNetSample:调用主权方的Method5成功" .. result)
+--->        else
+--->            print("--DouyinNetSample:调用主权方的Method5失败")
+--->        end
+--->    end, 5)
+--->end
+--->
+--->function Method5(index)
+--->    print("--DouyinNetSample:收到OwnerCall消息" .. index)
+--->    return "Method5Success"
+--->end
+--->```
+function DouyinScript_Impl:OwnerCall(method, onFinish, args) end
+
+--- 调用任意人的函数。
+---@param method string DouyinScript 的 Lua 文件中定义的函数名称
+---@param target DouyinPlayer 接收调用的目标玩家
+---@param onFinish LuaFunction 远程调用完成时的回调通知
+---@param args object[] 可变参数
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->local anotherPlayerID
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        TargetCallSample()
+--->    end
+--->end
+--->
+--->function OnPlayerJoined(player, evt)
+--->    if player and not player.isLocal then
+--->        anotherPlayerID = player.playerID
+--->        print("--DouyinNetSample:UID=" .. anotherPlayerID)
+--->    end
+--->end
+--->
+--->function TargetCallSample()
+--->    print("--DouyinNetSample:调用某个玩家的某个函数")
+--->    local player = DouyinPlayerService.GetPlayer(anotherPlayerID)
+--->    if not player then
+--->        print("获取player失败" .. anotherPlayerID)
+--->        return
+--->    end
+--->    self:TargetCall("Method6", player, function()
+--->        print(string.format("--DouyinNetSample:调用%s的Method6成功", player.playerOpenID))
+--->    end, 6)
+--->end
+--->
+--->function Method6(index)
+--->    print("--DouyinNetSample:收到TargetCall消息" .. index)
+--->end
+--->```
+function DouyinScript_Impl:TargetCall(method, target, onFinish, args) end
+
+--- 请求该对象的主权。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@param onFinished fun() 请求完成时的回调通知。如果回调函数中的 bool 参数为 true，则请求成功，否则请求失败。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        RequestOwnershipSample()
+--->    end
+--->end
+--->
+--->function RequestOwnershipSample()
+--->    self:RequestOwnership(function(success)
+--->        local player = DouyinPlayerService.GetLocalPlayer()
+--->        if success and self.gameObject and player then
+--->            print(string.format("--DouyinNetSample:RequestOwnershipSample:请求成为%s主权方成功", player.playerOpenID))
+--->        else
+--->            print("--DouyinNetSample:请求成为主权方失败")
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinScript_Impl:RequestOwnership(onFinished) end
+
+--- 把该对象的主权转移给指定的 Actor。只有该对象的主权方可以调用，非主权方调用会失败。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@param targetActorNr integer 这里是一个 int，表示目标 Actor 的 ID
+---@param onFinished fun() 请求完成时的回调通知，如果回调函数中的布尔参数为 true，则请求成功
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->local anotherPlayerID
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SetOwnershipSample()
+--->    end
+--->end
+--->
+--->function OnPlayerJoined(player, evt)
+--->    if player and not player.isLocal then
+--->        anotherPlayerID = player.playerID
+--->        print("--DouyinNetSample:UID=" .. anotherPlayerID)
+--->    end
+--->end
+--->
+--->function SetOwnershipSample()
+--->    local actor = DouyinActorService.GetActorById(anotherActorID)
+--->    if not actor then return end
+--->    self:SetOwnership(actor.actorID, function(success)
+--->        if success then
+--->            print(string.format("--DouyinNetSample:SetOwnership:设置%s成为主权方成功", actor.actorID))
+--->        else
+--->            print(string.format("--DouyinNetSample:SetOwnership:设置%s成为主权方失败", actor.actorID))
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinScript_Impl:SetOwnership(targetActorNr, onFinished) end
+
+--- 判断本地玩家是否拥有该对象的主权。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@return boolean ret true：拥有主权，false：没有主权。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->       if self:HasOwnership() then
+--->            print(string.format("拥有%s的主权", self.gameObject.name))
+--->        else
+--->            print(string.format("没有%s的主权", self.gameObject.name))
+--->        end
+--->    end
+--->end
+--->```
+function DouyinScript_Impl:HasOwnership() end
+
+--- 把该对象的主权转移给指定的 DouyinPlayer。只有主权者可以对对象进行操作。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@param player DouyinPlayer 将对象的主权所有者设置为player
+---@return boolean ret true：设置成功，false：设置失败（没有主权）
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->local anotherPlayerID
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SetOwnerSample()
+--->    end
+--->end
+--->
+--->function OnPlayerJoined(player, evt)
+--->    if player and not player.isLocal then
+--->        anotherPlayerID = player.playerID
+--->        print("--DouyinNetSample:UID=" .. anotherPlayerID)
+--->    end
+--->end
+--->
+--->function SetOwnerSample()
+--->    local player = DouyinPlayerService.GetPlayer(anotherPlayerID)
+--->    if not player then
+--->        print("获取player失败" .. anotherPlayerID)
+--->        return
+--->    end
+--->    local success = self:SetOwner(player)
+--->    if success then
+--->        print(string.format("--DouyinNetSample:SetOwner:设置%s成为主权方成功", player.playerOpenID))
+--->    else
+--->        print(string.format("--DouyinNetSample:SetOwner:设置%s成为主权方失败", player.playerOpenID))
+--->    end
+--->end
+--->```
+function DouyinScript_Impl:SetOwner(player) end
+
+--- 判断指定的 DouyinPlayer 是否拥有该物体的主权。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@param player DouyinPlayer 判断 DouyinPlayer 是否为所有者
+---@return boolean ret true：有主权，false：无主权。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        IsOwnerSample()
+--->    end
+--->end
+--->
+--->function IsOwnerSample()
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then return end
+--->    local isowner = self:IsOwner(player)
+--->    if isowner then
+--->        print(string.format("--DouyinNetSample:%s是主权方", player.playerOpenID))
+--->    else
+--->        print(string.format("--DouyinNetSample:%s不是主权方", player.playerOpenID))
+--->    end
+--->end
+--->```
+function DouyinScript_Impl:IsOwner(player) end
+
+--- 获取一个对象的 owner，会返回该对象的主权方。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@return DouyinPlayer ret 表示对象当前的 owner（主权所有者）
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->local anotherPlayerID
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        GetOwnerSample()
+--->    end
+--->end
+--->
+--->function OnPlayerJoined(player, evt)
+--->    if player and not player.isLocal then
+--->        anotherPlayerID = player.playerID
+--->        print("--DouyinNetSample:UID=" .. anotherPlayerID)
+--->    end
+--->end
+--->
+--->function GetOwnerSample()
+--->    local player = self:GetOwner()
+--->    if not player then return end
+--->    print("--DouyinNetSample:主权方是=" .. player.playerOpenID)
+--->end
+--->```
+function DouyinScript_Impl:GetOwner() end
+
+--- 申请控制权。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@param onFinished fun() 远程调用完成时的回调通知，如果回调函数中的布尔参数为 true，则请求成功
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        RequestControllershipSample()
+--->    end
+--->end
+--->
+--->function RequestControllershipSample()
+--->    self:RequestControllership(function(success)
+--->        local player = DouyinPlayerService.GetLocalPlayer()
+--->        if success and self.gameObject and player then
+--->            print(string.format("--DouyinNetSample:RequestControllership:请求%s的控制权成功", player.playerOpenID))
+--->        else
+--->            print("--DouyinNetSample:RequestControllership:请求控制权失败")
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinScript_Impl:RequestControllership(onFinished) end
+
+--- 释放控制权。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        ReleaseControllershipSample()
+--->    end
+--->end
+--->
+--->function ReleaseControllershipSample()
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then return end
+--->    self:ReleaseControllership()
+--->    print(string.format("--DouyinNetSample:RequestControllership:%s释放了%s的控制权", player.playerOpenID, self.gameObject.name))
+--->end
+--->```
+function DouyinScript_Impl:ReleaseControllership() end
+
+--- 把控制权转移给指定的 Actor。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@param targetPlayerNr integer 这里是一个 int，表示目标 Actor 的 ID
+---@param onFinished fun() 远程调用完成时的回调通知，如果回调函数中的布尔参数为 true，则请求成功
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->local anotherPlayerID
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SetControllershipSample()
+--->    end
+--->end
+--->
+--->function OnPlayerJoined(player, evt)
+--->    if player and not player.isLocal then
+--->        anotherPlayerID = player.playerID
+--->        print("--DouyinNetSample:UID=" .. anotherPlayerID)
+--->    end
+--->end
+--->
+--->function SetControllershipSample()
+--->    local actor = DouyinActorService.GetActorById(anotherActorID)
+--->    if not actor then return end
+--->    self:SetControllership(actor.actorID, function(success)
+--->        if success then
+--->            print(string.format("--DouyinNetSample:SetControllership:设置%s成为控制方成功", actor.actorID))
+--->        else
+--->            print(string.format("--DouyinNetSample:SetControllership:设置%s成为控制方失败", actor.actorID))
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinScript_Impl:SetControllership(targetPlayerNr, onFinished) end
+
+--- 判断是否有控制权。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@return boolean ret true：有控制权，false：没有控制权。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        HasControllershipSample()
+--->    end
+--->end
+--->
+--->function HasControllershipSample()
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then return end
+--->    local hasController = self:HasControllership()
+--->    if hasController then
+--->        print(string.format("--DouyinNetSample:HasControllership:%s拥有%s的控制权", player.playerOpenID, self.gameObject.name))
+--->    else
+--->        print(string.format("--DouyinNetSample:HasControllership:%s未拥有%s的控制权", player.playerOpenID, self.gameObject.name))
+--->    end
+--->end
+--->```
+function DouyinScript_Impl:HasControllership() end
+
+--- 判断是否为控制者。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@param player DouyinPlayer 判断 player   是否是当前物体的控制者
+---@return boolean ret true：该 player 是控制者，false：该 player 不是控制者。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        IsControllerSample()
+--->    end
+--->end
+--->
+--->function IsControllerSample()
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if not player then return end
+--->    local isController = self:IsController(player)
+--->    print("--DouyinNetSample:isController=" .. tostring(isController))
+--->end
+--->```
+function DouyinScript_Impl:IsController(player) end
+
+--- 设置物体的控制者。
+---@param player DouyinPlayer 将物体的控制者设置为 player
+---@return boolean ret true：设置成功，false：设置失败。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->local anotherPlayerID
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        SetControllerSample()
+--->    end
+--->end
+--->
+--->function OnPlayerJoined(player, evt)
+--->    if player and not player.isLocal then
+--->        anotherPlayerID = player.playerID
+--->        print("--DouyinNetSample:UID=" .. anotherPlayerID)
+--->    end
+--->end
+--->
+--->function SetControllerSample()
+--->    local player = DouyinPlayerService.GetPlayer(anotherPlayerID)
+--->    if not player then
+--->        print("获取player失败" .. anotherPlayerID)
+--->        return
+--->    end
+--->    self:SetController(player, function(success)
+--->        if success then
+--->            print(string.format("--DouyinNetSample:SetController:设置%s成为控制方成功", player.playerOpenID))
+--->        else
+--->            print(string.format("--DouyinNetSample:SetController:设置%s成为控制方失败", player.playerOpenID))
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinScript_Impl:SetController(player) end
+
+--- 获取当前物体的控制者。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@return DouyinPlayer ret 获取到的当前物体的控制者。
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("--DouyinNetSample:网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("1") then
+--->        GetControllerSample()
+--->    end
+--->end
+--->
+--->function GetControllerSample()
+--->    local player = self:GetController()
+--->    if not player then
+--->        print("--DouyinNetSample:GetController:该物体的控制方为空")
+--->    else
+--->        print(string.format("--DouyinNetSample:GetController:%s的控制方是%s", self.gameObject.name, player.playerOpenID))
+--->    end
+--->end
+--->```
+function DouyinScript_Impl:GetController() end
+
+--- 获取 GameObject 组件上所有的 DouyinScript，同名返回第一个。
+---@param name string DouyinScript 的 Lua 文件名称
+---@return DouyinScript ret 从组件上所获取的 DouyinScript。
+function DouyinScript_Impl:GetDouyinScript(name) end
+
+--- 获得同物体上的 DouyinScript 数组。
+---@param name string DouyinScript 的 Lua 文件名称
+---@return DouyinScript[] ret 从同物体上获得的 DouyinScript 数组。
+function DouyinScript_Impl:GetDouyinScripts(name) end
+
+--- 设置为可交互，包括3D交互和2D交互。public enum InteractiveButtonType{Hand, // 手部交互按鈕Additive, // 辅助交互按鈕None, // 无按钮}
+---@param type InteractiveButtonType 交互类型
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->local interationButton_2
+--->local btn2Click = false
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_2 = self:AddInteractorButton()
+--->    local interactText_2 = interationButton_2:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_2.text = "对话"
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinScript_Impl:EnableInteraction(type) end
+
+--- 禁止交互。
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->local interationButton_2
+--->local btn2Click = false
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_2 = self:AddInteractorButton()
+--->    local interactText_2 = interationButton_2:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_2.text = "对话"
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinScript_Impl:DisableInteraction() end
+
+--- 判断某一个 DouyinScript 里面的网络对象有没有完成 spawn。
+---@return boolean ret true：完成 spawn，false：没有完成 spawn。
+function DouyinScript_Impl:IsSpawned() end
+
+--- 重生  DouyinScript 对象，根据场景初始状态。
+function DouyinScript_Impl:Respawn() end
+
+--- 新增C区按钮
+---@return UnityEngine.UI.Button ret Unity按钮组件
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->local interationButton_2
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            --Actor捡起物体，目前只支持右手
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    end
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = "拾取"
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        if interactImg then
+--->            --处理图片的显示
+--->            SetBtnSprite(interactSprite)
+--->        end
+--->    end
+--->    
+--->    interationButton_2 = self:AddInteractorButton()
+--->    local interactText_2 = interationButton_2:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_2.text = "对话"
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButton(interationButton_1)
+--->    -- self:RemoveAllInteractorButtons()
+--->    -- self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinScript_Impl:AddInteractorButton() end
+
+--- 移除指定的C区按钮
+---@param gameObject UnityEngine.GameObject 所移除Button的GameObject
+---@param button UnityEngine.UI.Button 所要移除的Button
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            --Actor捡起物体，目前只支持右手
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    end
+--->end
+--->
+--->--开发者处理拾取逻辑的地方
+--->function OnPickup(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    if handType ~= CS.HandType.Right then
+--->        return
+--->    end
+--->    local animator = actor.gameObject:GetComponentInChildren(typeof(CS.UnityEngine.Animator))
+--->    if animator ~= nil then
+--->        local bone = animator:GetBoneTransform(CS.UnityEngine.HumanBodyBones.RightHand)
+--->        if bone ~= nil then
+--->            self.transform:SetParent(bone)
+--->        end
+--->        local position, rotation = ActorCalculatePalmTransform(actor, false)
+--->        self.transform.position = position
+--->        self.transform.rotation = rotation
+--->    end
+--->    local interactText = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText.text = "丢弃"
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = "拾取"
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        if interactImg then
+--->            --处理图片的显示
+--->            SetBtnSprite(interactSprite)
+--->        end
+--->    end
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButton(interationButton_1)
+--->end
+--->```
+function DouyinScript_Impl:RemoveInteractorButton(gameObject, button) end
+
+--- 移除指定index的C区按钮
+---@param gameObject UnityEngine.GameObject 要移除的按钮的GameObject
+---@param index integer 该脚本对象内通过AddInteractorButton添加的按钮序号
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            --Actor捡起物体，目前只支持右手
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    end
+--->end
+--->
+--->--开发者处理拾取逻辑的地方
+--->function OnPickup(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    if handType ~= CS.HandType.Right then
+--->        return
+--->    end
+--->    local animator = actor.gameObject:GetComponentInChildren(typeof(CS.UnityEngine.Animator))
+--->    if animator ~= nil then
+--->        local bone = animator:GetBoneTransform(CS.UnityEngine.HumanBodyBones.RightHand)
+--->        if bone ~= nil then
+--->            self.transform:SetParent(bone)
+--->        end
+--->        local position, rotation = ActorCalculatePalmTransform(actor, false)
+--->        self.transform.position = position
+--->        self.transform.rotation = rotation
+--->    end
+--->    local interactText = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText.text = "丢弃"
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = "拾取"
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        if interactImg then
+--->            --处理图片的显示
+--->            SetBtnSprite(interactSprite)
+--->        end
+--->    end
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveInteractorButtonAt(1)
+--->end
+--->```
+function DouyinScript_Impl:RemoveInteractorButtonAt(gameObject, index) end
+
+--- 移除该脚本对象内添加的所有的C区按钮
+---@param gameObject GameObjcet 要移除按钮的GameObjcet
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var interactSprite:UnityEngine.Sprite
+--->---@end
+--->local localActor
+--->local interationButton_1
+--->
+--->function OnActorTriggerEnter(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    if not localActor then
+--->        localActor = actor
+--->    end
+--->    --启用交互，启用之后会触发OnFocus方法，在OnFocus中创建交互按钮
+--->    self:EnableInteraction()
+--->end
+--->
+--->function OnActorTriggerExit(actor)
+--->    if not actor or not actor.isLocal then
+--->        return
+--->    end
+--->    --禁用交互，禁用之后会触发OnLostFocus方法，在OnLostFocus中移除交互按钮
+--->    self:DisableInteraction()
+--->end
+--->
+--->--玩家点击弹出的交互按钮时，会执行该函数
+--->--index表示点击的是第几个按钮
+--->function OnInteractorButtonClick(index)
+--->    if index == 1 then
+--->        --判断手中是否有物体，有物体丢弃，没有物体捡起
+--->        if localActor:IsPickup() then
+--->            localActor:Drop(self.gameObject)
+--->        else
+--->            --Actor捡起物体，目前只支持右手
+--->            localActor:Pickup(self.gameObject, CS.HandType.Right)
+--->        end
+--->    end
+--->end
+--->
+--->--开发者处理拾取逻辑的地方
+--->function OnPickup(actor, handType)
+--->    if actor == nil or not actor.isLocal then
+--->        return
+--->    end
+--->    if handType ~= CS.HandType.Right then
+--->        return
+--->    end
+--->    local animator = actor.gameObject:GetComponentInChildren(typeof(CS.UnityEngine.Animator))
+--->    if animator ~= nil then
+--->        local bone = animator:GetBoneTransform(CS.UnityEngine.HumanBodyBones.RightHand)
+--->        if bone ~= nil then
+--->            self.transform:SetParent(bone)
+--->        end
+--->        local position, rotation = ActorCalculatePalmTransform(actor, false)
+--->        self.transform.position = position
+--->        self.transform.rotation = rotation
+--->    end
+--->    local interactText = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText.text = "丢弃"
+--->end
+--->
+--->--执行self:EnableInteraction()后，会触发OnFocus方法
+--->function OnFocus(handType)
+--->    --执行self:AddInteractorButton可以创建一个交互按钮，返回Button对象
+--->    --返回的Button对象的图片和文字，都是默认的，你可以按需修改
+--->    interationButton_1 = self:AddInteractorButton()
+--->    local interactText_1 = interationButton_1:GetComponentInChildren(typeof(CS.UnityEngine.UI.Text))
+--->    interactText_1.text = "拾取"
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        if interactImg then
+--->            --处理图片的显示
+--->            SetBtnSprite(interactSprite)
+--->        end
+--->    end
+--->end
+--->
+--->function SetBtnSprite(iconSprite)
+--->    local iconTrans = interationButton_1.transform:Find("Icon")
+--->    if iconTrans then
+--->        local interactImg = iconTrans:GetComponent(typeof(CS.UnityEngine.UI.Image))
+--->        interationButton_1.transition = CS.UnityEngine.UI.Selectable.Transition.SpriteSwap
+--->        if interactImg then
+--->            interactImg.sprite = iconSprite
+--->            local spriteState = interationButton_1.spriteState
+--->            spriteState.highlightedSprite = iconSprite
+--->            spriteState.pressedSprite = iconSprite
+--->            spriteState.selectedSprite = iconSprite
+--->            interationButton_1.spriteState = spriteState
+--->        end
+--->    end
+--->end
+--->
+--->function OnLostFocus(handType)
+--->    self:RemoveAllInteractorButtons()
+--->end
+--->```
+function DouyinScript_Impl:RemoveAllInteractorButtons(gameObject) end
+
+--- 设置一个动作的Animation Event回调，当播放此动作时会触发回调函数
+---@param clip UnityEngine.AnimationClip 要添加动画事件的动画剪辑
+---@param callback fun() 动画事件回调函数。当动画事件触发时，会调用该回调函数并传 AnimationEvent 对象，方便开发者在特定的动画事件发生时执行自定义逻辑。
+function DouyinScript_Impl:SetAnimationEvent(clip, callback) end
+
+--------------------------------------------------------------------------------
+
+--- 平台向API，封装了一些平台向的事件和方法。
+---@class DouyinSocialService
+local DouyinSocialService_Impl = {}
+
+---@class Static.DouyinSocialService
+--- 平台向API，用于监听玩家的抖音视频的投稿发布状态
+--- ***
+--- **代码示例**
+--->```lua
+--->function Start()
+--->    DouyinSocialService.onPublishProcessEvent:AddListener(OnPublishProcessEventCallBack)
+--->end
+--->
+--->function OnPublishProcessEventCallBack(publishId, process)
+--->    print(string.format("---DouyinSocialService:发布ID={%s}_发布进度{%d}", publishId, process))
+--->end
+--->
+--->function OnDestroy()
+--->    DouyinSocialService.onPublishProcessEvent:RemoveListener(OnPublishProcessEventCallBack)
+--->end
+--->```
+---@field onPublishProcessEvent DouyinPublishProcessEvent
+--- 平台向API，用于监听玩家的抖音视频的投稿结果
+--- ***
+--- **代码示例**
+--->```lua
+--->function Start()
+--->    DouyinSocialService.onPublishResultEvent:AddListener(OnPublishResultEventCallBack)
+--->end
+--->
+--->function OnPublishResultEventCallBack(publishId, success, contentId)
+--->    --发布成功
+--->    if success == 1 then
+--->        print(string.format("---DouyinSocialService:发布成功，发布ID={%s}_作品ID={%s}", publishId, contentId))
+--->    else
+--->        print(string.format("---DouyinSocialService:发布失败，发布ID={%s}", publishId))
+--->    end
+--->end
+--->
+--->function OnDestroy()
+--->    DouyinSocialService.onPublishResultEvent:RemoveListener(OnPublishResultEventCallBack)
+--->end
+--->```
+---@field onPublishResultEvent DouyinPublishResultEvent
+local DouyinSocialService_Static = {}
+
+
+---@type Static.DouyinSocialService
+DouyinSocialService = DouyinSocialService_Static
+
+--------------------------------------------------------------------------------
+
+--- 用于管理和操作与用户界面（UI）相关的元素及事件，提供了一系列静态方法和事件来处理 UI 组件的获取、显示控制以及监听屏幕分辨率的变化。
+---@class DouyinUIService
+--- 屏幕分辨率改变的事件。
+---@field onScreenResolutionChanged DouyinScreenResolutionEvent
+local DouyinUIService_Impl = {}
+
+---@class Static.DouyinUIService
+local DouyinUIService_Static = {}
+
+--- 得到交互按钮。
+---@param handType HandType 用于指定交互按钮对应的手持方式
+---@param uiType UIType 用于指定交互按钮的 UI 样式
+---@return UnityEngine.UI.Button ret 若存在对应按钮，返回 Button 组件实例。若未找到对应按钮，返回 null。
+function DouyinUIService_Static.GetInteractionButton(handType, uiType) end
+
+--- 获得摇杆。
+---@param handType HandType 用于指定交互按钮对应的手持方式
+---@param uiType UIType 用于指定交互按钮的 UI 样式
+---@return DouyinJoyStickControl ret 获得对应的摇杆控件管理器。若未找到，返回 null。
+function DouyinUIService_Static.GetJoyStickControl(handType, uiType) end
+
+--- 获取按钮icon。
+---@param iconType IconType 指定获取的按钮的icon类型
+---@return UnityEngine.Sprite ret 若存在对应的图标，返回对应的图标。否则返回null。
+function DouyinUIService_Static.GetDefaultIcon(iconType) end
+
+--- 显示/隐藏Native界面
+---@param visible boolean 显示/隐藏Native界面
+function DouyinUIService_Static.SetNativeUIVisible(visible) end
+
+--- 显示隐藏Unity界面
+---@param visible boolean 显示隐藏Unity界面
+function DouyinUIService_Static.SetUIVisible(visible) end
+
+
+---@type Static.DouyinUIService
+DouyinUIService = DouyinUIService_Static
+
+--------------------------------------------------------------------------------
+
+--- 用户信息类，用来存储抖音用户的信息数据。
+---@class DouyinUserInfo
+--- 抖音用户的openID
+---@field openID string
+--- 抖音用户的昵称
+---@field name string
+--- 抖音用户头像的下载链接
+---@field portraitUrl string
+local DouyinUserInfo_Impl = {}
+
+--------------------------------------------------------------------------------
+
+--- DouyinUserService是一个管理用户数据的类，提供了一些静态方法，可以通过这些方法获取到抖音用户的数据信息。
+---@class DouyinUserService
+local DouyinUserService_Impl = {}
+
+---@class Static.DouyinUserService
+local DouyinUserService_Static = {}
+
+--- 通过openID获取抖音用户的信息。
+---@param playerOpenID string 玩家的openID，可以通过DouyinPlayer.playerOpenID获取
+---@param callback fun() 回调函数，承载着获取到的用户信息DouyinUserInfo
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var Btn_1:UnityEngine.UI.Button
+--->---@var Btn_2:UnityEngine.UI.Button
+--->---@end
+--->
+--->function Start()
+--->    Btn_1.onClick:AddListener(GetUserInfoSample)
+--->end
+--->
+--->function GetUserInfoSample()
+--->    local player = DouyinPlayerService.GetLocalPlayer()
+--->    if player then
+--->        DouyinUserService.GetUserInfo(player.playerOpenID,function (userInfo)
+--->            if userInfo then
+--->                DouyinUtility.Toast(string.format("openID=%s__name=%s__portraitUrl=%s", userInfo.openID,userInfo.name,userInfo.portraitUrl))
+--->                print(string.format("---DouyinUserService:openID=%s__name=%s__portraitUrl=%s", userInfo.openID,userInfo.name,userInfo.portraitUrl))
+--->            else
+--->                DouyinUtility.Toast("GetUserInfo Fail")
+--->                print("---DouyinUserService:userInfo is nil playerOpenID="..player.playerOpenID)
+--->            end
+--->        end)
+--->    end
+--->end
+--->```
+function DouyinUserService_Static.GetUserInfo(playerOpenID, callback) end
+
+--- 通过openID列表获取抖音多个用户的信息，批量查询阈值。
+---@param playerOpenIDs System.Collections.Generic.List 玩家的openID列表
+---@param callback Action<List> 回调函数，承载着获取到的用户信息列表
+--- ***
+--- **代码示例**
+--->```lua
+--->---@var Btn_1:UnityEngine.UI.Button
+--->---@var Btn_2:UnityEngine.UI.Button
+--->---@end
+--->
+--->function Start()
+--->    Btn_2.onClick:AddListener(GetUserInfosSample)
+--->end
+--->
+--->function GetUserInfosSample()
+--->    local openIDList = {}
+--->    local players = DouyinPlayerService.GetPlayers()
+--->    if players then
+--->        for i = 0, players.Length - 1 do
+--->            if players[i] then
+--->                openIDList[i+1] = players[i].playerOpenID
+--->            end
+--->        end
+--->    end
+--->    DouyinUserService.GetUserInfos(openIDList,function (userInfoList)
+--->        if userInfoList == nil or userInfoList.Count == 0 then
+--->            DouyinUtility.Toast("用户信息列表为空")
+--->            return
+--->        end
+--->        for i = 0, userInfoList.Count - 1 do
+--->            print(string.format("---DouyinUserService:openID=%s__name=%s__portraitUrl=%s", userInfoList[i].openID,userInfoList[i].name,userInfoList[i].portraitUrl))
+--->        end
+--->    end)
+--->end
+--->```
+function DouyinUserService_Static.GetUserInfos(playerOpenIDs, callback) end
+
+
+---@type Static.DouyinUserService
+DouyinUserService = DouyinUserService_Static
+
+--------------------------------------------------------------------------------
+
+--- 静态工具类，提供了一系列实用功能和操作方法。
+---@class DouyinUtility
+local DouyinUtility_Impl = {}
+
+---@class Static.DouyinUtility
+local DouyinUtility_Static = {}
+
+--- 弹出一个弹窗，可以设置标题，内容，确认按钮，取消按钮。
+---@param title string 弹窗的标题
+---@param message string 弹窗的消息按钮
+---@param confirm string 确认按钮的文本
+---@param confirmCallback fun() 确认按钮点击后的回到函数
+---@param cancel string 取消按钮的文本
+---@param cancelCallback fun() 取消按钮点击后的回调函数
+function DouyinUtility_Static.Alert(title, message, confirm, confirmCallback, cancel, cancelCallback) end
+
+--- 显示及一个 Toast 提示。
+---@param msg string 要提示的 Toast 提示信息
+function DouyinUtility_Static.Toast(msg) end
+
+--- 对传入的字符串内容进行表情过滤。
+---@param content string 需要进行表情过滤的内容
+---@return string ret 过滤后的字符串。
+function DouyinUtility_Static.FilteEmoji(content) end
+
+--- 返回服务器时间DateTime，默认返回的是UTC 0时区的时间，可以通过DateTime.ToLocalTime()方法转为本地时区时间，可参考下方的代码示例。在使用网络相关的API时，需要判断网络环境是否已经准备好了。特别是在Awake、Start、Update等生命周期中调用网络API时，很有可能当前网络环境没有准备好，导致出现异常情况。开发者在调用这些API时，需要先使用DouyinNetService.isNetworkSettled判断网络环境是否准备好了。
+---@return System.DateTime ret 例如：2025-09-03 14:30:45.123服务器当前时间
+--- ***
+--- **代码示例**
+--->```lua
+--->local Input = UnityEngine.Input
+--->
+--->function Update()
+--->    if not DouyinNetService.isNetworkSettled then
+--->        print("---网络未准备好")
+--->        return
+--->    end
+--->    if Input.GetKeyDown("3") then
+--->        GetServerTimeSample()
+--->    end
+--->end
+--->
+--->function GetServerTimeSample()
+--->    local dt = DouyinUtility.GetServerTime()
+--->    local format = "yyyy-MM-dd HH:mm:ss"
+--->    print("---ServerTime=" .. dt:ToString(format))--ServerTime=2025-11-19 07:11:29
+--->    local localDt = dt:ToLocalTime()
+--->    print("---ServerTime=" .. localDt:ToString(format))--ServerTime=2025-11-19 15:11:29
+--->end
+--->```
+function DouyinUtility_Static.GetServerTime() end
+
+--- 返回服务器Unix Time
+---@return integer ret 返回服务器的Unix时间戳，例如：1716220245
+function DouyinUtility_Static.GetServerUnixTime() end
+
+
+---@type Static.DouyinUtility
+DouyinUtility = DouyinUtility_Static
+
+--------------------------------------------------------------------------------
+
