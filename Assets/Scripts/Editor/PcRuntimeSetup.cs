@@ -43,7 +43,7 @@ namespace EggRescue.Editor
                 spawn = new GameObject("PlayerSpawn");
                 Undo.RegisterCreatedObjectUndo(spawn, "Create PlayerSpawn");
             }
-            var shufen = GameObject.Find("淑芬");
+            var shufen = GameObject.Find("淑芬1") ?? GameObject.Find("淑芬");
             if (shufen != null)
             {
                 var away = shufen.transform.forward;
@@ -69,7 +69,7 @@ namespace EggRescue.Editor
             back.y = 0f;
             if (back.sqrMagnitude < 0.01f) back = Vector3.back;
             else back.Normalize();
-            var pos = lookAt + back * 4f + Vector3.up * 0.55f;
+            var pos = lookAt + back * 2.5f + Vector3.up * 0.55f;
             Undo.RecordObject(cam.transform, "Place Main Camera behind PlayerSpawn");
             cam.transform.SetPositionAndRotation(pos, Quaternion.LookRotation(lookAt - pos, Vector3.up));
             EditorUtility.SetDirty(cam.transform);
@@ -128,16 +128,11 @@ namespace EggRescue.Editor
             var notebook = GameObject.Find("Notebook");
             if (notebook != null && notebook.GetComponent<BookController>() == null)
                 notebook.AddComponent<BookController>();
-            var texts = Object.FindObjectsOfType<UnityEngine.UI.Text>(true);
-            for (var i = 0; i < texts.Length; i++)
+            if (notebook != null)
             {
-                if (texts[i].name.IndexOf("Cheese", System.StringComparison.OrdinalIgnoreCase) < 0
-                    && texts[i].gameObject.name.IndexOf("Cheese", System.StringComparison.OrdinalIgnoreCase) < 0)
-                    continue;
-                var hud = texts[i].GetComponentInParent<CheeseHud>();
-                if (hud == null) hud = texts[i].gameObject.AddComponent<CheeseHud>();
-                hud.countText = texts[i];
-                break;
+                var hud = notebook.GetComponent<CheeseHud>();
+                if (hud == null) hud = notebook.AddComponent<CheeseHud>();
+                hud.countText = CheeseHud.FindCountText(notebook.transform);
             }
         }
 

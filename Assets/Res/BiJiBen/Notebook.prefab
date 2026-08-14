@@ -163,8 +163,6 @@ GameObject:
   - component: {fileID: 484223145}
   - component: {fileID: 484223147}
   - component: {fileID: 484223146}
-  - component: {fileID: 2042981940317395478}
-  - component: {fileID: 2410581807132248413}
   m_Layer: 5
   m_Name: Ending
   m_TagString: Untagged
@@ -240,73 +238,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2042981940317395478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484223144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 540439951, guid: 3ead8c7f8efe8473b8d110669e8128d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetGUID:
-    n1: 12593862472295383589
-    n2: 668439683461380307
-  RunContext: 0
---- !u!114 &2410581807132248413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484223144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -413692930, guid: c1a957cff7a534cbab677bbff81abab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScriptAsset: {fileID: -4320198879241519195, guid: 947e761e2ed0e4e298c548b6fda8aeef, type: 3}
-  ParaLuaBindingData:
-  - rid: 3883133810448531471
-  - rid: 3883133810448531472
-  - rid: 3883133810448531476
-  IsServerScript: 0
-  IsManualedVar: 1
-  eNetState: 0
-  autoUpdate: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: 3883133810448531471
-      type: {class: DouyinLuaDataGameObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: panels
-        Data:
-        - {fileID: 691635002}
-        - {fileID: 876205783}
-        - {fileID: 1766146179}
-        - {fileID: 1036855693}
-        - {fileID: 2121035300}
-        - {fileID: 1098095190}
-        - {fileID: 881592853}
-        - {fileID: 1102076494}
-        - {fileID: 432331904}
-        - {fileID: 384593102}
-        varType: UnityEngine.GameObject[]
-    - rid: 3883133810448531472
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: clickArea
-        Data: {fileID: 0}
-        varType: UnityEngine.UI.Button
-    - rid: 3883133810448531476
-      type: {class: DouyinLuaDataFloat, ns: , asm: com.douyin.script}
-      data:
-        varName: fadeDuration
-        Data: 1
 --- !u!1 &538741191
 GameObject:
   m_ObjectHideFlags: 0
@@ -8614,9 +8545,7 @@ GameObject:
   - component: {fileID: 2863233608023615492}
   - component: {fileID: 2863233608023615491}
   - component: {fileID: 2863233608023615490}
-  - component: {fileID: 2294542047800930401}
-  - component: {fileID: 2294542047800930406}
-  - component: {fileID: 2294542047800930407}
+  - component: {fileID: 217184875}
   m_Layer: 5
   m_Name: Notebook
   m_TagString: Untagged
@@ -8710,7 +8639,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2294542047800930401
+--- !u!114 &217184875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8719,628 +8648,115 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863233608023615489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -413692930, guid: c1a957cff7a534cbab677bbff81abab2, type: 3}
+  m_Script: {fileID: 11500000, guid: bfbd57075aaf24c4fa9c43af3e7236a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScriptAsset: {fileID: -4320198879241519195, guid: 565ccd184c8bdf94ca681023ca1758ad, type: 3}
-  ParaLuaBindingData:
-  - rid: 1482841568223428614
-  - rid: 1925947596892536833
-  - rid: 3883133806650327054
-  - rid: 1482841568223428618
-  - rid: 2282776681075703808
-  - rid: 1482841568223428622
-  - rid: 3238642656491864064
-  - rid: 3238642656491864065
-  - rid: 3238642656491864066
-  - rid: 3238642656491864067
-  - rid: 3883133806650327055
-  - rid: 3883133806650327056
-  - rid: 3883133806650327057
-  - rid: 3883133806650327058
-  - rid: 3883133806650327059
-  - rid: 3238642684362752040
-  - rid: 3883133806650327060
-  - rid: 3883133806650327061
-  - rid: 3883133806650327062
-  - rid: 3883133806650327063
-  - rid: 3883133806650327064
-  - rid: 3883133806650327065
-  - rid: 3883133806650327066
-  - rid: 3883133806650327067
-  - rid: 3883133806650327068
-  - rid: 3883133806650327069
-  - rid: 3883133806650327070
-  - rid: 3883133806650327071
-  - rid: 3883133806650327072
-  - rid: 3883133806650327073
-  - rid: 3883133806650327074
-  - rid: 3883133806650327075
-  - rid: 3883133806650327076
-  - rid: 3883133806650327077
-  - rid: 3883133806650327078
-  - rid: 3883133806650327079
-  - rid: 3883133806650327080
-  - rid: 3883133806650327081
-  - rid: 3883133806650327082
-  - rid: 3883133806650327083
-  - rid: 3883133806650327084
-  - rid: 3883133806650327085
-  - rid: 3883133806650327086
-  - rid: 3883133806650327087
-  - rid: 3883133806650327134
-  - rid: 3883133806650327135
-  - rid: 3883133806650327136
-  - rid: 3883133806650327137
-  - rid: 3883133806650327138
-  - rid: 3883133806650327106
-  - rid: 3883133806650327107
-  - rid: 3883133806650327108
-  - rid: 3883133806650327109
-  - rid: 3883133810448531466
-  - rid: 3883133810448531467
-  - rid: 3883133810448531468
-  - rid: 3883133806650327113
-  - rid: 3883133806650327114
-  - rid: 3883133806650327115
-  - rid: 3883133806650327116
-  - rid: 3883133806650327117
-  - rid: 3883133806650327118
-  - rid: 3883133806650327119
-  - rid: 3883133806650327120
-  - rid: 3883133806650327121
-  - rid: 3883133806650327122
-  - rid: 3883133806650327123
-  - rid: 3883133806650327124
-  - rid: 3883133806650327125
-  - rid: 3883133806650327126
-  - rid: 3883133806650327127
-  - rid: 3883133806650327128
-  - rid: 3883133806650327129
-  - rid: 3883133806650327130
-  - rid: 3883133806650327131
-  - rid: 3883133806650327132
-  - rid: 3883133806650327133
-  IsServerScript: 0
-  IsManualedVar: 1
-  eNetState: 0
-  autoUpdate: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: 1482841568223428614
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: open
-        Data: {fileID: 2294542046722831386}
-        varType: UnityEngine.UI.Button
-    - rid: 1482841568223428618
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: boolPanel
-        Data: {fileID: 2863233608265966066}
-        varType: UnityEngine.GameObject
-    - rid: 1482841568223428622
-      type: {class: DouyinLuaDataGameObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: pageContents
-        Data:
-        - {fileID: 2863233606971782691}
-        - {fileID: 2863233606929869017}
-        - {fileID: 2863233607147376480}
-        - {fileID: 2863233607967364576}
-        varType: UnityEngine.GameObject[]
-    - rid: 1925947596892536833
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: close
-        Data: {fileID: 1103164684}
-        varType: UnityEngine.UI.Button
-    - rid: 2282776681075703808
-      type: {class: DouyinLuaDataGameObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: hideOnOpen
-        Data: []
-        varType: UnityEngine.GameObject[]
-    - rid: 3238642656491864064
-      type: {class: DouyinLuaDataUObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: page1TabBtns
-        Data:
-        - {fileID: 2294542046177494888}
-        - {fileID: 6995879953195119528}
-        - {fileID: 6854960916391715632}
-        - {fileID: 5873931001710836946}
-        varType: UnityEngine.UI.Button[]
-    - rid: 3238642656491864065
-      type: {class: DouyinLuaDataUObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: page2TabBtns
-        Data:
-        - {fileID: 7944979790504535713}
-        - {fileID: 8252777925353489251}
-        - {fileID: 6647903743512749613}
-        - {fileID: 1363897333386754834}
-        varType: UnityEngine.UI.Button[]
-    - rid: 3238642656491864066
-      type: {class: DouyinLuaDataUObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: page3TabBtns
-        Data:
-        - {fileID: 1359149124115355047}
-        - {fileID: 2842008370335332935}
-        - {fileID: 7379106374646537386}
-        - {fileID: 689606174960877815}
-        varType: UnityEngine.UI.Button[]
-    - rid: 3238642656491864067
-      type: {class: DouyinLuaDataUObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: page4TabBtns
-        Data:
-        - {fileID: 4401733928090044953}
-        - {fileID: 8967597839378505886}
-        - {fileID: 2582008988325474726}
-        - {fileID: 1312800908769301442}
-        varType: UnityEngine.UI.Button[]
-    - rid: 3238642684362752040
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_FrogImage
-        Data: {fileID: 2863233608095042991}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327054
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: openRedDot
-        Data: {fileID: 1439625232}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327055
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D01
-        Data: {fileID: 2294542047018149113}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327056
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E01
-        Data: {fileID: 2294542046292378274}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327057
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E02
-        Data: {fileID: 2294542047175872963}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327058
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D02
-        Data: {fileID: 2294542047631947690}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327059
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D03
-        Data: {fileID: 2294542047018597142}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327060
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E12
-        Data: {fileID: 2294542046584517003}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327061
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D04
-        Data: {fileID: 1388846797425410634}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327062
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D05
-        Data: {fileID: 7157760612320398888}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327063
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D06
-        Data: {fileID: 1936399150022076217}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327064
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E23
-        Data: {fileID: 2294542046248723381}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327065
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E25
-        Data: {fileID: 2294542047115465014}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327066
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E04
-        Data: {fileID: 2294542048226881839}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327067
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D07
-        Data: {fileID: 2294542047881293492}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327068
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D08
-        Data: {fileID: 2294542047519080585}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327069
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E06
-        Data: {fileID: 2294542046931849136}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327070
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E07
-        Data: {fileID: 2294542047165910366}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327071
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E08
-        Data: {fileID: 2294542047837268945}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327072
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E09
-        Data: {fileID: 2294542048214434660}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327073
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E27
-        Data: {fileID: 2294542047617870968}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327074
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E34
-        Data: {fileID: 2294542047292230625}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327075
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E10
-        Data: {fileID: 2294542046294062279}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327076
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D09
-        Data: {fileID: 2294542046491591887}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327077
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E13
-        Data: {fileID: 2294542046498456622}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327078
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E14
-        Data: {fileID: 2294542047803794119}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327079
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E15
-        Data: {fileID: 2294542047502853277}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327080
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E16
-        Data: {fileID: 2294542047568532023}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327081
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E28
-        Data: {fileID: 2294542047355065229}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327082
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E17
-        Data: {fileID: 2294542048094258751}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327083
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_E18
-        Data: {fileID: 2294542048186977799}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327084
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D12
-        Data: {fileID: 2294542048174447900}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327085
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D13
-        Data: {fileID: 3441063042116342211}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327086
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D14
-        Data: {fileID: 2294542046781719844}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327087
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: entry_D18
-        Data: {fileID: 2294542046889338225}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327106
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D03_D04
-        Data: {fileID: 2863233607760457976}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327107
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D03_D05
-        Data: {fileID: 0}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327108
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D03_D06
-        Data: {fileID: 0}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327109
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D05_E23
-        Data: {fileID: 2863233606583752129}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327113
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_E04_E06
-        Data: {fileID: 2863233608276534575}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327114
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_E07_E08
-        Data: {fileID: 2863233607493050798}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327115
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_E08_E27
-        Data: {fileID: 2863233608314025297}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327116
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_E27_E34
-        Data: {fileID: 2863233607886536490}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327117
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_E08_E34
-        Data: {fileID: 2863233607985331580}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327118
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D13_E12
-        Data: {fileID: 2863233606377656082}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327119
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D13_D12
-        Data: {fileID: 2863233607041219475}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327120
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D14_D12
-        Data: {fileID: 2863233607509198408}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327121
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_D03_strike
-        Data: {fileID: 0}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327122
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_D03_note
-        Data: {fileID: 0}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327123
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_D07_strike
-        Data: {fileID: 0}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327124
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_D07_note
-        Data: {fileID: 0}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327125
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_E04_borrowed
-        Data: {fileID: 2863233606405018713}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327126
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_E04_ladderPic
-        Data: {fileID: 2863233607519252082}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327127
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_E06_done
-        Data: {fileID: 2863233606532903702}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327128
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_D08_got
-        Data: {fileID: 2863233608464572656}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327129
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_E08_glassNote
-        Data: {fileID: 2863233606924995977}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327130
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_D12_got
-        Data: {fileID: 2863233607344580085}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327131
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_D12_fishPic
-        Data: {fileID: 2863233607932530987}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327132
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_E13_strike
-        Data: {fileID: 2863233607370507663}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327133
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: mod_E13_note
-        Data: {fileID: 2863233607243880567}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327134
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: intelCheapPrefab
-        Data: {fileID: 8126202918789685816, guid: 194f1fe562e2c4228af6f68b21df17ae, type: 3}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327135
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: intelPremiumPrefab
-        Data: {fileID: 1434798428220742341, guid: 3061f1523339e49cea746a172751178a, type: 3}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327136
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: intelLayoutLeft
-        Data: {fileID: 2294542046463413537}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327137
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: intelLayoutRight
-        Data: {fileID: 2294542047847916274}
-        varType: UnityEngine.GameObject
-    - rid: 3883133806650327138
-      type: {class: DouyinLuaDataVarInt, ns: , asm: com.douyin.script}
-      data:
-        varName: intelLeftColumnMax
-        Data: 9
-    - rid: 3883133810448531466
-      type: {class: DouyinLuaDataGameObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: link_E17_D05
-        Data:
-        - {fileID: 2863233607665300086}
-        - {fileID: 2863233606377656082}
-        - {fileID: 2863233607099634678}
-        varType: UnityEngine.GameObject[]
-    - rid: 3883133810448531467
-      type: {class: DouyinLuaDataGameObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: link_E17_E23
-        Data:
-        - {fileID: 2863233606402536184}
-        - {fileID: 2863233606377656082}
-        - {fileID: 2863233607099634678}
-        varType: UnityEngine.GameObject[]
-    - rid: 3883133810448531468
-      type: {class: DouyinLuaDataGameObjectArr, ns: , asm: com.douyin.script}
-      data:
-        varName: link_D06_D07
-        Data:
-        - {fileID: 2863233607604408920}
-        - {fileID: 2863233608203924998}
-        varType: UnityEngine.GameObject[]
---- !u!114 &2294542047800930406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863233608023615489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 540439951, guid: 3ead8c7f8efe8473b8d110669e8128d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetGUID:
-    n1: 1032930101736661474
-    n2: 187457270503576179
-  RunContext: 0
---- !u!114 &2294542047800930407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863233608023615489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -413692930, guid: c1a957cff7a534cbab677bbff81abab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScriptAsset: {fileID: -4320198879241519195, guid: cc9f19e0c960f4b2bacdac777e7b4f40, type: 3}
-  ParaLuaBindingData:
-  - rid: 1482841700000000001
-  IsServerScript: 0
-  IsManualedVar: 1
-  eNetState: 0
-  autoUpdate: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: 1482841700000000001
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: countText
-        Data: {fileID: 7827082389266665655}
-        varType: UnityEngine.UI.Text
+  open: {fileID: 2294542046722831386}
+  close: {fileID: 1103164684}
+  openRedDot: {fileID: 1439625232}
+  boolPanel: {fileID: 2863233608265966066}
+  hideOnOpen:
+  - {fileID: 4292882821423383}
+  pageContents:
+  - {fileID: 2863233606971782691}
+  - {fileID: 2863233606929869017}
+  - {fileID: 2863233607147376480}
+  - {fileID: 2863233607967364576}
+  page1TabBtns:
+  - {fileID: 2294542046177494888}
+  - {fileID: 6995879953195119528}
+  - {fileID: 6854960916391715632}
+  - {fileID: 5873931001710836946}
+  page2TabBtns:
+  - {fileID: 7944979790504535713}
+  - {fileID: 8252777925353489251}
+  - {fileID: 6647903743512749613}
+  - {fileID: 1363897333386754834}
+  page3TabBtns:
+  - {fileID: 1359149124115355047}
+  - {fileID: 689606174960877815}
+  - {fileID: 7379106374646537386}
+  - {fileID: 2842008370335332935}
+  page4TabBtns:
+  - {fileID: 4401733928090044953}
+  - {fileID: 8967597839378505886}
+  - {fileID: 2582008988325474726}
+  - {fileID: 1312800908769301442}
+  entry_D01: {fileID: 2294542047018149113}
+  entry_E01: {fileID: 2294542046292378274}
+  entry_E02: {fileID: 2294542047175872963}
+  entry_D02: {fileID: 2294542047631947690}
+  entry_D03: {fileID: 2294542047018597142}
+  entry_FrogImage: {fileID: 2863233608095042991}
+  entry_E12: {fileID: 2294542046584517003}
+  entry_D04: {fileID: 1388846797425410634}
+  entry_D05: {fileID: 7157760612320398888}
+  entry_D06: {fileID: 1936399150022076217}
+  entry_E23: {fileID: 2294542046248723381}
+  entry_E25: {fileID: 2294542047115465014}
+  entry_E04: {fileID: 2294542048226881839}
+  entry_D07: {fileID: 2294542047881293492}
+  entry_D08: {fileID: 2294542047519080585}
+  entry_E06: {fileID: 2294542046931849136}
+  entry_E07: {fileID: 2294542047165910366}
+  entry_E08: {fileID: 2294542047837268945}
+  entry_E09: {fileID: 2294542048214434660}
+  entry_E27: {fileID: 2294542047617870968}
+  entry_E34: {fileID: 2294542047292230625}
+  entry_E10: {fileID: 2294542046294062279}
+  entry_D09: {fileID: 2294542046491591887}
+  entry_E13: {fileID: 2294542046498456622}
+  entry_E14: {fileID: 2294542047803794119}
+  entry_E15: {fileID: 2294542047502853277}
+  entry_E16: {fileID: 2294542047568532023}
+  entry_E28: {fileID: 2294542047355065229}
+  entry_E17: {fileID: 2294542048094258751}
+  entry_E18: {fileID: 2294542048186977799}
+  entry_D12: {fileID: 2294542048174447900}
+  entry_D13: {fileID: 3441063042116342211}
+  entry_D14: {fileID: 2294542046781719844}
+  entry_D18: {fileID: 2294542046889338225}
+  intelCheapPrefab: {fileID: 8126202918789685816, guid: 194f1fe562e2c4228af6f68b21df17ae, type: 3}
+  intelPremiumPrefab: {fileID: 1434798428220742341, guid: 3061f1523339e49cea746a172751178a, type: 3}
+  intelLayoutLeft: {fileID: 2294542046463413537}
+  intelLayoutRight: {fileID: 2294542047847916274}
+  intelLeftColumnMax: 9
+  link_D03_D04: {fileID: 2863233607760457976}
+  link_D03_D05: {fileID: 0}
+  link_D03_D06: {fileID: 0}
+  link_D05_E23: {fileID: 2863233606583752129}
+  link_E17_D05:
+  - {fileID: 2863233607665300086}
+  - {fileID: 2863233606377656082}
+  - {fileID: 2863233607099634678}
+  link_E17_E23:
+  - {fileID: 2863233606402536184}
+  - {fileID: 2863233606377656082}
+  - {fileID: 2863233607099634678}
+  link_D06_D07:
+  - {fileID: 2863233607604408920}
+  - {fileID: 2863233608203924998}
+  link_E04_E06: {fileID: 2863233608276534575}
+  link_E07_E08: {fileID: 2863233607493050798}
+  link_E08_E27: {fileID: 2863233608314025297}
+  link_E27_E34: {fileID: 2863233607886536490}
+  link_E08_E34: {fileID: 2863233607985331580}
+  link_D13_E12: {fileID: 2863233606377656082}
+  link_D13_D12: {fileID: 2863233607041219475}
+  link_D14_D12: {fileID: 2863233607509198408}
+  mod_D03_strike: {fileID: 0}
+  mod_D03_note: {fileID: 0}
+  mod_D07_strike: {fileID: 0}
+  mod_D07_note: {fileID: 0}
+  mod_E04_borrowed: {fileID: 2863233606405018713}
+  mod_E04_ladderPic: {fileID: 2863233607519252082}
+  mod_E06_done: {fileID: 2863233606532903702}
+  mod_D08_got: {fileID: 2863233608464572656}
+  mod_E08_glassNote: {fileID: 2863233606924995977}
+  mod_D12_got: {fileID: 2863233607344580085}
+  mod_D12_fishPic: {fileID: 2863233607932530987}
+  mod_E13_strike: {fileID: 2863233607370507663}
+  mod_E13_note: {fileID: 2863233607243880567}
 --- !u!1 &2863233608038941812
 GameObject:
   m_ObjectHideFlags: 0

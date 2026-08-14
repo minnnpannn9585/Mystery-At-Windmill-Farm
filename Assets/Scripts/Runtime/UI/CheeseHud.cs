@@ -16,17 +16,27 @@ namespace EggRescue
         bool _unlocked;
         int _lastCount;
 
-        void OnEnable() { GameEvents.CheeseCountChanged += OnCountChanged; }
-        void OnDisable() { GameEvents.CheeseCountChanged -= OnCountChanged; }
+        void Awake()
+        {
+            if (countText == null) countText = FindCountText(transform);
+            if (countText == null) countText = FindCountText(null);
+            GameEvents.CheeseCountChanged += OnCountChanged;
+        }
+
+        void OnDestroy()
+        {
+            GameEvents.CheeseCountChanged -= OnCountChanged;
+        }
 
         void Start()
         {
+            if (countText == null) countText = FindCountText(null);
             _lastCount = GameState.GetInt("CheeseCount");
             var root = ResolveRoot();
             if (_lastCount > 0) Reveal(false);
             else if (root != null)
             {
-                root.SetActive(false);
+                if (root != gameObject) root.SetActive(false);
                 _unlocked = false;
                 Refresh();
             }
@@ -95,6 +105,28 @@ namespace EggRescue
             _root = countText.transform.parent.gameObject;
             _baseScale = _root.transform.localScale;
             return _root;
+        }
+
+        public static Text FindCountText(Transform searchRoot)
+        {
+            var texts = searchRoot != null
+                ? searchRoot.GetComponentsInChildren<Text>(true)
+                : FindObjectsOfType<Text>(true);
+            Text underCheese = null;
+            Text namedCheese = null;
+            for (var i = 0; i < texts.Length; i++)
+            {
+                var t = texts[i];
+                if (t == null) continue;
+                if (t.name == "CheeseCount" || t.gameObject.name == "CheeseCount")
+                    return t;
+                if (underCheese == null && t.transform.parent != null && t.transform.parent.name == "Cheese")
+                    underCheese = t;
+                if (namedCheese == null
+                    && t.name.IndexOf("Cheese", System.StringComparison.OrdinalIgnoreCase) >= 0)
+                    namedCheese = t;
+            }
+            return underCheese != null ? underCheese : namedCheese;
         }
     }
 }

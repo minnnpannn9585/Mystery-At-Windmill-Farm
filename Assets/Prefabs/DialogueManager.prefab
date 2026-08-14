@@ -1,5 +1,157 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4099834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4099835}
+  - component: {fileID: 4099837}
+  - component: {fileID: 4099836}
+  m_Layer: 0
+  m_Name: Exclamation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &4099835
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 925586192890770641}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 144, y: 148.26031}
+  m_SizeDelta: {x: 100, y: 116.5206}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4099837
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099834}
+  m_CullTransparentMesh: 1
+--- !u!114 &4099836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1724101694, guid: 451915bc73545c5459f87ba02634dbf4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1564137665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1564137666}
+  - component: {fileID: 1564137668}
+  - component: {fileID: 1564137667}
+  m_Layer: 0
+  m_Name: Question
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1564137666
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564137665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 925586192890770641}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 144, y: 140}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1564137668
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564137665}
+  m_CullTransparentMesh: 1
+--- !u!114 &1564137667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564137665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -830949757, guid: 9403548757ec454419a42d7e8258e559, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1329583203149321494
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1565963071944870157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -718,7 +870,6 @@ GameObject:
   - component: {fileID: 2200745592348676648}
   - component: {fileID: 3690518871985201578}
   - component: {fileID: 1077789305147293514}
-  - component: {fileID: 2961167380500610176}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -808,18 +959,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2961167380500610176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031942225758172174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -194873416, guid: 4a545d2d23b5a471d88405d2b3cbd925, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6492050679358543319
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,8 +1045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7959200209734937575}
-  - component: {fileID: 7959200209734937573}
-  - component: {fileID: 7959200209734937574}
+  - component: {fileID: 1752199503}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -931,7 +1069,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7959200209734937573
+--- !u!114 &1752199503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -940,286 +1078,69 @@ MonoBehaviour:
   m_GameObject: {fileID: 7959200209734937576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 540439951, guid: 3ead8c7f8efe8473b8d110669e8128d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 32e47967e58b0e846b4d43f3bce936fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NetGUID:
-    n1: 12477475644316385056
-    n2: 1896333866351947495
-  RunContext: 0
---- !u!114 &7959200209734937574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7959200209734937576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -413692930, guid: c1a957cff7a534cbab677bbff81abab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScriptAsset: {fileID: -4320198879241519195, guid: 188d4b9f4e6214f4cbe74987bfd26d75, type: 3}
-  ParaLuaBindingData:
-  - rid: 1482841202479595521
-  - rid: 1482841202479595529
-  - rid: 1482841202479595530
-  - rid: 1482841202479595522
-  - rid: 1482841202479595523
-  - rid: 3883133810448531464
-  - rid: 1482841202479595524
-  - rid: 1482841202479595525
-  - rid: 1482841202479595526
-  - rid: 1482841202479595527
-  - rid: 3883133810448531456
-  - rid: 3883133810448531457
-  - rid: 3883133810448531468
-  - rid: 1482841202479595533
-  - rid: 1482841202479595534
-  - rid: 1482841202479595535
-  - rid: 1482841202479595536
-  - rid: 1482841202479595537
-  - rid: 3883133810448531458
-  - rid: 1482841202479595539
-  - rid: 3883133810448531459
-  - rid: 1482841202479595541
-  - rid: 3883133810448531460
-  - rid: 3883133810448531461
-  - rid: 3238642656491864068
-  - rid: 1482841202479595544
-  - rid: 3883133810448531462
-  - rid: 3883133810448531463
-  - rid: 1482841202479595547
-  - rid: 1482841202479595548
-  - rid: 1482841202479595549
-  - rid: 1482841202479595550
-  - rid: 1482841202479595551
-  - rid: 3883133810448531465
-  - rid: 3883133810448531466
-  - rid: 3883133810448531467
-  IsServerScript: 0
-  IsManualedVar: 1
-  eNetState: 0
-  autoUpdate: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: 1482841202479595521
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: dialoguePanel
-        Data: {fileID: 1565963071944870158}
-        varType: UnityEngine.GameObject
-    - rid: 1482841202479595522
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: npcName
-        Data: {fileID: 1565963071328601140}
-        varType: UnityEngine.UI.Text
-    - rid: 1482841202479595523
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: npcSprite
-        Data: {fileID: 1565963071541931117}
-        varType: UnityEngine.UI.Image
-    - rid: 1482841202479595524
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: npcDialogueText
-        Data: {fileID: 1565963071057823638}
-        varType: UnityEngine.UI.Text
-    - rid: 1482841202479595525
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: next
-        Data: {fileID: 1565963070207178669}
-        varType: UnityEngine.UI.Button
-    - rid: 1482841202479595526
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: playerPanel
-        Data: {fileID: 1565963071690403212}
-        varType: UnityEngine.GameObject
-    - rid: 1482841202479595527
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: playerPanelBtn
-        Data: {fileID: 7161055703521758369, guid: 4ba99a190b55a304e8c7c2271aace0ff, type: 3}
-        varType: UnityEngine.UI.Button
-    - rid: 1482841202479595529
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: playerNamePanel
-        Data: {fileID: 6492050679358543319}
-        varType: UnityEngine.GameObject
-    - rid: 1482841202479595530
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: npcNamePanel
-        Data: {fileID: 1565963070701512220}
-        varType: UnityEngine.GameObject
-    - rid: 1482841202479595533
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u5927\u9EC4_\u9189\u5012"
-        Data: {fileID: -915347839, guid: 5ae3c054a258b4dd3b6c2ca741bc83a6, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595534
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u5927\u9EC4_\u6267\u52E4"
-        Data: {fileID: 1655601685, guid: 105fb90468d2d4945800a3f71e3b503c, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595535
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u5927\u9EC4_\u632F\u594B"
-        Data: {fileID: -606181064, guid: 8ca9b6b365c5440fe86195d50c4135be, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595536
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u60B2\u4F24\u86D9_\u4E27"
-        Data: {fileID: 1047532560, guid: 1945355f621b24200b2bdd8765ebd986, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595537
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u60B2\u4F24\u86D9_\u4ECB\u5165"
-        Data: {fileID: 1586268496, guid: c7c00a2cd5b034f2fbdd5162f5def55b, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595539
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u8001\u9F20_\u516B\u5366"
-        Data: {fileID: 1992383659, guid: c388cf7edf32f4a02a394821ac26181a, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595541
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u5C0F\u9E21_\u88C5\u9177"
-        Data: {fileID: 1053847934, guid: cc74d390b9ff2468abbeca689f441fbe, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595544
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u4E4C\u9E26_\u5F97\u610F"
-        Data: {fileID: 46173006, guid: 44e25675165cf47089bef5317ddaede0, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595547
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u9ED1\u732B_\u9AD8\u50B2"
-        Data: {fileID: 557946692, guid: 683d764ed9c6947359ab4c34fbd36ae1, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595548
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u9ED1\u732B_\u5BA1\u89C6"
-        Data: {fileID: 155532594, guid: 9a6ff1d004ff94d58adf06e019d9c316, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595549
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u9ED1\u732B_\u70B8\u6BDB"
-        Data: {fileID: 653447336, guid: ea0940fc996a84023aadcd5526e130f1, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595550
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u95EA\u7535\u8717\u725B_\u5F85\u673A"
-        Data: {fileID: -792172305, guid: 022569898babd4e42b1e7a7c988fdb76, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 1482841202479595551
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u95EA\u7535\u8717\u725B_\u95EA\u7535\u8717\u725B"
-        Data: {fileID: -1753796012, guid: 920ba8ad7a87f43db8b217e53a71663f, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3238642656491864068
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u5C0F\u9E21_\u80CC\u5BF9"
-        Data: {fileID: 1127678413, guid: 7c8e3aa1e82e5ef4ba5844d853e363f2, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531456
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u6DD1\u82AC_\u5B88\u671B"
-        Data: {fileID: 1189861166, guid: 018e89043e99643568c669f2ce6ad27d, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531457
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u6DD1\u82AC_\u62A4\u96CF"
-        Data: {fileID: -1851695145, guid: 7c9cc88148bfc4a6ebd1e16c7ab74f71, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531468
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u6DD1\u82AC_\u56E2\u805A"
-        Data: {fileID: 712782417, guid: 7dc9dfe258df3334780182af9f1bd68a, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531458
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u8001\u9F20_\u515C\u552E"
-        Data: {fileID: -1730008819, guid: d4dde871bd0cd4e929837c06a640602b, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531459
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u8001\u9F20_\u53D1\u6035"
-        Data: {fileID: 1818307605, guid: b20201d8216e94be1a3b2d809eef859f, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531460
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u5C0F\u9E21_\u5FC3\u865A"
-        Data: {fileID: 1807904412, guid: 78db6aac307ce484ebb7f8a066d235be, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531461
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u5C0F\u9E21_\u6127\u759A"
-        Data: {fileID: 2067664737, guid: c5c355c1b92c24683973f7b5b5f6106b, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531462
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u4E4C\u9E26_\u541D\u556C"
-        Data: {fileID: -2014325252, guid: 20f6e4e503990463bac8a9521cea12ba, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531463
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u4E4C\u9E26_\u53EB\u56A3"
-        Data: {fileID: -853680205, guid: 86b8d1b0a97ce4b4296778cae97ee6ef, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531464
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: playerSprite
-        Data: {fileID: 4136908877248892788}
-        varType: UnityEngine.UI.Image
-    - rid: 3883133810448531465
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u73A9\u5BB6_\u6B63\u5E38"
-        Data: {fileID: 1514297200, guid: 4c0ee398b260fb342943c2cb06414040, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531466
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u73A9\u5BB6_\u60CA\u8BB6"
-        Data: {fileID: 485439963, guid: 8fef75fe9edc8464aa80a989cca062cc, type: 3}
-        varType: UnityEngine.Sprite
-    - rid: 3883133810448531467
-      type: {class: DouyinLuaDataUObject, ns: , asm: com.douyin.script}
-      data:
-        varName: "\u7ACB\u7ED8_\u73A9\u5BB6_\u7591\u60D1"
-        Data: {fileID: -724900012, guid: bc28706f47017a64a83c1f4ec032609f, type: 3}
-        varType: UnityEngine.Sprite
+  dialoguePanel: {fileID: 1565963071944870158}
+  playerNamePanel: {fileID: 6492050679358543319}
+  npcNamePanel: {fileID: 1565963070701512220}
+  npcName: {fileID: 1565963071328601140}
+  npcSprite: {fileID: 1565963071541931117}
+  playerSprite: {fileID: 4136908877248892788}
+  playerExclamation: {fileID: 4099834}
+  playerQuestion: {fileID: 1564137665}
+  npcDialogueText: {fileID: 1565963071057823638}
+  next: {fileID: 1565963070207178669}
+  playerPanel: {fileID: 1565963071690403212}
+  playerPanelBtn: {fileID: 7161055703521758369, guid: 4ba99a190b55a304e8c7c2271aace0ff, type: 3}
+  portraitSprites:
+  - {fileID: 1189861166, guid: 018e89043e99643568c669f2ce6ad27d, type: 3}
+  - {fileID: -1851695145, guid: 7c9cc88148bfc4a6ebd1e16c7ab74f71, type: 3}
+  - {fileID: 712782417, guid: 7dc9dfe258df3334780182af9f1bd68a, type: 3}
+  - {fileID: -915347839, guid: 5ae3c054a258b4dd3b6c2ca741bc83a6, type: 3}
+  - {fileID: 1655601685, guid: 105fb90468d2d4945800a3f71e3b503c, type: 3}
+  - {fileID: -606181064, guid: 8ca9b6b365c5440fe86195d50c4135be, type: 3}
+  - {fileID: 1047532560, guid: 1945355f621b24200b2bdd8765ebd986, type: 3}
+  - {fileID: 1586268496, guid: c7c00a2cd5b034f2fbdd5162f5def55b, type: 3}
+  - {fileID: -1730008819, guid: d4dde871bd0cd4e929837c06a640602b, type: 3}
+  - {fileID: 1992383659, guid: c388cf7edf32f4a02a394821ac26181a, type: 3}
+  - {fileID: 1818307605, guid: b20201d8216e94be1a3b2d809eef859f, type: 3}
+  - {fileID: 1053847934, guid: cc74d390b9ff2468abbeca689f441fbe, type: 3}
+  - {fileID: 1807904412, guid: 78db6aac307ce484ebb7f8a066d235be, type: 3}
+  - {fileID: 2067664737, guid: c5c355c1b92c24683973f7b5b5f6106b, type: 3}
+  - {fileID: 1127678413, guid: 7c8e3aa1e82e5ef4ba5844d853e363f2, type: 3}
+  - {fileID: 46173006, guid: 44e25675165cf47089bef5317ddaede0, type: 3}
+  - {fileID: -2014325252, guid: 20f6e4e503990463bac8a9521cea12ba, type: 3}
+  - {fileID: -853680205, guid: 86b8d1b0a97ce4b4296778cae97ee6ef, type: 3}
+  - {fileID: 557946692, guid: 683d764ed9c6947359ab4c34fbd36ae1, type: 3}
+  - {fileID: 155532594, guid: 9a6ff1d004ff94d58adf06e019d9c316, type: 3}
+  - {fileID: 653447336, guid: ea0940fc996a84023aadcd5526e130f1, type: 3}
+  - {fileID: -792172305, guid: 022569898babd4e42b1e7a7c988fdb76, type: 3}
+  - {fileID: -1753796012, guid: 920ba8ad7a87f43db8b217e53a71663f, type: 3}
+  portraitKeys:
+  - "\u5B88\u671B"
+  - "\u62A4\u96CF"
+  - "\u56E2\u805A"
+  - "\u9189\u5012"
+  - "\u6267\u52E4"
+  - "\u632F\u594B"
+  - "\u4E27"
+  - "\u4ECB\u5165"
+  - "\u515C\u552E"
+  - "\u516B\u5366"
+  - "\u53D1\u6035"
+  - "\u88C5\u9177"
+  - "\u5FC3\u865A"
+  - "\u6127\u759A"
+  - "\u80CC\u5BF9"
+  - "\u5F97\u610F"
+  - "\u541D\u556C"
+  - "\u53EB\u56A3"
+  - "\u9AD8\u50B2"
+  - "\u5BA1\u89C6"
+  - "\u70B8\u6BDB"
+  - "\u5F85\u673A"
+  - "\u95EA\u7535\u8717\u725B"
 --- !u!1 &8970362166947979574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,14 +1170,16 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1564137666}
+  - {fileID: 4099835}
   m_Father: {fileID: 1565963071944870157}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 489.14816, y: 286.461}
-  m_SizeDelta: {x: 531.595, y: -819.252}
+  m_AnchoredPosition: {x: 493, y: 145.28}
+  m_SizeDelta: {x: 552.689, y: -647.404}
   m_Pivot: {x: 0.5159455, y: 0.000000008381903}
 --- !u!222 &1813831675419989070
 CanvasRenderer:
@@ -1286,7 +1209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 485439963, guid: 8fef75fe9edc8464aa80a989cca062cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5ef99492dc6d3934b9bc162796de8aa0, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

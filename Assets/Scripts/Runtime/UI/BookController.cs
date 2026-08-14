@@ -126,7 +126,7 @@ namespace EggRescue
         {
             RefreshOpenInteractable();
             TickIcon(Time.deltaTime);
-            if (!GameEvents.DialogueActive && Input.GetKeyDown(KeyCode.N))
+            if (!GameEvents.DialogueActive && NotebookTogglePressed())
             {
                 if (IsOpen()) OnCloseClick();
                 else if (open != null && open.gameObject.activeSelf) OnOpenClick();
@@ -156,6 +156,13 @@ namespace EggRescue
                 else done.Add(kv.Key);
             }
             for (var i = 0; i < done.Count; i++) _anims.Remove(done[i]);
+        }
+
+        static bool NotebookTogglePressed()
+        {
+            return Input.GetKeyDown(KeyCode.N)
+                || Input.GetKeyDown(KeyCode.Q)
+                || Input.GetKeyDown(KeyCode.B);
         }
 
         void OnVarChanged(string name)

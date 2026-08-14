@@ -154,7 +154,7 @@ namespace EggRescue
                 rot = FlattenYaw(playerSpawn.rotation);
                 return;
             }
-            var shufen = GameObject.Find("淑芬");
+            var shufen = InteractionUtil.FindByName("淑芬1") ?? InteractionUtil.FindByName("淑芬");
             if (shufen != null)
             {
                 var away = shufen.transform.forward;
@@ -218,16 +218,12 @@ namespace EggRescue
             var notebook = GameObject.Find("Notebook");
             if (notebook != null && notebook.GetComponent<BookController>() == null)
                 notebook.AddComponent<BookController>();
-            if (notebook != null && notebook.GetComponent<CheeseHud>() == null)
+            if (notebook != null)
             {
-                var texts = notebook.GetComponentsInChildren<Text>(true);
-                for (var i = 0; i < texts.Length; i++)
-                {
-                    if (texts[i].name != "CheeseCount") continue;
-                    var hud = notebook.AddComponent<CheeseHud>();
-                    hud.countText = texts[i];
-                    break;
-                }
+                var hud = notebook.GetComponent<CheeseHud>();
+                if (hud == null) hud = notebook.AddComponent<CheeseHud>();
+                if (hud.countText == null)
+                    hud.countText = CheeseHud.FindCountText(notebook.transform);
             }
             var ending = notebook != null ? notebook.transform.Find("Ending") : null;
             if (ending != null && ending.GetComponent<EndingController>() == null)
@@ -237,9 +233,10 @@ namespace EggRescue
 
         void AutoWireWorld()
         {
-            WireNpc("淑芬", "淑芬", 0);
+            WireNpc("淑芬1", "淑芬", 0);
             WireNpc("淑芬2", "淑芬", 0);
             WireNpc("淑芬3", "淑芬", 0);
+            WireNpc("淑芬", "淑芬", 0);
             WireNpc("大黄", "大黄", 0);
             WireNpc("大黄 2", "大黄", 0);
             WireNpc("黑猫", "黑猫", 0);
@@ -369,20 +366,49 @@ namespace EggRescue
             if (root == null) return;
             var spawner = root.GetComponent<CheeseSpawner>();
             if (spawner == null) spawner = root.AddComponent<CheeseSpawner>();
-            var pickups = root.GetComponentsInChildren<Transform>(true);
-            for (var i = 0; i < pickups.Length; i++)
-            {
-                if (pickups[i].name != "Pickup") continue;
-                if (pickups[i].GetComponent<CheesePickup>() == null)
-                    pickups[i].gameObject.AddComponent<CheesePickup>();
-            }
+            if (spawner.cheesePrefab == null)
+                spawner.cheesePrefab = Resources.Load<GameObject>("CheesePickup");
         }
 
         static GameObject FindShuFenRoot()
         {
-            var a = GameObject.Find("淑芬");
-            if (a != null && a.transform.parent != null) return a.transform.parent.gameObject;
-            return a;
+            var existing = FindObjectOfType<ShuFenController>(true);
+            if (existing != null) return existing.gameObject;
+
+            var commission = InteractionUtil.FindByName("淑芬1") ?? InteractionUtil.FindByName("淑芬");
+            var hub = InteractionUtil.FindByName("淑芬2") ?? InteractionUtil.FindByName("淑芬 2");
+            var ngPlus = InteractionUtil.FindByName("淑芬3") ?? InteractionUtil.FindByName("淑芬 3");
+            if (commission == null) return null;
+
+            var parent = commission.transform.parent;
+            if (IsDedicatedShuFenParent(parent, commission, hub, ngPlus))
+                return parent.gameObject;
+
+            // 场景里三只淑芬目前是 characters 的平级子物体；运行时收到专用 parent 上，对齐 Lua。
+            var root = new GameObject("淑芬");
+            if (parent != null)
+                root.transform.SetParent(parent, false);
+            ReparentKeepWorld(commission, root.transform);
+            ReparentKeepWorld(hub, root.transform);
+            ReparentKeepWorld(ngPlus, root.transform);
+            return root;
+        }
+
+        static bool IsDedicatedShuFenParent(Transform parent, GameObject commission, GameObject hub, GameObject ngPlus)
+        {
+            if (parent == null) return false;
+            if (parent.name == "characters") return false;
+            if (parent.name != "淑芬" && parent.name != "ShuFen" && !parent.name.Contains("淑芬"))
+                return false;
+            if (hub != null && hub.transform.parent != parent) return false;
+            if (ngPlus != null && ngPlus.transform.parent != parent) return false;
+            return true;
+        }
+
+        static void ReparentKeepWorld(GameObject go, Transform parent)
+        {
+            if (go == null || parent == null) return;
+            go.transform.SetParent(parent, true);
         }
 
         static GameObject FindFrogRoot()
@@ -419,8 +445,11 @@ namespace EggRescue
 
         static void WireNpc(string goName, string npcName, int startId)
         {
-            var go = GameObject.Find(goName);
+            var go = InteractionUtil.FindByName(goName);
             if (go == null) return;
+            if (go.GetComponent<ShuFenController>() != null) return;
+            if (goName == "淑芬" && InteractionUtil.FindChildOrWorld(go.transform, "淑芬1") != null)
+                return;
             var trigger = go.GetComponent<DialogueTrigger>();
             if (trigger == null) trigger = go.AddComponent<DialogueTrigger>();
             if (string.IsNullOrEmpty(trigger.npcName))
