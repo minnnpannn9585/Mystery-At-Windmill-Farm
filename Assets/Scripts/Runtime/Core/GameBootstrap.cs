@@ -151,25 +151,37 @@ namespace EggRescue
             if (playerSpawn != null)
             {
                 pos = playerSpawn.position;
-                rot = playerSpawn.rotation;
+                rot = FlattenYaw(playerSpawn.rotation);
                 return;
             }
             var shufen = GameObject.Find("淑芬");
             if (shufen != null)
             {
-                pos = shufen.transform.position + shufen.transform.forward * 2f + Vector3.up * 0.5f;
-                rot = Quaternion.LookRotation((shufen.transform.position - pos).normalized, Vector3.up);
+                var away = shufen.transform.forward;
+                away.y = 0f;
+                if (away.sqrMagnitude < 0.01f) away = Vector3.forward;
+                else away.Normalize();
+                pos = shufen.transform.position + away * 2.2f + Vector3.up * 0.05f;
+                rot = FlattenYaw(Quaternion.LookRotation(-away, Vector3.up));
                 return;
             }
             var cam = Camera.main;
             if (cam != null)
             {
                 pos = cam.transform.position;
-                rot = Quaternion.Euler(0f, cam.transform.eulerAngles.y, 0f);
+                rot = FlattenYaw(cam.transform.rotation);
                 return;
             }
-            pos = Vector3.up;
+            pos = Vector3.up * 0.05f;
             rot = Quaternion.identity;
+        }
+
+        static Quaternion FlattenYaw(Quaternion rotation)
+        {
+            var forward = rotation * Vector3.forward;
+            forward.y = 0f;
+            if (forward.sqrMagnitude < 0.0001f) return Quaternion.identity;
+            return Quaternion.LookRotation(forward.normalized, Vector3.up);
         }
 
         void CreatePrompt(PlayerInteraction interaction)

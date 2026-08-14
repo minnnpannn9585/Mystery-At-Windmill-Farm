@@ -5,14 +5,14 @@ namespace EggRescue
     public sealed class ThirdPersonCamera : MonoBehaviour
     {
         [SerializeField] Transform target;
-        [SerializeField] Vector3 offset = new Vector3(0f, 0.35f, -6.5f);
+        [SerializeField] Vector3 offset = new Vector3(0f, 0.1f, -4f);
         [SerializeField] float mouseSensitivity = 2.2f;
         [SerializeField] float minPitch = -35f;
         [SerializeField] float maxPitch = 55f;
         [SerializeField] float followLerp = 12f;
 
         float _yaw;
-        float _pitch = 12f;
+        float _pitch = 8f;
         bool _snap;
 
         public void SetTarget(Transform t)

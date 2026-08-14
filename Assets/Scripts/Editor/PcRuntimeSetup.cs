@@ -46,16 +46,16 @@ namespace EggRescue.Editor
             var shufen = GameObject.Find("淑芬");
             if (shufen != null)
             {
-                var toChicken = shufen.transform.forward;
-                if (toChicken.sqrMagnitude < 0.01f) toChicken = Vector3.forward;
-                toChicken.y = 0f;
-                toChicken.Normalize();
-                spawn.transform.position = shufen.transform.position + toChicken * 2.2f + Vector3.up * 0.5f;
-                spawn.transform.rotation = Quaternion.LookRotation((shufen.transform.position - spawn.transform.position).normalized, Vector3.up);
+                var away = shufen.transform.forward;
+                away.y = 0f;
+                if (away.sqrMagnitude < 0.01f) away = Vector3.forward;
+                else away.Normalize();
+                spawn.transform.position = shufen.transform.position + away * 2.2f + Vector3.up * 0.05f;
+                spawn.transform.rotation = Quaternion.LookRotation(-away, Vector3.up);
             }
             else if (spawn.transform.position.sqrMagnitude < 0.01f)
             {
-                spawn.transform.position = Vector3.up;
+                spawn.transform.position = Vector3.up * 0.05f;
             }
             PlaceMainCameraBehindSpawn(spawn.transform);
         }
@@ -64,13 +64,12 @@ namespace EggRescue.Editor
         {
             var cam = Camera.main;
             if (cam == null || spawn == null) return;
-            var lookHeight = Vector3.up * 1.4f;
-            var lookAt = spawn.position + lookHeight;
+            var lookAt = spawn.position + Vector3.up * 1.15f;
             var back = -spawn.forward;
-            if (back.sqrMagnitude < 0.01f) back = Vector3.back;
             back.y = 0f;
-            back.Normalize();
-            var pos = lookAt + back * 6.5f + Vector3.up * 1.2f;
+            if (back.sqrMagnitude < 0.01f) back = Vector3.back;
+            else back.Normalize();
+            var pos = lookAt + back * 4f + Vector3.up * 0.55f;
             Undo.RecordObject(cam.transform, "Place Main Camera behind PlayerSpawn");
             cam.transform.SetPositionAndRotation(pos, Quaternion.LookRotation(lookAt - pos, Vector3.up));
             EditorUtility.SetDirty(cam.transform);

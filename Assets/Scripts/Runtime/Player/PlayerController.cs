@@ -27,7 +27,7 @@ namespace EggRescue
             {
                 var pivot = new GameObject("CameraPivot");
                 pivot.transform.SetParent(transform, false);
-                pivot.transform.localPosition = new Vector3(0f, 1.4f, 0f);
+                pivot.transform.localPosition = new Vector3(0f, 1.15f, 0f);
                 cameraPivot = pivot.transform;
             }
             gameObject.tag = "Player";
@@ -83,9 +83,17 @@ namespace EggRescue
         public void Teleport(Vector3 position, Quaternion rotation)
         {
             _cc.enabled = false;
-            transform.SetPositionAndRotation(position, rotation);
+            transform.SetPositionAndRotation(position, FlattenYaw(rotation));
             _velocity = Vector3.zero;
             _cc.enabled = true;
+        }
+
+        static Quaternion FlattenYaw(Quaternion rotation)
+        {
+            var forward = rotation * Vector3.forward;
+            forward.y = 0f;
+            if (forward.sqrMagnitude < 0.0001f) return Quaternion.identity;
+            return Quaternion.LookRotation(forward.normalized, Vector3.up);
         }
     }
 }
