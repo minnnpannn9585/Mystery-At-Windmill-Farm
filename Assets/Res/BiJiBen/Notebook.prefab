@@ -8728,6 +8728,7 @@ MonoBehaviour:
   - rid: 1925947596892536833
   - rid: 3883133806650327054
   - rid: 1482841568223428618
+  - rid: 2282776681075703808
   - rid: 1482841568223428622
   - rid: 3238642656491864064
   - rid: 3238642656491864065
@@ -8835,6 +8836,12 @@ MonoBehaviour:
         varName: close
         Data: {fileID: 1103164684}
         varType: UnityEngine.UI.Button
+    - rid: 2282776681075703808
+      type: {class: DouyinLuaDataGameObjectArr, ns: , asm: com.douyin.script}
+      data:
+        varName: hideOnOpen
+        Data: []
+        varType: UnityEngine.GameObject[]
     - rid: 3238642656491864064
       type: {class: DouyinLuaDataUObjectArr, ns: , asm: com.douyin.script}
       data:
