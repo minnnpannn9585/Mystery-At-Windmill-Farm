@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -159,7 +159,7 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _BaseAOIntensity: 0.491
-    - _BaseAlbedoBrightness: 1
+    - _BaseAlbedoBrightness: 1.4
     - _BaseAlbedoDesaturation: 0
     - _BaseEmissiveIntensity: 2
     - _BaseEmissiveMaskContrast: 2
@@ -171,12 +171,14 @@ Material:
     - _BaseRoughnessIntensity: 1
     - _BaseRoughnessOffset: 1.1
     - _BaseSmoothness: 0.3
-    - _BaseSmoothnessIntensity: 0.4
+    - _BaseSmoothnessIntensity: 0.19
     - _BaseSmoothnessOffset: 0.1
-    - _BaseSmoothnessWaves: 0.1
+    - _BaseSmoothnessWaves: 0.6
     - _BaseUVScale: 1
     - _BottomColorContrast: 0.81
     - _BottomColorOffset: 1
+    - _BottomDitherContrast: 3
+    - _BottomDitherOffset: 0
     - _BumpScale: 1
     - _BumpScale1: 1
     - _BumpScale2: 1
@@ -192,6 +194,7 @@ Material:
     - _Divide: 1
     - _DstBlend: 0
     - _EnableBottomColor: 1
+    - _EnableBottomDither: 0
     - _EnableDetail: 0
     - _EnableDetail1: 0
     - _EnableFlipNormals: 0
@@ -223,7 +226,7 @@ Material:
     - _TintNoiseContrast: 6.15
     - _TintNoiseIntensity: 1
     - _TintNoiseInvertMask: 0
-    - _TintNoiseUVScale: 8
+    - _TintNoiseUVScale: 12
     - _TopContrast: 1
     - _TopEnableNoise: 0
     - _TopIntensity: 0
@@ -256,16 +259,16 @@ Material:
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _BaseAlbedoColor: {r: 1.2808648, g: 0.5495323, b: 0.2114635, a: 1}
+    - _BaseAlbedoColor: {r: 0.19951732, g: 0.654088, b: 0.19951732, a: 1}
     - _BaseAlbedoColor1: {r: 0.8679245, g: 0.25792095, b: 0.25792095, a: 0.5019608}
     - _BaseAlbedoColor2: {r: 0.5520116, g: 0.41788515, b: 0.34191445, a: 0.5019608}
     - _BaseBottomColor: {r: 1, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _BaseEmissiveColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BottomColor: {r: 0.0995016, g: 0.20151839, b: 0.49056602, a: 1}
+    - _BottomColor: {r: 0.054843534, g: 0.29559743, b: 0.12133748, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.9339623, g: 0.43614274, b: 0.75258607, a: 1}
+    - _TintColor: {r: 0, g: 0.23270428, b: 0.061469037, a: 1}
     - _TintColor2: {r: 1, g: 0, b: 0, a: 0}
     - _TopColor: {r: 1, g: 1, b: 1, a: 0}
     - _TopLayerAlbedoColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}

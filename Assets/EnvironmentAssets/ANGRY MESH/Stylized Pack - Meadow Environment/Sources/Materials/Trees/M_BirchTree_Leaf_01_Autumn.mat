@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -191,7 +191,7 @@ Material:
     - _ASP_GlobalTreeSSSIntensity: 1
     - _AlphaCutoff: 0.5
     - _BaseAOIntensity: 0.491
-    - _BaseAlbedoBrightness: 1
+    - _BaseAlbedoBrightness: 0.6
     - _BaseAlbedoDesaturation: 0
     - _BaseBarkAOIntensity: 0.5
     - _BaseEmissiveAOMask: 0
@@ -295,10 +295,10 @@ Material:
     - _Rotation: 0.88
     - _RotationAngle: -0.64
     - _Scale: 10
-    - _SecondColorContrast: 7.06
+    - _SecondColorContrast: 4
     - _SecondColorIntensity: 0.7
     - _SecondColorInvertMask: 0
-    - _SecondColorOffset: 1
+    - _SecondColorOffset: 1.04
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 4
@@ -377,7 +377,7 @@ Material:
     m_Colors:
     - _AAAA: {r: 0, g: 1, b: 0, a: 0}
     - _Axis: {r: 1, g: 0, b: 0, a: 0}
-    - _BaseAlbedoColor: {r: 0.50980395, g: 0.22108312, b: 0.08235293, a: 1}
+    - _BaseAlbedoColor: {r: 0.18239485, g: 0.57232696, b: 0.13858226, a: 1}
     - _BaseAlbedoColor1: {r: 0.8679245, g: 0.25792095, b: 0.25792095, a: 0.5019608}
     - _BaseAlbedoColor2: {r: 0.14126332, g: 0.37123778, b: 0.16202943, a: 1}
     - _BaseBottomColor: {r: 1, g: 0, b: 0, a: 0}
@@ -393,7 +393,7 @@ Material:
     - _GradientColor: {r: 0.9716981, g: 0, b: 0, a: 0}
     - _PivotPoint: {r: 0, g: 0, b: 0, a: 0}
     - _Rotation: {r: 0, g: 0, b: 0, a: 0}
-    - _SecondColor: {r: 0.5, g: 0.14260639, b: 0.0731132, a: 1}
+    - _SecondColor: {r: 0, g: 0.05281103, b: 0.2264151, a: 1}
     - _TintColor: {r: 0.9915843, g: 1, b: 0.5424528, a: 0}
     - _TintColor1: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
     - _TintColor2: {r: 0.5430534, g: 0.5471698, b: 0.16260235, a: 1}

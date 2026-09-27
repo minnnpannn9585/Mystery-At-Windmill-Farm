@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -16,6 +16,7 @@ Material:
   - _ENABLEGLANCINGANGLECUT_ON
   - _ENABLESECONDCOLOR_ON
   - _ENABLETINTCOLOR_ON
+  - _ENABLETOPLAYERBLEND_ON
   - _ENABLEWIND_ON
   - _ENABLEWORLDPROJECTION_ON
   m_InvalidKeywords:
@@ -194,7 +195,7 @@ Material:
     - _ASP_GlobalTreeSSSIntensity: 1
     - _AlphaCutoff: 0.5
     - _BaseAOIntensity: 0.491
-    - _BaseAlbedoBrightness: 1
+    - _BaseAlbedoBrightness: 0.8
     - _BaseAlbedoDesaturation: 0
     - _BaseBarkAOIntensity: 0.5
     - _BaseEmissiveAOMask: 0
@@ -261,7 +262,7 @@ Material:
     - _EnableTintColor: 1
     - _EnableTintVariationColor: 1
     - _EnableTopLayer: 1
-    - _EnableTopLayerBlend: 0
+    - _EnableTopLayerBlend: 1
     - _EnableTopLayerNoise: 0
     - _EnableUseFlatColors: 0
     - _EnableWind: 1
@@ -305,7 +306,7 @@ Material:
     - _RotationAngle: -0.64
     - _Scale: 10
     - _SecondColorContrast: 3
-    - _SecondColorIntensity: 0.5
+    - _SecondColorIntensity: 0.79
     - _SecondColorInvertMask: 0
     - _SecondColorOffset: 1
     - _SmoothnessTextureChannel: 0
@@ -387,7 +388,7 @@ Material:
     m_Colors:
     - _AAAA: {r: 0, g: 1, b: 0, a: 0}
     - _Axis: {r: 1, g: 0, b: 0, a: 0}
-    - _BaseAlbedoColor: {r: 0.2668459, g: 0.46226418, b: 0.09376113, a: 1}
+    - _BaseAlbedoColor: {r: 0.12487631, g: 0.51572317, b: 0.1933565, a: 1}
     - _BaseAlbedoColor1: {r: 0.8679245, g: 0.25792095, b: 0.25792095, a: 0.5019608}
     - _BaseAlbedoColor2: {r: 0.14126332, g: 0.37123778, b: 0.16202943, a: 1}
     - _BaseBottomColor: {r: 1, g: 0, b: 0, a: 0}
@@ -403,7 +404,7 @@ Material:
     - _GradientColor: {r: 0.8584906, g: 0.1822268, b: 0.1822268, a: 1}
     - _PivotPoint: {r: 0, g: 0, b: 0, a: 0}
     - _Rotation: {r: 0, g: 0, b: 0, a: 0}
-    - _SecondColor: {r: 0.15886436, g: 0.3962264, b: 0.19627656, a: 1}
+    - _SecondColor: {r: 0.5844456, g: 0.654088, b: 0.21185859, a: 1}
     - _TintColor: {r: 0.9915843, g: 1, b: 0.5424528, a: 0}
     - _TintColor1: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
     - _TintColor2: {r: 0.5398189, g: 0.5471698, b: 0.35359558, a: 0}

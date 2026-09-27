@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -180,6 +180,8 @@ Material:
     - _BaseUVScale: 1
     - _BottomColorContrast: 3
     - _BottomColorOffset: 2.53
+    - _BottomDitherContrast: 3
+    - _BottomDitherOffset: 0
     - _BumpScale: 1
     - _BumpScale1: 1
     - _BumpScale2: 1
@@ -195,6 +197,7 @@ Material:
     - _Divide: 1
     - _DstBlend: 0
     - _EnableBottomColor: 1
+    - _EnableBottomDither: 0
     - _EnableDetail: 0
     - _EnableDetail1: 0
     - _EnableSmoothnessAnim: 0
