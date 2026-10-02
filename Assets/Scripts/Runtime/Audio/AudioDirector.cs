@@ -13,12 +13,14 @@ namespace EggRescue
         [SerializeField] ParticleSystem[] particleSystems;
 
         AudioClip _originalBgm;
+        bool _adoptedSceneBgm;
         readonly Dictionary<string, AudioClip> _byName = new Dictionary<string, AudioClip>();
 
         void Awake()
         {
             Instance = this;
             if (sfxSource == null) sfxSource = gameObject.AddComponent<AudioSource>();
+            if (bgmSource == null) bgmSource = AdoptSceneBgmSource();
             if (bgmSource == null)
             {
                 bgmSource = gameObject.AddComponent<AudioSource>();
@@ -30,8 +32,46 @@ namespace EggRescue
             if (bgmSource.clip != null) _originalBgm = bgmSource.clip;
         }
 
+        /// <summary>
+        /// ???????????????? BGM AudioSource?
+        /// ???????? AudioDirector ???????? BGM ????
+        /// </summary>
+        AudioSource AdoptSceneBgmSource()
+        {
+            var sources = FindObjectsOfType<AudioSource>(true);
+            AudioSource best = null;
+            for (var i = 0; i < sources.Length; i++)
+            {
+                var src = sources[i];
+                if (src == null || src == sfxSource) continue;
+                if (src.gameObject == gameObject) continue;
+                // BGM ?????? + ????(????) + 2D?
+                if (!src.loop) continue;
+                if (!src.playOnAwake && !src.isPlaying) continue;
+                if (src.spatialBlend > 0.5f) continue;
+                if (best == null) best = src;
+                else src.Stop(); // ?????????????????????
+            }
+            if (best != null)
+            {
+                _adoptedSceneBgm = true;
+                Debug.Log("[AudioDirector] adopted scene BGM source: " + best.gameObject.name);
+            }
+            return best;
+        }
+
         void Start()
         {
+            // ????? BGM ?????????????? audio_bgm ???????????
+            if (_adoptedSceneBgm && bgmSource != null && bgmSource.clip != null)
+            {
+                if (!bgmSource.isPlaying)
+                {
+                    bgmSource.loop = true;
+                    bgmSource.Play();
+                }
+                return;
+            }
             if (_byName.ContainsKey("audio_bgm"))
                 PlayBGM();
             else if (_byName.ContainsKey("bgm"))
