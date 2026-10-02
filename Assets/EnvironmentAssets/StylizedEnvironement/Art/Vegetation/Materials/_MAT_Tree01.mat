@@ -130,12 +130,12 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Contrastelending: 1
-    - _CoverageContrast: 0.1
+    - _CoverageContrast: 0.22
     - _CoverageFade: 0.36
     - _CoverageLevel: -0.13
     - _CoverageOverlayType: 0
     - _CoverageSmoothness: 0
-    - _CoverageThicknessLevel: 0.072
+    - _CoverageThicknessLevel: 0.18
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -160,7 +160,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _SurfaceSmoothness: 0.046
+    - _SurfaceSmoothness: 0.04
     - _TessEdgeLength: 16
     - _TessMax: 25
     - _TessMaxDisp: 25
@@ -184,10 +184,10 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _CoverageColor: {r: 0.786029, g: 0.894, b: 0.64350724, a: 0}
+    - _CoverageColor: {r: 0.8914204, g: 0.9056604, b: 0.89261705, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SurfaceColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SurfaceColor: {r: 0.61320746, g: 0.8432855, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4813965860560305412
 MonoBehaviour:

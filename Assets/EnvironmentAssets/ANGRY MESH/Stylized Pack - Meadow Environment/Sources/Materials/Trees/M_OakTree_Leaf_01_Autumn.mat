@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -189,8 +189,8 @@ Material:
     - _BaseBarkAOIntensity: 0.5
     - _BaseEmissiveAOMask: 1
     - _BaseEmissiveIntensity: 50
-    - _BaseEmissiveMaskContrast: 1
-    - _BaseGlancingAngleCut: 0.8
+    - _BaseEmissiveMaskContrast: 0
+    - _BaseGlancingAngleCut: 0.75
     - _BaseLerpBetweenColorandTexture: 1
     - _BaseMeshThickness: 1
     - _BaseMetallicIntensity: 0
@@ -342,7 +342,7 @@ Material:
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _BaseAlbedoColor: {r: 0.5647059, g: 0.3256163, b: 0.16470587, a: 1}
+    - _BaseAlbedoColor: {r: 0.14738333, g: 0.57861626, b: 0.22419028, a: 1}
     - _BaseAlbedoColor1: {r: 0.8679245, g: 0.25792095, b: 0.25792095, a: 0.5019608}
     - _BaseAlbedoColor2: {r: 0.14126332, g: 0.37123778, b: 0.16202943, a: 1}
     - _BaseBottomColor: {r: 1, g: 0, b: 0, a: 0}
@@ -355,7 +355,7 @@ Material:
     - _Direction: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GradientColor: {r: 0.9716981, g: 0, b: 0, a: 0}
-    - _SecondColor: {r: 0.3679245, g: 0.21889924, b: 0.20999464, a: 1}
+    - _SecondColor: {r: 0.031209184, g: 0.03773582, b: 0.03224314, a: 1}
     - _TintColor: {r: 0.9915843, g: 1, b: 0.5424528, a: 0}
     - _TintColor1: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
     - _TintColor2: {r: 0.33962262, g: 0.2858198, b: 0.1970452, a: 0}

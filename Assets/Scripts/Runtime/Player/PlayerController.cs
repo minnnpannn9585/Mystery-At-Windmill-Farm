@@ -51,10 +51,18 @@ namespace EggRescue
             var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (input.sqrMagnitude > 1f) input.Normalize();
 
-            var cam = Camera.main;
-            var yaw = cam != null
-                ? cam.transform.eulerAngles.y
-                : (cameraPivot != null ? cameraPivot.eulerAngles.y : transform.eulerAngles.y);
+            // ??????????? yaw???? LateUpdate ?? transform?
+            // ????? Camera.main.transform ????????????????????????
+            float yaw;
+            if (ThirdPersonCamera.Instance != null)
+                yaw = ThirdPersonCamera.Instance.Yaw;
+            else
+            {
+                var cam = Camera.main;
+                yaw = cam != null
+                    ? cam.transform.eulerAngles.y
+                    : (cameraPivot != null ? cameraPivot.eulerAngles.y : transform.eulerAngles.y);
+            }
             var yawRot = Quaternion.Euler(0f, yaw, 0f);
             var wish = yawRot * new Vector3(input.x, 0f, input.y);
             var speed = moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier : 1f);

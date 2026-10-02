@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -181,7 +181,7 @@ Material:
     - _ASP_GlobalTreeSSSIntensity: 1
     - _AlphaCutoff: 0.5
     - _BaseAOIntensity: 0.491
-    - _BaseAlbedoBrightness: 1
+    - _BaseAlbedoBrightness: 0.94
     - _BaseAlbedoDesaturation: 0
     - _BaseBarkAOIntensity: 0.5
     - _BaseEmissiveAOMask: 1
@@ -191,7 +191,7 @@ Material:
     - _BaseLerpBetweenColorandTexture: 1
     - _BaseMeshThickness: 1
     - _BaseMetallicIntensity: 0
-    - _BaseNormalIntensity: 1
+    - _BaseNormalIntensity: 0.94
     - _BaseOpacityIntensity: 1
     - _BaseRoughness: 0.5
     - _BaseRoughnessIntensity: 0
@@ -205,9 +205,9 @@ Material:
     - _BaseSSSShadow: 1
     - _BaseSmoothness: 0.5
     - _BaseSmoothnessIntensity: 0.6
-    - _BaseSmoothnessMax: 0.6
+    - _BaseSmoothnessMax: 0.18
     - _BaseSmoothnessMin: 0
-    - _BaseTreeAOIntensity: 0.6
+    - _BaseTreeAOIntensity: 0.61
     - _BaseUVScale: 1
     - _BottomColorContrast: 3
     - _BottomColorOffset: 2.44
@@ -338,7 +338,7 @@ Material:
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _BaseAlbedoColor: {r: 0.62352943, g: 0.5529412, b: 0.4745098, a: 1}
+    - _BaseAlbedoColor: {r: 0.21442977, g: 0.49056602, b: 0.32231677, a: 1}
     - _BaseAlbedoColor1: {r: 0.8679245, g: 0.25792095, b: 0.25792095, a: 0.5019608}
     - _BaseAlbedoColor2: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}
     - _BaseBottomColor: {r: 1, g: 0, b: 0, a: 0}

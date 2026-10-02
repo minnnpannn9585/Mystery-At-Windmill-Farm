@@ -110,12 +110,35 @@ namespace EggRescue
         {
             var cam = ResolveMainCamera();
             if (cam == null) return;
+            DisableConflictingCameraDrivers(cam.gameObject);
             var tps = cam.GetComponent<ThirdPersonCamera>();
             if (tps == null) tps = cam.gameObject.AddComponent<ThirdPersonCamera>();
             var pc = player.GetComponent<PlayerController>();
             var follow = pc != null && pc.CameraPivot != null ? pc.CameraPivot : player.transform;
             tps.SetTarget(follow);
             tps.SnapToTarget();
+        }
+
+        /// <summary>
+        /// 场景相机上若残留 demo 脚本(OrbitMotion / TMP CameraController 等)，
+        /// 它们会和 ThirdPersonCamera 争抢同一个 transform，表现为画面抖动。
+        /// </summary>
+        static void DisableConflictingCameraDrivers(GameObject camGo)
+        {
+            var behaviours = camGo.GetComponents<MonoBehaviour>();
+            for (var i = 0; i < behaviours.Length; i++)
+            {
+                var mb = behaviours[i];
+                if (mb == null) continue;
+                var n = mb.GetType().Name;
+                if (n == "ThirdPersonCamera") continue;
+                if (n == "OrbitMotion" || n == "CameraController" || n == "SmoothFollow"
+                    || n == "CameraFollow" || n == "CinemachineBrain")
+                {
+                    mb.enabled = false;
+                    Debug.Log("[GameBootstrap] disabled conflicting camera driver: " + n);
+                }
+            }
         }
 
         static Camera ResolveMainCamera()
@@ -194,9 +217,7 @@ namespace EggRescue
             var textGo = new GameObject("Prompt");
             textGo.transform.SetParent(canvasGo.transform, false);
             var text = textGo.AddComponent<Text>();
-            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-            if (text.font == null)
-                text.font = Font.CreateDynamicFontFromOSFont("Arial", 28);
+            text.font = ResolveUiFont();
             text.fontSize = 28;
             text.alignment = TextAnchor.LowerCenter;
             text.color = Color.white;
@@ -207,6 +228,36 @@ namespace EggRescue
             rt.offsetMax = Vector2.zero;
             text.gameObject.SetActive(false);
             if (interaction != null) interaction.SetPromptLabel(text);
+        }
+
+        /// <summary>
+        /// Unity 2022+ 把内置 Arial.ttf 换成了 LegacyRuntime.ttf，旧名字会抛 ArgumentException。
+        /// 这里按新名 -> 旧名 -> 系统字体的顺序逐级回退。
+        /// </summary>
+        static Font ResolveUiFont()
+        {
+            var font = TryGetBuiltinFont("LegacyRuntime.ttf");
+            if (font == null) font = TryGetBuiltinFont("Arial.ttf");
+            if (font == null)
+            {
+                // 中文提示需要能显示汉字的字体，优先挑常见的中文系统字体。
+                var candidates = new[] { "Microsoft YaHei", "SimHei", "SimSun", "PingFang SC", "Arial" };
+                for (var i = 0; i < candidates.Length && font == null; i++)
+                    font = Font.CreateDynamicFontFromOSFont(candidates[i], 28);
+            }
+            return font;
+        }
+
+        static Font TryGetBuiltinFont(string path)
+        {
+            try
+            {
+                return Resources.GetBuiltinResource<Font>(path);
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
         }
 
         void EnsureSystems()
