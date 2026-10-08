@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace EggRescue
 {
@@ -16,6 +17,11 @@ namespace EggRescue
         CharacterController _cc;
         Vector3 _velocity;
         bool _grounded;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        const float DebugMoveMultiplier = 3f;
+        static bool _debugMoveEnabled = true;
+        Text _debugLabel;
+#endif
 
         public Transform CameraPivot { get { return cameraPivot; } }
 
@@ -31,10 +37,20 @@ namespace EggRescue
                 cameraPivot = pivot.transform;
             }
             gameObject.tag = "Player";
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            EnsureDebugLabel();
+#endif
         }
 
         void Update()
         {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                _debugMoveEnabled = !_debugMoveEnabled;
+                RefreshDebugLabel();
+            }
+#endif
             if (GameEvents.InputLocked)
             {
                 _velocity.x = 0f;
@@ -65,7 +81,7 @@ namespace EggRescue
             }
             var yawRot = Quaternion.Euler(0f, yaw, 0f);
             var wish = yawRot * new Vector3(input.x, 0f, input.y);
-            var speed = moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier : 1f);
+            var speed = moveSpeed * CurrentMoveMultiplier();
             var planar = wish * speed;
 
             if (planar.sqrMagnitude > 0.01f)
@@ -82,6 +98,67 @@ namespace EggRescue
             ApplyGravity();
             _cc.Move(_velocity * Time.deltaTime);
         }
+
+        float CurrentMoveMultiplier()
+        {
+            if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
+                return 1f;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (_debugMoveEnabled) return DebugMoveMultiplier;
+#endif
+            return sprintMultiplier;
+        }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        void EnsureDebugLabel()
+        {
+            if (_debugLabel != null) return;
+            var canvasGo = new GameObject("DebugMoveCanvas");
+            canvasGo.transform.SetParent(transform, false);
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 80;
+            var textGo = new GameObject("DebugMoveLabel");
+            textGo.transform.SetParent(canvasGo.transform, false);
+            _debugLabel = textGo.AddComponent<Text>();
+            _debugLabel.font = ResolveDebugFont();
+            _debugLabel.fontSize = 18;
+            _debugLabel.alignment = TextAnchor.UpperLeft;
+            _debugLabel.color = new Color(1f, 0.86f, 0.25f, 0.95f);
+            _debugLabel.horizontalOverflow = HorizontalWrapMode.Overflow;
+            _debugLabel.verticalOverflow = VerticalWrapMode.Overflow;
+            var rt = _debugLabel.rectTransform;
+            rt.anchorMin = new Vector2(0f, 1f);
+            rt.anchorMax = new Vector2(0f, 1f);
+            rt.pivot = new Vector2(0f, 1f);
+            rt.anchoredPosition = new Vector2(16f, -12f);
+            rt.sizeDelta = new Vector2(480f, 28f);
+            RefreshDebugLabel();
+        }
+
+        void RefreshDebugLabel()
+        {
+            if (_debugLabel == null) return;
+            _debugLabel.text = _debugMoveEnabled
+                ? "测试三倍速：开（F8 关闭）"
+                : "测试三倍速：关（F8 打开）";
+        }
+
+        static Font ResolveDebugFont()
+        {
+            Font font = null;
+            try { font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); }
+            catch (System.Exception) { font = null; }
+            if (font == null)
+            {
+                try { font = Resources.GetBuiltinResource<Font>("Arial.ttf"); }
+                catch (System.Exception) { font = null; }
+            }
+            if (font == null)
+                font = Font.CreateDynamicFontFromOSFont("Microsoft YaHei", 18);
+            return font;
+        }
+#endif
 
         void ApplyGravity()
         {
