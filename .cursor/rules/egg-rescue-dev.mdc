@@ -1,12 +1,13 @@
 ---
-description: 小火人丢蛋探案 — 开发前先读实现架构与策划变量表
+description: 绿头鸭丢蛋探案 — 开发前先读实现架构与策划变量表
 alwaysApply: true
 ---
 
-# XiaoHuoRen_EggRescue 开发约定
+# 风车农场悬案 开发约定
 
+引擎：**团结引擎 1.10.1**。目标发布平台 **Steam**，支持设备 **PC**。玩家化身为一只**绿头鸭**。  
 唯一可运行 Scene：`Assets/Scenes/Mechanics_Code.unity`（PC Build Settings 入口）。  
-运行时逻辑在 **C#**（`Assets/Scripts/Runtime/`），由 `GameBootstrap` 启动。Lua + 抖音 SDK 仅作对照，不要再往 `Assets/luaScripts/` 加新功能。  
+当前运行时逻辑在 **C#**（`Assets/Scripts/Runtime/`），由 `GameBootstrap` 启动；运行时数据为 **JSON**。初版曾上线抖音小火人世界（约五万人游玩，大量好评），当时用 Lua 编写逻辑并存储数据。仓库里的 Lua + 抖音 SDK 仅作初版对照，不要再往 `Assets/luaScripts/` 加新功能。  
 旧美术验证场景 `ArtTest_MRL.unity` 不再作为日常开发入口。
 
 开发前先读：

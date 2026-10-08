@@ -2,7 +2,9 @@
 
 > **用途**：代码侧技术地图，供开发者和 AI 快速理解「怎么跑」。  
 > **策划文档**：玩法 / 叙事 / 变量语义见 [`MissingEggDoc-main/`](../MissingEggDoc-main/README.md)。  
-> **主开发 / 可运行 Scene**：`Assets/Scenes/Mechanics_Code.unity`（PC 已写入 Build Settings；Addressables 分组 `Mechanics_Code` 仅为抖音遗留发布入口）。  
+> **引擎**：团结引擎 1.10.1。目标发布平台为 **Steam**，支持设备为 **PC**。玩家化身为一只**绿头鸭**。  
+> **主开发 / 可运行 Scene**：`Assets/Scenes/Mechanics_Code.unity`（PC 已写入 Build Settings；Addressables 分组 `Mechanics_Code` 仅为抖音初版发布入口）。  
+> **初版**：曾上线抖音小火人世界，约五万人游玩并获得大量好评。初版使用 Lua 编写逻辑并存储数据。当前运行逻辑为 **C#**，运行时数据为 **JSON**。  
 > **遗留**：`ArtTest_MRL.unity` 为早期美术白盒场景。Lua + 抖音 SDK 仍在仓库中作对照，**新逻辑只写 C#**。
 
 ---
@@ -11,14 +13,14 @@
 
 | 层级 | 技术 |
 |------|------|
-| 引擎 | Unity 2021.3.14f1 + URP 12.1.8 |
-| 平台 | **PC Standalone**（第三人 WASD + 鼠标视角 + E 键交互） |
+| 引擎 | 团结引擎 1.10.1 |
+| 平台 | **Steam · PC**（第三人 WASD + 鼠标视角 + E 键交互） |
 | 游戏逻辑 | **C#**（`Assets/Scripts/Runtime/`） |
-| 对话 / 状态数据 | JSON TextAsset（`Assets/Resources/GameData/`，由 Lua 表转换） |
-| 遗留 | 抖音 World SDK + Lua（`Assets/luaScripts/`），发布前用菜单禁用 DouyinScript |
+| 对话 / 状态数据 | JSON TextAsset（`Assets/Resources/GameData/`）。初版用 Lua 存储数据；对话定稿仍可由 Lua 表转换成这份 JSON |
+| 遗留 | 抖音初版 World SDK + Lua（`Assets/luaScripts/`），发布前用菜单禁用 DouyinScript |
 | 编辑器 | C# 自定义窗口 + `Tools/Egg Rescue/PC/*` |
 
-C# 运行时入口：`GameBootstrap`（Play 后自动生成，不依赖抖音注入角色）。玩家占位胶囊，模型可后换。
+C# 运行时入口：`GameBootstrap`（Play 后自动生成，不依赖抖音注入角色）。玩家角色为绿头鸭；场景中暂以胶囊占位，模型可后换。
 
 ### 1.1 从 Lua 迁到 C# 后怎么跑
 
@@ -212,7 +214,7 @@ Assets/Resources/GameData/
 
 ### 5.1 一键发布
 
-Unity 菜单 **`Tools/Egg Rescue/Publish Editor to Data`**（`EggRescuePublishMenu.cs`）：
+编辑器菜单 **`Tools/Egg Rescue/Publish Editor to Data`**（`EggRescuePublishMenu.cs`）：
 
 1. 复制 `Editor/DialogueData/*.lua` → `Data/DialogueData/`
 2. 复制 `Editor/EditData/NPCData_Config.lua` → `Data/GlobalData/`，去掉 leading `local `
@@ -236,7 +238,7 @@ Unity 菜单 **`Tools/Egg Rescue/Publish Editor to Data`**（`EggRescuePublishMe
 
 ### 5.4 对话调试日志
 
-PC 运行时不使用抖音 World Debugger，日志在 Unity Console。下面是遗留 Lua 对照，过滤 `[Dialogue]`、`[DialogueLoad]`。
+PC 运行时不使用抖音 World Debugger，日志在团结引擎控制台。下面是初版 Lua 对照，过滤 `[Dialogue]`、`[DialogueLoad]`。
 
 | 位置 | 说明 |
 |------|------|
@@ -379,4 +381,4 @@ SetGlobalVar（对话 / ClueTrigger / 老鼠商店）
 
 ---
 
-*最后更新：2026-08-14 · PC C# Runtime · 主开发 Scene：Mechanics_Code*
+*最后更新：2026-10-08 · 团结引擎 1.10.1 · Steam / PC · C# + JSON · 主开发 Scene：Mechanics_Code*

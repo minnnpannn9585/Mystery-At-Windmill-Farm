@@ -34,7 +34,7 @@ python3 MissingEggDoc-main/scripts/doc_to_lua.py --no-entry \
 
 1. 对照 md §路由规则，在 lua 里接 entry / Next / hub gate（抄 `dahuang_01_FROM_DOC.lua`）。
 2. `compare_doc_lua.py` 台词 missing=0。
-3. Unity 导入无语法错误 → Publish → Scene 点测。
+3. 团结引擎导入无语法错误 → Publish → Scene 点测。
 
 ## 能生成什么
 
@@ -56,7 +56,7 @@ python3 MissingEggDoc-main/scripts/doc_to_lua.py --no-entry \
 | entry 链、intro→hub、子项 bypass | 每 NPC 不同 → Agent 改 lua |
 | hub 多回访（Status 1/2/3 + 子项短回访） | 需多个 Question + gate |
 | 无 `###` 的 inline 节 | parser 可能漏 |
-| Scene `DialogueTrigger` startID | Unity Inspector |
+| Scene `DialogueTrigger` startID | 团结引擎 Inspector |
 | NPCData 指向 `_FROM_DOC` | 测试接线 |
 
 ## 何时不用本脚本

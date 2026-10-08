@@ -126,7 +126,7 @@ python3 MissingEggDoc-main/scripts/validate_lua_vars.py
 
 ### 6.1 对话调试日志
 
-PC 运行时不使用抖音调试器。C# 对话日志在 Unity Console。下面是遗留 Lua 对照，过滤 `[Dialogue]` / `[DialogueLoad]`：
+PC 运行时不使用抖音调试器。C# 对话日志在团结引擎控制台。下面是初版 Lua 对照，过滤 `[Dialogue]` / `[DialogueLoad]`：
 
 | 开关 / 文件 | 作用 |
 |-------------|------|

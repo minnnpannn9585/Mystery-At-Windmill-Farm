@@ -48,7 +48,7 @@ flowchart LR
 1. 读 md：流程总览、入口判定、自检表、**§路由规则**（模板见 [`淑芬-对话脚本-树状.md`](../MissingEggDoc-main/docs/characters/淑芬-对话脚本-树状.md)）。
 2. 内容草稿：`doc_to_lua --no-entry` 或手写。
 3. 路由：抄大黄 `entry#0` / gate 链；改 intro→hub、子项 bypass intro；复杂 hub **复制完整 Options 块**到各回访 Question。
-4. 验收：`compare_doc_lua` 台词 missing=0（分文件）；路由 checklist；Unity 无语法错误。
+4. 验收：`compare_doc_lua` 台词 missing=0（分文件）；路由 checklist；团结引擎无语法错误。
 5. 登记：doc 17 新变量、NPCData → `*_FROM_DOC`。
 
 **PC 运行时读** `Assets/Resources/GameData/`（由 `Assets/Data/` 转换）；改 md 后：生成/手改 → Publish → Convert Lua Data To JSON。
@@ -420,7 +420,7 @@ python3 MissingEggDoc-main/scripts/validate_lua_vars.py
 
 脚本内 `VarName` 必须 ⊆ `GlobalVariables.lua`。
 
-### 7.4 Unity 点测清单
+### 7.4 团结引擎点测清单
 
 - [ ] DialogueEditor 导入无报错；导出再导入字段不丢
 - [ ] Publish → Data；Convert Lua Data To JSON
