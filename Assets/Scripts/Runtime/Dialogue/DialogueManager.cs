@@ -41,6 +41,7 @@ namespace EggRescue
         bool _waitingNextAfterOption;
         readonly HashSet<string> _unlockedCache = new HashSet<string>();
         string _lastPortraitKey;
+        int _blockAdvanceFrame = -1;
         readonly List<DialogueOption> _options = new List<DialogueOption>();
         readonly List<GameObject> _optionButtons = new List<GameObject>();
         readonly Dictionary<string, Sprite> _portraits = new Dictionary<string, Sprite>();
@@ -61,16 +62,7 @@ namespace EggRescue
             if (playerPanel != null) playerPanel.SetActive(false);
             if (playerNamePanel != null) playerNamePanel.SetActive(false);
             if (next != null)
-            {
-                next.onClick.AddListener(OnNextClick);
                 next.gameObject.SetActive(false);
-            }
-            if (dialoguePanel != null)
-            {
-                var btn = dialoguePanel.GetComponent<Button>();
-                if (btn == null) btn = dialoguePanel.AddComponent<Button>();
-                btn.onClick.AddListener(OnNextClick);
-            }
             if (playerPanelBtn != null) playerPanelBtn.gameObject.SetActive(false);
         }
 
@@ -137,6 +129,7 @@ namespace EggRescue
             }
             if (GetNode(actual) == null) return;
             _currentId = actual;
+            _blockAdvanceFrame = Time.frameCount;
             if (dialoguePanel != null) dialoguePanel.SetActive(true);
             GameEvents.RaiseDialogueStarted();
             AudioDirector.PlayAudio("audio_hello");
@@ -153,6 +146,7 @@ namespace EggRescue
             _animatingOptions = false;
             SetPlayerNamePanel(false);
             _currentId = nodeId;
+            _blockAdvanceFrame = Time.frameCount;
             if (dialoguePanel != null) dialoguePanel.SetActive(true);
             GameEvents.RaiseDialogueStarted();
             UpdateDialogueUi();
@@ -433,6 +427,7 @@ namespace EggRescue
         void OnOptionSelected(DialogueOption option)
         {
             if (!_waitingChoice) return;
+            _blockAdvanceFrame = Time.frameCount;
             _waitingChoice = false;
             if (playerPanel != null) playerPanel.SetActive(false);
             ClearOptionButtons();
@@ -663,9 +658,21 @@ namespace EggRescue
                     else _animatingOptions = false;
                 }
             }
-            if (_currentId >= 0 && !_waitingChoice
-                && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.E)))
-                OnNextClick();
+            if (_currentId < 0 || Time.frameCount == _blockAdvanceFrame || !AdvancePressed()) return;
+            if (_waitingChoice)
+            {
+                if (_animatingOptions) CompleteOptionAnimation();
+                return;
+            }
+            OnNextClick();
+        }
+
+        static bool AdvancePressed()
+        {
+            return Input.GetMouseButtonDown(0)
+                || Input.GetKeyDown(KeyCode.Space)
+                || Input.GetKeyDown(KeyCode.Return)
+                || Input.GetKeyDown(KeyCode.KeypadEnter);
         }
 
         static int ParseInt(string raw)

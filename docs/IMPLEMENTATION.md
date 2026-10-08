@@ -12,7 +12,7 @@
 | 层级 | 技术 |
 |------|------|
 | 引擎 | Unity 2021.3.14f1 + URP 12.1.8 |
-| 平台 | **PC Standalone**（第三人 WASD + 鼠标视角 + E/点击交互） |
+| 平台 | **PC Standalone**（第三人 WASD + 鼠标视角 + E 键交互） |
 | 游戏逻辑 | **C#**（`Assets/Scripts/Runtime/`） |
 | 对话 / 状态数据 | JSON TextAsset（`Assets/Resources/GameData/`，由 Lua 表转换） |
 | 遗留 | 抖音 World SDK + Lua（`Assets/luaScripts/`），发布前用菜单禁用 DouyinScript |
@@ -23,7 +23,7 @@ C# 运行时入口：`GameBootstrap`（Play 后自动生成，不依赖抖音注
 ### 1.1 从 Lua 迁到 C# 后怎么跑
 
 1. 打开 `Mechanics_Code`，菜单 **`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`**（写入出生点、禁用 DouyinScript、接线立绘）。
-2. Play：WASD 移动、空格跳、鼠标视角、E 或左键交互。F5 存档，F9 读档，Esc 解锁鼠标。
+2. Play：WASD 移动、空格跳、鼠标视角、E 键交互。对话中用鼠标左键、空格或回车推进。F5 存档，F9 读档，Esc 解锁鼠标。
 3. 改对话 lua 后执行 **`Tools/Egg Rescue/PC/Convert Lua Data To JSON`**（或 `dotnet run --project MissingEggDoc-main/scripts/LuaToJson/LuaToJson.csproj`）。
 
 数据转换脚本：[`MissingEggDoc-main/scripts/lua_to_json.py`](../MissingEggDoc-main/scripts/lua_to_json.py)（需 Python）与 [`MissingEggDoc-main/scripts/LuaToJson/`](../MissingEggDoc-main/scripts/LuaToJson/)（dotnet）。
@@ -371,7 +371,7 @@ SetGlobalVar（对话 / ClueTrigger / 老鼠商店）
 ## 10. 开发备忘
 
 - PC：`GameBootstrap` Play 后自动生成玩家胶囊与第三人称相机；菜单 `Tools/Egg Rescue/PC/Setup Scene For PC Runtime` 写入 `PlayerSpawn`、按 lua 名迁移 C# 组件并禁用 `DouyinScript`。
-- 操作：WASD 移动、空格跳、鼠标视角、E / 左键交互；对话中空格 / Enter / E 下一句；N 开关笔记本；F5 存档、F9 读档、Esc 解锁鼠标。
+- 操作：WASD 移动、空格跳、鼠标视角、只有 E 键开始交互；对话中鼠标左键 / 空格 / 回车下一句；N 开关笔记本；F5 存档、F9 读档、Esc 解锁鼠标。
 - 存档：`Application.persistentDataPath/windmill_farm_save.json`（变量 + NPC 分支 + 奶酪拾取 + BranchFlag + 已发现交互点）。Editor Play **不**自动读档；玩家包启动自动读档。
 - 对话 JSON 漏字段会卡主线：`ShopAction`、`RotatePool`、`ChainDialogue`、`BranchFlag`、`DisplayConditions`。
 - Scene 物体名 `MianController` 为历史拼写。Lua `DialogueTrigger` 仍通过 `GameObject.Find("DialogueData")` 读 DouyinScript；C# 改为 `Resources/GameData/Dialogue`。

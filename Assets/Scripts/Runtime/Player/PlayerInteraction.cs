@@ -25,7 +25,7 @@ namespace EggRescue
             if (hit == null) hit = ProximityInteractable();
             SetCurrent(hit);
 
-            if (_current != null && (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)))
+            if (_current != null && Input.GetKeyDown(KeyCode.E))
                 _current.Interact();
         }
 
