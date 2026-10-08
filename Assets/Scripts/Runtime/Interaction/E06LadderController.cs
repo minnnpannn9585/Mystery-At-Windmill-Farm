@@ -72,9 +72,11 @@ namespace EggRescue
             if (force || _lastInteract != enabled)
             {
                 _lastInteract = enabled;
-                InteractionUtil.SetCollidersEnabled(gameObject, enabled);
+                SetCollidersEnabled(gameObject, enabled);
                 if (_interactable != null) _interactable.SetInteractionEnabled(enabled);
             }
+            if (placed && placedGo != null)
+                EnableLadderColliders(placedGo);
             if (enabled && !string.IsNullOrEmpty(label) && _interactable != null)
                 _interactable.Prompt = label;
         }
@@ -122,6 +124,26 @@ namespace EggRescue
             var graph = DialogueDatabase.Get("miaosu");
             if (graph == null || DialogueManager.Instance == null) return;
             DialogueManager.Instance.StartWithData(graph, id);
+        }
+
+        static void SetCollidersEnabled(GameObject go, bool enabled)
+        {
+            if (go == null) return;
+            var cols = go.GetComponents<Collider>();
+            for (var i = 0; i < cols.Length; i++)
+            {
+                if (cols[i] != null) cols[i].enabled = enabled;
+            }
+        }
+
+        static void EnableLadderColliders(GameObject go)
+        {
+            if (go == null) return;
+            var cols = go.GetComponentsInChildren<Collider>(true);
+            for (var i = 0; i < cols.Length; i++)
+            {
+                if (cols[i] != null) cols[i].enabled = true;
+            }
         }
 
         GameObject ResolveBarnLadder()

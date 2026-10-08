@@ -21,7 +21,12 @@ namespace EggRescue
 
         public void EnsureCollider()
         {
-            if (GetComponentInChildren<Collider>(true) != null) return;
+            var existing = GetComponentsInChildren<Collider>(true);
+            for (var i = 0; i < existing.Length; i++)
+            {
+                if (existing[i] != null && existing[i].gameObject.activeInHierarchy)
+                    return;
+            }
             var sphere = gameObject.AddComponent<SphereCollider>();
             sphere.isTrigger = true;
             sphere.radius = 1.15f;
@@ -31,9 +36,6 @@ namespace EggRescue
         public void SetInteractionEnabled(bool enabled)
         {
             enabledInteraction = enabled;
-            var cols = GetComponentsInChildren<Collider>(true);
-            for (var i = 0; i < cols.Length; i++)
-                cols[i].enabled = enabled;
         }
 
         public void Interact()
