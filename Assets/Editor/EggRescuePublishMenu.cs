@@ -35,12 +35,6 @@ public static class EggRescuePublishMenu
             "OK");
     }
 
-    [MenuItem("Tools/Egg Rescue/Refresh Scene DialogueData")]
-    public static void RefreshSceneDialogueData()
-    {
-        CreateDialogueDataObjects.Create();
-    }
-
     private static int CopyDirectoryLuaFiles(string sourceDir, string destDir, bool transformLua)
     {
         string sourceFull = Path.Combine(Directory.GetCurrentDirectory(), sourceDir);
@@ -94,7 +88,7 @@ public static class EggRescuePublishMenu
 
         if (!isGlobalVariables)
         {
-            // Data NPCData uses global table without return (runtime DouyinScript convention).
+            // Data NPCData is a global table and does not return.
             content = Regex.Replace(content, @"\r?\nreturn\s+NPCData\s*$", "", RegexOptions.Multiline);
         }
 

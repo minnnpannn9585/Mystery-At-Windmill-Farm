@@ -4,7 +4,7 @@
 > **数据路径**：运行时 `Assets/Data/DialogueData/` · 编辑源 `Assets/Editor/DialogueData/`  
 > **树状生成稿**：`…/DialogueData/FROM_DOC/*_FROM_DOC.lua`（与定稿 `dahuang_01.lua` 等分开）  
 > **NPC 分支注册**：`Assets/Data/GlobalData/NPCData_Config.lua`  
-> **Scene 挂载**：`Mechanics_Code` → `DialogueData/{文件名}` DouyinScript
+> **PC 运行时**：`Assets/Resources/GameData/`（由 Data lua 转换）。对话图菜单：`Tools/Egg Rescue/Dialogue Editor`。
 
 ---
 

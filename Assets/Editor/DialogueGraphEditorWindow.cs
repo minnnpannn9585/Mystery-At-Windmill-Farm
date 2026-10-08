@@ -149,7 +149,7 @@ namespace RPGDialogueEditor
         private string _currentDialogueFile = "";
         private ScrollView _fileScrollView;
 
-        [MenuItem("抖音虚拟创作SDK/DialogueEditor")]
+        [MenuItem("Tools/Egg Rescue/Dialogue Editor")]
         public static void OpenWindow()
         {
             var window = GetWindow<DialogueGraphEditorWindow>();

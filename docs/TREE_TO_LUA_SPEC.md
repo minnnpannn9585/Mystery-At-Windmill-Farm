@@ -51,7 +51,7 @@ flowchart LR
 4. 验收：`compare_doc_lua` 台词 missing=0（分文件）；路由 checklist；Unity 无语法错误。
 5. 登记：doc 17 新变量、NPCData → `*_FROM_DOC`。
 
-**运行时读** `Assets/Data/DialogueData/`；改 md 后：生成/手改 → Publish → Refresh Scene。
+**PC 运行时读** `Assets/Resources/GameData/`（由 `Assets/Data/` 转换）；改 md 后：生成/手改 → Publish → Convert Lua Data To JSON。
 
 ---
 
@@ -423,7 +423,7 @@ python3 MissingEggDoc-main/scripts/validate_lua_vars.py
 ### 7.4 Unity 点测清单
 
 - [ ] DialogueEditor 导入无报错；导出再导入字段不丢
-- [ ] Publish → Data；Refresh Scene DialogueData
+- [ ] Publish → Data；Convert Lua Data To JSON
 - [ ] `DialogueTrigger.ID = 0`；`npcname` 与 NPCData 一致
 - [ ] 首访 / hub / 菜单隐藏项 / 返 hub / 对话结束
 - [ ] 入口判定每条（改 Debug 面板 bool/int 复测）

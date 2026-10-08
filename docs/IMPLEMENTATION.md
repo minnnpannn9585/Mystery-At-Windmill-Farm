@@ -191,23 +191,23 @@ NPC 配置：`Assets/Data/GlobalData/NPCData_Config.lua`
 ## 5. Editor → Runtime 数据管线
 
 ```
-DialogueGraphEditorWindow（可视化编辑）
+DialogueGraphEditorWindow（菜单：Tools/Egg Rescue/Dialogue Editor）
     ↓ 导出
 Assets/Editor/DialogueData/*.lua          ← 编辑源
     ↓ Tools/Egg Rescue/Publish Editor to Data
-Assets/Data/DialogueData/*.lua            ← 运行时副本
-    ↓ 挂到 Scene
-DialogueData/{模块名} 上的 DouyinScript
+Assets/Data/DialogueData/*.lua            ← 转换源
+    ↓ Tools/Egg Rescue/PC/Convert Lua Data To JSON
+Assets/Resources/GameData/Dialogue        ← PC 运行时
 
-NPCAssetManagerWindow（菜单：抖音虚拟创作SDK / NpcEditor）
+NPCAssetManagerWindow（菜单：Tools/Egg Rescue/NPC Editor）
     ↓ 导出
 Assets/Editor/EditData/NPCData_Config.lua
 Assets/Editor/EditData/GlobalVariables.lua
     ↓ Publish
 Assets/Data/GlobalData/NPCData_Config.lua
 Assets/Data/GlobalData/GlobalVariables.lua
-    ↓ 挂到
-GlobalVariables 物体上的 DouyinScript
+    ↓ Convert Lua Data To JSON
+Assets/Resources/GameData/
 ```
 
 ### 5.1 一键发布
@@ -218,7 +218,7 @@ Unity 菜单 **`Tools/Egg Rescue/Publish Editor to Data`**（`EggRescuePublishMe
 2. 复制 `Editor/EditData/NPCData_Config.lua` → `Data/GlobalData/`，去掉 leading `local `
 3. 复制 `Editor/EditData/GlobalVariables.lua` → `Data/GlobalData/`，去掉 `local` + `return`
 
-可选：**`Tools/Egg Rescue/Refresh Scene DialogueData`** — 刷新 Scene 中 DialogueData 子物体。
+然后执行 **`Tools/Egg Rescue/PC/Convert Lua Data To JSON`**，写入 `Assets/Resources/GameData/`。PC 运行时读这份 JSON。
 
 ### 5.2 发布 Checklist
 
@@ -228,15 +228,15 @@ Unity 菜单 **`Tools/Egg Rescue/Publish Editor to Data`**（`EggRescuePublishMe
 | 2 | NPC / 变量保存到 `Assets/Editor/EditData/` |
 | 3 | 执行 **Publish Editor to Data** |
 | 4 | `python3 MissingEggDoc-main/scripts/validate_lua_vars.py` |
-| 5 | （大改）Refresh Scene DialogueData |
+| 5 | **Convert Lua Data To JSON** |
 | 6 | **Mechanics_Code** 点测 |
 | **7** | **`NpcDialogueManager.lua`：`DIALOGUE_DEBUG = false`**（打包 / Addressables 发布前） |
 
 完整流程见 [`DIALOGUE_PIPELINE.md`](./DIALOGUE_PIPELINE.md)。
 
-### 5.4 对话调试日志（World Debugger）
+### 5.4 对话调试日志
 
-排查 1-A→1-A′ 等分支问题时，在 **World Debugger → 调试** 面板搜 `[Dialogue]`、`[DialogueLoad]`（不是 Unity Play Console）。
+PC 运行时不使用抖音 World Debugger，日志在 Unity Console。下面是遗留 Lua 对照，过滤 `[Dialogue]`、`[DialogueLoad]`。
 
 | 位置 | 说明 |
 |------|------|
@@ -256,7 +256,7 @@ Unity 菜单 **`Tools/Egg Rescue/Publish Editor to Data`**（`EggRescuePublishMe
 
 E03 偷听：`npcname=E03_Eavesdrop`，`zttTouTing.lua` 内容不变。
 
-**改对话流程**：编辑对话图 → 导出 lua → **Publish** → （可选）Refresh Scene。
+**改对话流程**：编辑对话图 → 导出 lua → **Publish** → **Convert Lua Data To JSON**。
 
 **改变量流程**：改 [doc 17](../MissingEggDoc-main/docs/17-全局游戏状态变量.md) → 改 `Editor/EditData/GlobalVariables.lua` → 改对话 / ClueTrigger → **Publish** → 跑 `validate_lua_vars.py`。
 

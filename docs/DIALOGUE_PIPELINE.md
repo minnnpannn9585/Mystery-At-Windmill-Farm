@@ -32,7 +32,7 @@ flowchart LR
 |------|------|
 | `Assets/Editor/DialogueData/` | 定稿 / 手工编辑源 |
 | `Assets/Editor/DialogueData/FROM_DOC/` | 树状生成稿（`*_FROM_DOC.lua`） |
-| `Assets/Data/DialogueData/` | 运行时 DouyinScript（含 `FROM_DOC/` 子目录） |
+| `Assets/Data/DialogueData/` | 转换源（含 `FROM_DOC/`）；PC 运行时读 JSON |
 | `Assets/Editor/EditData/` | NPCData / GlobalVariables 编辑源 |
 | `Assets/Data/GlobalData/` | 运行时 NPC / 变量配置 |
 
@@ -40,14 +40,14 @@ flowchart LR
 
 ## 2. 日常改对话（已有 lua）
 
-1. Unity 打开 **DialogueGraphEditorWindow**，导入 `Assets/Editor/DialogueData/{文件}.lua`
+1. 菜单 **`Tools/Egg Rescue/Dialogue Editor`** 打开对话图，导入 `Assets/Editor/DialogueData/{文件}.lua`
 2. 在图中微调节点、选项、变量
 3. **导出** 覆盖 Editor 副本
 4. 菜单 **`Tools/Egg Rescue/Publish Editor to Data`**
-5. （可选）**`Tools/Egg Rescue/Refresh Scene DialogueData`** 刷新 Scene 子物体 DouyinScript
+5. 菜单 **`Tools/Egg Rescue/PC/Convert Lua Data To JSON`**
 6. 运行 **Mechanics_Code** 验证
 
-> **不要**只改 Editor 而不 Publish — Scene 读的是 `Assets/Data/`。
+> **不要**只改 Editor 而不 Publish、不转换 — PC 运行时读的是 `Assets/Resources/GameData/`。
 
 ---
 
@@ -121,12 +121,12 @@ python3 MissingEggDoc-main/scripts/validate_lua_vars.py
 - [ ] **`VAR_DEBUG_UI_ENABLED = false`**、**`KEEP_NPC_BRANCH_FOR_TEST = false`**（[`GlobalVariablesManager.lua`](../Assets/luaScripts/GlobalVariablesManager.lua)；开发测 UI/分支，发布前必关）
 - [ ] 执行 **`Tools/Egg Rescue/Publish Editor to Data`**
 - [ ] `validate_lua_vars.py` 通过
-- [ ] （大改时）Refresh Scene DialogueData
+- [ ] **`Tools/Egg Rescue/PC/Convert Lua Data To JSON`**
 - [ ] **Mechanics_Code** 点测相关 NPC / E 点
 
-### 6.1 对话调试日志（World Debugger，非 Unity Console）
+### 6.1 对话调试日志
 
-开发时在 **抖音虚拟资产调试器 → 调试** 标签页查看，过滤 `[Dialogue]` / `[DialogueLoad]`：
+PC 运行时不使用抖音调试器。C# 对话日志在 Unity Console。下面是遗留 Lua 对照，过滤 `[Dialogue]` / `[DialogueLoad]`：
 
 | 开关 / 文件 | 作用 |
 |-------------|------|

@@ -51,7 +51,7 @@ public class NPCAssetManagerWindow : EditorWindow
     private Color themeCardBg = new Color(0.21f, 0.22f, 0.23f);
     private Color themeAccentLine = new Color(0.95f, 0.41f, 0.12f); 
 
-    [MenuItem("抖音虚拟创作SDK/NpcEditor")]
+    [MenuItem("Tools/Egg Rescue/NPC Editor")]
     public static void ShowWindow()
     {
         NPCAssetManagerWindow window = GetWindow<NPCAssetManagerWindow>("NPCEdit");

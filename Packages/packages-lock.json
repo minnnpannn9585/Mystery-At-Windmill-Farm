@@ -130,13 +130,6 @@
       },
       "url": "https://packages.tuanjie.cn"
     },
-    "com.unity.collab-proxy": {
-      "version": "2.5.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.tuanjie.cn"
-    },
     "com.unity.collections": {
       "version": "1.2.4",
       "depth": 2,
