@@ -24,7 +24,17 @@ namespace EggRescue
         [SerializeField] string[] portraitKeys;
 
         const float TypingSpeed = 0.05f;
-        const float OptionAnimSpeed = 0.2f;
+        const float PanelInDuration = 0.2f;
+        const float PanelOutDuration = 0.16f;
+        const float PanelSlide = 18f;
+        const float OptionFadeDuration = 0.12f;
+        const float NextFadeDuration = 0.14f;
+        const float NextBobAmp = 6f;
+        const float NextBobPeriod = 1.5f;
+        const float NextBobCycles = 2f;
+        const float PortraitFadeDuration = 0.16f;
+        const float NameFadeDuration = 0.12f;
+        const float MarkPopDuration = 0.14f;
 
         int _currentId = -1;
         DialogueGraph _graph;
@@ -37,8 +47,33 @@ namespace EggRescue
         string _sourceText = "";
         string _speakerSource = "";
         bool _animatingOptions;
-        float _optionAnimTimer;
-        int _optionAnimIndex;
+        float _optionClock;
+        readonly List<OptionFade> _optionFades = new List<OptionFade>();
+        CanvasGroup _panelGroup;
+        RectTransform _panelRect;
+        Vector2 _panelRest;
+        bool _panelRestReady;
+        int _panelMotion;
+        float _panelT;
+        float _panelFromAlpha;
+        float _panelFromY;
+        CanvasGroup _nextGroup;
+        RectTransform _nextRect;
+        Vector2 _nextRest;
+        bool _nextRestReady;
+        bool _nextBobbing;
+        bool _nextFading;
+        float _nextBobT;
+        float _nextFadeT;
+        CanvasGroup _softGroup;
+        float _softT;
+        string _softKey;
+        CanvasGroup _nameFade;
+        float _nameFadeT;
+        Transform _markTrans;
+        Vector3 _markBase;
+        float _markT;
+        bool _markPopping;
         DialogueOption _selectedOption;
         bool _waitingNextAfterOption;
         readonly HashSet<string> _unlockedCache = new HashSet<string>();
@@ -70,11 +105,12 @@ namespace EggRescue
             Instance = this;
             BindMissingUi();
             RebuildPortraitMap();
+            EnsurePanel();
+            EnsureNextRest();
             if (dialoguePanel != null) dialoguePanel.SetActive(false);
             if (playerPanel != null) playerPanel.SetActive(false);
             if (playerNamePanel != null) playerNamePanel.SetActive(false);
-            if (next != null)
-                next.gameObject.SetActive(false);
+            SetNextVisible(false);
             if (playerPanelBtn != null) playerPanelBtn.gameObject.SetActive(false);
         }
 
@@ -142,7 +178,7 @@ namespace EggRescue
             if (GetNode(actual) == null) return;
             _currentId = actual;
             _blockAdvanceFrame = Time.frameCount;
-            if (dialoguePanel != null) dialoguePanel.SetActive(true);
+            PresentPanel();
             GameEvents.RaiseDialogueStarted();
             AudioDirector.PlayAudio("audio_hello");
             UpdateDialogueUi();
@@ -159,7 +195,7 @@ namespace EggRescue
             SetPlayerNamePanel(false);
             _currentId = nodeId;
             _blockAdvanceFrame = Time.frameCount;
-            if (dialoguePanel != null) dialoguePanel.SetActive(true);
+            PresentPanel();
             GameEvents.RaiseDialogueStarted();
             UpdateDialogueUi();
             return true;
@@ -234,7 +270,7 @@ namespace EggRescue
             _current = GetNode(_currentId);
             if (_current == null) { EndDialogue(); return; }
             ApplyNodeSideEffects(_current);
-            if (next != null) next.gameObject.SetActive(false);
+            SetNextVisible(false);
             if (playerPanel != null) playerPanel.SetActive(false);
             ClearOptionButtons();
             UpdateNpcInfo(_current);
@@ -330,11 +366,7 @@ namespace EggRescue
             {
                 SetPlayerNamePanel(true);
                 if (npcName != null) npcName.text = GameLocale.Name("玩家");
-                if (next != null)
-                {
-                    next.gameObject.SetActive(true);
-                    next.interactable = true;
-                }
+                SetNextVisible(true);
                 return;
             }
             if (_current == null) return;
@@ -348,17 +380,13 @@ namespace EggRescue
             if (playerPanel != null) playerPanel.SetActive(false);
             ClearOptionButtons();
             ApplyNamePanel(_current != null ? _current.NpcName : null);
-            if (next != null)
-            {
-                next.gameObject.SetActive(true);
-                next.interactable = true;
-            }
+            SetNextVisible(true);
         }
 
         void ShowQuestionUi(DialogueNode data)
         {
             _waitingChoice = true;
-            if (next != null) next.gameObject.SetActive(false);
+            SetNextVisible(false);
             if (playerPanel != null) playerPanel.SetActive(true);
             ApplyNamePanel(data != null ? data.NpcName : null);
             _options.Clear();
@@ -401,7 +429,10 @@ namespace EggRescue
             {
                 var option = _options[i];
                 var go = Instantiate(playerPanelBtn.gameObject, playerPanel.transform);
-                go.SetActive(false);
+                var group = GetGroup(go);
+                group.alpha = 0f;
+                group.blocksRaycasts = false;
+                go.SetActive(true);
                 var label = go.GetComponentInChildren<Text>();
                 if (label != null) label.text = GameLocale.Line(option.Text);
                 var rect = go.GetComponent<RectTransform>();
@@ -412,24 +443,24 @@ namespace EggRescue
                     var captured = option;
                     btn.onClick.AddListener(() => OnOptionSelected(captured));
                 }
+                _optionFades.Add(new OptionFade { Group = group });
                 _optionButtons.Add(go);
             }
-            _animatingOptions = true;
-            _optionAnimTimer = 0f;
-            _optionAnimIndex = 0;
+            _animatingOptions = _optionFades.Count > 0;
+            _optionClock = 0f;
         }
 
         void CompleteOptionAnimation()
         {
             _animatingOptions = false;
-            for (var i = 0; i < _optionButtons.Count; i++)
-            {
-                if (_optionButtons[i] != null) _optionButtons[i].SetActive(true);
-            }
+            for (var i = 0; i < _optionFades.Count; i++)
+                ApplyOptionFade(_optionFades[i], 1f);
         }
 
         void ClearOptionButtons()
         {
+            _animatingOptions = false;
+            _optionFades.Clear();
             for (var i = 0; i < _optionButtons.Count; i++)
             {
                 if (_optionButtons[i] != null) Destroy(_optionButtons[i]);
@@ -444,7 +475,7 @@ namespace EggRescue
             _waitingChoice = false;
             if (playerPanel != null) playerPanel.SetActive(false);
             ClearOptionButtons();
-            if (next != null) next.gameObject.SetActive(false);
+            SetNextVisible(false);
             if (IsPlayerFirstAfterOption(option))
             {
                 PerformOptionJump(option, true);
@@ -548,8 +579,8 @@ namespace EggRescue
             _speakerSource = speaker;
             if (string.IsNullOrEmpty(speaker) || speaker == "描述")
             {
-                if (playerNamePanel != null) playerNamePanel.SetActive(false);
-                if (npcNamePanel != null) npcNamePanel.SetActive(false);
+                RevealName(playerNamePanel, false);
+                RevealName(npcNamePanel, false);
                 return;
             }
             var isPlayer = speaker == "玩家";
@@ -558,10 +589,10 @@ namespace EggRescue
             else if (npcName != null && isPlayer) npcName.text = GameLocale.Name("玩家");
         }
 
-        void SetPlayerNamePanel(bool active)
+        void SetPlayerNamePanel(bool playerSpeaking)
         {
-            if (playerNamePanel != null) playerNamePanel.SetActive(active);
-            if (npcNamePanel != null) npcNamePanel.SetActive(!active);
+            RevealName(playerNamePanel, playerSpeaking);
+            RevealName(npcNamePanel, !playerSpeaking);
         }
 
         string ResolvePlayerPortrait(DialogueNode data)
@@ -590,30 +621,40 @@ namespace EggRescue
             if (string.IsNullOrEmpty(spriteKey)) return false;
             if (speaker == "玩家")
             {
-                if (npcSprite != null) npcSprite.gameObject.SetActive(false);
+                HideImage(npcSprite);
                 if (playerSprite == null) { SetEmotionMarks(null); return false; }
+                var changed = _softKey != "玩家";
+                _softKey = "玩家";
                 playerSprite.gameObject.SetActive(true);
                 SetEmotionMarks(spriteKey);
+                SoftReveal(playerSprite, changed);
                 return true;
             }
             SetEmotionMarks(null);
-            if (playerSprite != null) playerSprite.gameObject.SetActive(false);
+            HideImage(playerSprite);
             Sprite sprite;
             if (npcSprite == null || !_portraits.TryGetValue(spriteKey, out sprite) || sprite == null)
             {
-                if (npcSprite != null) npcSprite.gameObject.SetActive(false);
+                HideImage(npcSprite);
                 return false;
             }
+            var portraitChanged = _softKey != spriteKey;
+            _softKey = spriteKey;
             npcSprite.sprite = sprite;
             npcSprite.gameObject.SetActive(true);
             if (speaker != "描述") _lastPortraitKey = spriteKey;
+            SoftReveal(npcSprite, portraitChanged);
             return true;
         }
 
         void SetEmotionMarks(string spriteKey)
         {
-            if (playerExclamation != null) playerExclamation.SetActive(spriteKey == "惊讶");
-            if (playerQuestion != null) playerQuestion.SetActive(spriteKey == "疑惑");
+            var exclaim = spriteKey == "惊讶";
+            var question = spriteKey == "疑惑";
+            if (!exclaim) SetMark(playerExclamation, false);
+            if (!question) SetMark(playerQuestion, false);
+            if (exclaim) SetMark(playerExclamation, true);
+            if (question) SetMark(playerQuestion, true);
         }
 
         void PlayPlayerEmotionSfx(string spriteKey)
@@ -638,9 +679,10 @@ namespace EggRescue
 
         void HideAllPortraits()
         {
-            if (npcSprite != null) npcSprite.gameObject.SetActive(false);
+            HideImage(npcSprite);
             SetEmotionMarks(null);
-            if (playerSprite != null) playerSprite.gameObject.SetActive(false);
+            HideImage(playerSprite);
+            _softKey = null;
         }
 
         public void EndDialogue()
@@ -655,21 +697,32 @@ namespace EggRescue
             _graph = null;
             _unlockedCache.Clear();
             _lastPortraitKey = null;
-            HideAllPortraits();
-            if (dialoguePanel != null) dialoguePanel.SetActive(false);
-            if (playerPanel != null) playerPanel.SetActive(false);
-            if (next != null) next.gameObject.SetActive(false);
-            ClearOptionButtons();
-            GameEvents.RaiseDialogueEnded();
-            if (chain != null && chain.ChainDialogue != null && !string.IsNullOrEmpty(chain.ChainDialogue.NpcName))
+            var chained = chain != null && chain.ChainDialogue != null && !string.IsNullOrEmpty(chain.ChainDialogue.NpcName);
+            if (chained)
+            {
+                HideAllPortraits();
+                if (playerPanel != null) playerPanel.SetActive(false);
+                SetNextVisible(false);
+                ClearOptionButtons();
+                GameEvents.RaiseDialogueEnded();
                 StartNpc(chain.ChainDialogue.NpcName, chain.ChainDialogue.StartId);
+                return;
+            }
+            BeginPanelOut();
+            GameEvents.RaiseDialogueEnded();
         }
 
         void Update()
         {
+            var dt = Time.deltaTime;
+            TickPanel(dt);
+            TickNext(dt);
+            TickPortrait(dt);
+            TickName(dt);
+            TickMark(dt);
             if (_typing)
             {
-                _typingTimer += Time.deltaTime;
+                _typingTimer += dt;
                 if (_typingTimer >= TypingSpeed)
                 {
                     _typingTimer = 0f;
@@ -680,21 +733,7 @@ namespace EggRescue
                         CompleteTyping();
                 }
             }
-            if (_animatingOptions)
-            {
-                _optionAnimTimer += Time.deltaTime;
-                if (_optionAnimTimer >= OptionAnimSpeed)
-                {
-                    _optionAnimTimer = 0f;
-                    _optionAnimIndex++;
-                    if (_optionAnimIndex <= _optionButtons.Count)
-                    {
-                        var btn = _optionButtons[_optionAnimIndex - 1];
-                        if (btn != null) btn.SetActive(true);
-                    }
-                    else _animatingOptions = false;
-                }
-            }
+            if (_animatingOptions) TickOptions(dt);
             if (_currentId < 0 || Time.frameCount == _blockAdvanceFrame || !AdvancePressed()) return;
             if (_waitingChoice)
             {
@@ -716,6 +755,340 @@ namespace EggRescue
         {
             int n;
             return int.TryParse(raw, out n) ? n : 0;
+        }
+
+        sealed class OptionFade
+        {
+            public CanvasGroup Group;
+        }
+
+        void PresentPanel()
+        {
+            if (dialoguePanel == null) return;
+            EnsurePanel();
+            if (_panelGroup == null) { dialoguePanel.SetActive(true); return; }
+            var settled = dialoguePanel.activeSelf && _panelMotion == 0 && _panelGroup.alpha > 0.98f;
+            if (settled)
+            {
+                _panelGroup.blocksRaycasts = true;
+                return;
+            }
+            if (!dialoguePanel.activeSelf || _panelGroup.alpha < 0.02f)
+            {
+                _panelFromAlpha = 0f;
+                _panelFromY = _panelRest.y - PanelSlide;
+            }
+            else
+            {
+                _panelFromAlpha = _panelGroup.alpha;
+                _panelFromY = _panelRect != null ? _panelRect.anchoredPosition.y : _panelRest.y;
+            }
+            dialoguePanel.SetActive(true);
+            _panelGroup.alpha = _panelFromAlpha;
+            _panelGroup.blocksRaycasts = true;
+            if (_panelRect != null)
+                _panelRect.anchoredPosition = new Vector2(_panelRest.x, _panelFromY);
+            _panelMotion = 1;
+            _panelT = 0f;
+        }
+
+        void BeginPanelOut()
+        {
+            if (dialoguePanel == null || !dialoguePanel.activeSelf)
+            {
+                FinishPanelOut();
+                return;
+            }
+            EnsurePanel();
+            if (_panelGroup == null)
+            {
+                FinishPanelOut();
+                return;
+            }
+            if (_panelMotion == 2) return;
+            if (_panelGroup.alpha < 0.02f)
+            {
+                FinishPanelOut();
+                return;
+            }
+            CancelSoftFades();
+            _panelFromAlpha = _panelGroup.alpha;
+            _panelFromY = _panelRect != null ? _panelRect.anchoredPosition.y : _panelRest.y;
+            _panelGroup.blocksRaycasts = false;
+            _panelMotion = 2;
+            _panelT = 0f;
+        }
+
+        void FinishPanelOut()
+        {
+            if (_currentId >= 0) return;
+            _panelMotion = 0;
+            HideAllPortraits();
+            if (playerPanel != null) playerPanel.SetActive(false);
+            SetNextVisible(false);
+            ClearOptionButtons();
+            if (_nameFade != null) { _nameFade.alpha = 1f; _nameFade = null; }
+            if (_panelGroup != null) _panelGroup.alpha = 0f;
+            if (_panelRect != null) _panelRect.anchoredPosition = _panelRest;
+            if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        }
+
+        void TickPanel(float dt)
+        {
+            if (_panelMotion == 0 || _panelGroup == null) return;
+            var dur = _panelMotion == 1 ? PanelInDuration : PanelOutDuration;
+            _panelT += dt;
+            var e = EaseOut(_panelT / dur);
+            if (_panelMotion == 1)
+            {
+                _panelGroup.alpha = Mathf.Lerp(_panelFromAlpha, 1f, e);
+                if (_panelRect != null)
+                    _panelRect.anchoredPosition = new Vector2(_panelRest.x, Mathf.Lerp(_panelFromY, _panelRest.y, e));
+                if (_panelT < dur) return;
+                _panelMotion = 0;
+                _panelGroup.alpha = 1f;
+                if (_panelRect != null) _panelRect.anchoredPosition = _panelRest;
+                if (!_nextBobbing && next != null && next.gameObject.activeSelf)
+                {
+                    _nextBobbing = true;
+                    _nextBobT = 0f;
+                }
+                return;
+            }
+            _panelGroup.alpha = Mathf.Lerp(_panelFromAlpha, 0f, e);
+            if (_panelRect != null)
+            {
+                var targetY = _panelFromY - PanelSlide * 0.65f;
+                _panelRect.anchoredPosition = new Vector2(_panelRest.x, Mathf.Lerp(_panelFromY, targetY, e));
+            }
+            if (_panelT < dur) return;
+            if (_currentId >= 0)
+            {
+                _panelMotion = 1;
+                _panelT = 0f;
+                _panelFromAlpha = _panelGroup.alpha;
+                _panelFromY = _panelRect != null ? _panelRect.anchoredPosition.y : _panelRest.y;
+                _panelGroup.blocksRaycasts = true;
+                return;
+            }
+            FinishPanelOut();
+        }
+
+        void EnsurePanel()
+        {
+            if (dialoguePanel == null) return;
+            var rect = dialoguePanel.GetComponent<RectTransform>();
+            if (_panelRestReady && _panelRect == rect) return;
+            _panelRect = rect;
+            _panelGroup = GetGroup(dialoguePanel);
+            if (_panelRect != null) _panelRest = _panelRect.anchoredPosition;
+            _panelRestReady = _panelRect != null;
+        }
+
+        void SetNextVisible(bool on)
+        {
+            if (next == null) return;
+            EnsureNextRest();
+            var was = next.gameObject.activeSelf;
+            next.gameObject.SetActive(on);
+            if (!on)
+            {
+                _nextBobbing = false;
+                _nextFading = false;
+                if (_nextRect != null) _nextRect.anchoredPosition = _nextRest;
+                if (_nextGroup != null) _nextGroup.alpha = 1f;
+                return;
+            }
+            next.interactable = true;
+            if (was) return;
+            _nextBobT = 0f;
+            _nextBobbing = _panelMotion == 0;
+            if (_panelMotion != 0 || _nextGroup == null)
+            {
+                _nextFading = false;
+                if (_nextGroup != null) _nextGroup.alpha = 1f;
+                return;
+            }
+            _nextFading = true;
+            _nextFadeT = 0f;
+            _nextGroup.alpha = 0f;
+        }
+
+        void EnsureNextRest()
+        {
+            if (_nextRestReady || next == null) return;
+            _nextRect = next.GetComponent<RectTransform>();
+            _nextGroup = GetGroup(next.gameObject);
+            if (_nextRect != null) _nextRest = _nextRect.anchoredPosition;
+            _nextRestReady = _nextRect != null;
+        }
+
+        void TickNext(float dt)
+        {
+            if (!_nextRestReady || next == null || !next.gameObject.activeSelf) return;
+            if (_nextFading && _nextGroup != null)
+            {
+                _nextFadeT += dt;
+                _nextGroup.alpha = EaseOut(_nextFadeT / NextFadeDuration);
+                if (_nextFadeT >= NextFadeDuration) _nextFading = false;
+            }
+            if (!_nextBobbing || _nextRect == null) return;
+            _nextBobT += dt;
+            if (_nextBobT >= NextBobPeriod * NextBobCycles)
+            {
+                _nextRect.anchoredPosition = _nextRest;
+                _nextBobbing = false;
+                return;
+            }
+            var y = Mathf.Sin(_nextBobT * (Mathf.PI * 2f / NextBobPeriod)) * NextBobAmp;
+            _nextRect.anchoredPosition = _nextRest + new Vector2(0f, y);
+        }
+
+        void TickOptions(float dt)
+        {
+            _optionClock += dt;
+            var t = _optionClock / OptionFadeDuration;
+            for (var i = 0; i < _optionFades.Count; i++)
+                ApplyOptionFade(_optionFades[i], t);
+            if (t >= 1f) _animatingOptions = false;
+        }
+
+        static void ApplyOptionFade(OptionFade fade, float t)
+        {
+            if (fade == null || fade.Group == null) return;
+            var e = EaseOut(t);
+            fade.Group.alpha = e;
+            fade.Group.blocksRaycasts = e > 0.35f;
+        }
+
+        void RevealName(GameObject go, bool on)
+        {
+            if (go == null) return;
+            if (go.activeSelf == on)
+                return;
+            go.SetActive(on);
+            var cg = GetGroup(go);
+            if (!on)
+            {
+                if (_nameFade == cg) _nameFade = null;
+                cg.alpha = 1f;
+                return;
+            }
+            if (_panelMotion != 0 || dialoguePanel == null || !dialoguePanel.activeSelf)
+            {
+                cg.alpha = 1f;
+                if (_nameFade == cg) _nameFade = null;
+                return;
+            }
+            cg.alpha = 0.4f;
+            _nameFade = cg;
+            _nameFadeT = 0f;
+        }
+
+        void TickName(float dt)
+        {
+            if (_nameFade == null) return;
+            _nameFadeT += dt;
+            _nameFade.alpha = Mathf.Lerp(0.4f, 1f, EaseOut(_nameFadeT / NameFadeDuration));
+            if (_nameFadeT >= NameFadeDuration) _nameFade = null;
+        }
+
+        void SoftReveal(Image img, bool changed)
+        {
+            if (img == null) return;
+            var cg = GetGroup(img.gameObject);
+            if (!changed || _panelMotion != 0)
+            {
+                if (_softGroup == cg) _softGroup = null;
+                cg.alpha = 1f;
+                return;
+            }
+            cg.alpha = 0.55f;
+            _softGroup = cg;
+            _softT = 0f;
+        }
+
+        void TickPortrait(float dt)
+        {
+            if (_softGroup == null) return;
+            _softT += dt;
+            _softGroup.alpha = Mathf.Lerp(0.55f, 1f, EaseOut(_softT / PortraitFadeDuration));
+            if (_softT >= PortraitFadeDuration) _softGroup = null;
+        }
+
+        void HideImage(Image img)
+        {
+            if (img == null) return;
+            var cg = img.GetComponent<CanvasGroup>();
+            if (cg != null)
+            {
+                if (_softGroup == cg) _softGroup = null;
+                cg.alpha = 1f;
+            }
+            img.gameObject.SetActive(false);
+        }
+
+        void SetMark(GameObject go, bool on)
+        {
+            if (go == null) return;
+            if (!on)
+            {
+                if (_markTrans == go.transform)
+                {
+                    _markTrans.localScale = _markBase;
+                    _markPopping = false;
+                    _markTrans = null;
+                }
+                go.SetActive(false);
+                return;
+            }
+            var was = go.activeSelf;
+            go.SetActive(true);
+            if (was || _panelMotion != 0) return;
+            _markTrans = go.transform;
+            _markBase = _markTrans.localScale;
+            _markT = 0f;
+            _markPopping = true;
+            _markTrans.localScale = _markBase * 0.88f;
+        }
+
+        void TickMark(float dt)
+        {
+            if (!_markPopping || _markTrans == null) return;
+            _markT += dt;
+            var e = EaseOut(_markT / MarkPopDuration);
+            _markTrans.localScale = Vector3.Lerp(_markBase * 0.88f, _markBase, e);
+            if (_markT < MarkPopDuration) return;
+            _markTrans.localScale = _markBase;
+            _markPopping = false;
+        }
+
+        void CancelSoftFades()
+        {
+            if (_softGroup != null)
+            {
+                _softGroup.alpha = 1f;
+                _softGroup = null;
+            }
+            if (_nameFade != null)
+            {
+                _nameFade.alpha = 1f;
+                _nameFade = null;
+            }
+        }
+
+        static CanvasGroup GetGroup(GameObject go)
+        {
+            var cg = go.GetComponent<CanvasGroup>();
+            if (cg == null) cg = go.AddComponent<CanvasGroup>();
+            return cg;
+        }
+
+        static float EaseOut(float t)
+        {
+            t = Mathf.Clamp01(t);
+            var inv = 1f - t;
+            return 1f - inv * inv * inv;
         }
 
         void BindMissingUi()
