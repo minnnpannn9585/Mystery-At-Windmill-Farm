@@ -20,6 +20,11 @@ namespace EggRescue
 
         static readonly Dictionary<string, PathState> Paths = new Dictionary<string, PathState>();
 
+        public static void ResetPaths()
+        {
+            Paths.Clear();
+        }
+
         void Start()
         {
             PathState path;

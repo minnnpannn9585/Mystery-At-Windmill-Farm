@@ -12,7 +12,7 @@
     },
     {
       "key": "menu.start",
-      "zh": "开始游戏",
+      "zh": "新游戏",
       "en": "New Game"
     },
     {
@@ -82,13 +82,13 @@
     },
     {
       "key": "menu.confirm_body",
-      "zh": "已有存档会保留，直到你在游戏里按 F5 再次保存。",
-      "en": "Your save stays until you press F5 in the game."
+      "zh": "这会覆盖已有存档，旧的调查进度会丢失。",
+      "en": "This overwrites your save. The old progress will be lost."
     },
     {
       "key": "menu.confirm_ok",
-      "zh": "开始",
-      "en": "Start"
+      "zh": "覆盖并开始",
+      "en": "Overwrite"
     },
     {
       "key": "menu.confirm_cancel",
@@ -104,6 +104,46 @@
       "key": "menu.lang_en",
       "zh": "English",
       "en": "English"
+    },
+    {
+      "key": "menu.credits",
+      "zh": "制作人员",
+      "en": "Credits"
+    },
+    {
+      "key": "menu.credits_body",
+      "zh": "策划与叙事\n程序\n美术\n音乐与音效\n\n《风车农场悬案》制作组",
+      "en": "Design & Story\nProgramming\nArt\nMusic & Sound\n\nMystery at Windmill Farm"
+    },
+    {
+      "key": "pause.title",
+      "zh": "暂停",
+      "en": "Paused"
+    },
+    {
+      "key": "pause.resume",
+      "zh": "返回游戏",
+      "en": "Resume"
+    },
+    {
+      "key": "pause.save",
+      "zh": "保存进度",
+      "en": "Save"
+    },
+    {
+      "key": "pause.main_menu",
+      "zh": "返回主菜单",
+      "en": "Main Menu"
+    },
+    {
+      "key": "pause.saved",
+      "zh": "进度已保存",
+      "en": "Progress saved"
+    },
+    {
+      "key": "pause.save_failed",
+      "zh": "保存失败",
+      "en": "Couldn't save"
     },
     {
       "key": "prompt.interact",

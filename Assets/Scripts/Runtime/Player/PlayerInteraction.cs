@@ -1,5 +1,5 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace EggRescue
 {
@@ -7,11 +7,11 @@ namespace EggRescue
     {
         [SerializeField] float rayDistance = 3.5f;
         [SerializeField] LayerMask mask = ~0;
-        [SerializeField] Text promptText;
+        [SerializeField] TMP_Text promptText;
 
         Interactable _current;
 
-        public void SetPromptLabel(Text label) { promptText = label; }
+        public void SetPromptLabel(TMP_Text label) { promptText = label; }
 
         void Update()
         {
@@ -90,6 +90,7 @@ namespace EggRescue
             {
                 promptText.gameObject.SetActive(true);
                 promptText.text = string.IsNullOrEmpty(next.Prompt) ? GameLocale.T("prompt.interact") : GameLocale.Line(next.Prompt);
+                promptText.ForceMeshUpdate();
             }
         }
     }

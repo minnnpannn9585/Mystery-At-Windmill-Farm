@@ -12,7 +12,6 @@ namespace EggRescue
     /// </summary>
     public sealed class StartMenuController : MonoBehaviour
     {
-        static readonly Color Meadow = new Color(0.13f, 0.22f, 0.16f, 1f);
         static readonly Color Paper = new Color(0.95f, 0.91f, 0.82f, 1f);
         static readonly Color Ink = new Color(0.14f, 0.23f, 0.16f, 1f);
         static readonly Color InkSoft = new Color(0.35f, 0.40f, 0.31f, 1f);
@@ -21,9 +20,6 @@ namespace EggRescue
         static readonly Color ButtonHighlight = new Color(0.26f, 0.45f, 0.30f, 1f);
         static readonly Color ButtonPressed = new Color(0.12f, 0.22f, 0.15f, 1f);
 
-        const float ButtonWidth = 400f;
-        const float ButtonHeight = 64f;
-
         static Sprite _white;
         static Sprite _panelSprite;
         static bool _panelSliced;
@@ -31,12 +27,14 @@ namespace EggRescue
         Button _start;
         Button _load;
         Button _settings;
+        Button _credits;
         Button _quit;
-        TMP_Text _hint;
         Button _langZh;
         Button _langEn;
         GameObject _settingsRoot;
+        GameObject _creditsRoot;
         GameObject _confirmRoot;
+        bool _pressLock;
         Slider _volumeSlider;
         Slider _sensitivitySlider;
         TMP_Text _volumeValue;
@@ -67,8 +65,9 @@ namespace EggRescue
             GameSettings.Load();
             CachePanelSprite();
             var font = ResolveFont();
-            Arrange(font);
+            BindSceneButtons();
             BuildSettings(font);
+            BuildCredits(font);
             BuildConfirm(font);
             Wire();
             RefreshSaveState();
@@ -94,151 +93,58 @@ namespace EggRescue
         {
             if (!Input.GetKeyDown(KeyCode.Escape)) return;
             if (_confirmRoot != null && _confirmRoot.activeSelf) SetOpen(_confirmRoot, false);
+            else if (_creditsRoot != null && _creditsRoot.activeSelf) SetOpen(_creditsRoot, false);
             else if (_settingsRoot != null && _settingsRoot.activeSelf) SetOpen(_settingsRoot, false);
         }
 
-        void Arrange(TMP_FontAsset font)
+        void BindSceneButtons()
         {
-            var bg = transform.Find("Background");
-            if (bg == null) bg = transform.Find("Image");
-            if (bg != null)
-            {
-                bg.name = "Background";
-                Stretch(bg.GetComponent<RectTransform>());
-                var image = bg.GetComponent<Image>();
-                if (image != null)
-                {
-                    image.color = Meadow;
-                    image.raycastTarget = false;
-                    if (image.sprite == null)
-                        image.sprite = WhiteSprite();
-                }
-            }
-
-            EnsureCard();
-            EnsureLabel("Title", "menu.title", new Vector2(0f, 268f), new Vector2(560f, 90f), 64f, Ink, font, 8f);
-            EnsureLabel("Subtitle", "menu.subtitle", new Vector2(0f, 168f), new Vector2(560f, 40f), 26f, InkSoft, font, 2f);
-            _start = LayoutButton("StartButton", "menu.start", 72f, font);
-            _load = LayoutButton("LoadButton", "menu.continue", -16f, font);
-            _settings = LayoutButton("SettingButton", "menu.settings", -104f, font);
-            _quit = LayoutButton("QuitButton", "menu.quit", -192f, font);
-            _hint = EnsureLabel("Hint", null, new Vector2(0f, -278f), new Vector2(520f, 36f), 22f, InkSoft, font, 0f);
-            EnsureLabel("Controls", "menu.controls", new Vector2(0f, -340f), new Vector2(540f, 32f), 18f, InkSoft, font, 1f);
+            _start = BindSceneButton("StartButton", "menu.start");
+            _load = BindSceneButton("LoadButton", "menu.continue");
+            _settings = BindSceneButton("SettingButton", "menu.settings");
+            _credits = BindSceneButton("CreditsButton", "menu.credits");
+            _quit = BindSceneButton("QuitButton", "menu.quit");
         }
 
-        void EnsureCard()
-        {
-            var existing = transform.Find("MenuCard");
-            RectTransform rt;
-            Image image;
-            if (existing == null)
-            {
-                var go = new GameObject("MenuCard", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-                go.transform.SetParent(transform, false);
-                go.transform.SetSiblingIndex(1);
-                rt = go.GetComponent<RectTransform>();
-                image = go.GetComponent<Image>();
-            }
-            else
-            {
-                rt = existing.GetComponent<RectTransform>();
-                image = existing.GetComponent<Image>();
-            }
-            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.pivot = new Vector2(0.5f, 0.5f);
-            rt.anchoredPosition = new Vector2(0f, -10f);
-            rt.sizeDelta = new Vector2(620f, 780f);
-            if (image == null) return;
-            image.color = Paper;
-            image.raycastTarget = false;
-            if (image.sprite == null)
-                ApplyPanelSprite(image);
-        }
-
-        TMP_Text EnsureLabel(string name, string key, Vector2 pos, Vector2 size, float fontSize, Color color, TMP_FontAsset font, float spacing)
-        {
-            var existing = transform.Find(name);
-            TMP_Text label;
-            RectTransform rt;
-            if (existing == null)
-            {
-                var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
-                go.transform.SetParent(transform, false);
-                label = go.GetComponent<TextMeshProUGUI>();
-                rt = go.GetComponent<RectTransform>();
-            }
-            else
-            {
-                rt = existing.GetComponent<RectTransform>();
-                label = existing.GetComponent<TMP_Text>();
-                if (label == null) label = existing.gameObject.AddComponent<TextMeshProUGUI>();
-            }
-            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.pivot = new Vector2(0.5f, 0.5f);
-            rt.anchoredPosition = pos;
-            rt.sizeDelta = size;
-            label.fontSize = fontSize;
-            label.color = color;
-            label.alignment = TextAlignmentOptions.Center;
-            label.characterSpacing = spacing;
-            label.raycastTarget = false;
-            label.enableWordWrapping = true;
-            if (font != null) label.font = font;
-            Bind(label, key);
-            return label;
-        }
-
-        Button LayoutButton(string name, string key, float y, TMP_FontAsset font)
+        Button BindSceneButton(string name, string key)
         {
             var go = GameObject.Find(name);
             if (go == null) return null;
-            var button = go.GetComponent<Button>();
-            var rt = go.GetComponent<RectTransform>();
-            if (rt != null)
-            {
-                rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-                rt.pivot = new Vector2(0.5f, 0.5f);
-                rt.anchoredPosition = new Vector2(0f, y);
-                rt.sizeDelta = new Vector2(ButtonWidth, ButtonHeight);
-            }
-            if (button != null)
-            {
-                var colors = button.colors;
-                colors.normalColor = ButtonNormal;
-                colors.highlightedColor = ButtonHighlight;
-                colors.pressedColor = ButtonPressed;
-                colors.selectedColor = ButtonHighlight;
-                colors.disabledColor = new Color(ButtonNormal.r, ButtonNormal.g, ButtonNormal.b, 0.35f);
-                colors.fadeDuration = 0.08f;
-                button.colors = colors;
-            }
             var label = go.GetComponentInChildren<TMP_Text>();
-            if (label != null)
-            {
-                label.fontSize = 30f;
-                label.color = Cream;
-                label.alignment = TextAlignmentOptions.Center;
-                label.raycastTarget = false;
-                if (font != null) label.font = font;
-                Bind(label, key);
-            }
-            return button;
+            if (label != null) Bind(label, key);
+            return go.GetComponent<Button>();
         }
 
         void Wire()
         {
-            if (_start != null) _start.onClick.AddListener(OnStart);
-            if (_load != null) _load.onClick.AddListener(OnContinue);
-            if (_settings != null) _settings.onClick.AddListener(OpenSettings);
-            if (_quit != null) _quit.onClick.AddListener(QuitGame);
+            Press(_start, OnStart);
+            Press(_load, OnContinue);
+            Press(_settings, OpenSettings);
+            Press(_credits, OpenCredits);
+            Press(_quit, QuitGame);
+        }
+
+        void Press(Button button, UnityEngine.Events.UnityAction action)
+        {
+            if (button == null || action == null) return;
+            var motion = button.GetComponent<MenuButtonMotion>();
+            if (motion == null) motion = button.gameObject.AddComponent<MenuButtonMotion>();
+            button.onClick.AddListener(() =>
+            {
+                if (_pressLock || _entering) return;
+                _pressLock = true;
+                motion.Play(() =>
+                {
+                    _pressLock = false;
+                    action();
+                });
+            });
         }
 
         void RefreshSaveState()
         {
             var hasSave = SaveService.Exists();
             if (_load != null) _load.interactable = hasSave;
-            if (_hint == null) return;
-            _hint.text = GameLocale.T(hasSave ? "menu.save_ready" : "menu.no_save");
         }
 
         void OnStart()
@@ -248,6 +154,12 @@ namespace EggRescue
                 SetOpen(_confirmRoot, true);
                 return;
             }
+            EnterGame(GameSession.Mode.NewGame);
+        }
+
+        void ConfirmNewGame()
+        {
+            if (!SaveService.WriteNewGame()) return;
             EnterGame(GameSession.Mode.NewGame);
         }
 
@@ -267,7 +179,6 @@ namespace EggRescue
             if (!Application.CanStreamedLevelBeLoaded(GameSession.GameSceneName))
             {
                 SetOpen(_confirmRoot, false);
-                if (_hint != null) _hint.text = GameLocale.T("menu.missing_scene");
                 Debug.LogError("[StartMenu] Build Settings 缺少 " + GameSession.GameSceneName);
                 return;
             }
@@ -296,15 +207,18 @@ namespace EggRescue
         void BuildSettings(TMP_FontAsset font)
         {
             _settingsRoot = CreateOverlay("SettingsOverlay");
-            var card = CreatePaper(_settingsRoot.transform, new Vector2(640f, 520f));
-            AddLabel(card, "menu.settings_title", new Vector2(0f, 190f), new Vector2(480f, 60f), 40f, Ink, font);
-            AddLabel(card, "menu.volume", new Vector2(-150f, 110f), new Vector2(160f, 36f), 24f, Ink, font);
-            AddLabel(card, "menu.sensitivity", new Vector2(-150f, 10f), new Vector2(220f, 36f), 24f, Ink, font);
-            AddLabel(card, "menu.language", new Vector2(-150f, -90f), new Vector2(160f, 36f), 24f, Ink, font);
-            _volumeValue = AddLabel(card, null, new Vector2(220f, 110f), new Vector2(80f, 36f), 22f, InkSoft, font);
-            _sensitivityValue = AddLabel(card, null, new Vector2(220f, 10f), new Vector2(80f, 36f), 22f, InkSoft, font);
-            _volumeSlider = CreateSlider(card, new Vector2(40f, 68f), 0f, 1f, GameSettings.MasterVolume);
-            _sensitivitySlider = CreateSlider(card, new Vector2(40f, -32f), 0.6f, 5f, GameSettings.MouseSensitivity);
+            var card = CreatePaper(_settingsRoot.transform, new Vector2(760f, 700f), true);
+            AddLabel(card, "menu.settings_title", new Vector2(0f, 286f), new Vector2(640f, 72f), 44f, Ink, font);
+            AddPlate(card, new Vector2(0f, 150f), new Vector2(660f, 132f));
+            AddPlate(card, new Vector2(0f, -10f), new Vector2(660f, 132f));
+            AddPlate(card, new Vector2(0f, -176f), new Vector2(660f, 148f));
+            AddLabel(card, "menu.volume", new Vector2(-210f, 188f), new Vector2(300f, 40f), 26f, Ink, font, TextAlignmentOptions.Left);
+            AddLabel(card, "menu.sensitivity", new Vector2(-210f, 28f), new Vector2(300f, 40f), 26f, Ink, font, TextAlignmentOptions.Left);
+            AddLabel(card, "menu.language", new Vector2(-210f, -128f), new Vector2(300f, 40f), 26f, Ink, font, TextAlignmentOptions.Left);
+            _volumeValue = AddLabel(card, null, new Vector2(250f, 188f), new Vector2(120f, 40f), 26f, InkSoft, font, TextAlignmentOptions.Right);
+            _sensitivityValue = AddLabel(card, null, new Vector2(250f, 28f), new Vector2(120f, 40f), 26f, InkSoft, font, TextAlignmentOptions.Right);
+            _volumeSlider = CreateSlider(card, new Vector2(0f, 118f), 0f, 1f, GameSettings.MasterVolume);
+            _sensitivitySlider = CreateSlider(card, new Vector2(0f, -42f), 0.6f, 5f, GameSettings.MouseSensitivity);
             _volumeSlider.onValueChanged.AddListener(value =>
             {
                 GameSettings.SetMasterVolume(value);
@@ -315,26 +229,42 @@ namespace EggRescue
                 GameSettings.SetMouseSensitivity(value);
                 RefreshSettingLabels();
             });
-            _langZh = CreateButton(card, "menu.lang_zh", new Vector2(-90f, -140f), new Vector2(160f, 52f), font);
-            _langEn = CreateButton(card, "menu.lang_en", new Vector2(90f, -140f), new Vector2(160f, 52f), font);
-            _langZh.onClick.AddListener(() => GameLocale.Set(GameLocale.Chinese));
-            _langEn.onClick.AddListener(() => GameLocale.Set(GameLocale.English));
-            var back = CreateButton(card, "menu.back", new Vector2(0f, -210f), new Vector2(220f, 56f), font);
-            back.onClick.AddListener(() => SetOpen(_settingsRoot, false));
+            _langZh = CreateButton(card, "menu.lang_zh", new Vector2(-110f, -198f), new Vector2(200f, 56f), font, true);
+            _langEn = CreateButton(card, "menu.lang_en", new Vector2(110f, -198f), new Vector2(200f, 56f), font, true);
+            Press(_langZh, () => GameLocale.Set(GameLocale.Chinese));
+            Press(_langEn, () => GameLocale.Set(GameLocale.English));
+            var back = CreateButton(card, "menu.back", new Vector2(0f, -292f), new Vector2(260f, 60f), font, true);
+            Press(back, () => SetOpen(_settingsRoot, false));
             RefreshSettingLabels();
             RefreshLanguageButtons();
+        }
+
+        void BuildCredits(TMP_FontAsset font)
+        {
+            _creditsRoot = CreateOverlay("CreditsOverlay");
+            var card = CreatePaper(_creditsRoot.transform, new Vector2(720f, 620f), true);
+            AddLabel(card, "menu.credits", new Vector2(0f, 230f), new Vector2(560f, 72f), 44f, Ink, font);
+            var body = AddLabel(card, "menu.credits_body", new Vector2(0f, 20f), new Vector2(560f, 320f), 30f, InkSoft, font);
+            body.lineSpacing = 16f;
+            var back = CreateButton(card, "menu.back", new Vector2(0f, -230f), new Vector2(260f, 60f), font, true);
+            Press(back, () => SetOpen(_creditsRoot, false));
+        }
+
+        void OpenCredits()
+        {
+            SetOpen(_creditsRoot, true);
         }
 
         void BuildConfirm(TMP_FontAsset font)
         {
             _confirmRoot = CreateOverlay("ConfirmOverlay");
-            var card = CreatePaper(_confirmRoot.transform, new Vector2(640f, 360f));
+            var card = CreatePaper(_confirmRoot.transform, new Vector2(640f, 360f), true);
             AddLabel(card, "menu.confirm_title", new Vector2(0f, 90f), new Vector2(520f, 56f), 36f, Ink, font);
             AddLabel(card, "menu.confirm_body", new Vector2(0f, 20f), new Vector2(520f, 72f), 22f, InkSoft, font);
-            var ok = CreateButton(card, "menu.confirm_ok", new Vector2(-120f, -100f), new Vector2(180f, 56f), font);
-            var cancel = CreateButton(card, "menu.confirm_cancel", new Vector2(120f, -100f), new Vector2(180f, 56f), font);
-            ok.onClick.AddListener(() => EnterGame(GameSession.Mode.NewGame));
-            cancel.onClick.AddListener(() => SetOpen(_confirmRoot, false));
+            var ok = CreateButton(card, "menu.confirm_ok", new Vector2(-120f, -100f), new Vector2(180f, 56f), font, true);
+            var cancel = CreateButton(card, "menu.confirm_cancel", new Vector2(120f, -100f), new Vector2(180f, 56f), font, true);
+            Press(ok, ConfirmNewGame);
+            Press(cancel, () => SetOpen(_confirmRoot, false));
         }
 
         void RefreshSettingLabels()
@@ -365,7 +295,7 @@ namespace EggRescue
             return go;
         }
 
-        static RectTransform CreatePaper(Transform parent, Vector2 size)
+        static RectTransform CreatePaper(Transform parent, Vector2 size, bool solid = false)
         {
             var go = new GameObject("Paper", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(parent, false);
@@ -375,11 +305,28 @@ namespace EggRescue
             rt.sizeDelta = size;
             var image = go.GetComponent<Image>();
             image.color = Paper;
-            ApplyPanelSprite(image);
+            if (solid) ApplySolid(image);
+            else ApplyPanelSprite(image);
             return rt;
         }
 
-        TMP_Text AddLabel(RectTransform parent, string key, Vector2 pos, Vector2 size, float fontSize, Color color, TMP_FontAsset font)
+        static RectTransform AddPlate(RectTransform parent, Vector2 pos, Vector2 size)
+        {
+            var go = new GameObject("Row", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            go.transform.SetParent(parent, false);
+            var rt = go.GetComponent<RectTransform>();
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = pos;
+            rt.sizeDelta = size;
+            var image = go.GetComponent<Image>();
+            image.color = new Color(0.90f, 0.85f, 0.74f, 1f);
+            image.raycastTarget = false;
+            ApplySolid(image);
+            return rt;
+        }
+
+        TMP_Text AddLabel(RectTransform parent, string key, Vector2 pos, Vector2 size, float fontSize, Color color, TMP_FontAsset font, TextAlignmentOptions alignment = TextAlignmentOptions.Center)
         {
             var go = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
             go.transform.SetParent(parent, false);
@@ -391,15 +338,16 @@ namespace EggRescue
             var label = go.GetComponent<TextMeshProUGUI>();
             label.fontSize = fontSize;
             label.color = color;
-            label.alignment = TextAlignmentOptions.Center;
+            label.alignment = alignment;
             label.raycastTarget = false;
             label.enableWordWrapping = true;
             if (font != null) label.font = font;
             Bind(label, key);
+            label.ForceMeshUpdate();
             return label;
         }
 
-        Button CreateButton(RectTransform parent, string key, Vector2 pos, Vector2 size, TMP_FontAsset font)
+        Button CreateButton(RectTransform parent, string key, Vector2 pos, Vector2 size, TMP_FontAsset font, bool solid = false)
         {
             var go = new GameObject(key, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
             go.transform.SetParent(parent, false);
@@ -410,7 +358,8 @@ namespace EggRescue
             rt.sizeDelta = size;
             var image = go.GetComponent<Image>();
             image.color = Color.white;
-            ApplyPanelSprite(image);
+            if (solid) ApplySolid(image);
+            else ApplyPanelSprite(image);
             var button = go.GetComponent<Button>();
             var colors = button.colors;
             colors.normalColor = ButtonNormal;
@@ -420,6 +369,7 @@ namespace EggRescue
             colors.fadeDuration = 0.08f;
             button.colors = colors;
             button.targetGraphic = image;
+            button.gameObject.AddComponent<MenuButtonMotion>();
             var labelGo = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
             labelGo.transform.SetParent(go.transform, false);
             Stretch(labelGo.GetComponent<RectTransform>());
@@ -430,6 +380,7 @@ namespace EggRescue
             label.raycastTarget = false;
             if (font != null) label.font = font;
             Bind(label, key);
+            label.ForceMeshUpdate();
             return button;
         }
 
@@ -437,6 +388,7 @@ namespace EggRescue
         {
             if (label == null || string.IsNullOrEmpty(key)) return;
             label.text = GameLocale.T(key);
+            label.ForceMeshUpdate();
             _labels.Add(new BoundLabel { Label = label, Key = key });
         }
 
@@ -445,7 +397,11 @@ namespace EggRescue
             for (var i = 0; i < _labels.Count; i++)
             {
                 var bound = _labels[i];
-                if (bound.Label != null) bound.Label.text = GameLocale.T(bound.Key);
+                if (bound.Label != null)
+                {
+                    bound.Label.text = GameLocale.T(bound.Key);
+                    bound.Label.ForceMeshUpdate();
+                }
             }
             RefreshSaveState();
             RefreshLanguageButtons();
@@ -474,9 +430,9 @@ namespace EggRescue
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
             rt.pivot = new Vector2(0.5f, 0.5f);
             rt.anchoredPosition = pos;
-            rt.sizeDelta = new Vector2(360f, 24f);
+            rt.sizeDelta = new Vector2(600f, 28f);
 
-            var background = CreateImage(go.transform, "Background", new Color(0.75f, 0.70f, 0.58f, 1f));
+            var background = CreateImage(go.transform, "Background", new Color(0.75f, 0.70f, 0.58f, 1f), true);
             Stretch(background.rectTransform);
 
             var fillArea = new GameObject("Fill Area", typeof(RectTransform));
@@ -485,7 +441,7 @@ namespace EggRescue
             Stretch(fillAreaRt);
             fillAreaRt.offsetMin = new Vector2(6f, 5f);
             fillAreaRt.offsetMax = new Vector2(-6f, -5f);
-            var fill = CreateImage(fillArea.transform, "Fill", ButtonNormal);
+            var fill = CreateImage(fillArea.transform, "Fill", ButtonNormal, true);
             Stretch(fill.rectTransform);
 
             var handleArea = new GameObject("Handle Slide Area", typeof(RectTransform));
@@ -494,8 +450,8 @@ namespace EggRescue
             Stretch(handleAreaRt);
             handleAreaRt.offsetMin = new Vector2(10f, 0f);
             handleAreaRt.offsetMax = new Vector2(-10f, 0f);
-            var handle = CreateImage(handleArea.transform, "Handle", Cream);
-            handle.rectTransform.sizeDelta = new Vector2(18f, 28f);
+            var handle = CreateImage(handleArea.transform, "Handle", Cream, true);
+            handle.rectTransform.sizeDelta = new Vector2(22f, 36f);
 
             var slider = go.AddComponent<Slider>();
             slider.fillRect = fill.rectTransform;
@@ -508,13 +464,14 @@ namespace EggRescue
             return slider;
         }
 
-        static Image CreateImage(Transform parent, string name, Color color)
+        static Image CreateImage(Transform parent, string name, Color color, bool solid = false)
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(parent, false);
             var image = go.GetComponent<Image>();
             image.color = color;
-            ApplyPanelSprite(image);
+            if (solid) ApplySolid(image);
+            else ApplyPanelSprite(image);
             return image;
         }
 
@@ -550,6 +507,13 @@ namespace EggRescue
             image.type = _panelSliced ? Image.Type.Sliced : Image.Type.Simple;
         }
 
+        static void ApplySolid(Image image)
+        {
+            if (image == null) return;
+            image.sprite = WhiteSprite();
+            image.type = Image.Type.Simple;
+        }
+
         static Sprite WhiteSprite()
         {
             if (_white != null) return _white;
@@ -564,13 +528,7 @@ namespace EggRescue
 
         static TMP_FontAsset ResolveFont()
         {
-            var texts = FindObjectsOfType<TMP_Text>(true);
-            for (var i = 0; i < texts.Length; i++)
-            {
-                if (texts[i] != null && texts[i].font != null)
-                    return texts[i].font;
-            }
-            return TMP_Settings.defaultFontAsset;
+            return UiFontCatalog.Load();
         }
     }
 }

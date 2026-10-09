@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,6 +36,10 @@ namespace EggRescue
             GameState.LoadDefaults();
             NpcRegistry.Load();
             DialogueDatabase.LoadAll();
+            CheeseRegistry.ClearPicked();
+            InteractionPointVfx.ClearDiscovered();
+            ClimbPathPoint.ResetPaths();
+            SaveService.ClearPose();
             if (GameSession.ShouldLoadSave())
                 SaveService.Load();
             GameSession.Consume();
@@ -50,11 +55,6 @@ namespace EggRescue
         {
             if (Input.GetKeyDown(KeyCode.F5)) SaveService.Save();
             if (Input.GetKeyDown(KeyCode.F9)) SaveService.Load();
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
         }
 
         void EnsureAudio()
@@ -107,7 +107,20 @@ namespace EggRescue
             player.tag = "Player";
             player.layer = 2;
             BindCameraToPlayer(player);
+            ApplySavedPose(player);
             CreatePrompt(player.GetComponent<PlayerInteraction>());
+        }
+
+        static void ApplySavedPose(GameObject player)
+        {
+            if (!SaveService.HasPose || player == null) return;
+            var controller = player.GetComponent<PlayerController>();
+            if (controller != null)
+                controller.Teleport(SaveService.PosePosition, SaveService.PoseYaw);
+            else
+                player.transform.SetPositionAndRotation(SaveService.PosePosition, Quaternion.Euler(0f, SaveService.PoseYaw, 0f));
+            if (ThirdPersonCamera.Instance != null)
+                ThirdPersonCamera.Instance.SetView(SaveService.PoseViewYaw, SaveService.PosePitch);
         }
 
         static void BindCameraToPlayer(GameObject player)
@@ -220,11 +233,13 @@ namespace EggRescue
             canvasGo.AddComponent<GraphicRaycaster>();
             var textGo = new GameObject("Prompt");
             textGo.transform.SetParent(canvasGo.transform, false);
-            var text = textGo.AddComponent<Text>();
-            text.font = ResolveUiFont();
+            var text = textGo.AddComponent<TextMeshProUGUI>();
+            var font = UiFontCatalog.Load();
+            if (font != null) text.font = font;
             text.fontSize = 28;
-            text.alignment = TextAnchor.LowerCenter;
+            text.alignment = TextAlignmentOptions.Bottom;
             text.color = Color.white;
+            text.raycastTarget = false;
             var rt = text.rectTransform;
             rt.anchorMin = new Vector2(0.3f, 0.08f);
             rt.anchorMax = new Vector2(0.7f, 0.16f);
@@ -234,38 +249,10 @@ namespace EggRescue
             if (interaction != null) interaction.SetPromptLabel(text);
         }
 
-        /// <summary>
-        /// Unity 2022+ 把内置 Arial.ttf 换成了 LegacyRuntime.ttf，旧名字会抛 ArgumentException。
-        /// 这里按新名 -> 旧名 -> 系统字体的顺序逐级回退。
-        /// </summary>
-        static Font ResolveUiFont()
-        {
-            var font = TryGetBuiltinFont("LegacyRuntime.ttf");
-            if (font == null) font = TryGetBuiltinFont("Arial.ttf");
-            if (font == null)
-            {
-                // 中文提示需要能显示汉字的字体，优先挑常见的中文系统字体。
-                var candidates = new[] { "Microsoft YaHei", "SimHei", "SimSun", "PingFang SC", "Arial" };
-                for (var i = 0; i < candidates.Length && font == null; i++)
-                    font = Font.CreateDynamicFontFromOSFont(candidates[i], 28);
-            }
-            return font;
-        }
-
-        static Font TryGetBuiltinFont(string path)
-        {
-            try
-            {
-                return Resources.GetBuiltinResource<Font>(path);
-            }
-            catch (System.Exception)
-            {
-                return null;
-            }
-        }
-
         void EnsureSystems()
         {
+            if (GetComponent<PauseMenu>() == null)
+                gameObject.AddComponent<PauseMenu>();
             if (FindObjectOfType<MouseBrotherShop>() == null)
                 gameObject.AddComponent<MouseBrotherShop>();
             if (FindObjectOfType<CheeseRefreshManager>() == null)

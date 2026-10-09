@@ -25,6 +25,14 @@ namespace EggRescue
 
         public Transform CameraPivot { get { return cameraPivot; } }
 
+        public void Teleport(Vector3 position, float yaw)
+        {
+            _velocity = Vector3.zero;
+            if (_cc != null) _cc.enabled = false;
+            transform.SetPositionAndRotation(position, Quaternion.Euler(0f, yaw, 0f));
+            if (_cc != null) _cc.enabled = true;
+        }
+
         void OnEnable()
         {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -160,17 +168,14 @@ namespace EggRescue
 
         static Font ResolveDebugFont()
         {
-            Font font = null;
-            try { font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); }
-            catch (System.Exception) { font = null; }
-            if (font == null)
+            var candidates = new[] { "Microsoft YaHei", "SimHei", "SimSun", "PingFang SC" };
+            for (var i = 0; i < candidates.Length; i++)
             {
-                try { font = Resources.GetBuiltinResource<Font>("Arial.ttf"); }
-                catch (System.Exception) { font = null; }
+                var os = Font.CreateDynamicFontFromOSFont(candidates[i], 18);
+                if (os != null) return os;
             }
-            if (font == null)
-                font = Font.CreateDynamicFontFromOSFont("Microsoft YaHei", 18);
-            return font;
+            try { return Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); }
+            catch (System.Exception) { return null; }
         }
 #endif
 

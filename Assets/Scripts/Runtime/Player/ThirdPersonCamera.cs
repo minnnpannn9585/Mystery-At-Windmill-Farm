@@ -25,6 +25,14 @@ namespace EggRescue
 
         /// <summary>???????? PlayerController ????????????????</summary>
         public float Yaw { get { return _yaw; } }
+        public float Pitch { get { return _pitch; } }
+
+        public void SetView(float yaw, float pitch)
+        {
+            _yaw = yaw;
+            _pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+            SnapToTarget();
+        }
 
         public void SetTarget(Transform t)
         {

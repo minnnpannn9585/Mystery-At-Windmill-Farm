@@ -83,11 +83,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 946855951
-    m_Localized: Your save stays until you press F5 in the game.
+    m_Localized: This overwrites your save. The old progress will be lost.
     m_Metadata:
       m_Items: []
   - m_Id: 946855952
-    m_Localized: Start
+    m_Localized: Overwrite
     m_Metadata:
       m_Items: []
   - m_Id: 946855953

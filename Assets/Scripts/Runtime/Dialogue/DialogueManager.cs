@@ -714,6 +714,7 @@ namespace EggRescue
 
         void Update()
         {
+            if (GameEvents.Paused) return;
             var dt = Time.deltaTime;
             TickPanel(dt);
             TickNext(dt);

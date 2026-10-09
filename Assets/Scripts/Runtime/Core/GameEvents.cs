@@ -18,9 +18,33 @@ namespace EggRescue
 
         public static bool DialogueActive { get; set; }
         public static bool NotebookOpen { get; set; }
+        public static bool Paused { get; private set; }
         public static bool InputLocked
         {
-            get { return DialogueActive || NotebookOpen; }
+            get { return DialogueActive || NotebookOpen || Paused; }
+        }
+
+        public static void SetPaused(bool paused)
+        {
+            Paused = paused;
+            if (paused)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                return;
+            }
+            if (!DialogueActive && !NotebookOpen)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
+        public static void ResetSession()
+        {
+            DialogueActive = false;
+            NotebookOpen = false;
+            Paused = false;
         }
 
         public static void RaiseVariableChanged(string name)
@@ -71,7 +95,7 @@ namespace EggRescue
         public static void RaiseDialogueEnded()
         {
             DialogueActive = false;
-            if (!NotebookOpen)
+            if (!NotebookOpen && !Paused)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -92,7 +116,7 @@ namespace EggRescue
         public static void RaiseNotebookClosed()
         {
             NotebookOpen = false;
-            if (!DialogueActive)
+            if (!DialogueActive && !Paused)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;

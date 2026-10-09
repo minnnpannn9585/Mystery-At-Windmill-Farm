@@ -143,7 +143,7 @@ namespace EggRescue
         {
             RefreshOpenInteractable();
             TickIcon(Time.deltaTime);
-            if (!GameEvents.DialogueActive && NotebookTogglePressed())
+            if (!GameEvents.Paused && !GameEvents.DialogueActive && NotebookTogglePressed())
             {
                 if (IsOpen()) OnCloseClick();
                 else if (open != null && open.gameObject.activeSelf) OnOpenClick();
