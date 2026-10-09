@@ -9,12 +9,14 @@ namespace EggRescue
 {
     /// <summary>
     /// 中英文切换。优先读 Unity Localization 当前语言的字符串表，表还没载入时用 catalog。
+    /// 语言来源：游戏内选择，然后是启动参数 -language，然后是 Steam 当前游戏语言，最后是简体中文。
+    /// 游戏内选择写入 PlayerPrefs 后，下次启动不再被 Steam 覆盖。
     /// </summary>
     public static class GameLocale
-    {
-        public const string Chinese = "zh-Hans";
-        public const string English = "en";
-        const string PrefKey = "egg.locale";
+        {
+            public const string Chinese = "zh-Hans";
+            public const string English = "en";
+            const string PrefKey = "egg.locale";
 
         public static event Action Changed;
 
@@ -29,20 +31,64 @@ namespace EggRescue
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void Boot()
         {
-            Code = PlayerPrefs.GetString(PrefKey, Chinese);
-            if (string.IsNullOrEmpty(Code)) Code = Chinese;
+            Code = ResolveInitial();
             LocaleCatalog.EnsureLoaded();
+            SteamLanguage.Ready += OnSteamReady;
             var go = new GameObject("GameLocale");
             UnityEngine.Object.DontDestroyOnLoad(go);
             _runner = go.AddComponent<Runner>();
         }
 
+        /// <summary>玩家在游戏里选定语言。这次选择会记住，并压过 Steam。</summary>
         public static void Set(string code)
         {
-            if (string.IsNullOrEmpty(code)) code = Chinese;
-            Code = code;
+            code = Normalize(code);
             PlayerPrefs.SetString(PrefKey, code);
             PlayerPrefs.Save();
+            Apply(code);
+        }
+
+        public static string Normalize(string code)
+        {
+            if (string.IsNullOrEmpty(code)) return Chinese;
+            if (code.StartsWith("en", StringComparison.OrdinalIgnoreCase)) return English;
+            return Chinese;
+        }
+
+        static string ResolveInitial()
+        {
+            if (PlayerPrefs.HasKey(PrefKey))
+                return Normalize(PlayerPrefs.GetString(PrefKey, Chinese));
+            return ResolvePlatform() ?? Chinese;
+        }
+
+        static string ResolvePlatform()
+        {
+            var launch = SteamLocaleMap.FromLaunchOption();
+            if (!string.IsNullOrEmpty(launch)) return launch;
+            string steam;
+            if (SteamLanguage.TryGetLocale(out steam)) return steam;
+            return null;
+        }
+
+        static void OnSteamReady()
+        {
+            PullPlatformIfUnset();
+        }
+
+        static void PullPlatformIfUnset()
+        {
+            if (PlayerPrefs.HasKey(PrefKey)) return;
+            var platform = ResolvePlatform();
+            if (string.IsNullOrEmpty(platform)) return;
+            Apply(platform);
+        }
+
+        static void Apply(string code)
+        {
+            code = Normalize(code);
+            if (code == Code) return;
+            Code = code;
             _ui = null;
             _lines = null;
             ApplySelectedLocale();
@@ -137,15 +183,15 @@ namespace EggRescue
 
             void Start()
             {
+                PullPlatformIfUnset();
                 StartCoroutine(Initialize());
             }
 
             void OnLocaleChanged(Locale locale)
             {
-                if (locale == null) return;
-                if (_applyQueued) return;
+                if (locale == null || _applyQueued) return;
                 if (locale.Identifier.Code == Code) return;
-                Set(locale.Identifier.Code);
+                ApplySelectedLocale();
             }
         }
     }

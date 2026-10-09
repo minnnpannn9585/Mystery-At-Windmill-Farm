@@ -102,10 +102,12 @@ namespace EggRescue
             AutoBindFields();
             BuildCatalog();
             if (boolPanel != null) boolPanel.SetActive(false);
+            var leftHud = transform.Find("LeftHUD");
+            if (leftHud != null) leftHud.gameObject.SetActive(true);
             if (open != null)
             {
-                open.gameObject.SetActive(false);
-                _iconVisible = false;
+                _iconVisible = true;
+                open.gameObject.SetActive(true);
                 open.onClick.AddListener(OnOpenClick);
             }
             if (close != null) close.onClick.AddListener(OnCloseClick);

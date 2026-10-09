@@ -19,7 +19,7 @@
 | 对话 / 状态数据 | JSON TextAsset（`Assets/Resources/GameData/`）。初版用 Lua 存储数据；对话定稿仍可由 Lua 表转换成这份 JSON |
 | 遗留 | 抖音初版 World SDK + Lua（`Assets/luaScripts/`），发布前用菜单禁用 DouyinScript |
 | 编辑器 | C# 自定义窗口 + `Tools/Egg Rescue/PC/*` |
-| 本地化 | Unity Localization 1.5.2。源表 `Assets/Resources/Localization/catalog.json`（中/英）。主菜单设置里切换。导入字符串表：`Tools/Egg Rescue/PC/Import Localization Tables` |
+| 本地化 | Unity Localization 1.5.2。源表 `Assets/Resources/Localization/catalog.json`（中/英，同一安装包，不按语言拆 Depot）。主菜单设置里切换。导入字符串表：`Tools/Egg Rescue/PC/Import Localization Tables`。语言优先级见 §1.2 |
 
 C# 运行时入口：`GameBootstrap`（Play 后自动生成，不依赖抖音注入角色）。玩家角色为绿头鸭；场景中暂以胶囊占位，模型可后换。
 
@@ -30,6 +30,32 @@ C# 运行时入口：`GameBootstrap`（Play 后自动生成，不依赖抖音注
 3. 改对话 lua 后执行 **`Tools/Egg Rescue/PC/Convert Lua Data To JSON`**（或 `dotnet run --project MissingEggDoc-main/scripts/LuaToJson/LuaToJson.csproj`）。
 
 数据转换脚本：[`MissingEggDoc-main/scripts/lua_to_json.py`](../MissingEggDoc-main/scripts/lua_to_json.py)（需 Python）与 [`MissingEggDoc-main/scripts/LuaToJson/`](../MissingEggDoc-main/scripts/LuaToJson/)（dotnet）。
+
+### 1.2 语言与 Steam
+
+游戏内语言码只有 `zh-Hans` 和 `en`。Steam 用另一套名字（`schinese`、`english`），对照在 `SteamLocaleMap`。
+
+启动时按这个顺序决定语言：
+
+1. 玩家在主菜单里点过「中文」或「English」：用记住的选择（`PlayerPrefs` 键 `egg.locale`），不再跟 Steam。
+2. 启动参数 `-language schinese` 或 `-language english`（Steam 启动选项也能写这个）。
+3. Steam 当前**游戏**语言：`ISteamApps::GetCurrentGameLanguage`。不要用客户端界面语言。
+4. 以上都没有：简体中文。编辑器直接 Play 走这里。
+
+Steam 语言暂时没有对应表时用英文。还没有繁体表，`tchinese` 先显示简体。
+
+商店页文案、成就和卡牌的翻译在 Steamworks 后台，不进 `catalog.json`。支持语言勾选 English 和 Simplified Chinese。中英文打在同一个 Depot 里。
+
+接入 Steamworks 时，在 `SteamAPI.Init` 成功之后调用：
+
+```csharp
+SteamLanguage.Bind(() =>
+    Steamworks.SteamAPI.IsSteamRunning()
+        ? Steamworks.SteamApps.GetCurrentGameLanguage()
+        : null);
+```
+
+如果用的是 Steamworks.NET 或 Facepunch.Steamworks，并且 Init 早于语言生效，可以不写 `Bind`，`SteamLanguage` 会自己找已经加载的 API。Init 必须在读语言之前完成，本框架不负责初始化 Steam，也不调用 `RestartAppIfNecessary`。
 
 ---
 

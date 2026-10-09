@@ -102,7 +102,13 @@ namespace EggRescue
         {
             if (_root != null) return _root;
             if (countText == null || countText.transform.parent == null) return null;
-            _root = countText.transform.parent.gameObject;
+            var parent = countText.transform.parent;
+            if (parent.name == "LeftHUD")
+            {
+                var cheese = parent.Find("Cheese");
+                if (cheese != null) parent = cheese;
+            }
+            _root = parent.gameObject;
             _baseScale = _root.transform.localScale;
             return _root;
         }

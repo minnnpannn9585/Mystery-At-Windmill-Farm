@@ -22,4 +22,4 @@ alwaysApply: true
 
 **树状 md → lua（混合式）**：[`doc_to_lua.py`](../MissingEggDoc-main/scripts/doc_to_lua.py) 只辅助批量台词（`--no-entry`）；**路由由 Agent 读 md §路由规则直接改 lua**，禁止为单个 NPC 扩展生成器 entry/profile。详见 [`TREE_TO_LUA_SPEC.md`](../docs/TREE_TO_LUA_SPEC.md) §1。
 
-PC 场景接线：`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`。存档：F5 保存 / F9 读取。主菜单「继续游戏」读档后进入农场；「开始游戏」不读档。编辑器直接 Play `Mechanics_Code` 不自动读档。N 开关笔记本。中英文：Unity Localization，源表 `Assets/Resources/Localization/catalog.json`，主菜单设置里切换。改文案后执行 `Tools/Egg Rescue/PC/Import Localization Tables`。
+PC 场景接线：`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`。存档：F5 保存 / F9 读取。主菜单「继续游戏」读档后进入农场；「开始游戏」不读档。编辑器直接 Play `Mechanics_Code` 不自动读档。N 开关笔记本。中英文：Unity Localization，源表 `Assets/Resources/Localization/catalog.json`，主菜单设置里切换并记住。没选过时正式包跟随 Steam 当前游戏语言（`english` / `schinese`，见 `SteamLanguage`）。改文案后执行 `Tools/Egg Rescue/PC/Import Localization Tables`。
