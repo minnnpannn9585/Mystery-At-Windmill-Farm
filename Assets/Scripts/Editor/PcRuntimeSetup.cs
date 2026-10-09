@@ -15,7 +15,7 @@ namespace EggRescue.Editor
             WireNotebookAndHud();
             DouyinComponentMigrator.MigrateQuiet();
             DisableDouyinScripts();
-            EditorUtility.DisplayDialog("Egg Rescue PC", "已写入 Build Settings、PlayerSpawn、GameBootstrap，迁移 C# 组件并禁用 DouyinScript。", "OK");
+            EditorUtility.DisplayDialog("Egg Rescue PC", "已写入 Build Settings（主菜单在前）、PlayerSpawn、GameBootstrap，迁移 C# 组件并禁用 DouyinScript。", "OK");
         }
 
         [MenuItem("Tools/Egg Rescue/PC/Disable Douyin Scripts In Open Scene")]
@@ -27,11 +27,18 @@ namespace EggRescue.Editor
 
         static void EnsureBuildSettings()
         {
-            var scene = "Assets/Scenes/Mechanics_Code.unity";
-            var list = new System.Collections.Generic.List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
-            for (var i = 0; i < list.Count; i++)
-                if (list[i].path == scene) return;
-            list.Insert(0, new EditorBuildSettingsScene(scene, true));
+            const string menu = "Assets/Scenes/StartMenu.unity";
+            const string game = "Assets/Scenes/Mechanics_Code.unity";
+            var incoming = EditorBuildSettings.scenes;
+            var list = new System.Collections.Generic.List<EditorBuildSettingsScene>();
+            list.Add(new EditorBuildSettingsScene(menu, true));
+            list.Add(new EditorBuildSettingsScene(game, true));
+            for (var i = 0; i < incoming.Length; i++)
+            {
+                var path = incoming[i].path;
+                if (path == menu || path == game) continue;
+                list.Add(incoming[i]);
+            }
             EditorBuildSettings.scenes = list.ToArray();
         }
 

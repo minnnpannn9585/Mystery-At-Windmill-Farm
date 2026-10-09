@@ -1,0 +1,191 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 2eb9c77e630e04d21a737eab98797a75, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 942661632
+    m_Localized: Mystery at Windmill Farm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855936
+    m_Localized: A Mallard's Investigation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855937
+    m_Localized: New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855938
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855939
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855940
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855941
+    m_Localized: WASD Move    Mouse Look    E Interact    N Notebook
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855942
+    m_Localized: You can continue the last investigation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855943
+    m_Localized: No save yet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855944
+    m_Localized: The farm scene is not in Build Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855945
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855946
+    m_Localized: Master Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855947
+    m_Localized: Mouse Sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855948
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855949
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855950
+    m_Localized: Start a new investigation?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855951
+    m_Localized: Your save stays until you press F5 in the game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855952
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855953
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855954
+    m_Localized: "\u4E2D\u6587"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855955
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855956
+    m_Localized: E Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855957
+    m_Localized: 'Test 3x speed: on (F8 off)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855958
+    m_Localized: 'Test 3x speed: off (F8 on)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855959
+    m_Localized: Shufen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855960
+    m_Localized: Dahuang
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855961
+    m_Localized: Black Cat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855962
+    m_Localized: Sad Frog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855963
+    m_Localized: Flash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855964
+    m_Localized: Crow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855965
+    m_Localized: Chick Detective Crew
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855966
+    m_Localized: Mouse Brothers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855967
+    m_Localized: Aman
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855968
+    m_Localized: Mili
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855969
+    m_Localized: Doudou
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855970
+    m_Localized: Guazi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855971
+    m_Localized: Boss Mouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855972
+    m_Localized: Little Mouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855973
+    m_Localized: The Oak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855974
+    m_Localized: Narration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855975
+    m_Localized: You
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946855976
+    m_Localized: The Chicks
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -15,6 +15,11 @@ namespace EggRescue
             get { return System.IO.Path.Combine(Application.persistentDataPath, FileName); }
         }
 
+        public static bool Exists()
+        {
+            return File.Exists(Path);
+        }
+
         public static void Save()
         {
             var sb = new StringBuilder();

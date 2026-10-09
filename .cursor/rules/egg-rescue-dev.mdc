@@ -6,7 +6,7 @@ alwaysApply: true
 # 风车农场悬案 开发约定
 
 引擎：**团结引擎 1.10.1**。目标发布平台 **Steam**，支持设备 **PC**。玩家化身为一只**绿头鸭**。  
-唯一可运行 Scene：`Assets/Scenes/Mechanics_Code.unity`（PC Build Settings 入口）。  
+玩家入口 Scene：`Assets/Scenes/StartMenu.unity`（Build Settings 第一项）。游戏 Scene：`Assets/Scenes/Mechanics_Code.unity`。  
 当前运行时逻辑在 **C#**（`Assets/Scripts/Runtime/`），由 `GameBootstrap` 启动；运行时数据为 **JSON**。初版曾上线抖音小火人世界（约五万人游玩，大量好评），当时用 Lua 编写逻辑并存储数据。仓库里的 Lua + 抖音 SDK 仅作初版对照，不要再往 `Assets/luaScripts/` 加新功能。  
 旧美术验证场景 `ArtTest_MRL.unity` 不再作为日常开发入口。
 
@@ -22,4 +22,4 @@ alwaysApply: true
 
 **树状 md → lua（混合式）**：[`doc_to_lua.py`](../MissingEggDoc-main/scripts/doc_to_lua.py) 只辅助批量台词（`--no-entry`）；**路由由 Agent 读 md §路由规则直接改 lua**，禁止为单个 NPC 扩展生成器 entry/profile。详见 [`TREE_TO_LUA_SPEC.md`](../docs/TREE_TO_LUA_SPEC.md) §1。
 
-PC 场景接线：`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`。存档：F5 保存 / F9 读取（玩家包启动自动读档；Editor Play 不自动读档）。N 开关笔记本。
+PC 场景接线：`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`。存档：F5 保存 / F9 读取。主菜单「继续游戏」读档后进入农场；「开始游戏」不读档。编辑器直接 Play `Mechanics_Code` 不自动读档。N 开关笔记本。中英文：Unity Localization，源表 `Assets/Resources/Localization/catalog.json`，主菜单设置里切换。改文案后执行 `Tools/Egg Rescue/PC/Import Localization Tables`。

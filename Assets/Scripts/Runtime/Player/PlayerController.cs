@@ -25,6 +25,20 @@ namespace EggRescue
 
         public Transform CameraPivot { get { return cameraPivot; } }
 
+        void OnEnable()
+        {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            GameLocale.Changed += RefreshDebugLabel;
+#endif
+        }
+
+        void OnDisable()
+        {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            GameLocale.Changed -= RefreshDebugLabel;
+#endif
+        }
+
         void Awake()
         {
             Instance = this;
@@ -140,8 +154,8 @@ namespace EggRescue
         {
             if (_debugLabel == null) return;
             _debugLabel.text = _debugMoveEnabled
-                ? "测试三倍速：开（F8 关闭）"
-                : "测试三倍速：关（F8 打开）";
+                ? GameLocale.T("debug.speed_on")
+                : GameLocale.T("debug.speed_off");
         }
 
         static Font ResolveDebugFont()

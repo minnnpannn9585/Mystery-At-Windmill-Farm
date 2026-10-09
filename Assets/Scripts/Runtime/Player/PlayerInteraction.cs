@@ -89,7 +89,7 @@ namespace EggRescue
             else
             {
                 promptText.gameObject.SetActive(true);
-                promptText.text = string.IsNullOrEmpty(next.Prompt) ? "E 交互" : next.Prompt;
+                promptText.text = string.IsNullOrEmpty(next.Prompt) ? GameLocale.T("prompt.interact") : GameLocale.Line(next.Prompt);
             }
         }
     }

@@ -34,6 +34,8 @@ namespace EggRescue
         float _typingTimer;
         int _typingIndex;
         string _fullText = "";
+        string _sourceText = "";
+        string _speakerSource = "";
         bool _animatingOptions;
         float _optionAnimTimer;
         int _optionAnimIndex;
@@ -51,6 +53,16 @@ namespace EggRescue
         public bool IsDialogueActive
         {
             get { return _currentId >= 0 || (dialoguePanel != null && dialoguePanel.activeSelf); }
+        }
+
+        void OnEnable()
+        {
+            GameLocale.Changed += OnLocaleChanged;
+        }
+
+        void OnDisable()
+        {
+            GameLocale.Changed -= OnLocaleChanged;
         }
 
         void Awake()
@@ -289,7 +301,8 @@ namespace EggRescue
                 PlayPlayerEmotionSfx(spriteKey);
 
             if (npcDialogueText == null) return;
-            _fullText = data.Dialogue ?? "";
+            _sourceText = data.Dialogue ?? "";
+            _fullText = GameLocale.Line(_sourceText);
             if (data.Type == "Question" && _fullText.Length == 0)
             {
                 if (!string.IsNullOrEmpty(npcDialogueText.text))
@@ -316,7 +329,7 @@ namespace EggRescue
             if (_waitingNextAfterOption)
             {
                 SetPlayerNamePanel(true);
-                if (npcName != null) npcName.text = "玩家";
+                if (npcName != null) npcName.text = GameLocale.Name("玩家");
                 if (next != null)
                 {
                     next.gameObject.SetActive(true);
@@ -390,7 +403,7 @@ namespace EggRescue
                 var go = Instantiate(playerPanelBtn.gameObject, playerPanel.transform);
                 go.SetActive(false);
                 var label = go.GetComponentInChildren<Text>();
-                if (label != null) label.text = option.Text;
+                if (label != null) label.text = GameLocale.Line(option.Text);
                 var rect = go.GetComponent<RectTransform>();
                 if (rect != null) rect.anchoredPosition = new Vector2(0f, startY - i * buttonHeight);
                 var btn = go.GetComponent<Button>();
@@ -440,8 +453,9 @@ namespace EggRescue
             _selectedOption = option;
             _waitingNextAfterOption = true;
             SetPlayerNamePanel(true);
-            if (npcName != null) npcName.text = "玩家";
-            _fullText = option.Text;
+            if (npcName != null) npcName.text = GameLocale.Name("玩家");
+            _sourceText = option.Text;
+            _fullText = GameLocale.Line(_sourceText);
             var key = ClassifyPlayerPortrait(option.Text);
             ApplyPortrait(key, "玩家");
             PlayPlayerEmotionSfx(key);
@@ -508,8 +522,30 @@ namespace EggRescue
             return false;
         }
 
+        void OnLocaleChanged()
+        {
+            if (!string.IsNullOrEmpty(_sourceText))
+            {
+                _fullText = GameLocale.Line(_sourceText);
+                if (npcDialogueText != null)
+                {
+                    if (_typing) _typingIndex = 0;
+                    else npcDialogueText.text = _fullText;
+                }
+            }
+            if (!string.IsNullOrEmpty(_speakerSource))
+                ApplyNamePanel(_speakerSource);
+            for (var i = 0; i < _optionButtons.Count && i < _options.Count; i++)
+            {
+                if (_optionButtons[i] == null) continue;
+                var label = _optionButtons[i].GetComponentInChildren<Text>();
+                if (label != null) label.text = GameLocale.Line(_options[i].Text);
+            }
+        }
+
         void ApplyNamePanel(string speaker)
         {
+            _speakerSource = speaker;
             if (string.IsNullOrEmpty(speaker) || speaker == "描述")
             {
                 if (playerNamePanel != null) playerNamePanel.SetActive(false);
@@ -518,7 +554,8 @@ namespace EggRescue
             }
             var isPlayer = speaker == "玩家";
             SetPlayerNamePanel(isPlayer);
-            if (npcName != null && !isPlayer) npcName.text = speaker;
+            if (npcName != null && !isPlayer) npcName.text = GameLocale.Name(speaker);
+            else if (npcName != null && isPlayer) npcName.text = GameLocale.Name("玩家");
         }
 
         void SetPlayerNamePanel(bool active)

@@ -1,0 +1,4804 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Dialogue_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 7670c36d54f344445b515211d15f7aed, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 279961600
+    m_Localized: (By the barn wall, a short wooden ladder lies on its side,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961601
+    m_Localized: "*hic\u2014*"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961602
+    m_Localized: "Who\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961603
+    m_Localized: Shufen's egg is gone. Did you see anything?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961604
+    m_Localized: (Dahuang's ear twitches. His eyes slowly come into focus)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961605
+    m_Localized: "The egg\u2026 the crow\u2026 carried it off."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961606
+    m_Localized: The crow?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961607
+    m_Localized: "Mm\u2026 the crow flew to the barn roof. I chased it, couldn't
+      jump up, and bit a mouthful of air."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961608
+    m_Localized: (Dahuang lowers his head back onto his paws. His voice drops)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961609
+    m_Localized: "I failed\u2026 I didn't protect Shufen's egg."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961610
+    m_Localized: There's a short ladder under you. Can you shift over first?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961611
+    m_Localized: (Dahuang drowsily kicks. The ladder gets pinned even harder)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961612
+    m_Localized: "\u2026Don't push\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961613
+    m_Localized: "*hic\u2026*"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961614
+    m_Localized: Dahuang, drink this first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961615
+    m_Localized: Dahuang, wake up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961616
+    m_Localized: I'll come back later.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961617
+    m_Localized: (Dahuang squints, leans in to sniff, sticks out his tongue and drinks
+      slowly. He pauses, then buries his head and keeps drinking)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961618
+    m_Localized: "(A moment later Dahuang flings his head \u2014 the wet leaf flies
+      off his forehead)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961619
+    m_Localized: "*urk\u2014*"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961620
+    m_Localized: (Dahuang blinks hard. His eyes start to focus)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961621
+    m_Localized: (He pushes up off the ladder and stands, swaying)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961622
+    m_Localized: "\u2026Mm. Clearer now."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961623
+    m_Localized: (Dahuang huffs and buries his head in his paws)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961624
+    m_Localized: "*hic\u2026* quiet\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961625
+    m_Localized: Calling won't wake him. I need something that can sober him up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961626
+    m_Localized: Calling won't wake him. He has to sober up before I can borrow the
+      ladder.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961627
+    m_Localized: Anything else?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961628
+    m_Localized: Can I borrow the ladder?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961629
+    m_Localized: Whose nest is that in the barn?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961630
+    m_Localized: Is this the egg you chased?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961631
+    m_Localized: Nothing else for now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961632
+    m_Localized: Dahuang, can I borrow the ladder? I have to get over that little
+      wall by the entrance.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961633
+    m_Localized: The ladder?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961634
+    m_Localized: (Dahuang turns and looks at the fallen ladder beside him)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961635
+    m_Localized: Oh. Right. Take it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961636
+    m_Localized: (Dahuang pushes the ladder this way with a paw)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961637
+    m_Localized: Set it steady before you climb. Don't fall.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961638
+    m_Localized: There's a flattened grass nest in the corner of the barn. Do you
+      know whose it is?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961639
+    m_Localized: That grass nest in the barn corner?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961640
+    m_Localized: (Dahuang frowns, trying to remember)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961641
+    m_Localized: A couple of days ago I thought I saw two gray little things dart
+      past. Too fast. Didn't see them clearly.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961642
+    m_Localized: Or maybe I was too drunk those days.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961643
+    m_Localized: "Dahuang, look at this \u2014 is this the egg you chased that day?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961644
+    m_Localized: (Dahuang lowers his head and stares at the open notebook)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961645
+    m_Localized: "This is\u2026 what?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961646
+    m_Localized: (Dahuang's eyes go wide. He leans closer)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961647
+    m_Localized: A rock?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961648
+    m_Localized: (Dahuang lifts his head and freezes)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961649
+    m_Localized: "\u2026It's about the same shape as the thing the crow carried off."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961650
+    m_Localized: The crow has been guarding this rock. He says it's his tribe's totem
+      gem.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961651
+    m_Localized: (Dahuang stares at the notebook, not moving)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961652
+    m_Localized: "So what the crow took\u2026 wasn't Shufen's egg?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961653
+    m_Localized: "\u2026I\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961654
+    m_Localized: Then I'm not a useless guard!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961655
+    m_Localized: (His tail starts whipping and won't stop)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961656
+    m_Localized: Shufen's egg must still be out there!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961657
+    m_Localized: (Dahuang jolts and takes a deep breath)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961658
+    m_Localized: (He stops facing one direction, solemn)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961659
+    m_Localized: "The egg's scent is that way \u2014 the red-roof house. Where the
+      owner lives. Across the bridge."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961660
+    m_Localized: (Dahuang stops outside the red-roof house, tail held tight)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961661
+    m_Localized: Right here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961662
+    m_Localized: Go look at that door first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961663
+    m_Localized: Find anything?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961664
+    m_Localized: Can't get in the front door.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961665
+    m_Localized: Are there other animals living in the red-roof house?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961666
+    m_Localized: Nothing yet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961667
+    m_Localized: "\u2026Then what do we do. Detective, look again. I'll try in a
+      bit too."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961668
+    m_Localized: There's a fine little door here, and a tuft of animal fur,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961669
+    m_Localized: (Dahuang blinks, then smacks his forehead with a paw)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961670
+    m_Localized: "Ow! This dog brain of mine \u2014 the drink still hasn't worn off!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961671
+    m_Localized: What did you remember?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961672
+    m_Localized: A cat! That arrogant black cat!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961673
+    m_Localized: Where is he?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961674
+    m_Localized: In the great oak!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961675
+    m_Localized: (Both paws on the trunk, he shakes it hard)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961676
+    m_Localized: Lord Cat! Come down! We need you on this!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961677
+    m_Localized: Dahuang, have you known that black cat a long time?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961678
+    m_Localized: "Quite a while. When he first came\u2026 he was smaller than one
+      of my paws."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961679
+    m_Localized: (Dahuang looks down at his own paw)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961680
+    m_Localized: He didn't know anything then. Couldn't even climb a tree. I taught
+      him once.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961681
+    m_Localized: Did he learn?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961682
+    m_Localized: He did. After that he stopped talking to me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961683
+    m_Localized: Was he afraid of anything as a kitten?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961684
+    m_Localized: Rain.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961685
+    m_Localized: (Dahuang scratches an ear)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961686
+    m_Localized: I mentioned it later. He said he'd never been in my doghouse, that
+      kind of place.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961687
+    m_Localized: (Dahuang looks toward where the black cat is crouched)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961688
+    m_Localized: He's still there.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961689
+    m_Localized: What?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961690
+    m_Localized: I said he hasn't left. Any other cat, shaken out of a tree, would've
+      bolted.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961691
+    m_Localized: (Dahuang casually shifts half a step aside)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961692
+    m_Localized: He's listening. He just doesn't want anyone to notice.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961693
+    m_Localized: (Dahuang sits by the oak, looking toward the red-roof house)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961694
+    m_Localized: I'll keep watch.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961695
+    m_Localized: (Dahuang looks up at the red roof, tail swaying gently)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961696
+    m_Localized: Go on. I'll wait here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961697
+    m_Localized: On patrol. All clear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961698
+    m_Localized: Dahuang, what happened to that rock in the end?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961699
+    m_Localized: Still with the crow. I asked. It says it's a tribal totem gem. A
+      big deal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961700
+    m_Localized: (Dahuang scratches an ear)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961701
+    m_Localized: "\u2026Let it be."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961702
+    m_Localized: "I think\u2026 next time I see apple mash, I won't drink it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961703
+    m_Localized: (A pause)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961704
+    m_Localized: I'm a guard. Not a drunk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961705
+    m_Localized: Dahuang, will another egg go missing?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961706
+    m_Localized: No.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279961707
+    m_Localized: (Dahuang looks down at his collar, then up)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155904
+    m_Localized: My nose works just fine.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155905
+    m_Localized: Every time it thunders, he comes and crouches beside my doghouse.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155906
+    m_Localized: I say come in. He says this cat is only passing by,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155907
+    m_Localized: A big yellow dog half-sprawled on top of it, a low snore with a
+      whistle)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155908
+    m_Localized: Can't get over the low wall at the barn entrance.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155909
+    m_Localized: He has his own cat door. The key hangs on his neck!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155910
+    m_Localized: Then he stood in the doorway the whole night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155911
+    m_Localized: That's just how he is. Mouth harder than stone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155912
+    m_Localized: I'll go on ahead. See you past the bridge!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155913
+    m_Localized: (The crown of the tree shakes hard. A black cat drops from it, fur
+      exploded, eyes rolling)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155914
+    m_Localized: "Get\u2014away!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155915
+    m_Localized: Can't you see this cat is nursing a wound from being tricked?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155916
+    m_Localized: "Wait\u2026 that voice\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155917
+    m_Localized: You're that tree!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155918
+    m_Localized: "\u2026It's a cat."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155919
+    m_Localized: (Dahuang lowers his voice)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155920
+    m_Localized: You talked to the tree?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155921
+    m_Localized: "I thought\u2026 the tree was talking\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155922
+    m_Localized: (The black cat takes a deep breath, licks twice at the messy fur,
+      fails, and gets more annoyed)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155923
+    m_Localized: That damned two-legs!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155924
+    m_Localized: "Last night he acted so gentle, got this cat to relax\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155925
+    m_Localized: "He picked this cat up. This cat thought it was a massage\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155926
+    m_Localized: Next moment he set this cat down on the cold floor!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155927
+    m_Localized: Stole this cat's personal cushion!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155928
+    m_Localized: "Ah\u2026 that is pretty rude."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155929
+    m_Localized: And you!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155930
+    m_Localized: (The black cat's gaze drifts idly over Dahuang)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155931
+    m_Localized: "\u2026That bird calls you a carpet."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155932
+    m_Localized: What?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155933
+    m_Localized: "\u2026I didn't mishear."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155934
+    m_Localized: (A one-second pause)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155935
+    m_Localized: And you shook the tree like that?! What kind of uncivilized method
+      is that?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155936
+    m_Localized: You wouldn't come down if I didn't.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155937
+    m_Localized: (The black cat's gaze slides over and stops)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155938
+    m_Localized: "\u2026And who are you?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155939
+    m_Localized: I'm the detective, investigating Shufen's missing egg.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155940
+    m_Localized: A chicken's business. What does it have to do with this cat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155941
+    m_Localized: (The black cat crouches by the oak roots, tail slowly sweeping the
+      ground, not moving)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155942
+    m_Localized: "\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155943
+    m_Localized: Everything I found points inside the red-roof house.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155944
+    m_Localized: I have something new to tell you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155945
+    m_Localized: "That grass nest in the barn\u2026 it's yours, isn't it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155946
+    m_Localized: About that thing you asked me to do.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155947
+    m_Localized: "The thing you want \u2014 I'm still working on it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155948
+    m_Localized: I got it back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155949
+    m_Localized: "That time you went up on the barn roof\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155950
+    m_Localized: I won't bother you now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155951
+    m_Localized: "\u2026Go on."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155952
+    m_Localized: This cat doesn't promise to like it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155953
+    m_Localized: Shufen woke up this morning and the egg was gone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155954
+    m_Localized: "\u2026And then."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155955
+    m_Localized: But there were no signs of a fight in the nest, no outside scent,
+      and no drag marks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155956
+    m_Localized: No fight in the nest, and no drag marks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155957
+    m_Localized: It walked off on its own?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155958
+    m_Localized: Dahuang's nose just came back,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155959
+    m_Localized: That stupid dog's nose is actually useful on this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155960
+    m_Localized: "And what the sad frog saw last night\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155961
+    m_Localized: A tall two-legs, with a cold container,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155962
+    m_Localized: "\u2026That toad's wording is always poetic."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155963
+    m_Localized: (The black cat says nothing. His eyes turn slowly)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155964
+    m_Localized: "But \"cold container\" and \"source of life\" \u2014 tell me what
+      they match."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155965
+    m_Localized: Go on.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155966
+    m_Localized: "Someone drew water at the pond \u2014 outside the red-roof house,
+      what proof can you produce?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155967
+    m_Localized: "\u2026I'll look outside the red-roof house again."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155968
+    m_Localized: Go.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155969
+    m_Localized: An empty bucket by the door. Pond mud in the bottom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155970
+    m_Localized: Rain-boot prints, heading toward the coop at night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155971
+    m_Localized: That's all for now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155972
+    m_Localized: There's an empty bucket by the door. The bottom is pond silt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155973
+    m_Localized: (The black cat's gaze lands on the visitor and holds for a second)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155974
+    m_Localized: "The toad's cold container \u2014 it's this bucket."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155975
+    m_Localized: The bucket just held pond water. That matches what the sad frog
+      called the "source of life."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155976
+    m_Localized: (The black cat's tail slows, stops sweeping, and just presses down)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155977
+    m_Localized: Rain-boot prints in front of the door, heading toward the coop at
+      night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155978
+    m_Localized: (The black cat stops)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155979
+    m_Localized: The prints go toward the coop. Left at night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155980
+    m_Localized: One report isn't enough.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155981
+    m_Localized: "\u2026I'll look again."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155982
+    m_Localized: Last night, someone went to the pond for water.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155983
+    m_Localized: Then, at night, they went to the coop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155984
+    m_Localized: Now the egg's scent is coming out of the red-roof house.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155985
+    m_Localized: (Silence)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155986
+    m_Localized: That guy went into the coop last night and took the egg.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155987
+    m_Localized: Carried it into the red-roof house.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155988
+    m_Localized: But why?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155989
+    m_Localized: This cat wants to know too.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155990
+    m_Localized: (Starts to stand, then sits back down)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155991
+    m_Localized: What he's doing with that egg.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155992
+    m_Localized: "That corner of the barn\u2026 that grass nest. It's yours, isn't
+      it?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155993
+    m_Localized: There's scorched straw and fur beside it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155994
+    m_Localized: (The black cat's eyes snap up and lock)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155995
+    m_Localized: "\u2026How do you know about that."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155996
+    m_Localized: What are those burn marks?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155997
+    m_Localized: "None other than that dead bird\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155998
+    m_Localized: (He stops himself at once)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284155999
+    m_Localized: "\u2026But that has nothing to do with you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156000
+    m_Localized: (The black cat's gaze flicks to a crack in the red-roof wall, then
+      back. The tip of his tail flicks)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156001
+    m_Localized: Does it have to do with the mice?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156002
+    m_Localized: "\u2026What are you guessing at."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156003
+    m_Localized: "I get this done for you \u2014 you open the house for me."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156004
+    m_Localized: (The black cat squints at the visitor and says nothing for a while)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156005
+    m_Localized: Go find the mice.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156006
+    m_Localized: Get the thing back first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156007
+    m_Localized: (The black cat's eyelid moves. He stays crouched)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156008
+    m_Localized: "\u2026Speak."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156009
+    m_Localized: I found what you wanted.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156010
+    m_Localized: (The black cat's ears stand up. The tip of his tail flicks, out
+      of his control)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156011
+    m_Localized: Where.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156012
+    m_Localized: "Bright green, with a sharp herbal sweetness that hits the nose\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156013
+    m_Localized: There's a frog at the pond who's been sitting on it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156014
+    m_Localized: (The black cat leans forward half an inch, pupils wide, then sits
+      up straight at once)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156015
+    m_Localized: I asked him to his face. He wouldn't give it up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156016
+    m_Localized: Do you have a way?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156017
+    m_Localized: (The black cat pauses, whiskers flat, then puts the arrogant face
+      back on a second later)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156018
+    m_Localized: "How it ended up with the toad \u2014 this cat doesn't know either."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156019
+    m_Localized: If you can't get it back, go find the mice.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156020
+    m_Localized: They'll have a way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156021
+    m_Localized: (The mint fish is offered)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156022
+    m_Localized: "(The black cat's ears stand up. His tail thumps twice \u2014 then
+      he pins it)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156023
+    m_Localized: "\u2026Hmph."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156024
+    m_Localized: "(He comes closer, lowers his head, sniffs, holds for a second,
+      then takes a huge breath \u2014 half a purr in his throat, then it stops dead)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156025
+    m_Localized: "Mrow\u2026 that's it \u2014 no!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156026
+    m_Localized: (He steps back half a pace and pins the fish with a paw)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156027
+    m_Localized: One stinking fish cannot buy this cat!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156028
+    m_Localized: "(Quietly) You purred just now\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156029
+    m_Localized: Your ears are broken.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156030
+    m_Localized: Lord Cat, do you know what happened last night?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156031
+    m_Localized: "Dahuang, stop talking\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156032
+    m_Localized: You got played to your face by that two-legs!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156033
+    m_Localized: "The whole farm watched you sleep like a log, thinking he was going
+      to give you a massage\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156034
+    m_Localized: "\u2014You wake up, the cushion's gone, and your pride is in the
+      dirt!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156035
+    m_Localized: If this gets out, this winter you'll be sleeping in a straw pile,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156036
+    m_Localized: (The black cat's tail snaps once, then goes still)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156037
+    m_Localized: "(Very slowly, he rises from the crouch. His eyes freeze Dahuang
+      \u2014 Dahuang sheepishly turns his head away)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156038
+    m_Localized: This cat is not doing it for that frantic hen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156039
+    m_Localized: And not because this stupid dog told me to.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156040
+    m_Localized: (He lowers his head and picks up the mint fish in his mouth)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156041
+    m_Localized: "This cat is going inside to find out \u2014 where the cushion went,
+      and what that guy did with it last night."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156042
+    m_Localized: "This cat will find out \u2014 where the cushion went, and what
+      that guy did with it last night."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156043
+    m_Localized: This cat has to see it with his own eyes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156044
+    m_Localized: "As for that broken egg you mentioned\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156045
+    m_Localized: "See it? That window in the attic \u2014 if you want in, go that
+      way."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156046
+    m_Localized: (The black cat slips neatly through the cat door)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156047
+    m_Localized: (A moment later the attic window of the red roof is pushed open
+      from inside. A crisp click)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156048
+    m_Localized: "That time you went up on the barn roof \u2014 did you already know
+      it was a rock?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156049
+    m_Localized: (The black cat pauses and licks a paw)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156050
+    m_Localized: "Mm. Saw it on the windowsill this morning \u2014 the crow dove,
+      and that white rock in his claws flashed in the morning light."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156051
+    m_Localized: (The black cat glances at Dahuang)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156052
+    m_Localized: Anyone who isn't blind could tell it wasn't an egg.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156053
+    m_Localized: Why didn't you say so!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156054
+    m_Localized: That crow starts cawing at four every morning.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156055
+    m_Localized: It's been three years.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156056
+    m_Localized: Making you run a few extra laps seemed fair to this cat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156057
+    m_Localized: (The black cat tilts his head, the corner of his mouth lifting)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156058
+    m_Localized: Didn't this cat say it from the tree?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156059
+    m_Localized: '"A fool is showing off. A blind one is asking everywhere."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156060
+    m_Localized: "\u2026Wait."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156061
+    m_Localized: That line was about the crow and me?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156062
+    m_Localized: You thought this cat was insulting the tree.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156063
+    m_Localized: "When you went up on the barn roof before \u2014 you already knew
+      it was a rock, didn't you?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156064
+    m_Localized: (The black cat gives a sideways look)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156065
+    m_Localized: "\u2026You're only getting it now?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156066
+    m_Localized: "Saw it from the windowsill this morning. A white rock, flashing
+      in the morning light\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156067
+    m_Localized: Why didn't you say?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156068
+    m_Localized: "That crow \u2014 every morning at four, right on time."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156069
+    m_Localized: Three years, and this cat's ears haven't gone deaf.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156070
+    m_Localized: "Asking only now \u2014 late is late."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156071
+    m_Localized: Making you run a few extra laps doesn't feel like a loss to this
+      cat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156072
+    m_Localized: Don't scratch the eaves.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156073
+    m_Localized: That's where this cat suns himself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156074
+    m_Localized: (A very soft tail-thump comes from inside)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156075
+    m_Localized: If you fall, this cat will not go down and pick you up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156076
+    m_Localized: The attic window is open.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156077
+    m_Localized: What are you still dawdling on the eaves for.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156078
+    m_Localized: This cat is starting to suspect you and that dog jump at the same
+      level.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156079
+    m_Localized: The cushion is back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156080
+    m_Localized: This cat barely agrees to keep renting that room to that guy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156081
+    m_Localized: And the egg?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156082
+    m_Localized: "That broken egg\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156083
+    m_Localized: This cat is watching it for Shufen for now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156084
+    m_Localized: That's all.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156085
+    m_Localized: Will you go up that tree again?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156086
+    m_Localized: This cat rests in the tree. He is not talking.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156087
+    m_Localized: Next time don't chat with the tree.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156088
+    m_Localized: (Mint fish in his mouth, tail held high)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156089
+    m_Localized: And those two things outside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156090
+    m_Localized: "Outside the red-roof house \u2014 the empty bucket by the door,
+      the rain-boot prints in front. Look carefully, then come back."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156091
+    m_Localized: Did you get a clear answer from the chicks?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156092
+    m_Localized: "They've been squawking nonstop these two days \u2014 sort that
+      out first."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156093
+    m_Localized: There's a flock of chicks who've been cheeping away these two days,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156094
+    m_Localized: All right, I'll ask the chicks first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156095
+    m_Localized: The one who drew water at the pond last night went back into this
+      house afterward.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156096
+    m_Localized: What did the chicks say.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156097
+    m_Localized: "They confessed \u2014 the day before yesterday they shoved their
+      little brother back into the nest in the confusion;"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156098
+    m_Localized: "\u2026Go ask that toad. What it saw by the pond last night. Get
+      it clear, then come back."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156099
+    m_Localized: He says the egg's scent is still coming out of the red-roof house.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156100
+    m_Localized: Go find out what happened.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156101
+    m_Localized: Something called the "source of life" was drawn out of the pond.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156102
+    m_Localized: "The white rock on the roof is one they drew themselves. The crow
+      took it the day before yesterday. Their little brother only vanished last night
+      \u2014 they told me to ask the frog at the pond."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156103
+    m_Localized: I will not let you sponge off my doghouse.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156104
+    m_Localized: Since the egg is probably still inside, taking a look costs nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156105
+    m_Localized: The cat door is this cat's. You may not use it. This cat goes in
+      and pushes it open for you from inside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156106
+    m_Localized: "Hmph. This cat already said \u2014 go find the mice."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156107
+    m_Localized: Until the thing is back, don't even think about opening the door.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156108
+    m_Localized: A fool is showing off. A blind one is asking everywhere.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156109
+    m_Localized: Who? The tree? The tree talked?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156110
+    m_Localized: "Ahem\u2026 this tree is speaking."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156111
+    m_Localized: "The fool and the blind one you just mentioned \u2014 who are they,
+      really?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156112
+    m_Localized: "\u2026Go, mortal. Don't step on my roots."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156113
+    m_Localized: The tree?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156114
+    m_Localized: You stepped on my root.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156115
+    m_Localized: Oh, sorry.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156116
+    m_Localized: Dull.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156117
+    m_Localized: Tree, something big happened on the farm. Do you know?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156118
+    m_Localized: Noise.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156119
+    m_Localized: What noise?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156120
+    m_Localized: You talking. Noise.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156121
+    m_Localized: Tree, you're here every day. What can you see?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156122
+    m_Localized: "Mortals\u2026 only see what they want to see."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156123
+    m_Localized: "\u2026I don't quite follow."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156124
+    m_Localized: Go.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156125
+    m_Localized: Tree, is there something on the barn roof?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156126
+    m_Localized: That stupid bird on the roof is still guarding its treasure.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156127
+    m_Localized: Still guarding its treasure.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156128
+    m_Localized: What treasure?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156129
+    m_Localized: What's worth guarding.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156130
+    m_Localized: You mean the crow?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156131
+    m_Localized: This tree does not name names.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156132
+    m_Localized: Tree, have you heard any strange sounds?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156133
+    m_Localized: "The one on the barn roof started calling again before dawn\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156134
+    m_Localized: Who's calling?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156135
+    m_Localized: Every day at four. For three years.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156136
+    m_Localized: "\u2026Go."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156137
+    m_Localized: "Hey \u2014 you! Don't walk off \u2014 look over here, at the crack
+      in the red-roof wall!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156138
+    m_Localized: Intel for sale!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156139
+    m_Localized: "Fair to young and old \u2014 don't miss it as you pass\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156140
+    m_Localized: "\u2026Who's shouting?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156141
+    m_Localized: Someone doing business.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156142
+    m_Localized: "Inside\u2026 the crack?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156143
+    m_Localized: "Yes! Come closer if you want to talk\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156144
+    m_Localized: (A dim yellow light flickers in the crack)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156145
+    m_Localized: Well, a customer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156146
+    m_Localized: Buying intel?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156147
+    m_Localized: "\u2026You sell intel here?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156148
+    m_Localized: What happens on this farm, we know more than anyone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156149
+    m_Localized: "Cheap ones are one cheese crumb. The pricey ones are five\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156150
+    m_Localized: Genuine goods.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156151
+    m_Localized: "\u2026Occasionally watered down a little."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156152
+    m_Localized: (An abacus lightly taps Little Mouse's head)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156153
+    m_Localized: "\u2026Mm."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156154
+    m_Localized: If you find cheese crumbs around the farm, bring them to us for
+      intel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156155
+    m_Localized: What do you want to buy?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156156
+    m_Localized: No intel left. Anything else?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156157
+    m_Localized: A cheap one. One crumb.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156158
+    m_Localized: A pricey one. Five.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156159
+    m_Localized: "That black cat seems to be staring at you\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156160
+    m_Localized: "The black cat told me to come find you\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156161
+    m_Localized: Eight cheese crumbs. Here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156162
+    m_Localized: "That frog \u2014 is there any way to handle him?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156163
+    m_Localized: The frog side is a bit of trouble.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156164
+    m_Localized: Didn't you say the thing was still in your hands?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156165
+    m_Localized: Never mind.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156166
+    m_Localized: (Both mice shrink half a body into the crack. Boss Mouse pokes his
+      head out first)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156167
+    m_Localized: "\u2026Cats and mice don't get along. Normal."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156168
+    m_Localized: "Boss, he's been staring extra long today\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156169
+    m_Localized: You don't talk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156170
+    m_Localized: Fine.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156171
+    m_Localized: (Boss Mouse glances toward the oak, swallows the rest, and shrinks
+      into the crack)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156172
+    m_Localized: (Boss Mouse waits a beat. The abacus doesn't move. Little Mouse
+      is about to speak)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156173
+    m_Localized: I'll say it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156174
+    m_Localized: (Boss Mouse clears his throat and pauses)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156175
+    m_Localized: "Oh, that thing\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156176
+    m_Localized: The thing is still here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156177
+    m_Localized: "Boss\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156178
+    m_Localized: It's still with me. You want it back?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156179
+    m_Localized: "\u2026Yes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156180
+    m_Localized: Of course you can.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156181
+    m_Localized: "Only, keeping it here \u2014 storage fee is eight cheese crumbs.
+      A fair price."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156182
+    m_Localized: Here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156183
+    m_Localized: Not yet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156184
+    m_Localized: I already found it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156185
+    m_Localized: Found it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156186
+    m_Localized: Still here? Who are you fooling.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156187
+    m_Localized: "Then you still\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156188
+    m_Localized: (Boss Mouse closes the ledger. The abacus stays quiet)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156189
+    m_Localized: (Little Mouse still wants to speak, and swallows it)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156190
+    m_Localized: No money, nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156191
+    m_Localized: "Come back when the wallet's full\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156192
+    m_Localized: "All right, I'll go get\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156193
+    m_Localized: (Boss Mouse reaches deep into the crack and comes back with empty
+      paws)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156194
+    m_Localized: "\u2026Slight situation."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156195
+    m_Localized: "While running from here toward the pond\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156196
+    m_Localized: My hand slipped. It fell somewhere by the pond.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156197
+    m_Localized: It fell?! You just said it was still here?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156198
+    m_Localized: "The hand slipped, but it's still on land we manage \u2014 so it
+      still counts as here."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156199
+    m_Localized: I gave you the direction! That's payment and goods, settled!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156200
+    m_Localized: (Boss Mouse turns a page. The abacus doesn't stop)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156201
+    m_Localized: Look toward the pond. That's it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156202
+    m_Localized: (Little Mouse pokes his head out and lowers his voice)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156203
+    m_Localized: "Boss, this order's big. Should we\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156204
+    m_Localized: "\u2026Seeing as this order is big, there's a new batch of pricey
+      ones in the cabinet. Come pick anytime."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156205
+    m_Localized: (Little Mouse shrinks behind Boss Mouse until half his face is gone)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156206
+    m_Localized: I already got the fish back from the pond.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156207
+    m_Localized: (Boss Mouse's abacus slips off his paw. He doesn't catch it)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156208
+    m_Localized: "(Low) Boss\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156209
+    m_Localized: Keep it down.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156210
+    m_Localized: If the black cat asks, what I say is for you two to weigh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156211
+    m_Localized: (Silence. Boss Mouse presses the ledger into the crack and doesn't
+      move for a long time)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156212
+    m_Localized: "\u2026Fine. We botched this one."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156213
+    m_Localized: There's still a pricey batch in the cabinet. It used to come only
+      with other goods. Now pick as you like.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156214
+    m_Localized: "That batch should wait a bit longer\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156215
+    m_Localized: Name the price.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156216
+    m_Localized: (Little Mouse shuts his mouth. No more abacus sounds in the crack)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156217
+    m_Localized: (Little Mouse pokes his head out)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156218
+    m_Localized: Forget it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156219
+    m_Localized: There is a way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156220
+    m_Localized: Eight cheese crumbs. I'll teach you one line to fob it off.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156221
+    m_Localized: One price.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156222
+    m_Localized: (Boss Mouse takes the cheese. The abacus clicks three times)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156223
+    m_Localized: (Boss Mouse tucks the cheese into the ledger. The abacus taps once)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156224
+    m_Localized: Pay these eight, and that pricey batch in the back is on sale now
+      too.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156225
+    m_Localized: "And the line\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156226
+    m_Localized: "Listen\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156227
+    m_Localized: (Little Mouse pokes his head out and can't help himself)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156228
+    m_Localized: The one who sits by the pond sighing all day? I know that one!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156229
+    m_Localized: (Boss Mouse turns the ledger to a page and stops)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156230
+    m_Localized: This was going to cost you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156231
+    m_Localized: "Yes, this is an extra service\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156232
+    m_Localized: "But seeing as your order was big\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156233
+    m_Localized: (Boss Mouse closes the ledger and spins the abacus on a fingertip)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156234
+    m_Localized: Then what do I do?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156235
+    m_Localized: "You tell it\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156236
+    m_Localized: I've been all over, seen many frogs exactly like it, and I can recite
+      what they say.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156237
+    m_Localized: (Little Mouse lowers his voice)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156238
+    m_Localized: "Boss\u2026 did you really rank them?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156239
+    m_Localized: Enough.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156240
+    m_Localized: '(Boss Mouse gives a look: go)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156241
+    m_Localized: Look what this is.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156242
+    m_Localized: (Holds the mint fish, still smelling of frog, up to the crack)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156243
+    m_Localized: Eight, right? Or I take the fish and that line of yours to the black
+      cat and let him come pay in person?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156244
+    m_Localized: No need.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156245
+    m_Localized: "The batch in the back of the cabinet \u2014 it's open for you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156246
+    m_Localized: "Pick whatever! That line just now \u2014 pretend we never said
+      it!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156247
+    m_Localized: (The back pages of the ledger flip open fast)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156248
+    m_Localized: The dog on the farm, Dahuang. Seen him?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156249
+    m_Localized: His collar is silver-plated!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156250
+    m_Localized: The owner of the red-roof house is stingy himself, but he puts a
+      silver-plated collar on the dog.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156251
+    m_Localized: (Little Mouse tries not to laugh, and fails)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156252
+    m_Localized: "The way this farm spends money is wonderful\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156253
+    m_Localized: The frog at the pond. Seen it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156254
+    m_Localized: "The one who stares at the water and sighs all day\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156255
+    m_Localized: In his youth he was the acknowledged greatest romantic on these
+      waters.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156256
+    m_Localized: "\u2026What?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156257
+    m_Localized: The ones chasing him could form a line!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156258
+    m_Localized: (Both mice go quiet for a moment)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156259
+    m_Localized: The biggest hen in the coop, Shufen. Know her?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156260
+    m_Localized: Ten years ago she was the next village's cockfighting champion!
+      The owner of the red-roof house paid a fortune to buy her.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156261
+    m_Localized: She doesn't fight now. She just lays eggs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156262
+    m_Localized: "\u2026She really stopped?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156263
+    m_Localized: So they say.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156264
+    m_Localized: (The two mice look at each other and both go quiet)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156265
+    m_Localized: The snail on the broad leaf outside the coop. Noticed it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156266
+    m_Localized: A commercial spy! Sent by the next farm!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156267
+    m_Localized: Stealing a map of this farm. Three years now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156268
+    m_Localized: "\u2026A snail?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156269
+    m_Localized: Three years! Crawling bit by bit!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156270
+    m_Localized: (Boss Mouse nods solemnly)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156271
+    m_Localized: There's a book under the bed in the red-roof house.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156272
+    m_Localized: Aftercare for Hens!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156273
+    m_Localized: The one in the red-roof house calls himself a chicken specialist,
+      and this is the book he knows best.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156274
+    m_Localized: "Every time he goes into the coop and tells Shufen \"good girl\"
+      \u2014 that's move three of postpartum care!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156275
+    m_Localized: (Boss Mouse doesn't go on)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156276
+    m_Localized: That great oak. Looked closely?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156277
+    m_Localized: It can walk!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156278
+    m_Localized: One centimeter a year. Its roots drink up all the water under this
+      ground.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156279
+    m_Localized: "The whole farm underground is its territory\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156280
+    m_Localized: On the surface, it's just a tree.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156281
+    m_Localized: (The two of them, perfectly serious)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156282
+    m_Localized: That dog Dahuang sometimes sneaks the fermented apple mash from
+      the red-roof house.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156283
+    m_Localized: "He drank too much again last night and lay by the barn wall all
+      night, unable to get up\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156284
+    m_Localized: To wake him, take the bucket of soaked grain by the coop trough
+      over to him.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156285
+    m_Localized: "Dahuang is especially greedy for that\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156286
+    m_Localized: We saw it ourselves.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156287
+    m_Localized: These past few days the owner of the red-roof house keeps leaning
+      at the window, looking toward the coop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156288
+    m_Localized: He looks, and then he doesn't go in! He just rummages through the
+      house!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156289
+    m_Localized: Busy as anything. Can't tell what he's busy with.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156290
+    m_Localized: "We guess he's looking for something\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156291
+    m_Localized: Guesses aren't goods. We don't sell anything without a conclusion.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156292
+    m_Localized: That bunch of kids in fake sunglasses. Noticed them?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156293
+    m_Localized: Last night they all huddled in the coop and didn't take one step
+      out!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156294
+    m_Localized: Huddled in a ball, quiet in a way that isn't like them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156295
+    m_Localized: "Like they were waiting for something \u2014 waiting for what, unknown."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156296
+    m_Localized: What they were waiting for, unknown.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156297
+    m_Localized: This one is worth the price.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156298
+    m_Localized: The afternoon before last, the black cat climbed the barn roof by
+      himself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156299
+    m_Localized: Not long after, he came down and said nothing!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156300
+    m_Localized: Three years of grudges, and they didn't even fight.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156301
+    m_Localized: "\u2026What did he go up for?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156302
+    m_Localized: Unknown is unknown. We don't invent it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156303
+    m_Localized: Do you know why those chicks are afraid of the swamp monster?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156304
+    m_Localized: "Because we told them there's a swamp monster over by the pond \u2014
+      haha \u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156305
+    m_Localized: (Little Mouse covers his mouth and stops)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156306
+    m_Localized: "\u2026That day we saw them pushing a muddy round thing past the
+      barn,"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156307
+    m_Localized: Chicks are timid. They hear half a sentence and add ten.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156308
+    m_Localized: The crow on the barn roof picked something up from the grass by
+      the coop door the morning before last.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156309
+    m_Localized: White! Shiny! Big!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156310
+    m_Localized: When he flew back to the barn roof he was as excited as if he'd
+      found a crown.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156311
+    m_Localized: What did he pick up?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156312
+    m_Localized: Don't know. That's all we can sell.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156313
+    m_Localized: Late last night a yellow light came on in the red-roof house.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156314
+    m_Localized: Glaring! The kind that comes through the wall crack!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156315
+    m_Localized: At the same time a thin hum started in the wall and never stopped.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156316
+    m_Localized: "Like the house grew a little sun that never sets \u2014 light and
+      heat."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156317
+    m_Localized: What it actually is inside, unknown.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156318
+    m_Localized: Late last night the rain boots in the red-roof house made two trips.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156319
+    m_Localized: One trip back, with the smell of wet mud!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156320
+    m_Localized: The other, footsteps going off toward the coop, then coming back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156321
+    m_Localized: "\u2026What was in his hands?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156322
+    m_Localized: Couldn't see. Only sound and smell.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156323
+    m_Localized: "One trip wet mud, one trip toward the coop \u2014 odd, isn't it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156324
+    m_Localized: "Do you know where the swamp-monster sound came from\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156325
+    m_Localized: Late last night a low sound with a whistle came from the coop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156326
+    m_Localized: "\"Snrrrr \u2014 gwah \u2014\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156327
+    m_Localized: (Little Mouse demonstrates with full sound effects)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156328
+    m_Localized: The smell was fermented apple mash and drunk-dog breath.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156329
+    m_Localized: "\u2026A drunk dog?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156330
+    m_Localized: That wasn't a swamp monster. It was Dahuang snoring!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156331
+    m_Localized: "The swamp-monster growl the chicks talked about\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156332
+    m_Localized: Just a drunk dog's snore!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156333
+    m_Localized: This one, we'll thump our chests.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156334
+    m_Localized: "Late last night, seen with our own eyes from the crack\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156335
+    m_Localized: The black cat, by the fence, whispering to his own shadow.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156336
+    m_Localized: "\u2026Whispering what?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156337
+    m_Localized: "Not a bite! Silent, sneaky, muttering at the shadow\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156338
+    m_Localized: The farm's black-market cat gang is making a big move.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156339
+    m_Localized: (Little Mouse nods hard and swallows the rest)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156340
+    m_Localized: The south stretch of this wall used to house another intel shop,
+      same trade as us.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156341
+    m_Localized: We ran them out!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156342
+    m_Localized: Everything they sold was fake. We reported them,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156343
+    m_Localized: "Now this farm has only us\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156344
+    m_Localized: "Just our two shops selling \u2014 a monopoly."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156345
+    m_Localized: (Boss Mouse lifts the abacus, mouth crooked high)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156346
+    m_Localized: "Late last night, we saw it ourselves\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156347
+    m_Localized: "Flash \u2014 he flew!!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156348
+    m_Localized: He lifted off the broad leaf, circled once, and landed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156349
+    m_Localized: "We were stunned\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156350
+    m_Localized: A commercial spy's skill, beyond our imagination.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156351
+    m_Localized: All in, eight cheese crumbs. A fair price.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156352
+    m_Localized: That pricey batch in the back is on sale now too.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156353
+    m_Localized: Around here it ranks seventh at best.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156354
+    m_Localized: Most of a body pressed on a wooden ladder!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156355
+    m_Localized: Shufen did this before. It works.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156356
+    m_Localized: Too funny. Made it up on the spot.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156357
+    m_Localized: Later the wall was repaired and that side was blocked off.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156358
+    m_Localized: There are some you haven't bought. Come pick them yourself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156359
+    m_Localized: "If you've got enough cheese, come pick\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156360
+    m_Localized: Whether the cheese is enough is your business.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156361
+    m_Localized: A short charcoal stick on the grass, the tip worn flat, nearby leaves
+      smudged with charcoal dust.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156362
+    m_Localized: A few fluffy yellow down feathers scattered in the grass.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156363
+    m_Localized: Where the frog sits is a little higher than the lotus leaves around
+      it. Something green is under him. Up close, a strange smell.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156364
+    m_Localized: "That smell\u2026 what is this?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156365
+    m_Localized: A few small three-toed prints in the soft mud by the pond. The edges
+      have gone soft from the water.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156366
+    m_Localized: A chicken came to the pond?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156367
+    m_Localized: A few shallow pits stepped into the ground, and beside them a round-bottomed
+      print. Wet mud that smells of waterweed sticks to the bottom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156368
+    m_Localized: A low wall. Too high. Can't climb it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156369
+    m_Localized: A bucket of cloudy liquid. A few swollen grains float on top. It
+      smells a little sour.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156370
+    m_Localized: "This smell\u2026 might be exactly what Dahuang needs."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156371
+    m_Localized: Need something to stand on.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156372
+    m_Localized: A few straw tips burned black, and a small tuft of singed dark fur
+      stuck beside them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156373
+    m_Localized: Something hot touched this. The scorch is shallow. Not a big fire.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156374
+    m_Localized: The hay is pressed into a round dent, with a few dark fine hairs
+      on the edge.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156375
+    m_Localized: Who sleeps here often?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156376
+    m_Localized: A few shallow claw prints. Small, sharp paws.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156377
+    m_Localized: A bit of colored reflection flashes in a beam crack, then vanishes
+      when the angle shifts.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156378
+    m_Localized: "What is that reflection \u2014 what shiny thing did the crow put
+      here?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156379
+    m_Localized: A natural white round stone. A crooked heart drawn on it in charcoal,
+      and a childish ghost face on the back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156380
+    m_Localized: "This is\u2026 what?? ......Anyway it isn't an egg"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156381
+    m_Localized: An empty bucket. Wet mud and fine sand stuck to the bottom, with
+      the smell of pond weed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156382
+    m_Localized: This bucket just held pond water.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156383
+    m_Localized: A few heavy mud prints. Wide sole tread, running from the door toward
+      the coop. The mud edges have dried in a ring.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156384
+    m_Localized: A fine little door, the edge worn bright, with a tiny latch.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156385
+    m_Localized: Whose private little door is this?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156386
+    m_Localized: A few long thin scratch marks on the bark.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156387
+    m_Localized: A clean little ceramic bowl. Tiny paw-print patterns on the rim,
+      and a little leftover food in the bottom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156388
+    m_Localized: A well-cared-for little animal lives here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156389
+    m_Localized: A tuft of dark fur, fine and soft at the tips.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156390
+    m_Localized: The front door is shut tight. No gap to squeeze through.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156391
+    m_Localized: You can climb in and look now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156392
+    m_Localized: A pressed mark in the hay nest. A dull snore from the direction
+      of the barn.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156393
+    m_Localized: Where's the guard dog?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156394
+    m_Localized: A pressed mark in the hay nest.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156395
+    m_Localized: This is where Dahuang lives.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156396
+    m_Localized: An old wooden bucket. Dried grain stuck to the bottom. A faint sour
+      smell.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156397
+    m_Localized: Now you can get over.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156398
+    m_Localized: A dozen glass beads of different sizes pressed into the bottom of
+      the nest, breaking the sunlight into little colors.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156399
+    m_Localized: A few flattened metal bottle caps caught in the grass stems, edges
+      worn bright.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156400
+    m_Localized: A bent hairpin caught on the edge of the nest. A chip of black paint
+      missing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156401
+    m_Localized: An unopened milk candy buried beside the glass beads. The wrapper
+      badly wrinkled.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156402
+    m_Localized: A small tuft of pale yellow down.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156403
+    m_Localized: A few coarse yellow short hairs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156404
+    m_Localized: A few gray-brown fine hairs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156405
+    m_Localized: A tuft of fine soft black fur.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156406
+    m_Localized: I didn't know crows had fur?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156407
+    m_Localized: The straw by the coop threshold is trodden flat. Stems bent different
+      ways. Some marks new, some old.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156408
+    m_Localized: A small pile of fermented apple mash. A heavy sweet-sour smell.
+      A few apple cores gnawed clean stick out of the pile.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156409
+    m_Localized: A few old eggshells pressed in the corner, edges worn smooth, paler
+      than the other shell bits in the coop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156410
+    m_Localized: A lot of chicks have already hatched.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156411
+    m_Localized: A winding slime trail. The straight distance from start to end is
+      no wider than a leaf.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156412
+    m_Localized: A pinecone sunk deep in the soft mud, with a boot-sized pit around
+      it. The mud at the edge is wet, and the top of the cone is already sun-dried.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156413
+    m_Localized: Someone was in a hurry and never looked at their feet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156414
+    m_Localized: The attic window is latched from inside. Only a blur of warm light
+      through the glass.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156415
+    m_Localized: The wooden edge is worn bright by little claws. A few shallow scratches
+      gather at the same foothold.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156416
+    m_Localized: A small animal often stays here to look outside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156417
+    m_Localized: "The black cat often keeps watch here\u2026 he sees everything that
+      happens in the yard."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156418
+    m_Localized: The curtains of the red-roof house are drawn tight. Only a line
+      of warm yellow light leaks through the gap.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156419
+    m_Localized: Not like the living-room lamp. More like someone left a little light
+      on.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156420
+    m_Localized: A bucket of cloudy liquid. A little sour.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156421
+    m_Localized: The black cat's fur.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156422
+    m_Localized: "This fine black fur again\u2026 do crows really have fur?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156423
+    m_Localized: "(Comic ending placeholder \u2014 the truth is about to come out.)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156424
+    m_Localized: (A sharp herbal sweetness, mixed with the smell of pond water)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156425
+    m_Localized: "\u2026You came."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156426
+    m_Localized: "Or\u2026 you were only passing this dead water."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156427
+    m_Localized: "\u2026Is this your place?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156428
+    m_Localized: This is a place of nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156429
+    m_Localized: I've been sitting here a long time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156430
+    m_Localized: "Have you seen\u2026 an egg here?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156431
+    m_Localized: "An egg\u2026 what egg."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156432
+    m_Localized: In this water, nothing new has been born for a long time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156433
+    m_Localized: "So is it\u2026 yes, or no?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156434
+    m_Localized: Wrong person to ask.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156435
+    m_Localized: "The barn\u2026 have you been there?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156436
+    m_Localized: I only lie by the water.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156437
+    m_Localized: "Places far from water\u2026 even nothingness is dry."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156438
+    m_Localized: "The swamp monster\u2026 is there really one in this pond?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156439
+    m_Localized: (The frog slowly turns his head. His gaze lands for the first time,
+      and it's unfocused)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156440
+    m_Localized: Swamp monster.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156441
+    m_Localized: "\u2026There is no swamp monster."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156442
+    m_Localized: But there is something more heartbreaking than a swamp monster.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156443
+    m_Localized: "This water\u2026 watches one thing after another disappear."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156444
+    m_Localized: (The surface is calm. No trace left)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156445
+    m_Localized: Purity died first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156446
+    m_Localized: "Then\u2026 the cold vessel came."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156447
+    m_Localized: (The frog stares down at the water and doesn't look up for a long
+      time)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156448
+    m_Localized: "The source of life\u2026 is drying up."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156449
+    m_Localized: "A black demon\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156450
+    m_Localized: (The frog's throat moves, then goes mute)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156451
+    m_Localized: It took the jewel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156452
+    m_Localized: Nothing left.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156453
+    m_Localized: "\u2026What are you even saying."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156454
+    m_Localized: "\u2026Something else has come."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156455
+    m_Localized: "Or\u2026 something else is about to leave."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156456
+    m_Localized: "That green cushion under you\u2026 can I have it?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156457
+    m_Localized: (Something green is pinned under the frog. A wave of herbal sweetness
+      drifts from it)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156458
+    m_Localized: (The frog looks down at what's under him, then up. His gaze is still
+      unfocused)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156459
+    m_Localized: (The frog doesn't answer at once. His eyes rest on the water for
+      a while)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156460
+    m_Localized: (The frog's gaze moves slowly from the water to what's under him,
+      then back)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156461
+    m_Localized: (The frog stares at the water again and doesn't look over)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156462
+    m_Localized: "\u2026You still don't understand."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156463
+    m_Localized: (The frog slowly shifts his body. The green thing shows. The herbal
+      sweetness suddenly thickens)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156464
+    m_Localized: "\u2026Take it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156465
+    m_Localized: "It smells rotten and sweet\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156466
+    m_Localized: Like the dizzy smell of life leaving.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156467
+    m_Localized: "Since you mean to take this nothingness away\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156468
+    m_Localized: (The frog looks at the water again, emptier than before)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156469
+    m_Localized: "\u2026Then it's all yours."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156470
+    m_Localized: "This thing\u2026 you've been sitting on it the whole time?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156471
+    m_Localized: It's rotting, same as me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156472
+    m_Localized: But at least the smell is still here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156473
+    m_Localized: Proof that it existed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156474
+    m_Localized: (A wind passes. The water ripples. The moon's reflection breaks
+      and gathers)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156475
+    m_Localized: "\u2026I've seen so many frogs like you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156476
+    m_Localized: (The frog slowly turns his head. His gaze focuses for the first
+      time)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156477
+    m_Localized: The same lines. The same pose. The same pond.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156478
+    m_Localized: You are number seven in this region.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156479
+    m_Localized: (The frog stares blankly for several seconds. His eyes suddenly
+      lock)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156480
+    m_Localized: "\u2026Seventh."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156481
+    m_Localized: (A moment of silence)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156482
+    m_Localized: "\u2026Seventh?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156483
+    m_Localized: (The frog looks down and slowly pushes out what's under him, saying
+      nothing)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156484
+    m_Localized: (The frog turns his body the other way and doesn't look over)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156485
+    m_Localized: (The water doesn't move at all)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156486
+    m_Localized: "Today's water\u2026 is the same as yesterday's water."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156487
+    m_Localized: But yesterday is already gone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156488
+    m_Localized: "So actually\u2026 it isn't the same."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156489
+    m_Localized: "\u2026Hello."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156490
+    m_Localized: What's good about it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156491
+    m_Localized: (The water goes silent again)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156492
+    m_Localized: "\u2026Having come is having come."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156493
+    m_Localized: Being alive is waiting for something that won't come.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156494
+    m_Localized: "Waiting\u2026 for what?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156495
+    m_Localized: Don't know.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156496
+    m_Localized: But it feels like waiting.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284156497
+    m_Localized: "Something happened on the farm\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350208
+    m_Localized: Things are always happening.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350209
+    m_Localized: You only just noticed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350210
+    m_Localized: You already know.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350211
+    m_Localized: But knowing doesn't help.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350212
+    m_Localized: "\u2026Nothingness doesn't vanish because it was found."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350213
+    m_Localized: "\u2026Are you all right?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350214
+    m_Localized: All right is a very luxurious state.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350215
+    m_Localized: "\u2026Anything else?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350216
+    m_Localized: "The jewel\u2026 floated up again last night."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350217
+    m_Localized: What sinks into the abyss is only ever the reflection.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350218
+    m_Localized: (The water is calm. The moon's reflection is whole)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350219
+    m_Localized: (The frog doesn't turn his head)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350220
+    m_Localized: "The black demon\u2026 maybe only hates his own reflection."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350221
+    m_Localized: He isn't the only one who hates.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350222
+    m_Localized: "The source of life\u2026 is still being scooped away."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350223
+    m_Localized: Nothingness is still here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350224
+    m_Localized: "\u2026Everything that should be checked has been checked."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350225
+    m_Localized: "Checked what\u2026 nothingness is still nothingness."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350226
+    m_Localized: "That rotten driftwood is gone\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350227
+    m_Localized: It's empty under me. Cold.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350228
+    m_Localized: (The frog sighs)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350229
+    m_Localized: "\u2026Which fits."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350230
+    m_Localized: "\u2026Why did you come here?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350231
+    m_Localized: I came for that green cushion under you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350232
+    m_Localized: Because I'm looking for a lost egg.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350233
+    m_Localized: "\u2026Don't know. I felt it, so I came."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350234
+    m_Localized: Do you know what losing is?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350235
+    m_Localized: I do. If you lose it, you can still find it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350236
+    m_Localized: I do. I've lost something important.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350237
+    m_Localized: "\u2026I don't. Or, so what if I do."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350238
+    m_Localized: "It stayed with me\u2026 until now."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350239
+    m_Localized: Then keep it. I won't take it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350240
+    m_Localized: But now it should be taken away.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350241
+    m_Localized: "\u2026Staying with you is also a kind of spending."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350242
+    m_Localized: (At the coop door a hen is standing. She suddenly lifts her head)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350243
+    m_Localized: "Hey \u2014 wait!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350244
+    m_Localized: "Can you help? I can't find my child\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350245
+    m_Localized: (She takes a step toward the nest, then looks back)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350246
+    m_Localized: 'This morning I found it: the last egg, the one I marked with a
+      heart, is gone.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350247
+    m_Localized: "The other children hatched days ago. Just this smallest one\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350248
+    m_Localized: "It moved once before last night. That feeling\u2026 I couldn't
+      be wrong."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350249
+    m_Localized: (She pauses and looks at the sky)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350250
+    m_Localized: "It's turned cold all of a sudden. I was worried\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350251
+    m_Localized: The owner came to look several times too. Just stood there and didn't
+      speak.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350252
+    m_Localized: Will you look for me?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350253
+    m_Localized: Leave it to me. I'll look.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350254
+    m_Localized: "Thank you. Really. If you need to ask anything, come find me anytime\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350255
+    m_Localized: You're here. Come in.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350256
+    m_Localized: Any findings?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350257
+    m_Localized: (She leans forward, then holds back)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350258
+    m_Localized: (She hears a sound and snaps her head up)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350259
+    m_Localized: Oh, it's you!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350260
+    m_Localized: "\u2026How is it. Any news?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350261
+    m_Localized: (She tucks her wings and turns her face away)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350262
+    m_Localized: You're here. Come sit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350263
+    m_Localized: (She glances at the nest. Her eyes stop)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350264
+    m_Localized: "\u2026Is there anything else I can do?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350265
+    m_Localized: "If you found something about the egg, look\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350266
+    m_Localized: "I think\u2026 the owner took the egg."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350267
+    m_Localized: The owner keeps hanging around your nest lately?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350268
+    m_Localized: Dahuang drank too much. How do I wake him?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350269
+    m_Localized: That crow. Do you think he knows something?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350270
+    m_Localized: The frog by the pond. Do you know it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350271
+    m_Localized: The mice in the red-roof house. Do you know about them?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350272
+    m_Localized: "The nap nest in the barn \u2014 is it yours?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350273
+    m_Localized: I'll go look for other clues.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350274
+    m_Localized: "The owner\u2026 you said he keeps hanging around your nest lately?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350275
+    m_Localized: "He just keeps coming to the nest \u2014 sometimes he bends down
+      and looks in, sometimes he only stands there."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350276
+    m_Localized: I shoo him and he steps back half a pace. A while later he comes
+      close again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350277
+    m_Localized: (A pause)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350278
+    m_Localized: He's like that. He can't put down what he's worried about, but he
+      can't say it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350279
+    m_Localized: When he comes I know he's thinking of the child too.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350280
+    m_Localized: "That crow hauls everything up to the top\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350281
+    m_Localized: There's a pile on the barn roof. He treasures it. The rest of us
+      can't be bothered.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350282
+    m_Localized: If you're looking for something lost, you might as well rummage
+      through his things.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350283
+    m_Localized: "That frog\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350284
+    m_Localized: (She shakes her head gently)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350285
+    m_Localized: "I don't really understand what it says. But it stays by the water\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350286
+    m_Localized: "Go ask. Just be patient \u2014 it talks in circles. Ask a few more
+      times."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350287
+    m_Localized: Those two mice in the red-roof house. Do you know about them?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350288
+    m_Localized: You went and found those two?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350289
+    m_Localized: "Those two\u2026 they do have news. They just love to water it down."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350290
+    m_Localized: (She tucks her wings)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350291
+    m_Localized: "If you want to ask, I won't stop you \u2014 sort out for yourself
+      which line is true and which is nonsense."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350292
+    m_Localized: "There's a grass nest over by the barn \u2014 is that your napping
+      spot?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350293
+    m_Localized: Not me. I don't go that far.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350294
+    m_Localized: "The coop side is perfectly fine\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350295
+    m_Localized: Dahuang seems to have drunk too much. Any way to wake him?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350296
+    m_Localized: That stupid dog drank too much again?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350297
+    m_Localized: (She sighs)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350298
+    m_Localized: "The doghouse is empty \u2014 he's definitely drunk over by the
+      barn again."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350299
+    m_Localized: You won't wake him by shouting, not when he's that far gone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350300
+    m_Localized: There's a bucket of old grain-soaked water by the coop trough. He
+      likes that taste,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350301
+    m_Localized: (A pause)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350302
+    m_Localized: "\u2026Last time I was the one who took it to him."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350303
+    m_Localized: "There's a rock on the barn roof with a heart and a ghost face drawn
+      on it \u2014 look, like this."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350304
+    m_Localized: (She stares at the notebook and doesn't move for a long time)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350305
+    m_Localized: "\u2026This is a rock?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350306
+    m_Localized: (She looks down again, then up)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350307
+    m_Localized: A rock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350308
+    m_Localized: The afternoon before last I left the nest for a turn and took a
+      dust bath,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350309
+    m_Localized: I came back and touched it. The egg was ice cold.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350310
+    m_Localized: (A pause. Her voice drops)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350311
+    m_Localized: My heart went empty at once. I ran all over the yard. Squats until
+      my legs went soft,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350312
+    m_Localized: I ran myself out and went back to the nest, and the egg was warm
+      again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350313
+    m_Localized: I thought I'd warmed the child myself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350314
+    m_Localized: (She presses her beak shut hard)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350315
+    m_Localized: Those little brats! Aman! What have you been getting them into!?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350316
+    m_Localized: If I catch you, every one of you gets a beating!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350317
+    m_Localized: (A pause. Her wings loosen)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350318
+    m_Localized: "\u2026The afternoon before last was a false alarm."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350319
+    m_Localized: The child only went missing this morning. Thank you for finding
+      this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350320
+    m_Localized: (She frowns, thinking)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350321
+    m_Localized: "\u2026The owner?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350322
+    m_Localized: The owner is absolutely not a bad person.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350323
+    m_Localized: "The afternoon before last, when I was running the yard in a panic
+      \u2014 he stood there watching, worried too."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350324
+    m_Localized: (Her feathers tense a little)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350325
+    m_Localized: It'll be all right.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350326
+    m_Localized: (Her voice pressed very low)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350327
+    m_Localized: "\u2026It'll be all right."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350328
+    m_Localized: The child is beside me. Thank you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350329
+    m_Localized: Shufen, what the crow took was a rock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350330
+    m_Localized: "\u2026It turned into all this."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350331
+    m_Localized: "That two-legs of an owner\u2026 I won't shoo him anymore either."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350332
+    m_Localized: Mm.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350333
+    m_Localized: "Uh\u2026 I'll still shoo him once in a while."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350334
+    m_Localized: (Shufen crouches by the nest. A just-hatched chick is burrowing
+      under her wing)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350335
+    m_Localized: "You won't believe it \u2014 he came back by himself."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350336
+    m_Localized: He came back by himself?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350337
+    m_Localized: Mm. Already hatched. A tiny one.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350338
+    m_Localized: Walked in by himself. Stood at the door and called me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350339
+    m_Localized: (She gathers the chick in with a wing)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350340
+    m_Localized: "The nest was empty so long, I thought\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350341
+    m_Localized: That's good.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350342
+    m_Localized: "\u2026Thank you. Really."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350343
+    m_Localized: If you hadn't run all over the yard, I wouldn't have known what
+      to do.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350344
+    m_Localized: No movement for so long. I kept watch over it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350345
+    m_Localized: I know the farm better than anyone. I'm right here by the coop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350346
+    m_Localized: "Bright, white, round \u2014 if he sees it, he carries it to the
+      top."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350347
+    m_Localized: He sees everyone who passes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350348
+    m_Localized: Pour it down him and he wakes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350349
+    m_Localized: Just that little while.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350350
+    m_Localized: Wanted to warm the child back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350351
+    m_Localized: (On a broad leaf, a tiny snail's eyestalks slowly turn toward you)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350352
+    m_Localized: "I\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350353
+    m_Localized: "See\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350354
+    m_Localized: "Met\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350355
+    m_Localized: (The eyestalks turn back, as if one sentence tired him out)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350356
+    m_Localized: "This snail\u2026 the sentence just stops halfway?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350357
+    m_Localized: "Crr\u2026 ow\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350358
+    m_Localized: "Car\u2026 ried\u2026 off\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350359
+    m_Localized: (The snail stops. The shell doesn't move)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350360
+    m_Localized: "\u2014The crow? Carried what off? Finish the sentence\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350361
+    m_Localized: "Wh\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350362
+    m_Localized: "ite\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350363
+    m_Localized: "stone\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350364
+    m_Localized: (The snail's eyestalks droop, as if there's a second half)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350365
+    m_Localized: A white stone?! You saw it ages ago?! And then?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350366
+    m_Localized: "Wh\u2026 ite\u2026 stone\u2026,"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350367
+    m_Localized: "The real\u2026 egg\u2026 was\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350368
+    m_Localized: (The snail's eyestalks droop, stuck on the last word)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350369
+    m_Localized: "The real egg was\u2026 what?! Keep going!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350370
+    m_Localized: "The o\u2026 wner\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350371
+    m_Localized: (The snail goes completely still)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350372
+    m_Localized: The owner?! The owner did what?! I'm not counting on you. Go get
+      the black cat to open the door!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350373
+    m_Localized: "The real\u2026 egg\u2026 was\u2026 taken\u2026 by\u2026 the\u2026
+      owner\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350374
+    m_Localized: "In\u2026 to\u2026 the\u2026 house\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350375
+    m_Localized: (The snail's eyestalks aim at you and blink, extremely slowly)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350376
+    m_Localized: "I ran the whole farm\u2026 and you, you always stop halfway\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350377
+    m_Localized: "Great\u2026 de\u2026 tec\u2026 tive\u2026,"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350378
+    m_Localized: "Is\u2026 the\u2026 case\u2026 solved\u2026?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350379
+    m_Localized: (A smug caw drifts down from the barn roof)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350380
+    m_Localized: "This king's junk kingdom \u2014 glorious again today!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350381
+    m_Localized: (A caw draws out its tail and goes quiet)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350382
+    m_Localized: I need to go up and look.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350383
+    m_Localized: Who?! Who's trampling the edge of this king's formation!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350384
+    m_Localized: Get away! Mortals forbidden!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350385
+    m_Localized: Climb! Climb!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350386
+    m_Localized: This king wants to see how you get up!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350387
+    m_Localized: (A cackling laugh comes down from the roof)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350388
+    m_Localized: Halt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350389
+    m_Localized: "Mortal who steps into the junk kingdom \u2014 name yourself."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350390
+    m_Localized: I'm the detective. I came for Shufen's egg.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350391
+    m_Localized: An egg?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350392
+    m_Localized: (The crow cocks his head. His eyes turn, bright and sly)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350393
+    m_Localized: This king has only a divine gem here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350394
+    m_Localized: A tribal totem. A limited figure. Wrong door.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350395
+    m_Localized: Dahuang says you carried off Shufen's egg.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350396
+    m_Localized: That carpet with zero jumping ability?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350397
+    m_Localized: Barking nonsense from that far away. What does it know.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350398
+    m_Localized: What this king picked up was a big treasure, white and bright.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350399
+    m_Localized: "Even that one climbed up and glared at this king's divine gem\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350400
+    m_Localized: (The crow lifts his chin, pleased)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350401
+    m_Localized: Then he lost his nerve and went down without a word. Jealousy. Definitely
+      jealousy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350402
+    m_Localized: May I look at that divine gem?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350403
+    m_Localized: Looking is allowed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350404
+    m_Localized: (The crow's wingtip opens and blocks the white rock)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350405
+    m_Localized: Taking it? Don't even think about it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350406
+    m_Localized: "\u2026I'll only look."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350407
+    m_Localized: Mortal, you'd better only look.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350408
+    m_Localized: This is just a rock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350409
+    m_Localized: Insolence!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350410
+    m_Localized: What do you know about totem studies?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350411
+    m_Localized: "Look closely \u2014 a heart on the front. That is an ancient seal!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350412
+    m_Localized: Turn it over, a ghost face. That is a ward against evil!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350413
+    m_Localized: (The crow's wing clamps the white rock, deliberately showing only
+      the heart)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350414
+    m_Localized: It is full of mysterious power!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350415
+    m_Localized: Mortal, remember this king's glory.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350416
+    m_Localized: Those scorch marks under the barn. Did you do that?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350417
+    m_Localized: I'll go now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350418
+    m_Localized: Those scorch marks under the barn. Did you do them?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350419
+    m_Localized: That is the glass-bead formation this king laid.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350420
+    m_Localized: "When the sun hits, the beads gather into a point of fire \u2014
+      against thieves, against robbers, against black fur."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350421
+    m_Localized: So the straw below was lit by a focused point of light?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350422
+    m_Localized: "Burning straw\u2026 that is the formation's aftershock."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350423
+    m_Localized: It means this king's power was too fierce.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350424
+    m_Localized: Go down.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350425
+    m_Localized: Don't step on this king's treasures.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350426
+    m_Localized: (Another long, smug caw)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350427
+    m_Localized: Back again?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350428
+    m_Localized: Just walking around.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350429
+    m_Localized: Tours cost money.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350430
+    m_Localized: The gem is still here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350431
+    m_Localized: No need to ask.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350432
+    m_Localized: (The crow taps the white rock with a wingtip)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350433
+    m_Localized: The case isn't solved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350434
+    m_Localized: What does that have to do with this king.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350435
+    m_Localized: This king's kingdom is entirely normal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350436
+    m_Localized: (The crow crouches at the edge of the nest, quieter than usual)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350437
+    m_Localized: The case is solved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350438
+    m_Localized: This king knows. That is just a rock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350439
+    m_Localized: "\u2026You admit it now?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350440
+    m_Localized: "This king always knew! The heart seal, the ghost-face ward\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350441
+    m_Localized: The ghost face was drawn by the chicks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350442
+    m_Localized: "\u2026Part of the exam."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350443
+    m_Localized: (The crow turns his face away and presses the white rock down with
+      a wingtip)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350444
+    m_Localized: And the black cat? Did you two make up?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350445
+    m_Localized: That black fur?! At four yesterday morning he was lurking at the
+      edge of this king's formation again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350446
+    m_Localized: "This king flashed broken glass in his eyes\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350447
+    m_Localized: "\u2026Still not made up."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350448
+    m_Localized: This king does not need to make up. The highest king on the farm
+      does not need to.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350449
+    m_Localized: Go down, hat-wearer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350450
+    m_Localized: (The crow covers the white rock with a wing and lowers his head)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350451
+    m_Localized: All of it was an exam this king designed personally!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350452
+    m_Localized: He just went down, tail swinging.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350453
+    m_Localized: Hey, what are you doing?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350454
+    m_Localized: (Four chicks crowd by the coop, each in crooked cardboard sunglasses,
+      acting cool)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350455
+    m_Localized: "(Quiet) Someone's here\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350456
+    m_Localized: "Don't, don't look at him\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350457
+    m_Localized: (Aman shifts half a step forward, then stops)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350458
+    m_Localized: Shufen's egg is gone. Do you know?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350459
+    m_Localized: (Aman's sunglasses slide to the tip of his beak)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350460
+    m_Localized: "(Very quiet) Little brother\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350461
+    m_Localized: (Urgent) Guazi! Don't yell!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350462
+    m_Localized: (Aman pushes the sunglasses back up)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350463
+    m_Localized: "We\u2026 the Shadow Detective Crew\u2026 are also on this case."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350464
+    m_Localized: This is big. You'd better not meddle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350465
+    m_Localized: Can you tell me anything?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350466
+    m_Localized: (Doudou tugs Aman's wing)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350467
+    m_Localized: Internal intel. Can't tell outsiders.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350468
+    m_Localized: You have to say something.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350469
+    m_Localized: (Mili and Doudou look at each other)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350470
+    m_Localized: "\u2026We're busy. Really."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350471
+    m_Localized: Right. Field work is booked solid.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350472
+    m_Localized: (Guazi keeps his head down. His beak moves. No sound)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350473
+    m_Localized: "\u2026Anything else?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350474
+    m_Localized: What are you actually up to?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350475
+    m_Localized: The grass nest in the barn corner. Know whose it is?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350476
+    m_Localized: Dahuang's that hungover. How do I wake him?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350477
+    m_Localized: This thing. How do you explain it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350478
+    m_Localized: I'm going up to the barn roof to find the crow.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350479
+    m_Localized: Nothing. I'm going.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350480
+    m_Localized: "Those messy marks by the coop \u2014 they have to do with you,
+      don't they."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350481
+    m_Localized: (Aman shrinks his neck)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350482
+    m_Localized: "\u2026That's\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350483
+    m_Localized: "De-detective tools\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350484
+    m_Localized: (The four chicks pack tighter)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350485
+    m_Localized: Talk! What are you hiding from me!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350486
+    m_Localized: "(Tearful) The swamp monster\u2026 the swamp monster carried little
+      brother off\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350487
+    m_Localized: Yes!! It was the swamp monster!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350488
+    m_Localized: (Aman nods hard toward the pond)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350489
+    m_Localized: Three heads! Green all over!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350490
+    m_Localized: It climbed out of the pond! Dragged the egg into the water!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350491
+    m_Localized: You saw it yourself?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350492
+    m_Localized: "Did-didn't see\u2026 but it definitely was!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350493
+    m_Localized: "That sound outside last night\u2026 the frog said so too\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350494
+    m_Localized: "(Shaking) Otherwise how could little brother be gone\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350495
+    m_Localized: The frog at the pond must have seen it!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350496
+    m_Localized: Go ask him!! Please go!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350497
+    m_Localized: (Aman's sunglasses are crooked. He doesn't bother to fix them)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350498
+    m_Localized: "(\u2026\u2026)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350499
+    m_Localized: There's a grass nest in the barn corner. Do you know whose it is?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350500
+    m_Localized: (Aman frowns)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350501
+    m_Localized: The barn corner? Not in our patrol range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350502
+    m_Localized: "(Quiet) I\u2026 I didn't notice that side."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350503
+    m_Localized: Wrong place! We only guard the coop side!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350504
+    m_Localized: "\u2026Nothing worth saying."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350505
+    m_Localized: Dahuang's that hungover. Any way to wake him?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350506
+    m_Localized: (Doudou bounces. His sunglasses go crooked)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350507
+    m_Localized: Uncle Dahuang? He's still lying there?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350508
+    m_Localized: (Aman holds Doudou down)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350509
+    m_Localized: Is there a way?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350510
+    m_Localized: (Aman lowers his voice. A wingtip shakes)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350511
+    m_Localized: "By the coop trough, there's old grain-soaked water. He likes it.
+      Pour it down him and he wakes. \u2026Take it. Call it the detective crew looking
+      after a senior."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350512
+    m_Localized: "(Quiet) \u2026Can we help this time?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350513
+    m_Localized: Huh? What's on the barn roof?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350514
+    m_Localized: "Dahuang said \u2014 the crow carried the egg up to the roof."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350515
+    m_Localized: "\u2026The roof?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350516
+    m_Localized: "(Quiet) The egg\u2026?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350517
+    m_Localized: The crow is still up there guarding it. I have to go look.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350518
+    m_Localized: (Aman looks at the other three. Doudou's mouth opens, and nothing
+      comes out)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350519
+    m_Localized: "(Very quiet) Could it be\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350520
+    m_Localized: (Urgent) Guazi!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350521
+    m_Localized: (Wind blows past the coop)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350522
+    m_Localized: (None of the four chicks looks at the others)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350523
+    m_Localized: (Aman starts to fix his sunglasses and freezes)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350524
+    m_Localized: (The four chicks shut their mouths together)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350525
+    m_Localized: Guess what I found, after all that climbing, up there with the crow?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350526
+    m_Localized: (The four chicks look at each other. Nobody speaks)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350527
+    m_Localized: "\u2026The egg?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350528
+    m_Localized: Talk! What is this! What happened!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350529
+    m_Localized: (The four chicks crowd in, then freeze)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350530
+    m_Localized: "\u2026We drew it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350531
+    m_Localized: (The sunglasses clatter to the ground)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350532
+    m_Localized: "That isn't Mom's egg\u2026 what the crow took was a fake\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350533
+    m_Localized: "(Crying) Then little brother \u2014 where is little brother\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350534
+    m_Localized: (Aman covers his face with a wing)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350535
+    m_Localized: "Waaah \u2014 I confess!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350536
+    m_Localized: From the start.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350537
+    m_Localized: The afternoon before last we found a white rock, drew it to look
+      like an egg, put it in the nest pretending it was the egg,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350538
+    m_Localized: "Then we stole the real little brother out\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350539
+    m_Localized: (Quiet) To play ball.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350540
+    m_Localized: "Play\u2026 ball? You used your little brother as a ball?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350541
+    m_Localized: (Several chicks look down and say nothing)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350542
+    m_Localized: And then?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350543
+    m_Localized: There's a swamp monster. It comes out at night and specially eats
+      eggs that got mud on them!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350544
+    m_Localized: (Puffed up) Now I remember they were holding in laughter the whole
+      time!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350545
+    m_Localized: Hurry and push the real egg back into the nest!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350546
+    m_Localized: And the fake rock?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350547
+    m_Localized: "The fake rock\u2026 we tossed it in the grass the day before yesterday\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350548
+    m_Localized: "(Quiet) Later\u2026 the crow carried it off."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350549
+    m_Localized: "Then when Dahuang said the crow carried an egg to the roof\u2014?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350550
+    m_Localized: (The four chicks look at each other)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350551
+    m_Localized: "Uncle Dahuang drank for two days. He mixed the days up\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350552
+    m_Localized: "(Crying) What the crow carried off was the fake rock we drew \u2014
+      that was the day before yesterday!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350553
+    m_Localized: Was there a noise last night?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350554
+    m_Localized: "Little brother was still there at bedtime\u2026 in the middle of
+      the night the nest was empty\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350555
+    m_Localized: "There was a really loud sound outside\u2026 we thought it was the
+      swamp monster\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350556
+    m_Localized: "(Crying) If there is no swamp monster\u2026 who took little brother?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350557
+    m_Localized: (Aman slumps)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350558
+    m_Localized: "\u2026We'll never steal little brother out to play ball again."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350559
+    m_Localized: (The coop is very quiet)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350560
+    m_Localized: "(Very quiet) Great detective\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350561
+    m_Localized: "(Even quieter) Don't look at me\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350562
+    m_Localized: (Low) Stand up straight.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350563
+    m_Localized: Shufen is still crying.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350564
+    m_Localized: "\u2026We know."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350565
+    m_Localized: "(Tearful) It's our fault\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350566
+    m_Localized: Great detective.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350567
+    m_Localized: Hm?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350568
+    m_Localized: "If\u2026 if little brother really is in the red-roof house\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350569
+    m_Localized: We'll go and admit it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350570
+    m_Localized: "(Quiet) \u2026Mm."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350571
+    m_Localized: Not sure yet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350572
+    m_Localized: (Aman nods once)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350573
+    m_Localized: Do you regret it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350574
+    m_Localized: (None of the four chicks makes a sound)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350575
+    m_Localized: "\u2026We regret it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350576
+    m_Localized: "(Hoarse) The Shadow Detective Crew\u2026 messed it up."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350577
+    m_Localized: "I\u2026 I won't yell about the swamp monster anymore."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350578
+    m_Localized: Don't bring it up again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350579
+    m_Localized: (The four chicks sit at the coop door. Aman's sunglasses are by
+      his feet)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350580
+    m_Localized: "Good news \u2014 little brother hatched."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350581
+    m_Localized: (The four chicks look up)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350582
+    m_Localized: "\u2026He really came out?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350583
+    m_Localized: He did. He's calling in the nest himself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350584
+    m_Localized: (Doudou turns his head and rubs his eyes with a wing)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350585
+    m_Localized: I'm not crying.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350586
+    m_Localized: "\u2026Those days, we hoped every day he was all right."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350587
+    m_Localized: It's all right now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350588
+    m_Localized: "(Low) Mm\u2026 actually, back then, we were really scared."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350589
+    m_Localized: "That thing about the mice tricking you into making up a swamp monster
+      \u2014 still planning to settle it?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350590
+    m_Localized: (Doudou throws a wing up)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350591
+    m_Localized: We will!! We have to settle it with them!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350592
+    m_Localized: "(Cuts in) \u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350593
+    m_Localized: (Aman puts the sunglasses back on)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350594
+    m_Localized: The Shadow Detective Crew has its own arrangements.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350595
+    m_Localized: "(Quiet) They made it up way too far\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350596
+    m_Localized: (Low) Doudou, heard you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350597
+    m_Localized: (Doudou nods hard. Mili and Guazi nod too)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350598
+    m_Localized: (The four chicks line up. Sunglasses on straight)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350599
+    m_Localized: Colleagues.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350600
+    m_Localized: Another job?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350601
+    m_Localized: A walk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350602
+    m_Localized: (Low) And to see if the mice are in.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350603
+    m_Localized: (Low) Doudou!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350604
+    m_Localized: A new case?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350605
+    m_Localized: No. Little brother just hatched. Don't go out and run wild.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350606
+    m_Localized: (Guazi stares into the coop)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350607
+    m_Localized: Looking at what?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350608
+    m_Localized: Looking at little brother.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350609
+    m_Localized: (A thin call comes from the nest)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350610
+    m_Localized: (Quiet) He looked this way just now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350611
+    m_Localized: "\u2026Still investigating. Don't touch our scene."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350612
+    m_Localized: "The pond\u2026 did you go?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350613
+    m_Localized: "\u2026Field work is paused. If you've got something, say it fast."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350614
+    m_Localized: (The four chicks crowd together again)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350615
+    m_Localized: "The black cat sent me to ask \u2014 what actually happened to you
+      these two days? I saw a white rock with the crow. It has to do with you, doesn't
+      it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350616
+    m_Localized: (The four chicks freeze)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350617
+    m_Localized: "(Tearful) We\u2026 we lost little brother\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350618
+    m_Localized: "While we were pushing little brother past the barn, Uncle Mouse
+      jumped out and said\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350619
+    m_Localized: Little brother had already been pushed back into the nest by then.
+      If he really vanished, it was last night!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350620
+    m_Localized: "That sound last night\u2026 the frog might have heard it. Go ask
+      him\u2026 please\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350621
+    m_Localized: "Then we stole the real little brother out \u2014 to play ball."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350622
+    m_Localized: There's a swamp monster that specially eats muddy eggs!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350623
+    m_Localized: "We got scared and ran to the pond to wash the egg, and then the
+      frog's words scared us too\u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350624
+    m_Localized: Little brother only vanished last night! It's not the same thing
+      as that trip!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350625
+    m_Localized: "(Low) That sound outside last night\u2026 it had to be the swamp
+      monster\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350626
+    m_Localized: "(Low) The frog over at the pond also said the jewel sank\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350627
+    m_Localized: "(Very quiet) \u2026But the day before yesterday\u2026 it was clearly
+      us\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350628
+    m_Localized: (Low) Guazi! Stop talking!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350629
+    m_Localized: (Low) Then if someone comes asking, what do we say?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350630
+    m_Localized: "(Low) We say\u2026 the swamp monster. It came from the pond. It
+      carried the egg off\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350631
+    m_Localized: "(Low) It has to be that\u2026 otherwise how could little brother
+      be gone\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350632
+    m_Localized: There's a passage up above
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350633
+    m_Localized: Place the ladder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350634
+    m_Localized: E Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350635
+    m_Localized: Dahuang's collar is silver-plated.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350636
+    m_Localized: In his youth the frog was the greatest romantic on these waters.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350637
+    m_Localized: Ten years ago Shufen was the next village's cockfighting champion.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350638
+    m_Localized: Flash is a commercial spy from the next farm. He's been mapping
+      this place for three years.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350639
+    m_Localized: The owner calls himself a chicken specialist, especially Aftercare
+      for Hens.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350640
+    m_Localized: "The great oak can walk \u2014 one centimeter a year."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350641
+    m_Localized: Last time Dahuang stole the owner's fermented apple mash, Shufen
+      woke him with grain-soaked water.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350642
+    m_Localized: "These days the owner keeps peering toward the coop \u2014 then
+      doesn't go in."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350643
+    m_Localized: Last night the chicks all stayed in the coop, like they were waiting
+      for something
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350644
+    m_Localized: The afternoon before last, the black cat climbed the barn roof by
+      himself
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350645
+    m_Localized: The swamp monster was something the mouse brothers made up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350646
+    m_Localized: The morning before last, the crow took something from the grass
+      by the coop door back to the roof.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350647
+    m_Localized: "Last night a yellow light burned in the red-roof house and the
+      walls hummed \u2014 like a little sun that never sets."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350648
+    m_Localized: "Last night the owner's rain boots made two trips \u2014 one with
+      wet mud, one toward the coop."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350649
+    m_Localized: That 'swamp monster growl' last night was actually Dahuang snoring.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350650
+    m_Localized: Last night the black cat whispered to his own shadow by the fence.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350651
+    m_Localized: There used to be another intel shop. The mouse brothers ran it out
+      of business.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 288350652
+    m_Localized: Last night Flash lifted off a broad leaf, circled once, and landed.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

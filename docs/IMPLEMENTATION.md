@@ -3,7 +3,7 @@
 > **用途**：代码侧技术地图，供开发者和 AI 快速理解「怎么跑」。  
 > **策划文档**：玩法 / 叙事 / 变量语义见 [`MissingEggDoc-main/`](../MissingEggDoc-main/README.md)。  
 > **引擎**：团结引擎 1.10.1。目标发布平台为 **Steam**，支持设备为 **PC**。玩家化身为一只**绿头鸭**。  
-> **主开发 / 可运行 Scene**：`Assets/Scenes/Mechanics_Code.unity`（PC 已写入 Build Settings；Addressables 分组 `Mechanics_Code` 仅为抖音初版发布入口）。  
+> **玩家入口 Scene**：`Assets/Scenes/StartMenu.unity`（Build Settings 第一项）。**游戏 Scene**：`Assets/Scenes/Mechanics_Code.unity`（Addressables 分组 `Mechanics_Code` 仅为抖音初版发布入口）。  
 > **初版**：曾上线抖音小火人世界，约五万人游玩并获得大量好评。初版使用 Lua 编写逻辑并存储数据。当前运行逻辑为 **C#**，运行时数据为 **JSON**。  
 > **遗留**：`ArtTest_MRL.unity` 为早期美术白盒场景。Lua + 抖音 SDK 仍在仓库中作对照，**新逻辑只写 C#**。
 
@@ -19,13 +19,14 @@
 | 对话 / 状态数据 | JSON TextAsset（`Assets/Resources/GameData/`）。初版用 Lua 存储数据；对话定稿仍可由 Lua 表转换成这份 JSON |
 | 遗留 | 抖音初版 World SDK + Lua（`Assets/luaScripts/`），发布前用菜单禁用 DouyinScript |
 | 编辑器 | C# 自定义窗口 + `Tools/Egg Rescue/PC/*` |
+| 本地化 | Unity Localization 1.5.2。源表 `Assets/Resources/Localization/catalog.json`（中/英）。主菜单设置里切换。导入字符串表：`Tools/Egg Rescue/PC/Import Localization Tables` |
 
 C# 运行时入口：`GameBootstrap`（Play 后自动生成，不依赖抖音注入角色）。玩家角色为绿头鸭；场景中暂以胶囊占位，模型可后换。
 
 ### 1.1 从 Lua 迁到 C# 后怎么跑
 
-1. 打开 `Mechanics_Code`，菜单 **`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`**（写入出生点、禁用 DouyinScript、接线立绘）。
-2. Play：WASD 移动、空格跳、鼠标视角、E 键交互。对话中用鼠标左键、空格或回车推进。F5 存档，F9 读档，Esc 解锁鼠标。
+1. 玩家包从 `StartMenu` 进入农场。日常改农场内容仍打开 `Mechanics_Code`，菜单 **`Tools/Egg Rescue/PC/Setup Scene For PC Runtime`**（写入出生点、Build Settings、禁用 DouyinScript、接线立绘）。
+2. Play 农场场景：WASD 移动、空格跳、鼠标视角、E 键交互。对话中用鼠标左键、空格或回车推进。F5 存档，F9 读档，Esc 解锁鼠标。主菜单可调主音量和鼠标灵敏度。
 3. 改对话 lua 后执行 **`Tools/Egg Rescue/PC/Convert Lua Data To JSON`**（或 `dotnet run --project MissingEggDoc-main/scripts/LuaToJson/LuaToJson.csproj`）。
 
 数据转换脚本：[`MissingEggDoc-main/scripts/lua_to_json.py`](../MissingEggDoc-main/scripts/lua_to_json.py)（需 Python）与 [`MissingEggDoc-main/scripts/LuaToJson/`](../MissingEggDoc-main/scripts/LuaToJson/)（dotnet）。
@@ -374,11 +375,11 @@ SetGlobalVar（对话 / ClueTrigger / 老鼠商店）
 
 - PC：`GameBootstrap` Play 后自动生成玩家胶囊与第三人称相机；菜单 `Tools/Egg Rescue/PC/Setup Scene For PC Runtime` 写入 `PlayerSpawn`、按 lua 名迁移 C# 组件并禁用 `DouyinScript`。
 - 操作：WASD 移动、空格跳、鼠标视角、只有 E 键开始交互；对话中鼠标左键 / 空格 / 回车下一句；N 开关笔记本；F5 存档、F9 读档、Esc 解锁鼠标。
-- 存档：`Application.persistentDataPath/windmill_farm_save.json`（变量 + NPC 分支 + 奶酪拾取 + BranchFlag + 已发现交互点）。Editor Play **不**自动读档；玩家包启动自动读档。
+- 存档：`Application.persistentDataPath/windmill_farm_save.json`（变量 + NPC 分支 + 奶酪拾取 + BranchFlag + 已发现交互点）。主菜单「继续游戏」读档后进入；「开始游戏」从默认状态进入，已有存档保留到游戏中再次 F5。编辑器直接 Play `Mechanics_Code` **不**自动读档。
 - 对话 JSON 漏字段会卡主线：`ShopAction`、`RotatePool`、`ChainDialogue`、`BranchFlag`、`DisplayConditions`。
 - Scene 物体名 `MianController` 为历史拼写。Lua `DialogueTrigger` 仍通过 `GameObject.Find("DialogueData")` 读 DouyinScript；C# 改为 `Resources/GameData/Dialogue`。
 - 不要移植 `ClueTrigger.Awake` 的全量 bool 重置。
 
 ---
 
-*最后更新：2026-10-08 · 团结引擎 1.10.1 · Steam / PC · C# + JSON · 主开发 Scene：Mechanics_Code*
+*最后更新：2026-10-09 · 团结引擎 1.10.1 · Steam / PC · C# + JSON · 入口 StartMenu · 游戏 Scene：Mechanics_Code*

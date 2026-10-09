@@ -79,8 +79,23 @@ namespace EggRescue
         bool _iconVisible;
         List<HudState> _hiddenHud;
 
-        void OnEnable() { GameEvents.VariableChanged += OnVarChanged; }
-        void OnDisable() { GameEvents.VariableChanged -= OnVarChanged; }
+        void OnEnable()
+        {
+            GameEvents.VariableChanged += OnVarChanged;
+            GameLocale.Changed += OnLocaleChanged;
+        }
+
+        void OnDisable()
+        {
+            GameEvents.VariableChanged -= OnVarChanged;
+            GameLocale.Changed -= OnLocaleChanged;
+        }
+
+        void OnLocaleChanged()
+        {
+            if (_intelText.Count == 0) return;
+            RebuildIntel();
+        }
 
         void Start()
         {
@@ -377,7 +392,7 @@ namespace EggRescue
             instance.SetActive(true);
             var label = instance.GetComponentInChildren<Text>(true);
             string text;
-            if (label != null && _intelText.TryGetValue(varName, out text)) label.text = text;
+            if (label != null && _intelText.TryGetValue(varName, out text)) label.text = GameLocale.Line(text);
             if (fade) QueueReveal("intel_" + varName, instance);
             else GetGroup(instance).alpha = 1f;
             _intelSpawned[varName] = instance;

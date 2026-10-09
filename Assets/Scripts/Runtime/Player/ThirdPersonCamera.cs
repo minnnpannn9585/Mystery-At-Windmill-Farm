@@ -51,8 +51,14 @@ namespace EggRescue
             Instance = this;
         }
 
+        public void SetMouseSensitivity(float value)
+        {
+            mouseSensitivity = Mathf.Max(0.2f, value);
+        }
+
         void Start()
         {
+            mouseSensitivity = GameSettings.MouseSensitivity;
             if (target == null && PlayerController.Instance != null)
                 SetTarget(PlayerController.Instance.CameraPivot != null
                     ? PlayerController.Instance.CameraPivot

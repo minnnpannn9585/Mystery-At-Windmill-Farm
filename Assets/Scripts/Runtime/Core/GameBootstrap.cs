@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace EggRescue
@@ -13,6 +14,7 @@ namespace EggRescue
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void AutoBoot()
         {
+            if (SceneManager.GetActiveScene().name == GameSession.MenuSceneName) return;
             if (FindObjectOfType<GameBootstrap>() != null) return;
             var go = new GameObject("EggRescue_Runtime");
             go.AddComponent<GameBootstrap>();
@@ -29,11 +31,13 @@ namespace EggRescue
         {
             if (_booted) return;
             _booted = true;
+            GameSettings.Load();
             GameState.LoadDefaults();
             NpcRegistry.Load();
             DialogueDatabase.LoadAll();
-            if (!Application.isEditor)
+            if (GameSession.ShouldLoadSave())
                 SaveService.Load();
+            GameSession.Consume();
             EnsureAudio();
             EnsureDialogue();
             EnsurePlayer();

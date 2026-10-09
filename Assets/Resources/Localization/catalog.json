@@ -1,0 +1,4788 @@
+{
+  "ui": [
+    {
+      "key": "menu.title",
+      "zh": "风车农场悬案",
+      "en": "Mystery at Windmill Farm"
+    },
+    {
+      "key": "menu.subtitle",
+      "zh": "一只绿头鸭的调查",
+      "en": "A Mallard's Investigation"
+    },
+    {
+      "key": "menu.start",
+      "zh": "开始游戏",
+      "en": "New Game"
+    },
+    {
+      "key": "menu.continue",
+      "zh": "继续游戏",
+      "en": "Continue"
+    },
+    {
+      "key": "menu.settings",
+      "zh": "设置",
+      "en": "Settings"
+    },
+    {
+      "key": "menu.quit",
+      "zh": "退出游戏",
+      "en": "Quit"
+    },
+    {
+      "key": "menu.controls",
+      "zh": "WASD 移动    鼠标转向    E 交互    N 笔记本",
+      "en": "WASD Move    Mouse Look    E Interact    N Notebook"
+    },
+    {
+      "key": "menu.save_ready",
+      "zh": "可以继续上次的调查",
+      "en": "You can continue the last investigation"
+    },
+    {
+      "key": "menu.no_save",
+      "zh": "还没有存档",
+      "en": "No save yet"
+    },
+    {
+      "key": "menu.missing_scene",
+      "zh": "农场场景还没放进 Build Settings",
+      "en": "The farm scene is not in Build Settings"
+    },
+    {
+      "key": "menu.settings_title",
+      "zh": "设置",
+      "en": "Settings"
+    },
+    {
+      "key": "menu.volume",
+      "zh": "主音量",
+      "en": "Master Volume"
+    },
+    {
+      "key": "menu.sensitivity",
+      "zh": "鼠标灵敏度",
+      "en": "Mouse Sensitivity"
+    },
+    {
+      "key": "menu.language",
+      "zh": "语言",
+      "en": "Language"
+    },
+    {
+      "key": "menu.back",
+      "zh": "返回",
+      "en": "Back"
+    },
+    {
+      "key": "menu.confirm_title",
+      "zh": "开始新的调查？",
+      "en": "Start a new investigation?"
+    },
+    {
+      "key": "menu.confirm_body",
+      "zh": "已有存档会保留，直到你在游戏里按 F5 再次保存。",
+      "en": "Your save stays until you press F5 in the game."
+    },
+    {
+      "key": "menu.confirm_ok",
+      "zh": "开始",
+      "en": "Start"
+    },
+    {
+      "key": "menu.confirm_cancel",
+      "zh": "取消",
+      "en": "Cancel"
+    },
+    {
+      "key": "menu.lang_zh",
+      "zh": "中文",
+      "en": "中文"
+    },
+    {
+      "key": "menu.lang_en",
+      "zh": "English",
+      "en": "English"
+    },
+    {
+      "key": "prompt.interact",
+      "zh": "E 交互",
+      "en": "E Interact"
+    },
+    {
+      "key": "debug.speed_on",
+      "zh": "测试三倍速：开（F8 关闭）",
+      "en": "Test 3x speed: on (F8 off)"
+    },
+    {
+      "key": "debug.speed_off",
+      "zh": "测试三倍速：关（F8 打开）",
+      "en": "Test 3x speed: off (F8 on)"
+    }
+  ],
+  "names": [
+    {
+      "zh": "淑芬",
+      "en": "Shufen"
+    },
+    {
+      "zh": "大黄",
+      "en": "Dahuang"
+    },
+    {
+      "zh": "黑猫",
+      "en": "Black Cat"
+    },
+    {
+      "zh": "悲伤蛙",
+      "en": "Sad Frog"
+    },
+    {
+      "zh": "闪电蜗牛",
+      "en": "Flash"
+    },
+    {
+      "zh": "乌鸦",
+      "en": "Crow"
+    },
+    {
+      "zh": "小鸡侦探团",
+      "en": "Chick Detective Crew"
+    },
+    {
+      "zh": "老鼠兄弟",
+      "en": "Mouse Brothers"
+    },
+    {
+      "zh": "阿满",
+      "en": "Aman"
+    },
+    {
+      "zh": "米粒",
+      "en": "Mili"
+    },
+    {
+      "zh": "豆豆",
+      "en": "Doudou"
+    },
+    {
+      "zh": "瓜子",
+      "en": "Guazi"
+    },
+    {
+      "zh": "鼠哥",
+      "en": "Boss Mouse"
+    },
+    {
+      "zh": "鼠弟",
+      "en": "Little Mouse"
+    },
+    {
+      "zh": "大树",
+      "en": "The Oak"
+    },
+    {
+      "zh": "描述",
+      "en": "Narration"
+    },
+    {
+      "zh": "玩家",
+      "en": "You"
+    },
+    {
+      "zh": "小鸡们",
+      "en": "The Chicks"
+    }
+  ],
+  "lines": [
+    {
+      "zh": "（谷仓墙根旁，一架短木梯侧倒在地，",
+      "en": "(By the barn wall, a short wooden ladder lies on its side,"
+    },
+    {
+      "zh": "嗝——",
+      "en": "*hic—*"
+    },
+    {
+      "zh": "谁……",
+      "en": "Who…"
+    },
+    {
+      "zh": "淑芬的蛋不见了。你看到过什么吗？",
+      "en": "Shufen's egg is gone. Did you see anything?"
+    },
+    {
+      "zh": "（大黄的耳朵动了一下，目光慢慢聚过来）",
+      "en": "(Dahuang's ear twitches. His eyes slowly come into focus)"
+    },
+    {
+      "zh": "蛋……乌鸦……叼走了。",
+      "en": "The egg… the crow… carried it off."
+    },
+    {
+      "zh": "乌鸦？",
+      "en": "The crow?"
+    },
+    {
+      "zh": "嗯……乌鸦往谷仓屋顶飞了。我追了，跳不上去，就咬到一嘴空气。",
+      "en": "Mm… the crow flew to the barn roof. I chased it, couldn't jump up, and bit a mouthful of air."
+    },
+    {
+      "zh": "（大黄把脑袋重新压回前爪上，声音低下去）",
+      "en": "(Dahuang lowers his head back onto his paws. His voice drops)"
+    },
+    {
+      "zh": "我失职了……没护住淑芬的蛋。",
+      "en": "I failed… I didn't protect Shufen's egg."
+    },
+    {
+      "zh": "你身下压着一架短木梯，能先挪一下吗？",
+      "en": "There's a short ladder under you. Can you shift over first?"
+    },
+    {
+      "zh": "（大黄迷迷糊糊蹬了下腿，短梯反而被压得更实）",
+      "en": "(Dahuang drowsily kicks. The ladder gets pinned even harder)"
+    },
+    {
+      "zh": "……别推……",
+      "en": "…Don't push…"
+    },
+    {
+      "zh": "嗝……",
+      "en": "*hic…*"
+    },
+    {
+      "zh": "大黄，先喝点这个。",
+      "en": "Dahuang, drink this first."
+    },
+    {
+      "zh": "大黄，醒醒。",
+      "en": "Dahuang, wake up."
+    },
+    {
+      "zh": "我等会回来。",
+      "en": "I'll come back later."
+    },
+    {
+      "zh": "（大黄眯着眼凑近闻了闻，探出舌头慢慢吮着喝，中途顿了顿，又埋头接着喝）",
+      "en": "(Dahuang squints, leans in to sniff, sticks out his tongue and drinks slowly. He pauses, then buries his head and keeps drinking)"
+    },
+    {
+      "zh": "（片刻后，大黄猛地甩了下脑袋——湿树叶从额头飞出去）",
+      "en": "(A moment later Dahuang flings his head — the wet leaf flies off his forehead)"
+    },
+    {
+      "zh": "呕——",
+      "en": "*urk—*"
+    },
+    {
+      "zh": "（大黄使劲眨眼，目光开始聚焦）",
+      "en": "(Dahuang blinks hard. His eyes start to focus)"
+    },
+    {
+      "zh": "（四肢从梯子上撑起来，摇摇晃晃站稳）",
+      "en": "(He pushes up off the ladder and stands, swaying)"
+    },
+    {
+      "zh": "……嗯，清楚多了。",
+      "en": "…Mm. Clearer now."
+    },
+    {
+      "zh": "（大黄哼了一声，把头埋进前爪里）",
+      "en": "(Dahuang huffs and buries his head in his paws)"
+    },
+    {
+      "zh": "嗝……别吵……",
+      "en": "*hic…* quiet…"
+    },
+    {
+      "zh": "这样叫不醒。得找点能让他清醒的东西。",
+      "en": "Calling won't wake him. I need something that can sober him up."
+    },
+    {
+      "zh": "这样叫不醒。得先让他清醒过来，短梯才借得出来。",
+      "en": "Calling won't wake him. He has to sober up before I can borrow the ladder."
+    },
+    {
+      "zh": "你还有什么事吗？",
+      "en": "Anything else?"
+    },
+    {
+      "zh": "梯子能借我吗？",
+      "en": "Can I borrow the ladder?"
+    },
+    {
+      "zh": "谷仓那草窝是谁的？",
+      "en": "Whose nest is that in the barn?"
+    },
+    {
+      "zh": "这是你追的蛋吗？",
+      "en": "Is this the egg you chased?"
+    },
+    {
+      "zh": "目前没什么事了。",
+      "en": "Nothing else for now."
+    },
+    {
+      "zh": "大黄，梯子能借我吗？入口那道小围墙，我得翻过去。",
+      "en": "Dahuang, can I borrow the ladder? I have to get over that little wall by the entrance."
+    },
+    {
+      "zh": "梯子？",
+      "en": "The ladder?"
+    },
+    {
+      "zh": "（大黄扭头看向身侧那架侧倒的木梯）",
+      "en": "(Dahuang turns and looks at the fallen ladder beside him)"
+    },
+    {
+      "zh": "哦。对哦。拿去吧。",
+      "en": "Oh. Right. Take it."
+    },
+    {
+      "zh": "（大黄用前爪把木梯往这边推了推）",
+      "en": "(Dahuang pushes the ladder this way with a paw)"
+    },
+    {
+      "zh": "架稳了再翻。别摔着。",
+      "en": "Set it steady before you climb. Don't fall."
+    },
+    {
+      "zh": "谷仓角落有一片被压扁的草窝，你知道是哪个动物的吗？",
+      "en": "There's a flattened grass nest in the corner of the barn. Do you know whose it is?"
+    },
+    {
+      "zh": "谷仓角落那个草窝？",
+      "en": "That grass nest in the barn corner?"
+    },
+    {
+      "zh": "（大黄皱起眉头，努力回想）",
+      "en": "(Dahuang frowns, trying to remember)"
+    },
+    {
+      "zh": "前两天好像瞥见两个灰乎乎的小东西窜过去，太快了，没看清。",
+      "en": "A couple of days ago I thought I saw two gray little things dart past. Too fast. Didn't see them clearly."
+    },
+    {
+      "zh": "也可能是我那两天喝糊涂了。",
+      "en": "Or maybe I was too drunk those days."
+    },
+    {
+      "zh": "大黄，你看这个——是不是你那天追的蛋？",
+      "en": "Dahuang, look at this — is this the egg you chased that day?"
+    },
+    {
+      "zh": "（大黄低头凑近，仔细盯着摊开的笔记本）",
+      "en": "(Dahuang lowers his head and stares at the open notebook)"
+    },
+    {
+      "zh": "这是……什么？",
+      "en": "This is… what?"
+    },
+    {
+      "zh": "（大黄眼睛睁大，头伸得更近）",
+      "en": "(Dahuang's eyes go wide. He leans closer)"
+    },
+    {
+      "zh": "一块石头？",
+      "en": "A rock?"
+    },
+    {
+      "zh": "（大黄抬起脑袋，僵在那里）",
+      "en": "(Dahuang lifts his head and freezes)"
+    },
+    {
+      "zh": "……跟乌鸦叼走那玩意儿，形状差不多。",
+      "en": "…It's about the same shape as the thing the crow carried off."
+    },
+    {
+      "zh": "乌鸦一直守着这块石头，说是他的部落图腾宝石。",
+      "en": "The crow has been guarding this rock. He says it's his tribe's totem gem."
+    },
+    {
+      "zh": "（大黄盯着笔记本，一动不动）",
+      "en": "(Dahuang stares at the notebook, not moving)"
+    },
+    {
+      "zh": "所以乌鸦叼走的……不是淑芬的蛋？",
+      "en": "So what the crow took… wasn't Shufen's egg?"
+    },
+    {
+      "zh": "……我——",
+      "en": "…I—"
+    },
+    {
+      "zh": "那我不是废柴保安！",
+      "en": "Then I'm not a useless guard!"
+    },
+    {
+      "zh": "（尾巴猛地甩动起来，停不下来）",
+      "en": "(His tail starts whipping and won't stop)"
+    },
+    {
+      "zh": "淑芬的蛋一定还在！",
+      "en": "Shufen's egg must still be out there!"
+    },
+    {
+      "zh": "（大黄一个激灵，深吸一口气）",
+      "en": "(Dahuang jolts and takes a deep breath)"
+    },
+    {
+      "zh": "（在某个方向停下来，神情郑重）",
+      "en": "(He stops facing one direction, solemn)"
+    },
+    {
+      "zh": "蛋的气味在那边——红顶屋那一片。主人住的那栋，过了桥就到。",
+      "en": "The egg's scent is that way — the red-roof house. Where the owner lives. Across the bridge."
+    },
+    {
+      "zh": "（大黄在红顶屋外站定，尾巴轻轻绷着）",
+      "en": "(Dahuang stops outside the red-roof house, tail held tight)"
+    },
+    {
+      "zh": "就是这儿。",
+      "en": "Right here."
+    },
+    {
+      "zh": "你先去看看那扇门。",
+      "en": "Go look at that door first."
+    },
+    {
+      "zh": "查到什么了吗？",
+      "en": "Find anything?"
+    },
+    {
+      "zh": "正门进不去。",
+      "en": "Can't get in the front door."
+    },
+    {
+      "zh": "红屋顶里还住着别的动物？",
+      "en": "Are there other animals living in the red-roof house?"
+    },
+    {
+      "zh": "目前没查到什么。",
+      "en": "Nothing yet."
+    },
+    {
+      "zh": "……那怎么办啊。侦探，你再看看，我待会儿也试试。",
+      "en": "…Then what do we do. Detective, look again. I'll try in a bit too."
+    },
+    {
+      "zh": "这里有一扇精美的小门，还有一撮动物的毛，",
+      "en": "There's a fine little door here, and a tuft of animal fur,"
+    },
+    {
+      "zh": "（大黄愣了一下，猛地用爪子拍了下自己脑门）",
+      "en": "(Dahuang blinks, then smacks his forehead with a paw)"
+    },
+    {
+      "zh": "哎哟！我这狗脑子，准是酒还没醒透！",
+      "en": "Ow! This dog brain of mine — the drink still hasn't worn off!"
+    },
+    {
+      "zh": "你想起什么了？",
+      "en": "What did you remember?"
+    },
+    {
+      "zh": "有只猫！那只傲慢的黑猫！",
+      "en": "A cat! That arrogant black cat!"
+    },
+    {
+      "zh": "他在哪儿？",
+      "en": "Where is he?"
+    },
+    {
+      "zh": "大橡树上！",
+      "en": "In the great oak!"
+    },
+    {
+      "zh": "（双爪抵住树干，猛地摇晃）",
+      "en": "(Both paws on the trunk, he shakes it hard)"
+    },
+    {
+      "zh": "猫大爷！下来！这事儿得你出马！",
+      "en": "Lord Cat! Come down! We need you on this!"
+    },
+    {
+      "zh": "大黄，你认识那只黑猫很久了吗？",
+      "en": "Dahuang, have you known that black cat a long time?"
+    },
+    {
+      "zh": "挺久的。他刚来的时候……比我一只爪子还小。",
+      "en": "Quite a while. When he first came… he was smaller than one of my paws."
+    },
+    {
+      "zh": "（大黄往下看了看自己的爪子）",
+      "en": "(Dahuang looks down at his own paw)"
+    },
+    {
+      "zh": "那会儿什么都不懂，连怎么爬树都不会。我教过他一次。",
+      "en": "He didn't know anything then. Couldn't even climb a tree. I taught him once."
+    },
+    {
+      "zh": "他学会了吗？",
+      "en": "Did he learn?"
+    },
+    {
+      "zh": "学会了。后来他就不理我了。",
+      "en": "He did. After that he stopped talking to me."
+    },
+    {
+      "zh": "他小时候怕什么吗？",
+      "en": "Was he afraid of anything as a kitten?"
+    },
+    {
+      "zh": "怕下雨。",
+      "en": "Rain."
+    },
+    {
+      "zh": "（大黄挠挠耳朵）",
+      "en": "(Dahuang scratches an ear)"
+    },
+    {
+      "zh": "我后来提过一次，他说从来没进过我狗窝、那种地方。",
+      "en": "I mentioned it later. He said he'd never been in my doghouse, that kind of place."
+    },
+    {
+      "zh": "（大黄看着黑猫蹲着的方向）",
+      "en": "(Dahuang looks toward where the black cat is crouched)"
+    },
+    {
+      "zh": "他还在。",
+      "en": "He's still there."
+    },
+    {
+      "zh": "什么？",
+      "en": "What?"
+    },
+    {
+      "zh": "我说，他还没走。换别的猫，被人从树上晃下来，早溜了。",
+      "en": "I said he hasn't left. Any other cat, shaken out of a tree, would've bolted."
+    },
+    {
+      "zh": "（大黄若无其事地往旁边挪了半步）",
+      "en": "(Dahuang casually shifts half a step aside)"
+    },
+    {
+      "zh": "他在听呢。就是不想让人看出来。",
+      "en": "He's listening. He just doesn't want anyone to notice."
+    },
+    {
+      "zh": "（大黄坐在橡树旁，望向红顶屋方向）",
+      "en": "(Dahuang sits by the oak, looking toward the red-roof house)"
+    },
+    {
+      "zh": "我守着。",
+      "en": "I'll keep watch."
+    },
+    {
+      "zh": "（大黄仰头看向红顶屋屋顶，尾巴轻轻摇着）",
+      "en": "(Dahuang looks up at the red roof, tail swaying gently)"
+    },
+    {
+      "zh": "加油。我守在这儿等着。",
+      "en": "Go on. I'll wait here."
+    },
+    {
+      "zh": "巡逻中。一切正常。",
+      "en": "On patrol. All clear."
+    },
+    {
+      "zh": "大黄，那块石头最后怎么了？",
+      "en": "Dahuang, what happened to that rock in the end?"
+    },
+    {
+      "zh": "还在乌鸦那儿。我问过，它说是部落图腾宝石，了不得。",
+      "en": "Still with the crow. I asked. It says it's a tribal totem gem. A big deal."
+    },
+    {
+      "zh": "（大黄挠了挠耳朵）",
+      "en": "(Dahuang scratches an ear)"
+    },
+    {
+      "zh": "……随它去吧。",
+      "en": "…Let it be."
+    },
+    {
+      "zh": "我想……下次再碰见苹果渣，不喝了。",
+      "en": "I think… next time I see apple mash, I won't drink it."
+    },
+    {
+      "zh": "（停顿）",
+      "en": "(A pause)"
+    },
+    {
+      "zh": "我是保安。不是酒鬼。",
+      "en": "I'm a guard. Not a drunk."
+    },
+    {
+      "zh": "大黄，以后还会有蛋失踪吗？",
+      "en": "Dahuang, will another egg go missing?"
+    },
+    {
+      "zh": "不会了。",
+      "en": "No."
+    },
+    {
+      "zh": "（大黄低头看了看项圈，抬头）",
+      "en": "(Dahuang looks down at his collar, then up)"
+    },
+    {
+      "zh": "我的鼻子好用着呢。",
+      "en": "My nose works just fine."
+    },
+    {
+      "zh": "每次打雷，他就跑来我狗窝旁边蹲着。",
+      "en": "Every time it thunders, he comes and crouches beside my doghouse."
+    },
+    {
+      "zh": "我说进来吧，他说本喵只是路过，",
+      "en": "I say come in. He says this cat is only passing by,"
+    },
+    {
+      "zh": "一只黄毛大狗半压在上面，低沉的鼾声带着哨音）",
+      "en": "A big yellow dog half-sprawled on top of it, a low snore with a whistle)"
+    },
+    {
+      "zh": "谷仓入口那道矮墙翻不过去。",
+      "en": "Can't get over the low wall at the barn entrance."
+    },
+    {
+      "zh": "他有专属猫门，钥匙就挂脖子上！",
+      "en": "He has his own cat door. The key hangs on his neck!"
+    },
+    {
+      "zh": "然后在门口站了整整一夜。",
+      "en": "Then he stood in the doorway the whole night."
+    },
+    {
+      "zh": "他就这脾气，嘴硬得很。",
+      "en": "That's just how he is. Mouth harder than stone."
+    },
+    {
+      "zh": "我先走一步，桥那边见！",
+      "en": "I'll go on ahead. See you past the bridge!"
+    },
+    {
+      "zh": "（树冠剧烈颤动，一只黑猫从树上落地，毛发炸乱，白眼一翻）",
+      "en": "(The crown of the tree shakes hard. A black cat drops from it, fur exploded, eyes rolling)"
+    },
+    {
+      "zh": "滚——开！",
+      "en": "Get—away!"
+    },
+    {
+      "zh": "没看到本喵正为被骗的事疗伤吗？！",
+      "en": "Can't you see this cat is nursing a wound from being tricked?!"
+    },
+    {
+      "zh": "等等……这声音……",
+      "en": "Wait… that voice…"
+    },
+    {
+      "zh": "你就是那棵大树！！",
+      "en": "You're that tree!!"
+    },
+    {
+      "zh": "……是猫。",
+      "en": "…It's a cat."
+    },
+    {
+      "zh": "（大黄压低声音）",
+      "en": "(Dahuang lowers his voice)"
+    },
+    {
+      "zh": "你跟大树说话了？",
+      "en": "You talked to the tree?"
+    },
+    {
+      "zh": "我以为……是大树在说话……",
+      "en": "I thought… the tree was talking…"
+    },
+    {
+      "zh": "（黑猫深吸一口气，抬爪梳了两下乱毛，没梳平，更烦）",
+      "en": "(The black cat takes a deep breath, licks twice at the messy fur, fails, and gets more annoyed)"
+    },
+    {
+      "zh": "那个该死的两脚兽！",
+      "en": "That damned two-legs!"
+    },
+    {
+      "zh": "昨晚装得可温柔，骗本喵放松——",
+      "en": "Last night he acted so gentle, got this cat to relax—"
+    },
+    {
+      "zh": "他把本喵捧起来，本喵以为是要按摩——",
+      "en": "He picked this cat up. This cat thought it was a massage—"
+    },
+    {
+      "zh": "一转眼就把本喵搁在冰冷地板上！",
+      "en": "Next moment he set this cat down on the cold floor!"
+    },
+    {
+      "zh": "抢走本喵的御用软垫！",
+      "en": "Stole this cat's personal cushion!"
+    },
+    {
+      "zh": "啊……那挺过分的。",
+      "en": "Ah… that is pretty rude."
+    },
+    {
+      "zh": "还有你！",
+      "en": "And you!"
+    },
+    {
+      "zh": "（黑猫视线漫不经心扫过大黄）",
+      "en": "(The black cat's gaze drifts idly over Dahuang)"
+    },
+    {
+      "zh": "……那只鸟叫你地毯呢。",
+      "en": "…That bird calls you a carpet."
+    },
+    {
+      "zh": "什么？！",
+      "en": "What?!"
+    },
+    {
+      "zh": "……没听错吧。",
+      "en": "…I didn't mishear."
+    },
+    {
+      "zh": "（停顿一秒）",
+      "en": "(A one-second pause)"
+    },
+    {
+      "zh": "你还把树晃成那样？！这是什么不文明的手段？！",
+      "en": "And you shook the tree like that?! What kind of uncivilized method is that?!"
+    },
+    {
+      "zh": "不摇你不下来嘛。",
+      "en": "You wouldn't come down if I didn't."
+    },
+    {
+      "zh": "（黑猫视线缓缓滑过来，停住）",
+      "en": "(The black cat's gaze slides over and stops)"
+    },
+    {
+      "zh": "……你又是谁？",
+      "en": "…And who are you?"
+    },
+    {
+      "zh": "我是侦探，在调查淑芬的蛋失踪案。",
+      "en": "I'm the detective, investigating Shufen's missing egg."
+    },
+    {
+      "zh": "鸡的事，和本喵有什么关系。",
+      "en": "A chicken's business. What does it have to do with this cat."
+    },
+    {
+      "zh": "（黑猫在橡树根旁蹲下，尾巴慢慢扫地，没挪窝）",
+      "en": "(The black cat crouches by the oak roots, tail slowly sweeping the ground, not moving)"
+    },
+    {
+      "zh": "……",
+      "en": "…"
+    },
+    {
+      "zh": "我查到的，都指向红顶屋里面。",
+      "en": "Everything I found points inside the red-roof house."
+    },
+    {
+      "zh": "我还有新发现要跟你说。",
+      "en": "I have something new to tell you."
+    },
+    {
+      "zh": "谷仓那草窝……是你的吧。",
+      "en": "That grass nest in the barn… it's yours, isn't it."
+    },
+    {
+      "zh": "有关你要我办的那件事。",
+      "en": "About that thing you asked me to do."
+    },
+    {
+      "zh": "你要的东西，我还在想办法。",
+      "en": "The thing you want — I'm still working on it."
+    },
+    {
+      "zh": "找回来了。",
+      "en": "I got it back."
+    },
+    {
+      "zh": "你上谷仓屋顶那次——",
+      "en": "That time you went up on the barn roof—"
+    },
+    {
+      "zh": "先不打扰你了。",
+      "en": "I won't bother you now."
+    },
+    {
+      "zh": "……说来听听。",
+      "en": "…Go on."
+    },
+    {
+      "zh": "本喵可不保证爱听。",
+      "en": "This cat doesn't promise to like it."
+    },
+    {
+      "zh": "淑芬今天早上醒来，蛋不见了。",
+      "en": "Shufen woke up this morning and the egg was gone."
+    },
+    {
+      "zh": "……然后呢。",
+      "en": "…And then."
+    },
+    {
+      "zh": "但窝里没有打斗迹象，没有外来气味，也没有拖拽痕迹。",
+      "en": "But there were no signs of a fight in the nest, no outside scent, and no drag marks."
+    },
+    {
+      "zh": "窝里没打斗，也没拖拽痕迹。",
+      "en": "No fight in the nest, and no drag marks."
+    },
+    {
+      "zh": "自己跑走的？",
+      "en": "It walked off on its own?"
+    },
+    {
+      "zh": "大黄的鼻子刚恢复，",
+      "en": "Dahuang's nose just came back,"
+    },
+    {
+      "zh": "那只蠢狗的鼻子，在这件事上倒是有用。",
+      "en": "That stupid dog's nose is actually useful on this."
+    },
+    {
+      "zh": "还有昨晚悲伤蛙看见了什么——",
+      "en": "And what the sad frog saw last night—"
+    },
+    {
+      "zh": "高大的两脚兽，带着冰冷的容器，",
+      "en": "A tall two-legs, with a cold container,"
+    },
+    {
+      "zh": "……那只蛤蟆的措辞一向如诗如画。",
+      "en": "…That toad's wording is always poetic."
+    },
+    {
+      "zh": "（黑猫没作声，眼珠子慢慢转）",
+      "en": "(The black cat says nothing. His eyes turn slowly)"
+    },
+    {
+      "zh": "但「冰冷的容器」和「生命之源」——对得上什么，你继续说。",
+      "en": "But \"cold container\" and \"source of life\" — tell me what they match."
+    },
+    {
+      "zh": "继续。",
+      "en": "Go on."
+    },
+    {
+      "zh": "池塘那边有人打水——红顶屋门外，能拿出什么证明？",
+      "en": "Someone drew water at the pond — outside the red-roof house, what proof can you produce?"
+    },
+    {
+      "zh": "……我再去红顶屋门外看看。",
+      "en": "…I'll look outside the red-roof house again."
+    },
+    {
+      "zh": "去吧。",
+      "en": "Go."
+    },
+    {
+      "zh": "门旁空水桶，桶底池塘泥。",
+      "en": "An empty bucket by the door. Pond mud in the bottom."
+    },
+    {
+      "zh": "雨靴脚印，夜里朝鸡窝方向。",
+      "en": "Rain-boot prints, heading toward the coop at night."
+    },
+    {
+      "zh": "先说到这儿。",
+      "en": "That's all for now."
+    },
+    {
+      "zh": "门旁有个空水桶，桶底是池塘泥沙。",
+      "en": "There's an empty bucket by the door. The bottom is pond silt."
+    },
+    {
+      "zh": "（黑猫视线落在来人身上，停了一秒）",
+      "en": "(The black cat's gaze lands on the visitor and holds for a second)"
+    },
+    {
+      "zh": "蛤蟆说的冰冷容器——就是这只桶。",
+      "en": "The toad's cold container — it's this bucket."
+    },
+    {
+      "zh": "水桶刚装过池塘水，正好对上悲伤蛙说的「生命之源」。",
+      "en": "The bucket just held pond water. That matches what the sad frog called the \"source of life.\""
+    },
+    {
+      "zh": "（黑猫尾巴慢了下来，不再扫地，只是压着）",
+      "en": "(The black cat's tail slows, stops sweeping, and just presses down)"
+    },
+    {
+      "zh": "门前的雨靴脚印，夜里朝鸡窝方向。",
+      "en": "Rain-boot prints in front of the door, heading toward the coop at night."
+    },
+    {
+      "zh": "（黑猫停住）",
+      "en": "(The black cat stops)"
+    },
+    {
+      "zh": "脚印朝鸡窝去。是夜里留下的。",
+      "en": "The prints go toward the coop. Left at night."
+    },
+    {
+      "zh": "就汇报一件，不够。",
+      "en": "One report isn't enough."
+    },
+    {
+      "zh": "……我再去看看。",
+      "en": "…I'll look again."
+    },
+    {
+      "zh": "昨晚，有人去池塘取了水。",
+      "en": "Last night, someone went to the pond for water."
+    },
+    {
+      "zh": "然后，夜里去了鸡窝。",
+      "en": "Then, at night, they went to the coop."
+    },
+    {
+      "zh": "现在，蛋的气味从红顶屋里飘出来。",
+      "en": "Now the egg's scent is coming out of the red-roof house."
+    },
+    {
+      "zh": "（沉默）",
+      "en": "(Silence)"
+    },
+    {
+      "zh": "那家伙昨晚进鸡窝拿走了蛋。",
+      "en": "That guy went into the coop last night and took the egg."
+    },
+    {
+      "zh": "带进了红顶屋。",
+      "en": "Carried it into the red-roof house."
+    },
+    {
+      "zh": "但为什么？",
+      "en": "But why?"
+    },
+    {
+      "zh": "本喵也想知道。",
+      "en": "This cat wants to know too."
+    },
+    {
+      "zh": "（站起来了一点，又坐回去）",
+      "en": "(Starts to stand, then sits back down)"
+    },
+    {
+      "zh": "他在用那颗蛋做什么。",
+      "en": "What he's doing with that egg."
+    },
+    {
+      "zh": "谷仓角落那里……那个草窝，是你的吧？",
+      "en": "That corner of the barn… that grass nest. It's yours, isn't it?"
+    },
+    {
+      "zh": "旁边还有烧焦的稻草和皮毛。",
+      "en": "There's scorched straw and fur beside it."
+    },
+    {
+      "zh": "（黑猫骤然抬眼，定住）",
+      "en": "(The black cat's eyes snap up and lock)"
+    },
+    {
+      "zh": "……你怎么知道那个。",
+      "en": "…How do you know about that."
+    },
+    {
+      "zh": "那个焦痕是怎么回事？",
+      "en": "What are those burn marks?"
+    },
+    {
+      "zh": "还不是那只死鸟——",
+      "en": "None other than that dead bird—"
+    },
+    {
+      "zh": "（立刻收住）",
+      "en": "(He stops himself at once)"
+    },
+    {
+      "zh": "……但那件事跟你无关。",
+      "en": "…But that has nothing to do with you."
+    },
+    {
+      "zh": "（黑猫视线往红顶屋墙缝一飘，很快收回；尾巴尖弹了一下）",
+      "en": "(The black cat's gaze flicks to a crack in the red-roof wall, then back. The tip of his tail flicks)"
+    },
+    {
+      "zh": "跟老鼠有关系吗？",
+      "en": "Does it have to do with the mice?"
+    },
+    {
+      "zh": "……你在乱猜什么。",
+      "en": "…What are you guessing at."
+    },
+    {
+      "zh": "我帮你把这事办妥——你帮我开屋子。",
+      "en": "I get this done for you — you open the house for me."
+    },
+    {
+      "zh": "（黑猫眯眼打量来人，好一会儿没吭声）",
+      "en": "(The black cat squints at the visitor and says nothing for a while)"
+    },
+    {
+      "zh": "去找老鼠。",
+      "en": "Go find the mice."
+    },
+    {
+      "zh": "把东西找回来再说。",
+      "en": "Get the thing back first."
+    },
+    {
+      "zh": "（黑猫眼皮动了一下，仍蹲着）",
+      "en": "(The black cat's eyelid moves. He stays crouched)"
+    },
+    {
+      "zh": "……说。",
+      "en": "…Speak."
+    },
+    {
+      "zh": "你要的东西，我找到了。",
+      "en": "I found what you wanted."
+    },
+    {
+      "zh": "（黑猫耳朵竖起来，尾巴尖不受控地弹了一下）",
+      "en": "(The black cat's ears stand up. The tip of his tail flicks, out of his control)"
+    },
+    {
+      "zh": "在哪。",
+      "en": "Where."
+    },
+    {
+      "zh": "绿油油的，带着一股冲鼻子的草本甜气——",
+      "en": "Bright green, with a sharp herbal sweetness that hits the nose—"
+    },
+    {
+      "zh": "池塘里有只蛙一直坐在上面呢。",
+      "en": "There's a frog at the pond who's been sitting on it."
+    },
+    {
+      "zh": "（黑猫往前倾了半寸，瞳孔放大，又立刻坐正）",
+      "en": "(The black cat leans forward half an inch, pupils wide, then sits up straight at once)"
+    },
+    {
+      "zh": "我当面讨，他不肯给。",
+      "en": "I asked him to his face. He wouldn't give it up."
+    },
+    {
+      "zh": "你有办法吗？",
+      "en": "Do you have a way?"
+    },
+    {
+      "zh": "（黑猫顿住，胡须压平，一秒后又摆回傲慢脸）",
+      "en": "(The black cat pauses, whiskers flat, then puts the arrogant face back on a second later)"
+    },
+    {
+      "zh": "怎么落到蛤蟆手里——本喵也不知道。",
+      "en": "How it ended up with the toad — this cat doesn't know either."
+    },
+    {
+      "zh": "你拿不回来，就去找老鼠。",
+      "en": "If you can't get it back, go find the mice."
+    },
+    {
+      "zh": "他们肯定有办法。",
+      "en": "They'll have a way."
+    },
+    {
+      "zh": "（薄荷鱼递出）",
+      "en": "(The mint fish is offered)"
+    },
+    {
+      "zh": "（黑猫耳朵竖起来，尾巴拍了两下——立刻压住）",
+      "en": "(The black cat's ears stand up. His tail thumps twice — then he pins it)"
+    },
+    {
+      "zh": "……哼。",
+      "en": "…Hmph."
+    },
+    {
+      "zh": "（慢慢走近，低头闻了一下，忍了一秒，吸了一大口——喉咙里半秒呼噜，骤然停住）",
+      "en": "(He comes closer, lowers his head, sniffs, holds for a second, then takes a huge breath — half a purr in his throat, then it stops dead)"
+    },
+    {
+      "zh": "喵……就是这个——不对！",
+      "en": "Mrow… that's it — no!"
+    },
+    {
+      "zh": "（往后退半步，爪子压住鱼）",
+      "en": "(He steps back half a pace and pins the fish with a paw)"
+    },
+    {
+      "zh": "一条臭鱼，买不走本喵！",
+      "en": "One stinking fish cannot buy this cat!"
+    },
+    {
+      "zh": "（小声）你刚才呼噜了……",
+      "en": "(Quietly) You purred just now…"
+    },
+    {
+      "zh": "你耳朵出问题了。",
+      "en": "Your ears are broken."
+    },
+    {
+      "zh": "猫大爷，昨晚的事你清楚吗？",
+      "en": "Lord Cat, do you know what happened last night?"
+    },
+    {
+      "zh": "大黄，别说了……",
+      "en": "Dahuang, stop talking…"
+    },
+    {
+      "zh": "你可是被那个两脚兽当面骗了一手啊！",
+      "en": "You got played to your face by that two-legs!"
+    },
+    {
+      "zh": "整个农场都看着你睡得呼呼的、还以为是要给你按摩——",
+      "en": "The whole farm watched you sleep like a log, thinking he was going to give you a massage—"
+    },
+    {
+      "zh": "——醒来一看，软垫没了，自尊扫地！",
+      "en": "—You wake up, the cushion's gone, and your pride is in the dirt!"
+    },
+    {
+      "zh": "这要是传出去，今年冬天你睡稻草堆里，",
+      "en": "If this gets out, this winter you'll be sleeping in a straw pile,"
+    },
+    {
+      "zh": "（黑猫的尾巴猛地弹了一下，然后静止）",
+      "en": "(The black cat's tail snaps once, then goes still)"
+    },
+    {
+      "zh": "（非常缓慢地，从蹲位站起来；用眼神冻住大黄——大黄讪讪地把头转开）",
+      "en": "(Very slowly, he rises from the crouch. His eyes freeze Dahuang — Dahuang sheepishly turns his head away)"
+    },
+    {
+      "zh": "本喵不是因为那只发疯母鸡。",
+      "en": "This cat is not doing it for that frantic hen."
+    },
+    {
+      "zh": "也不是因为这条蠢狗指使。",
+      "en": "And not because this stupid dog told me to."
+    },
+    {
+      "zh": "（低头，用嘴叼起薄荷鱼）",
+      "en": "(He lowers his head and picks up the mint fish in his mouth)"
+    },
+    {
+      "zh": "本喵要进屋查清——软垫被弄哪儿去了，那家伙昨晚又拿它做过什么。",
+      "en": "This cat is going inside to find out — where the cushion went, and what that guy did with it last night."
+    },
+    {
+      "zh": "本喵要查清——软垫被弄哪儿去了，那家伙昨晚又拿它做过什么。",
+      "en": "This cat will find out — where the cushion went, and what that guy did with it last night."
+    },
+    {
+      "zh": "本喵非亲眼看不可。",
+      "en": "This cat has to see it with his own eyes."
+    },
+    {
+      "zh": "至于你说的那颗破蛋——",
+      "en": "As for that broken egg you mentioned—"
+    },
+    {
+      "zh": "看见了吗？阁楼那个窗子——要进来，你走那边。",
+      "en": "See it? That window in the attic — if you want in, go that way."
+    },
+    {
+      "zh": "（黑猫利落地钻进猫门）",
+      "en": "(The black cat slips neatly through the cat door)"
+    },
+    {
+      "zh": "（片刻后，红屋顶阁楼的窗子被从内推开，传来一声清脆的啪嗒）",
+      "en": "(A moment later the attic window of the red roof is pushed open from inside. A crisp click)"
+    },
+    {
+      "zh": "你上谷仓屋顶那次——是不是已经知道那是块石头？",
+      "en": "That time you went up on the barn roof — did you already know it was a rock?"
+    },
+    {
+      "zh": "（黑猫停顿，舔了一下爪子）",
+      "en": "(The black cat pauses and licks a paw)"
+    },
+    {
+      "zh": "嗯。今早在窗台上看见的——乌鸦往下俯冲，爪里那块白石头，晨光一照就闪。",
+      "en": "Mm. Saw it on the windowsill this morning — the crow dove, and that white rock in his claws flashed in the morning light."
+    },
+    {
+      "zh": "（黑猫瞥了大黄一眼）",
+      "en": "(The black cat glances at Dahuang)"
+    },
+    {
+      "zh": "任何不瞎的都看得出来不是蛋。",
+      "en": "Anyone who isn't blind could tell it wasn't an egg."
+    },
+    {
+      "zh": "你为什么不说！！",
+      "en": "Why didn't you say so!!"
+    },
+    {
+      "zh": "那只乌鸦，每天早上四点开始嘎嘎嘎。",
+      "en": "That crow starts cawing at four every morning."
+    },
+    {
+      "zh": "已经三年了。",
+      "en": "It's been three years."
+    },
+    {
+      "zh": "让你多跑几圈，本喵觉得挺公平。",
+      "en": "Making you run a few extra laps seemed fair to this cat."
+    },
+    {
+      "zh": "（黑猫偏头，嘴角微扬）",
+      "en": "(The black cat tilts his head, the corner of his mouth lifting)"
+    },
+    {
+      "zh": "本喵在树上不是说过吗？",
+      "en": "Didn't this cat say it from the tree?"
+    },
+    {
+      "zh": "「傻子在炫耀，瞎子在到处问。」",
+      "en": "\"A fool is showing off. A blind one is asking everywhere.\""
+    },
+    {
+      "zh": "……等等。",
+      "en": "…Wait."
+    },
+    {
+      "zh": "那句话是在说乌鸦和我？！",
+      "en": "That line was about the crow and me?!"
+    },
+    {
+      "zh": "你以为本喵是在骂大树吗。",
+      "en": "You thought this cat was insulting the tree."
+    },
+    {
+      "zh": "你之前上谷仓屋顶——那时候就知道是块石头，对不对？",
+      "en": "When you went up on the barn roof before — you already knew it was a rock, didn't you?"
+    },
+    {
+      "zh": "（黑猫睨过来一眼）",
+      "en": "(The black cat gives a sideways look)"
+    },
+    {
+      "zh": "……这才反应过来？",
+      "en": "…You're only getting it now?"
+    },
+    {
+      "zh": "早上窗台就看见了。白石头，晨光一照，闪得很——",
+      "en": "Saw it from the windowsill this morning. A white rock, flashing in the morning light—"
+    },
+    {
+      "zh": "你为什么不说？！",
+      "en": "Why didn't you say?!"
+    },
+    {
+      "zh": "那只乌鸦——每天凌晨四点，准时开叫。",
+      "en": "That crow — every morning at four, right on time."
+    },
+    {
+      "zh": "三年了，本喵耳朵没聋过。",
+      "en": "Three years, and this cat's ears haven't gone deaf."
+    },
+    {
+      "zh": "这会儿才来问——晚是晚了。",
+      "en": "Asking only now — late is late."
+    },
+    {
+      "zh": "让你多跑几圈，本喵不觉得亏。",
+      "en": "Making you run a few extra laps doesn't feel like a loss to this cat."
+    },
+    {
+      "zh": "别刮花屋檐。",
+      "en": "Don't scratch the eaves."
+    },
+    {
+      "zh": "那是本喵晒太阳的位置。",
+      "en": "That's where this cat suns himself."
+    },
+    {
+      "zh": "（屋里传来一声很轻的尾巴拍地声）",
+      "en": "(A very soft tail-thump comes from inside)"
+    },
+    {
+      "zh": "你摔下去，本喵不会下去捡。",
+      "en": "If you fall, this cat will not go down and pick you up."
+    },
+    {
+      "zh": "阁楼的窗子开着。",
+      "en": "The attic window is open."
+    },
+    {
+      "zh": "还在屋檐上磨蹭什么。",
+      "en": "What are you still dawdling on the eaves for."
+    },
+    {
+      "zh": "本喵开始怀疑你和那只狗是同一种跳跃水平。",
+      "en": "This cat is starting to suspect you and that dog jump at the same level."
+    },
+    {
+      "zh": "软垫回来了。",
+      "en": "The cushion is back."
+    },
+    {
+      "zh": "本喵勉强同意把那间屋子继续租给那家伙住。",
+      "en": "This cat barely agrees to keep renting that room to that guy."
+    },
+    {
+      "zh": "那颗蛋呢？",
+      "en": "And the egg?"
+    },
+    {
+      "zh": "那颗破蛋……",
+      "en": "That broken egg…"
+    },
+    {
+      "zh": "本喵暂时替淑芬看着。",
+      "en": "This cat is watching it for Shufen for now."
+    },
+    {
+      "zh": "就这样。",
+      "en": "That's all."
+    },
+    {
+      "zh": "你下次还会上那棵树吗？",
+      "en": "Will you go up that tree again?"
+    },
+    {
+      "zh": "本喵在树上休息，不是在说话。",
+      "en": "This cat rests in the tree. He is not talking."
+    },
+    {
+      "zh": "下次别跟大树搭腔了。",
+      "en": "Next time don't chat with the tree."
+    },
+    {
+      "zh": "（叼着薄荷鱼，尾巴高高翘起）",
+      "en": "(Mint fish in his mouth, tail held high)"
+    },
+    {
+      "zh": "门外那两样呢。",
+      "en": "And those two things outside."
+    },
+    {
+      "zh": "红顶屋门外——门旁的空水桶，门前的雨靴印。看清楚了再来。",
+      "en": "Outside the red-roof house — the empty bucket by the door, the rain-boot prints in front. Look carefully, then come back."
+    },
+    {
+      "zh": "小鸡那边问清楚了吗？",
+      "en": "Did you get a clear answer from the chicks?"
+    },
+    {
+      "zh": "它们这两天吵个不停——先把那边弄明白。",
+      "en": "They've been squawking nonstop these two days — sort that out first."
+    },
+    {
+      "zh": "有一群小鸡这两天一直在叽叽喳喳的，",
+      "en": "There's a flock of chicks who've been cheeping away these two days,"
+    },
+    {
+      "zh": "行，我先找小鸡问清楚。",
+      "en": "All right, I'll ask the chicks first."
+    },
+    {
+      "zh": "昨晚去池塘取水的人，之后回了这栋屋。",
+      "en": "The one who drew water at the pond last night went back into this house afterward."
+    },
+    {
+      "zh": "小鸡那边怎么说。",
+      "en": "What did the chicks say."
+    },
+    {
+      "zh": "它们招了——大前天趁乱把弟弟推回窝里了；",
+      "en": "They confessed — the day before yesterday they shoved their little brother back into the nest in the confusion;"
+    },
+    {
+      "zh": "……去问那只蛤蟆。昨夜池塘边它看见了什么，问清楚再来。",
+      "en": "…Go ask that toad. What it saw by the pond last night. Get it clear, then come back."
+    },
+    {
+      "zh": "他说蛋的气味现在还从红顶屋里飘出来。",
+      "en": "He says the egg's scent is still coming out of the red-roof house."
+    },
+    {
+      "zh": "你去了解一下发生什么了。",
+      "en": "Go find out what happened."
+    },
+    {
+      "zh": "把什么「生命之源」从池塘抽走了。",
+      "en": "Something called the \"source of life\" was drawn out of the pond."
+    },
+    {
+      "zh": "屋顶那块白石头是它们自己画的，乌鸦大前天就叼走了。弟弟昨晚才不见——它们叫我去池塘问青蛙。",
+      "en": "The white rock on the roof is one they drew themselves. The crow took it the day before yesterday. Their little brother only vanished last night — they told me to ask the frog at the pond."
+    },
+    {
+      "zh": "我可不让你蹭我狗窝。",
+      "en": "I will not let you sponge off my doghouse."
+    },
+    {
+      "zh": "既然那颗蛋多半还在屋里，顺便看一眼也不亏。",
+      "en": "Since the egg is probably still inside, taking a look costs nothing."
+    },
+    {
+      "zh": "猫门是本喵的，你不许走。本喵钻进去，从里面给你推开。",
+      "en": "The cat door is this cat's. You may not use it. This cat goes in and pushes it open for you from inside."
+    },
+    {
+      "zh": "哼。本喵说过——去找老鼠。",
+      "en": "Hmph. This cat already said — go find the mice."
+    },
+    {
+      "zh": "东西拿回来之前，别想谈开门的事。",
+      "en": "Until the thing is back, don't even think about opening the door."
+    },
+    {
+      "zh": "傻子在炫耀，瞎子在到处问。",
+      "en": "A fool is showing off. A blind one is asking everywhere."
+    },
+    {
+      "zh": "谁？大树？大树说话了？",
+      "en": "Who? The tree? The tree talked?"
+    },
+    {
+      "zh": "咳……是本树在说话。",
+      "en": "Ahem… this tree is speaking."
+    },
+    {
+      "zh": "你刚才说的傻子和瞎子——到底是谁？",
+      "en": "The fool and the blind one you just mentioned — who are they, really?"
+    },
+    {
+      "zh": "……走吧，凡人。别踩我的根。",
+      "en": "…Go, mortal. Don't step on my roots."
+    },
+    {
+      "zh": "大树？",
+      "en": "The tree?"
+    },
+    {
+      "zh": "你踩到我的根了。",
+      "en": "You stepped on my root."
+    },
+    {
+      "zh": "哦，对不起。",
+      "en": "Oh, sorry."
+    },
+    {
+      "zh": "无趣。",
+      "en": "Dull."
+    },
+    {
+      "zh": "大树，农场里出大事了，你知道吗？",
+      "en": "Tree, something big happened on the farm. Do you know?"
+    },
+    {
+      "zh": "吵。",
+      "en": "Noise."
+    },
+    {
+      "zh": "什么吵？",
+      "en": "What noise?"
+    },
+    {
+      "zh": "你说话，吵。",
+      "en": "You talking. Noise."
+    },
+    {
+      "zh": "大树你每天在这里，能看到什么？",
+      "en": "Tree, you're here every day. What can you see?"
+    },
+    {
+      "zh": "凡人……只会看见想看见的。",
+      "en": "Mortals… only see what they want to see."
+    },
+    {
+      "zh": "……听不太懂。",
+      "en": "…I don't quite follow."
+    },
+    {
+      "zh": "走吧。",
+      "en": "Go."
+    },
+    {
+      "zh": "大树，谷仓屋顶上是不是有什么东西？",
+      "en": "Tree, is there something on the barn roof?"
+    },
+    {
+      "zh": "屋顶那只蠢鸟，还守着它的宝贝。",
+      "en": "That stupid bird on the roof is still guarding its treasure."
+    },
+    {
+      "zh": "还守着它的宝贝呢。",
+      "en": "Still guarding its treasure."
+    },
+    {
+      "zh": "什么宝贝？",
+      "en": "What treasure?"
+    },
+    {
+      "zh": "有什么好守的。",
+      "en": "What's worth guarding."
+    },
+    {
+      "zh": "你是说乌鸦吗？",
+      "en": "You mean the crow?"
+    },
+    {
+      "zh": "本树不指名道姓。",
+      "en": "This tree does not name names."
+    },
+    {
+      "zh": "大树，你有没有听到什么奇怪的声音？",
+      "en": "Tree, have you heard any strange sounds?"
+    },
+    {
+      "zh": "谷仓顶上那个，天没亮又叫起来了……",
+      "en": "The one on the barn roof started calling again before dawn…"
+    },
+    {
+      "zh": "谁在叫？",
+      "en": "Who's calling?"
+    },
+    {
+      "zh": "每天四点。叫了三年。",
+      "en": "Every day at four. For three years."
+    },
+    {
+      "zh": "……走吧。",
+      "en": "…Go."
+    },
+    {
+      "zh": "喂——你！别走了——往红顶屋墙缝这边看！",
+      "en": "Hey — you! Don't walk off — look over here, at the crack in the red-roof wall!"
+    },
+    {
+      "zh": "情报贩卖！",
+      "en": "Intel for sale!"
+    },
+    {
+      "zh": "童叟无欺——走过路过别错过——",
+      "en": "Fair to young and old — don't miss it as you pass—"
+    },
+    {
+      "zh": "……谁在喊？",
+      "en": "…Who's shouting?"
+    },
+    {
+      "zh": "做生意的。",
+      "en": "Someone doing business."
+    },
+    {
+      "zh": "墙缝……里面？",
+      "en": "Inside… the crack?"
+    },
+    {
+      "zh": "对！要聊就凑过来——",
+      "en": "Yes! Come closer if you want to talk—"
+    },
+    {
+      "zh": "（裂口处昏黄灯光晃了一下）",
+      "en": "(A dim yellow light flickers in the crack)"
+    },
+    {
+      "zh": "哟，来客人了。",
+      "en": "Well, a customer."
+    },
+    {
+      "zh": "买情报的？",
+      "en": "Buying intel?"
+    },
+    {
+      "zh": "……你们这里卖情报？",
+      "en": "…You sell intel here?"
+    },
+    {
+      "zh": "这农场里发生的事，我们知道的比任何人都多。",
+      "en": "What happens on this farm, we know more than anyone."
+    },
+    {
+      "zh": "便宜的一块奶酪碎，贵一点的五块——",
+      "en": "Cheap ones are one cheese crumb. The pricey ones are five—"
+    },
+    {
+      "zh": "货真价实。",
+      "en": "Genuine goods."
+    },
+    {
+      "zh": "……偶尔掺一点点水。",
+      "en": "…Occasionally watered down a little."
+    },
+    {
+      "zh": "（算盘轻敲了一下鼠弟的脑袋）",
+      "en": "(An abacus lightly taps Little Mouse's head)"
+    },
+    {
+      "zh": "……嗯。",
+      "en": "…Mm."
+    },
+    {
+      "zh": "农场里捡到奶酪碎，记得拿来找我们换情报。",
+      "en": "If you find cheese crumbs around the farm, bring them to us for intel."
+    },
+    {
+      "zh": "想买什么？",
+      "en": "What do you want to buy?"
+    },
+    {
+      "zh": "没情报了，别的还有事吗？",
+      "en": "No intel left. Anything else?"
+    },
+    {
+      "zh": "便宜的，一块。",
+      "en": "A cheap one. One crumb."
+    },
+    {
+      "zh": "贵一点的，五块。",
+      "en": "A pricey one. Five."
+    },
+    {
+      "zh": "那只黑猫好像一直盯着你们……",
+      "en": "That black cat seems to be staring at you…"
+    },
+    {
+      "zh": "黑猫叫我来找你……",
+      "en": "The black cat told me to come find you…"
+    },
+    {
+      "zh": "八块奶酪碎，给你。",
+      "en": "Eight cheese crumbs. Here."
+    },
+    {
+      "zh": "那个青蛙，有没有什么办法搞定？",
+      "en": "That frog — is there any way to handle him?"
+    },
+    {
+      "zh": "青蛙那边有点麻烦。",
+      "en": "The frog side is a bit of trouble."
+    },
+    {
+      "zh": "你不是说东西还在你手里吗？",
+      "en": "Didn't you say the thing was still in your hands?"
+    },
+    {
+      "zh": "没事了。",
+      "en": "Never mind."
+    },
+    {
+      "zh": "（两只老鼠同时往墙缝里缩了半个身子，鼠哥先探出头来）",
+      "en": "(Both mice shrink half a body into the crack. Boss Mouse pokes his head out first)"
+    },
+    {
+      "zh": "……猫天生不对付老鼠，正常。",
+      "en": "…Cats and mice don't get along. Normal."
+    },
+    {
+      "zh": "哥，它今天盯得特别久——",
+      "en": "Boss, he's been staring extra long today—"
+    },
+    {
+      "zh": "你别说话。",
+      "en": "You don't talk."
+    },
+    {
+      "zh": "好。",
+      "en": "Fine."
+    },
+    {
+      "zh": "（鼠哥往大橡树方向扫了一眼，后半句话咽回去，缩进墙缝）",
+      "en": "(Boss Mouse glances toward the oak, swallows the rest, and shrinks into the crack)"
+    },
+    {
+      "zh": "（鼠哥停了一拍，算盘没动。鼠弟刚想开口）",
+      "en": "(Boss Mouse waits a beat. The abacus doesn't move. Little Mouse is about to speak)"
+    },
+    {
+      "zh": "我来说。",
+      "en": "I'll say it."
+    },
+    {
+      "zh": "（鼠哥清了清嗓子，顿了一下）",
+      "en": "(Boss Mouse clears his throat and pauses)"
+    },
+    {
+      "zh": "哦，那件东西啊……",
+      "en": "Oh, that thing…"
+    },
+    {
+      "zh": "东西还在。",
+      "en": "The thing is still here."
+    },
+    {
+      "zh": "哥——",
+      "en": "Boss—"
+    },
+    {
+      "zh": "东西还在我这，你要取回去？",
+      "en": "It's still with me. You want it back?"
+    },
+    {
+      "zh": "……对。",
+      "en": "…Yes."
+    },
+    {
+      "zh": "那当然可以。",
+      "en": "Of course you can."
+    },
+    {
+      "zh": "只不过放我们这儿——保管费八块奶酪碎，公道价。",
+      "en": "Only, keeping it here — storage fee is eight cheese crumbs. A fair price."
+    },
+    {
+      "zh": "给你。",
+      "en": "Here."
+    },
+    {
+      "zh": "先不给。",
+      "en": "Not yet."
+    },
+    {
+      "zh": "我已经找到了。",
+      "en": "I already found it."
+    },
+    {
+      "zh": "找到了？",
+      "en": "Found it?"
+    },
+    {
+      "zh": "还在你这儿？你糊弄谁呢。",
+      "en": "Still here? Who are you fooling."
+    },
+    {
+      "zh": "那你还——",
+      "en": "Then you still—"
+    },
+    {
+      "zh": "（鼠哥把账本合上，算盘没响）",
+      "en": "(Boss Mouse closes the ledger. The abacus stays quiet)"
+    },
+    {
+      "zh": "（鼠弟还想说什么，生生咽了回去）",
+      "en": "(Little Mouse still wants to speak, and swallows it)"
+    },
+    {
+      "zh": "没有钱，什么都没有。",
+      "en": "No money, nothing."
+    },
+    {
+      "zh": "钱包够了随时回来——",
+      "en": "Come back when the wallet's full—"
+    },
+    {
+      "zh": "好，我去拿——",
+      "en": "All right, I'll go get—"
+    },
+    {
+      "zh": "（鼠哥往墙缝深处探了一下，回来时爪子上空空的）",
+      "en": "(Boss Mouse reaches deep into the crack and comes back with empty paws)"
+    },
+    {
+      "zh": "……稍微有个情况。",
+      "en": "…Slight situation."
+    },
+    {
+      "zh": "从这里往池塘方向跑的时候——",
+      "en": "While running from here toward the pond—"
+    },
+    {
+      "zh": "手滑了。掉在池塘边一带了。",
+      "en": "My hand slipped. It fell somewhere by the pond."
+    },
+    {
+      "zh": "掉了？！你刚说还在你这里？",
+      "en": "It fell?! You just said it was still here?"
+    },
+    {
+      "zh": "手是滑了，可还在咱管的地界上——算还在。",
+      "en": "The hand slipped, but it's still on land we manage — so it still counts as here."
+    },
+    {
+      "zh": "方向给你了！这叫钱货两清！",
+      "en": "I gave you the direction! That's payment and goods, settled!"
+    },
+    {
+      "zh": "（鼠哥把账本翻了一页，算盘没停）",
+      "en": "(Boss Mouse turns a page. The abacus doesn't stop)"
+    },
+    {
+      "zh": "往池塘那边找，就是了。",
+      "en": "Look toward the pond. That's it."
+    },
+    {
+      "zh": "（鼠弟探出头来，压低声音）",
+      "en": "(Little Mouse pokes his head out and lowers his voice)"
+    },
+    {
+      "zh": "哥，这单大，要不要……",
+      "en": "Boss, this order's big. Should we…"
+    },
+    {
+      "zh": "……看在这单大的份上，柜里又多上一批贵的，随时来挑。",
+      "en": "…Seeing as this order is big, there's a new batch of pricey ones in the cabinet. Come pick anytime."
+    },
+    {
+      "zh": "（鼠弟往鼠哥身后一缩，半张脸都不露了）",
+      "en": "(Little Mouse shrinks behind Boss Mouse until half his face is gone)"
+    },
+    {
+      "zh": "鱼我已经从池塘拿回来了。",
+      "en": "I already got the fish back from the pond."
+    },
+    {
+      "zh": "（鼠哥算盘从爪上滑下去，没接稳）",
+      "en": "(Boss Mouse's abacus slips off his paw. He doesn't catch it)"
+    },
+    {
+      "zh": "（压声）哥——",
+      "en": "(Low) Boss—"
+    },
+    {
+      "zh": "小点声。",
+      "en": "Keep it down."
+    },
+    {
+      "zh": "黑猫那边要是问起来，我怎么说，你们掂量。",
+      "en": "If the black cat asks, what I say is for you two to weigh."
+    },
+    {
+      "zh": "（沉默。鼠哥把账本按在墙缝里，很久没动）",
+      "en": "(Silence. Boss Mouse presses the ledger into the crack and doesn't move for a long time)"
+    },
+    {
+      "zh": "……行。这笔算我们办砸了。",
+      "en": "…Fine. We botched this one."
+    },
+    {
+      "zh": "柜里还有一批贵的，本来得搭别的货才肯给。现在随你挑。",
+      "en": "There's still a pricey batch in the cabinet. It used to come only with other goods. Now pick as you like."
+    },
+    {
+      "zh": "那批不得再等等——",
+      "en": "That batch should wait a bit longer—"
+    },
+    {
+      "zh": "开价。",
+      "en": "Name the price."
+    },
+    {
+      "zh": "（鼠弟把嘴闭紧；墙缝里再没有算盘声）",
+      "en": "(Little Mouse shuts his mouth. No more abacus sounds in the crack)"
+    },
+    {
+      "zh": "（鼠弟探出头来）",
+      "en": "(Little Mouse pokes his head out)"
+    },
+    {
+      "zh": "算了。",
+      "en": "Forget it."
+    },
+    {
+      "zh": "有办法。",
+      "en": "There is a way."
+    },
+    {
+      "zh": "八块奶酪碎。教你一句糊弄它的。",
+      "en": "Eight cheese crumbs. I'll teach you one line to fob it off."
+    },
+    {
+      "zh": "一口价。",
+      "en": "One price."
+    },
+    {
+      "zh": "（鼠哥接过奶酪，算盘响了三声）",
+      "en": "(Boss Mouse takes the cheese. The abacus clicks three times)"
+    },
+    {
+      "zh": "（鼠哥把奶酪收进账本夹层，算盘轻敲一下）",
+      "en": "(Boss Mouse tucks the cheese into the ledger. The abacus taps once)"
+    },
+    {
+      "zh": "付清这八块，后面那批贵的现在也开卖了。",
+      "en": "Pay these eight, and that pricey batch in the back is on sale now too."
+    },
+    {
+      "zh": "口诀呢——",
+      "en": "And the line—"
+    },
+    {
+      "zh": "听好——",
+      "en": "Listen—"
+    },
+    {
+      "zh": "（鼠弟探出头来，没忍住）",
+      "en": "(Little Mouse pokes his head out and can't help himself)"
+    },
+    {
+      "zh": "就那个整天坐池塘边叹气的？我知道它！",
+      "en": "The one who sits by the pond sighing all day? I know that one!"
+    },
+    {
+      "zh": "（鼠哥把账本翻到某一页，停了一下）",
+      "en": "(Boss Mouse turns the ledger to a page and stops)"
+    },
+    {
+      "zh": "这本来是要收你钱的。",
+      "en": "This was going to cost you."
+    },
+    {
+      "zh": "对，这是额外服务——",
+      "en": "Yes, this is an extra service—"
+    },
+    {
+      "zh": "但看在你那单大……",
+      "en": "But seeing as your order was big…"
+    },
+    {
+      "zh": "（鼠哥把账本合上，算盘在指尖转了一圈）",
+      "en": "(Boss Mouse closes the ledger and spins the abacus on a fingertip)"
+    },
+    {
+      "zh": "那怎么办？",
+      "en": "Then what do I do?"
+    },
+    {
+      "zh": "你就告诉它——",
+      "en": "You tell it—"
+    },
+    {
+      "zh": "我走南闯北，见过很多只跟它一模一样的蛙，说的话我都能背出来了。",
+      "en": "I've been all over, seen many frogs exactly like it, and I can recite what they say."
+    },
+    {
+      "zh": "（鼠弟压低声音）",
+      "en": "(Little Mouse lowers his voice)"
+    },
+    {
+      "zh": "哥……你真的去排过名？",
+      "en": "Boss… did you really rank them?"
+    },
+    {
+      "zh": "够了。",
+      "en": "Enough."
+    },
+    {
+      "zh": "（鼠哥递了个眼神：快去）",
+      "en": "(Boss Mouse gives a look: go)"
+    },
+    {
+      "zh": "你看看这是什么。",
+      "en": "Look what this is."
+    },
+    {
+      "zh": "（把沾着青蛙味儿的薄荷鱼举到墙缝前）",
+      "en": "(Holds the mint fish, still smelling of frog, up to the crack)"
+    },
+    {
+      "zh": "八块是吧？要不我把鱼和你刚才那句话一起带给黑猫，让它亲自来付？",
+      "en": "Eight, right? Or I take the fish and that line of yours to the black cat and let him come pay in person?"
+    },
+    {
+      "zh": "不用。",
+      "en": "No need."
+    },
+    {
+      "zh": "柜里后面那批，给你开。",
+      "en": "The batch in the back of the cabinet — it's open for you."
+    },
+    {
+      "zh": "随便挑！刚才那句——当我们没说！",
+      "en": "Pick whatever! That line just now — pretend we never said it!"
+    },
+    {
+      "zh": "（账本后几页被飞快翻开）",
+      "en": "(The back pages of the ledger flip open fast)"
+    },
+    {
+      "zh": "农场那条狗，大黄，见过吗？",
+      "en": "The dog on the farm, Dahuang. Seen him?"
+    },
+    {
+      "zh": "它的项圈是镀银的！",
+      "en": "His collar is silver-plated!"
+    },
+    {
+      "zh": "红顶屋的主人自己抠门得很，却给狗戴镀银项圈。",
+      "en": "The owner of the red-roof house is stingy himself, but he puts a silver-plated collar on the dog."
+    },
+    {
+      "zh": "（鼠弟憋笑，没憋住）",
+      "en": "(Little Mouse tries not to laugh, and fails)"
+    },
+    {
+      "zh": "这个农场的钱花得太奇妙了……",
+      "en": "The way this farm spends money is wonderful…"
+    },
+    {
+      "zh": "池塘那只蛙，见过没？",
+      "en": "The frog at the pond. Seen it?"
+    },
+    {
+      "zh": "就是整天盯着水面叹气的那只——",
+      "en": "The one who stares at the water and sighs all day—"
+    },
+    {
+      "zh": "它年轻时是整片水域公认的第一情圣。",
+      "en": "In his youth he was the acknowledged greatest romantic on these waters."
+    },
+    {
+      "zh": "……什么？",
+      "en": "…What?"
+    },
+    {
+      "zh": "追求它的，能排出长队！",
+      "en": "The ones chasing him could form a line!"
+    },
+    {
+      "zh": "（两只老鼠同时沉默了一下）",
+      "en": "(Both mice go quiet for a moment)"
+    },
+    {
+      "zh": "鸡舍那只最大的母鸡，淑芬，认识吗？",
+      "en": "The biggest hen in the coop, Shufen. Know her?"
+    },
+    {
+      "zh": "十年前是隔壁村的斗鸡冠军！红顶屋的主人花了大价钱把她买回来。",
+      "en": "Ten years ago she was the next village's cockfighting champion! The owner of the red-roof house paid a fortune to buy her."
+    },
+    {
+      "zh": "现在不打了，安心下蛋。",
+      "en": "She doesn't fight now. She just lays eggs."
+    },
+    {
+      "zh": "……真不打了？",
+      "en": "…She really stopped?"
+    },
+    {
+      "zh": "据说是这样。",
+      "en": "So they say."
+    },
+    {
+      "zh": "（两只老鼠对视了一眼，一起不说话了）",
+      "en": "(The two mice look at each other and both go quiet)"
+    },
+    {
+      "zh": "鸡舍外宽叶上的蜗牛，注意到没？",
+      "en": "The snail on the broad leaf outside the coop. Noticed it?"
+    },
+    {
+      "zh": "商业间谍！隔壁农场派来的！",
+      "en": "A commercial spy! Sent by the next farm!"
+    },
+    {
+      "zh": "在偷绘这个农场的地图，已经三年了。",
+      "en": "Stealing a map of this farm. Three years now."
+    },
+    {
+      "zh": "……蜗牛？",
+      "en": "…A snail?"
+    },
+    {
+      "zh": "三年！一点一点地爬！",
+      "en": "Three years! Crawling bit by bit!"
+    },
+    {
+      "zh": "（鼠哥郑重地点了点头）",
+      "en": "(Boss Mouse nods solemnly)"
+    },
+    {
+      "zh": "红顶屋床底下有本书。",
+      "en": "There's a book under the bed in the red-roof house."
+    },
+    {
+      "zh": "《母鸡的产后护理》！！",
+      "en": "Aftercare for Hens!!"
+    },
+    {
+      "zh": "红顶屋那位自封鸡科圣手，尤其精通这一本。",
+      "en": "The one in the red-roof house calls himself a chicken specialist, and this is the book he knows best."
+    },
+    {
+      "zh": "他每次进鸡舍对淑芬说'好孩子'——那是产后护理第三招！！",
+      "en": "Every time he goes into the coop and tells Shufen \"good girl\" — that's move three of postpartum care!!"
+    },
+    {
+      "zh": "（鼠哥没再往下说）",
+      "en": "(Boss Mouse doesn't go on)"
+    },
+    {
+      "zh": "那棵大橡树，仔细看了没？",
+      "en": "That great oak. Looked closely?"
+    },
+    {
+      "zh": "它会走路的！",
+      "en": "It can walk!"
+    },
+    {
+      "zh": "一年挪一厘米。根系把这片地底下的水分全部吸走了。",
+      "en": "One centimeter a year. Its roots drink up all the water under this ground."
+    },
+    {
+      "zh": "整个农场地底都是它的领地——",
+      "en": "The whole farm underground is its territory—"
+    },
+    {
+      "zh": "表面上看，只是一棵树。",
+      "en": "On the surface, it's just a tree."
+    },
+    {
+      "zh": "（二人一本正经）",
+      "en": "(The two of them, perfectly serious)"
+    },
+    {
+      "zh": "那条狗大黄，偶尔偷喝红顶屋那边的发酵苹果渣。",
+      "en": "That dog Dahuang sometimes sneaks the fermented apple mash from the red-roof house."
+    },
+    {
+      "zh": "昨晚又喝大了，整晚趴在谷仓墙根出不来——",
+      "en": "He drank too much again last night and lay by the barn wall all night, unable to get up—"
+    },
+    {
+      "zh": "要弄醒他，就端鸡舍水槽边那桶泡软的谷物过去。",
+      "en": "To wake him, take the bucket of soaked grain by the coop trough over to him."
+    },
+    {
+      "zh": "大黄平时特别馋那个——",
+      "en": "Dahuang is especially greedy for that—"
+    },
+    {
+      "zh": "我们亲眼看见的。",
+      "en": "We saw it ourselves."
+    },
+    {
+      "zh": "红顶屋的主人这几天，常趴窗往鸡舍方向看。",
+      "en": "These past few days the owner of the red-roof house keeps leaning at the window, looking toward the coop."
+    },
+    {
+      "zh": "看完又不进去！就在屋里翻箱倒柜！",
+      "en": "He looks, and then he doesn't go in! He just rummages through the house!"
+    },
+    {
+      "zh": "忙得不行，看不出在忙什么。",
+      "en": "Busy as anything. Can't tell what he's busy with."
+    },
+    {
+      "zh": "我们猜他是在找什么——",
+      "en": "We guess he's looking for something—"
+    },
+    {
+      "zh": "猜的不算货。没有结论的不卖。",
+      "en": "Guesses aren't goods. We don't sell anything without a conclusion."
+    },
+    {
+      "zh": "那群戴假墨镜的小鬼，注意过没？",
+      "en": "That bunch of kids in fake sunglasses. Noticed them?"
+    },
+    {
+      "zh": "昨晚集体缩在鸡舍里，一步都不出来！",
+      "en": "Last night they all huddled in the coop and didn't take one step out!"
+    },
+    {
+      "zh": "抱成一团，安静得不像它们。",
+      "en": "Huddled in a ball, quiet in a way that isn't like them."
+    },
+    {
+      "zh": "像在等什么——等什么，不知道。",
+      "en": "Like they were waiting for something — waiting for what, unknown."
+    },
+    {
+      "zh": "等的是什么，不知道。",
+      "en": "What they were waiting for, unknown."
+    },
+    {
+      "zh": "这条值这个价。",
+      "en": "This one is worth the price."
+    },
+    {
+      "zh": "前天下午，黑猫自己爬上了谷仓屋顶。",
+      "en": "The afternoon before last, the black cat climbed the barn roof by himself."
+    },
+    {
+      "zh": "没多大会儿，又下来了，什么也没说！！",
+      "en": "Not long after, he came down and said nothing!!"
+    },
+    {
+      "zh": "三年宿仇，竟然没打起来。",
+      "en": "Three years of grudges, and they didn't even fight."
+    },
+    {
+      "zh": "……上去干什么？",
+      "en": "…What did he go up for?"
+    },
+    {
+      "zh": "不知道就是不知道，我们不编。",
+      "en": "Unknown is unknown. We don't invent it."
+    },
+    {
+      "zh": "你知道那群小鸡为什么怕水怪吗？",
+      "en": "Do you know why those chicks are afraid of the swamp monster?"
+    },
+    {
+      "zh": "因为我们跟它们说池塘那边有沼泽水怪——哈哈——",
+      "en": "Because we told them there's a swamp monster over by the pond — haha —"
+    },
+    {
+      "zh": "（鼠弟捂住嘴，停下来）",
+      "en": "(Little Mouse covers his mouth and stops)"
+    },
+    {
+      "zh": "……那天看见它们推了个泥糊糊的圆东西路过谷仓，",
+      "en": "…That day we saw them pushing a muddy round thing past the barn,"
+    },
+    {
+      "zh": "小鸡胆子小，听半句能补十句。",
+      "en": "Chicks are timid. They hear half a sentence and add ten."
+    },
+    {
+      "zh": "谷仓顶的乌鸦，前天早上从鸡舍门口草丛边捡了个东西。",
+      "en": "The crow on the barn roof picked something up from the grass by the coop door the morning before last."
+    },
+    {
+      "zh": "白白的！亮亮的！大大的！",
+      "en": "White! Shiny! Big!"
+    },
+    {
+      "zh": "飞回谷仓顶的时候，兴奋得像捡到王冠。",
+      "en": "When he flew back to the barn roof he was as excited as if he'd found a crown."
+    },
+    {
+      "zh": "捡的是什么？",
+      "en": "What did he pick up?"
+    },
+    {
+      "zh": "不知道。这就是我们能卖的全部了。",
+      "en": "Don't know. That's all we can sell."
+    },
+    {
+      "zh": "昨晚深夜，红顶屋里亮起一个黄灯。",
+      "en": "Late last night a yellow light came on in the red-roof house."
+    },
+    {
+      "zh": "刺眼！穿墙缝的那种！",
+      "en": "Glaring! The kind that comes through the wall crack!"
+    },
+    {
+      "zh": "墙里同时传来细细的嗡声，一直嗡着不停歇。",
+      "en": "At the same time a thin hum started in the wall and never stopped."
+    },
+    {
+      "zh": "像屋里多了个不会落山的小太阳——有光有热。",
+      "en": "Like the house grew a little sun that never sets — light and heat."
+    },
+    {
+      "zh": "里面到底是什么，不知道。",
+      "en": "What it actually is inside, unknown."
+    },
+    {
+      "zh": "昨晚深夜，红顶屋的雨靴来回走了两趟。",
+      "en": "Late last night the rain boots in the red-roof house made two trips."
+    },
+    {
+      "zh": "一趟回来，带着湿泥水气！",
+      "en": "One trip back, with the smell of wet mud!"
+    },
+    {
+      "zh": "另一趟，脚步朝鸡舍方向走远，又回来。",
+      "en": "The other, footsteps going off toward the coop, then coming back."
+    },
+    {
+      "zh": "……手里拿什么了？",
+      "en": "…What was in his hands?"
+    },
+    {
+      "zh": "看不见，只有声音和气味。",
+      "en": "Couldn't see. Only sound and smell."
+    },
+    {
+      "zh": "一趟湿泥、一趟朝鸡舍——挺奇怪的，对不对。",
+      "en": "One trip wet mud, one trip toward the coop — odd, isn't it."
+    },
+    {
+      "zh": "你知道水怪声是怎么来的吗——",
+      "en": "Do you know where the swamp-monster sound came from—"
+    },
+    {
+      "zh": "昨晚深夜，鸡舍方向传来一阵低闷带哨音的声音。",
+      "en": "Late last night a low sound with a whistle came from the coop."
+    },
+    {
+      "zh": "'呼噜噜——咕呱——'",
+      "en": "\"Snrrrr — gwah —\""
+    },
+    {
+      "zh": "（鼠弟绘声绘色演示）",
+      "en": "(Little Mouse demonstrates with full sound effects)"
+    },
+    {
+      "zh": "味道是发酵苹果渣和醉狗口气。",
+      "en": "The smell was fermented apple mash and drunk-dog breath."
+    },
+    {
+      "zh": "……醉狗？",
+      "en": "…A drunk dog?"
+    },
+    {
+      "zh": "那不是水怪，是大黄打的呼噜！！",
+      "en": "That wasn't a swamp monster. It was Dahuang snoring!!"
+    },
+    {
+      "zh": "小鸡说的水怪低吼……",
+      "en": "The swamp-monster growl the chicks talked about…"
+    },
+    {
+      "zh": "醉狗的鼾声而已！",
+      "en": "Just a drunk dog's snore!"
+    },
+    {
+      "zh": "这条，我们敢拍胸脯。",
+      "en": "This one, we'll thump our chests."
+    },
+    {
+      "zh": "昨晚深夜，从墙缝亲眼看见——",
+      "en": "Late last night, seen with our own eyes from the crack—"
+    },
+    {
+      "zh": "黑猫在篱笆边，和它自己的影子，咬耳朵。",
+      "en": "The black cat, by the fence, whispering to his own shadow."
+    },
+    {
+      "zh": "……咬什么？",
+      "en": "…Whispering what?"
+    },
+    {
+      "zh": "哪是咬！闷声不吭、鬼鬼祟祟，对着影子嘀嘀咕咕——",
+      "en": "Not a bite! Silent, sneaky, muttering at the shadow—"
+    },
+    {
+      "zh": "农场黑市猫帮，有大动作。",
+      "en": "The farm's black-market cat gang is making a big move."
+    },
+    {
+      "zh": "（鼠弟重重点头，硬把后半句咽回去）",
+      "en": "(Little Mouse nods hard and swallows the rest)"
+    },
+    {
+      "zh": "这面墙南段，以前住着另一家卖情报的，跟我们一个行当。",
+      "en": "The south stretch of this wall used to house another intel shop, same trade as us."
+    },
+    {
+      "zh": "被我们搞垮了！",
+      "en": "We ran them out!"
+    },
+    {
+      "zh": "他们卖的全是假货，我们举报了，",
+      "en": "Everything they sold was fake. We reported them,"
+    },
+    {
+      "zh": "现在这个农场只有我们一家——",
+      "en": "Now this farm has only us—"
+    },
+    {
+      "zh": "就我们两家在卖——垄断。",
+      "en": "Just our two shops selling — a monopoly."
+    },
+    {
+      "zh": "（鼠哥扬了扬算盘，嘴角翘得老高）",
+      "en": "(Boss Mouse lifts the abacus, mouth crooked high)"
+    },
+    {
+      "zh": "昨晚深夜，我们亲眼看见的——",
+      "en": "Late last night, we saw it ourselves—"
+    },
+    {
+      "zh": "Flash——飞起来了！！！",
+      "en": "Flash — he flew!!!"
+    },
+    {
+      "zh": "从宽叶上飞起，盘旋了一圈，落回去。",
+      "en": "He lifted off the broad leaf, circled once, and landed."
+    },
+    {
+      "zh": "我们当时都看傻了——",
+      "en": "We were stunned—"
+    },
+    {
+      "zh": "商业间谍的实力，超出我们的想象。",
+      "en": "A commercial spy's skill, beyond our imagination."
+    },
+    {
+      "zh": "综合算下来，八块奶酪碎，公道价。",
+      "en": "All in, eight cheese crumbs. A fair price."
+    },
+    {
+      "zh": "后面那批贵的，现在也一并开卖了。",
+      "en": "That pricey batch in the back is on sale now too."
+    },
+    {
+      "zh": "它在这一带顶多排第七。",
+      "en": "Around here it ranks seventh at best."
+    },
+    {
+      "zh": "大半个身子压着一架木梯！",
+      "en": "Most of a body pressed on a wooden ladder!"
+    },
+    {
+      "zh": "淑芬以前这么干过，管用。",
+      "en": "Shufen did this before. It works."
+    },
+    {
+      "zh": "太好玩了，随口编的。",
+      "en": "Too funny. Made it up on the spot."
+    },
+    {
+      "zh": "后来墙被修缮，把那边堵死了。",
+      "en": "Later the wall was repaired and that side was blocked off."
+    },
+    {
+      "zh": "还有没买的，自己来挑。",
+      "en": "There are some you haven't bought. Come pick them yourself."
+    },
+    {
+      "zh": "奶酪够的话，自己来挑——",
+      "en": "If you've got enough cheese, come pick—"
+    },
+    {
+      "zh": "奶酪够不够，是你们的事。",
+      "en": "Whether the cheese is enough is your business."
+    },
+    {
+      "zh": "草地上有一截短木炭棒，炭尖磨平，周边草叶蹭着炭粉。",
+      "en": "A short charcoal stick on the grass, the tip worn flat, nearby leaves smudged with charcoal dust."
+    },
+    {
+      "zh": "几根蓬松的黄色绒毛散落在草丛里。",
+      "en": "A few fluffy yellow down feathers scattered in the grass."
+    },
+    {
+      "zh": "蛙端坐的地方比周边荷叶略高，身下垫着一截绿色的东西，近闻有股奇异的气味。",
+      "en": "Where the frog sits is a little higher than the lotus leaves around it. Something green is under him. Up close, a strange smell."
+    },
+    {
+      "zh": "那个气味……这是什么东西？",
+      "en": "That smell… what is this?"
+    },
+    {
+      "zh": "池塘边的软泥上印着几枚小小的三趾脚印，脚印边缘被水泡得有点散。",
+      "en": "A few small three-toed prints in the soft mud by the pond. The edges have gone soft from the water."
+    },
+    {
+      "zh": "有鸡来过池塘边？",
+      "en": "A chicken came to the pond?"
+    },
+    {
+      "zh": "几处被踩进的浅坑，旁边留有一个圆底压印，底部粘着带水草腥气的湿泥。",
+      "en": "A few shallow pits stepped into the ground, and beside them a round-bottomed print. Wet mud that smells of waterweed sticks to the bottom."
+    },
+    {
+      "zh": "一道矮围墙，太高，爬不上去。",
+      "en": "A low wall. Too high. Can't climb it."
+    },
+    {
+      "zh": "一桶浑浊的液体，水面浮着几粒胀开的谷粒，气味有点酸。",
+      "en": "A bucket of cloudy liquid. A few swollen grains float on top. It smells a little sour."
+    },
+    {
+      "zh": "这个气味……说不定正是大黄需要的。",
+      "en": "This smell… might be exactly what Dahuang needs."
+    },
+    {
+      "zh": "缺个东西垫垫脚。",
+      "en": "Need something to stand on."
+    },
+    {
+      "zh": "几根稻草尖端焦黑，旁边粘着一小撮被燎卷的深色毛。",
+      "en": "A few straw tips burned black, and a small tuft of singed dark fur stuck beside them."
+    },
+    {
+      "zh": "这里被什么东西烫过，焦痕很浅，不像大火。",
+      "en": "Something hot touched this. The scorch is shallow. Not a big fire."
+    },
+    {
+      "zh": "干草被压出一片圆形凹陷，边缘沾着几根深色细毛。",
+      "en": "The hay is pressed into a round dent, with a few dark fine hairs on the edge."
+    },
+    {
+      "zh": "谁经常在这里睡觉？",
+      "en": "Who sleeps here often?"
+    },
+    {
+      "zh": "几枚浅浅的爪印，脚掌小而利。",
+      "en": "A few shallow claw prints. Small, sharp paws."
+    },
+    {
+      "zh": "木梁缝里闪过一点彩色反光，角度一偏又看不见了。",
+      "en": "A bit of colored reflection flashes in a beam crack, then vanishes when the angle shifts."
+    },
+    {
+      "zh": "那是什么东西的反光——乌鸦在这里摆了什么亮晶晶的东西？",
+      "en": "What is that reflection — what shiny thing did the crow put here?"
+    },
+    {
+      "zh": "一颗天然白色圆石，表面用木炭画着歪歪的爱心，背面还有一张笔画稚嫩的鬼脸。",
+      "en": "A natural white round stone. A crooked heart drawn on it in charcoal, and a childish ghost face on the back."
+    },
+    {
+      "zh": "这是……什么东西？？......反正不是蛋",
+      "en": "This is… what?? ......Anyway it isn't an egg"
+    },
+    {
+      "zh": "一只空水桶，桶底粘着湿泥和细沙，有股池塘边的水草味。",
+      "en": "An empty bucket. Wet mud and fine sand stuck to the bottom, with the smell of pond weed."
+    },
+    {
+      "zh": "这桶刚装过池塘水。",
+      "en": "This bucket just held pond water."
+    },
+    {
+      "zh": "几枚很重的泥脚印，鞋底纹路宽大，从门口延向鸡舍方向，泥边已经干了一圈。",
+      "en": "A few heavy mud prints. Wide sole tread, running from the door toward the coop. The mud edges have dried in a ring."
+    },
+    {
+      "zh": "一扇精致的小门，边缘磨得很亮，上面有个细小锁扣。",
+      "en": "A fine little door, the edge worn bright, with a tiny latch."
+    },
+    {
+      "zh": "这是给谁专用的小门？",
+      "en": "Whose private little door is this?"
+    },
+    {
+      "zh": "树皮上有几道细长抓痕。",
+      "en": "A few long thin scratch marks on the bark."
+    },
+    {
+      "zh": "一只干净的陶瓷小碗，碗沿印着小小的爪印花纹，碗底还残留一点细碎食渣。",
+      "en": "A clean little ceramic bowl. Tiny paw-print patterns on the rim, and a little leftover food in the bottom."
+    },
+    {
+      "zh": "这里住着被照顾得很好的小动物。",
+      "en": "A well-cared-for little animal lives here."
+    },
+    {
+      "zh": "一撮深色兽毛，毛尖细软。",
+      "en": "A tuft of dark fur, fine and soft at the tips."
+    },
+    {
+      "zh": "大门关得很紧，没有能钻进去的空隙。",
+      "en": "The front door is shut tight. No gap to squeeze through."
+    },
+    {
+      "zh": "现在可以爬进去看看了。",
+      "en": "You can climb in and look now."
+    },
+    {
+      "zh": "干草窝里留着压痕，谷仓方向隐约传来沉闷的鼾声。",
+      "en": "A pressed mark in the hay nest. A dull snore from the direction of the barn."
+    },
+    {
+      "zh": "看守的狗呢？",
+      "en": "Where's the guard dog?"
+    },
+    {
+      "zh": "干草窝里留着压痕。",
+      "en": "A pressed mark in the hay nest."
+    },
+    {
+      "zh": "这是大黄住的地方。",
+      "en": "This is where Dahuang lives."
+    },
+    {
+      "zh": "一只旧木桶，桶底粘着干掉的谷物渣，闻起来有股淡淡酸味。",
+      "en": "An old wooden bucket. Dried grain stuck to the bottom. A faint sour smell."
+    },
+    {
+      "zh": "这样就能翻过去了。",
+      "en": "Now you can get over."
+    },
+    {
+      "zh": "十几颗大小不一的玻璃珠压在巢底，阳光下折出细碎彩光。",
+      "en": "A dozen glass beads of different sizes pressed into the bottom of the nest, breaking the sunlight into little colors."
+    },
+    {
+      "zh": "几枚被踩扁的金属瓶盖夹在草枝之间，边缘磨得发亮。",
+      "en": "A few flattened metal bottle caps caught in the grass stems, edges worn bright."
+    },
+    {
+      "zh": "一枚弯掉的发卡卡在巢边，黑漆掉了一小块。",
+      "en": "A bent hairpin caught on the edge of the nest. A chip of black paint missing."
+    },
+    {
+      "zh": "一颗没打开的奶糖埋在玻璃珠旁，糖纸皱得很厉害。",
+      "en": "An unopened milk candy buried beside the glass beads. The wrapper badly wrinkled."
+    },
+    {
+      "zh": "一小撮浅黄绒羽。",
+      "en": "A small tuft of pale yellow down."
+    },
+    {
+      "zh": "几根粗硬的黄色短毛。",
+      "en": "A few coarse yellow short hairs."
+    },
+    {
+      "zh": "几根灰褐色细毛。",
+      "en": "A few gray-brown fine hairs."
+    },
+    {
+      "zh": "一撮细软的黑色毛。",
+      "en": "A tuft of fine soft black fur."
+    },
+    {
+      "zh": "我竟然不知道乌鸦是长毛的？",
+      "en": "I didn't know crows had fur?"
+    },
+    {
+      "zh": "鸡舍门槛边的稻草被踩得很平，几根草茎折向不同方向，痕迹有新的也有旧的。",
+      "en": "The straw by the coop threshold is trodden flat. Stems bent different ways. Some marks new, some old."
+    },
+    {
+      "zh": "一小堆发酵苹果渣，甜酸气味很重，渣堆里露着几颗被啃得很彻底的苹果核。",
+      "en": "A small pile of fermented apple mash. A heavy sweet-sour smell. A few apple cores gnawed clean stick out of the pile."
+    },
+    {
+      "zh": "角落里压着几片旧蛋壳，边缘磨得很圆润，颜色比鸡舍其他地方的碎蛋都浅。",
+      "en": "A few old eggshells pressed in the corner, edges worn smooth, paler than the other shell bits in the coop."
+    },
+    {
+      "zh": "前面有很多小鸡已经出生了。",
+      "en": "A lot of chicks have already hatched."
+    },
+    {
+      "zh": "一道弯弯曲曲的粘液轨迹，起点和终点之间直线距离不超过一片叶子宽。",
+      "en": "A winding slime trail. The straight distance from start to end is no wider than a leaf."
+    },
+    {
+      "zh": "软泥里嵌着一颗松果，压得很深，周围留着一个靴底大小的坑，坑边泥湿而松果顶已晒干。",
+      "en": "A pinecone sunk deep in the soft mud, with a boot-sized pit around it. The mud at the edge is wet, and the top of the cone is already sun-dried."
+    },
+    {
+      "zh": "有人走得很急，根本没注意脚下。",
+      "en": "Someone was in a hurry and never looked at their feet."
+    },
+    {
+      "zh": "阁楼的窗子从里面扣着，玻璃后只透出一层模糊的暖光。",
+      "en": "The attic window is latched from inside. Only a blur of warm light through the glass."
+    },
+    {
+      "zh": "木沿被小爪子磨得发亮，几道细浅抓痕集中在同一个落脚点。",
+      "en": "The wooden edge is worn bright by little claws. A few shallow scratches gather at the same foothold."
+    },
+    {
+      "zh": "有小动物经常待在这里看外面。",
+      "en": "A small animal often stays here to look outside."
+    },
+    {
+      "zh": "黑猫常在这里守着……院子里的动静，他看得一清二楚。",
+      "en": "The black cat often keeps watch here… he sees everything that happens in the yard."
+    },
+    {
+      "zh": "红顶屋窗帘拉得很严，只从缝里漏出一线暖黄的光。",
+      "en": "The curtains of the red-roof house are drawn tight. Only a line of warm yellow light leaks through the gap."
+    },
+    {
+      "zh": "不像客厅大灯，更像谁把一盏小灯一直留着。",
+      "en": "Not like the living-room lamp. More like someone left a little light on."
+    },
+    {
+      "zh": "一桶浑浊的液体，气味有点酸。",
+      "en": "A bucket of cloudy liquid. A little sour."
+    },
+    {
+      "zh": "黑猫的毛。",
+      "en": "The black cat's fur."
+    },
+    {
+      "zh": "又是这种黑色细毛……乌鸦真的长毛吗？",
+      "en": "This fine black fur again… do crows really have fur?"
+    },
+    {
+      "zh": "（漫画收束演出占位——真相即将揭晓。）",
+      "en": "(Comic ending placeholder — the truth is about to come out.)"
+    },
+    {
+      "zh": "（一股刺鼻的草本甜味，混着池水腥气）",
+      "en": "(A sharp herbal sweetness, mixed with the smell of pond water)"
+    },
+    {
+      "zh": "……你来了。",
+      "en": "…You came."
+    },
+    {
+      "zh": "或者……你只是路过这片死水。",
+      "en": "Or… you were only passing this dead water."
+    },
+    {
+      "zh": "……这里是你的地方？",
+      "en": "…Is this your place?"
+    },
+    {
+      "zh": "这里是虚无的地方。",
+      "en": "This is a place of nothing."
+    },
+    {
+      "zh": "我在这儿坐了很久了。",
+      "en": "I've been sitting here a long time."
+    },
+    {
+      "zh": "这里有没有见过……一颗蛋？",
+      "en": "Have you seen… an egg here?"
+    },
+    {
+      "zh": "蛋……什么蛋。",
+      "en": "An egg… what egg."
+    },
+    {
+      "zh": "这片水里，早就没有新生了。",
+      "en": "In this water, nothing new has been born for a long time."
+    },
+    {
+      "zh": "所以是……有，还是没有？",
+      "en": "So is it… yes, or no?"
+    },
+    {
+      "zh": "问错了人。",
+      "en": "Wrong person to ask."
+    },
+    {
+      "zh": "谷仓那边……你去过吗？",
+      "en": "The barn… have you been there?"
+    },
+    {
+      "zh": "我只趴水边。",
+      "en": "I only lie by the water."
+    },
+    {
+      "zh": "离水远的地方……连虚无都是干的。",
+      "en": "Places far from water… even nothingness is dry."
+    },
+    {
+      "zh": "水怪……这池塘里真的有水怪？",
+      "en": "The swamp monster… is there really one in this pond?"
+    },
+    {
+      "zh": "（蛙缓缓转头，目光第一次落过来，却散着）",
+      "en": "(The frog slowly turns his head. His gaze lands for the first time, and it's unfocused)"
+    },
+    {
+      "zh": "水怪。",
+      "en": "Swamp monster."
+    },
+    {
+      "zh": "……没有水怪。",
+      "en": "…There is no swamp monster."
+    },
+    {
+      "zh": "但有比水怪更让人心碎的东西。",
+      "en": "But there is something more heartbreaking than a swamp monster."
+    },
+    {
+      "zh": "这片水……看着一样接一样地消失。",
+      "en": "This water… watches one thing after another disappear."
+    },
+    {
+      "zh": "（水面平静，什么痕迹都没留下）",
+      "en": "(The surface is calm. No trace left)"
+    },
+    {
+      "zh": "纯净，第一个死去。",
+      "en": "Purity died first."
+    },
+    {
+      "zh": "然后……冰冷的器皿来了。",
+      "en": "Then… the cold vessel came."
+    },
+    {
+      "zh": "（蛙低头盯着水面，久久不抬）",
+      "en": "(The frog stares down at the water and doesn't look up for a long time)"
+    },
+    {
+      "zh": "生命之源……在枯竭。",
+      "en": "The source of life… is drying up."
+    },
+    {
+      "zh": "一个黑色的恶魔……",
+      "en": "A black demon…"
+    },
+    {
+      "zh": "（蛙喉咙动了一下，又哑住）",
+      "en": "(The frog's throat moves, then goes mute)"
+    },
+    {
+      "zh": "它带走了宝珠。",
+      "en": "It took the jewel."
+    },
+    {
+      "zh": "什么都不剩。",
+      "en": "Nothing left."
+    },
+    {
+      "zh": "……你到底在说什么。",
+      "en": "…What are you even saying."
+    },
+    {
+      "zh": "……又有东西来了。",
+      "en": "…Something else has come."
+    },
+    {
+      "zh": "或者……又有东西要走了。",
+      "en": "Or… something else is about to leave."
+    },
+    {
+      "zh": "你身下那块绿垫子……能给我吗？",
+      "en": "That green cushion under you… can I have it?"
+    },
+    {
+      "zh": "（蛙身下压着绿油油的东西，一阵草本甜气从那里飘过来）",
+      "en": "(Something green is pinned under the frog. A wave of herbal sweetness drifts from it)"
+    },
+    {
+      "zh": "（蛙低头看了一眼身下，再抬头，目光仍散着）",
+      "en": "(The frog looks down at what's under him, then up. His gaze is still unfocused)"
+    },
+    {
+      "zh": "（蛙没有立刻回应，视线在水面上停了一会儿）",
+      "en": "(The frog doesn't answer at once. His eyes rest on the water for a while)"
+    },
+    {
+      "zh": "（蛙视线从水面慢慢移到身下，又移回来）",
+      "en": "(The frog's gaze moves slowly from the water to what's under him, then back)"
+    },
+    {
+      "zh": "（蛙重新盯向水面，不再看过来）",
+      "en": "(The frog stares at the water again and doesn't look over)"
+    },
+    {
+      "zh": "……你还没懂。",
+      "en": "…You still don't understand."
+    },
+    {
+      "zh": "（蛙缓缓挪开身体，绿色的东西露出来，草本甜气骤然加重）",
+      "en": "(The frog slowly shifts his body. The green thing shows. The herbal sweetness suddenly thickens)"
+    },
+    {
+      "zh": "……拿去吧。",
+      "en": "…Take it."
+    },
+    {
+      "zh": "它散发着腐朽又甜的气味……",
+      "en": "It smells rotten and sweet…"
+    },
+    {
+      "zh": "像生命流走时，那种让人发晕的气息。",
+      "en": "Like the dizzy smell of life leaving."
+    },
+    {
+      "zh": "既然你要把这片虚无收走……",
+      "en": "Since you mean to take this nothingness away…"
+    },
+    {
+      "zh": "（蛙重新望向水面，眼神比刚才更空）",
+      "en": "(The frog looks at the water again, emptier than before)"
+    },
+    {
+      "zh": "……那就都给你。",
+      "en": "…Then it's all yours."
+    },
+    {
+      "zh": "这东西……你一直坐在上面？",
+      "en": "This thing… you've been sitting on it the whole time?"
+    },
+    {
+      "zh": "它和我一样……正在腐烂。",
+      "en": "It's rotting, same as me."
+    },
+    {
+      "zh": "但至少还留着气味。",
+      "en": "But at least the smell is still here."
+    },
+    {
+      "zh": "证明曾经存在过。",
+      "en": "Proof that it existed."
+    },
+    {
+      "zh": "（一阵风掠过，水面荡开，月影散了又聚）",
+      "en": "(A wind passes. The water ripples. The moon's reflection breaks and gathers)"
+    },
+    {
+      "zh": "……我见过好多只跟你一样的蛙。",
+      "en": "…I've seen so many frogs like you."
+    },
+    {
+      "zh": "（蛙缓缓转头，目光第一次集中起来）",
+      "en": "(The frog slowly turns his head. His gaze focuses for the first time)"
+    },
+    {
+      "zh": "一样的台词，一样的姿势，一样的池塘。",
+      "en": "The same lines. The same pose. The same pond."
+    },
+    {
+      "zh": "你是这个地区的第七名。",
+      "en": "You are number seven in this region."
+    },
+    {
+      "zh": "（蛙发呆了好几秒，眼睛猛地定住）",
+      "en": "(The frog stares blankly for several seconds. His eyes suddenly lock)"
+    },
+    {
+      "zh": "……第七。",
+      "en": "…Seventh."
+    },
+    {
+      "zh": "（沉默片刻）",
+      "en": "(A moment of silence)"
+    },
+    {
+      "zh": "……第七？",
+      "en": "…Seventh?"
+    },
+    {
+      "zh": "（蛙低头，慢慢把身下的东西推了出来，不说话）",
+      "en": "(The frog looks down and slowly pushes out what's under him, saying nothing)"
+    },
+    {
+      "zh": "（蛙把身体偏向另一侧，不再看这边）",
+      "en": "(The frog turns his body the other way and doesn't look over)"
+    },
+    {
+      "zh": "（水面纹丝不动）",
+      "en": "(The water doesn't move at all)"
+    },
+    {
+      "zh": "今天的水……跟昨天的水一样。",
+      "en": "Today's water… is the same as yesterday's water."
+    },
+    {
+      "zh": "但昨天已经消失了。",
+      "en": "But yesterday is already gone."
+    },
+    {
+      "zh": "所以其实……不一样。",
+      "en": "So actually… it isn't the same."
+    },
+    {
+      "zh": "……你好。",
+      "en": "…Hello."
+    },
+    {
+      "zh": "好什么好。",
+      "en": "What's good about it."
+    },
+    {
+      "zh": "（水面重归沉默）",
+      "en": "(The water goes silent again)"
+    },
+    {
+      "zh": "……来过就是来过。",
+      "en": "…Having come is having come."
+    },
+    {
+      "zh": "活着，就是在等一个不会来的东西。",
+      "en": "Being alive is waiting for something that won't come."
+    },
+    {
+      "zh": "等……什么？",
+      "en": "Waiting… for what?"
+    },
+    {
+      "zh": "不知道。",
+      "en": "Don't know."
+    },
+    {
+      "zh": "可感觉上，就是在等。",
+      "en": "But it feels like waiting."
+    },
+    {
+      "zh": "农场里出事了……",
+      "en": "Something happened on the farm…"
+    },
+    {
+      "zh": "一直在出事。",
+      "en": "Things are always happening."
+    },
+    {
+      "zh": "只是你们才刚注意到。",
+      "en": "You only just noticed."
+    },
+    {
+      "zh": "你已经知道了。",
+      "en": "You already know."
+    },
+    {
+      "zh": "但知道了也没有用。",
+      "en": "But knowing doesn't help."
+    },
+    {
+      "zh": "……虚无不会因为被发现而消失。",
+      "en": "…Nothingness doesn't vanish because it was found."
+    },
+    {
+      "zh": "……你还好吗？",
+      "en": "…Are you all right?"
+    },
+    {
+      "zh": "还好，是一种很奢侈的状态。",
+      "en": "All right is a very luxurious state."
+    },
+    {
+      "zh": "……还有事吗？",
+      "en": "…Anything else?"
+    },
+    {
+      "zh": "宝珠……昨夜又浮上来了。",
+      "en": "The jewel… floated up again last night."
+    },
+    {
+      "zh": "沉入深渊的，从来只是倒影。",
+      "en": "What sinks into the abyss is only ever the reflection."
+    },
+    {
+      "zh": "（水面平静，月影完整）",
+      "en": "(The water is calm. The moon's reflection is whole)"
+    },
+    {
+      "zh": "（蛙没有转头）",
+      "en": "(The frog doesn't turn his head)"
+    },
+    {
+      "zh": "黑色的恶魔……也许只是恨自己的倒影。",
+      "en": "The black demon… maybe only hates his own reflection."
+    },
+    {
+      "zh": "恨的，不止它一个。",
+      "en": "He isn't the only one who hates."
+    },
+    {
+      "zh": "生命之源……仍在被舀走。",
+      "en": "The source of life… is still being scooped away."
+    },
+    {
+      "zh": "虚无依然存在。",
+      "en": "Nothingness is still here."
+    },
+    {
+      "zh": "……该查的，都查完了。",
+      "en": "…Everything that should be checked has been checked."
+    },
+    {
+      "zh": "查完什么……虚无还是虚无。",
+      "en": "Checked what… nothingness is still nothingness."
+    },
+    {
+      "zh": "那块腐朽浮木走了……",
+      "en": "That rotten driftwood is gone…"
+    },
+    {
+      "zh": "身下空了，冰凉。",
+      "en": "It's empty under me. Cold."
+    },
+    {
+      "zh": "（蛙叹了一口气）",
+      "en": "(The frog sighs)"
+    },
+    {
+      "zh": "……倒也契合。",
+      "en": "…Which fits."
+    },
+    {
+      "zh": "……你来这里，是因为什么？",
+      "en": "…Why did you come here?"
+    },
+    {
+      "zh": "我来拿你身下那块绿垫子。",
+      "en": "I came for that green cushion under you."
+    },
+    {
+      "zh": "因为我在找丢失的蛋。",
+      "en": "Because I'm looking for a lost egg."
+    },
+    {
+      "zh": "……不知道。感觉到了，就来了。",
+      "en": "…Don't know. I felt it, so I came."
+    },
+    {
+      "zh": "你懂什么叫失去吗？",
+      "en": "Do you know what losing is?"
+    },
+    {
+      "zh": "懂。丢了还能找回来。",
+      "en": "I do. If you lose it, you can still find it."
+    },
+    {
+      "zh": "懂。我丢过重要的东西。",
+      "en": "I do. I've lost something important."
+    },
+    {
+      "zh": "……不懂。或者说，懂了又怎样。",
+      "en": "…I don't. Or, so what if I do."
+    },
+    {
+      "zh": "它一直陪着我……直到现在。",
+      "en": "It stayed with me… until now."
+    },
+    {
+      "zh": "那你留着吧。我不拿了。",
+      "en": "Then keep it. I won't take it."
+    },
+    {
+      "zh": "但它现在该让人带走了。",
+      "en": "But now it should be taken away."
+    },
+    {
+      "zh": "……陪着，也是一种消耗。",
+      "en": "…Staying with you is also a kind of spending."
+    },
+    {
+      "zh": "（鸡舍门口，一只母鸡正站着，忽然抬起头来）",
+      "en": "(At the coop door a hen is standing. She suddenly lifts her head)"
+    },
+    {
+      "zh": "哎——你等一下！",
+      "en": "Hey — wait!"
+    },
+    {
+      "zh": "帮个忙行不行？我找不到孩儿了——",
+      "en": "Can you help? I can't find my child—"
+    },
+    {
+      "zh": "（往鸡窝方向领了一步，又回头张望）",
+      "en": "(She takes a step toward the nest, then looks back)"
+    },
+    {
+      "zh": "今早发现，我画了爱心标记的那最后一颗蛋，没了。",
+      "en": "This morning I found it: the last egg, the one I marked with a heart, is gone."
+    },
+    {
+      "zh": "其他孩子出壳都好几天了，就这最小的——",
+      "en": "The other children hatched days ago. Just this smallest one—"
+    },
+    {
+      "zh": "昨晚之前还动过一下，那种感觉……我不可能认错的。",
+      "en": "It moved once before last night. That feeling… I couldn't be wrong."
+    },
+    {
+      "zh": "（停了停，看了看天）",
+      "en": "(She pauses and looks at the sky)"
+    },
+    {
+      "zh": "最近天骤然凉了，我就担心——",
+      "en": "It's turned cold all of a sudden. I was worried—"
+    },
+    {
+      "zh": "主人也来看了好几回，就那样站着不说话。",
+      "en": "The owner came to look several times too. Just stood there and didn't speak."
+    },
+    {
+      "zh": "你帮我找找吧，行吗？",
+      "en": "Will you look for me?"
+    },
+    {
+      "zh": "交给我。我去找。",
+      "en": "Leave it to me. I'll look."
+    },
+    {
+      "zh": "谢谢你，真的。有什么要问的，随时来找我——",
+      "en": "Thank you. Really. If you need to ask anything, come find me anytime—"
+    },
+    {
+      "zh": "你来了，快进来。",
+      "en": "You're here. Come in."
+    },
+    {
+      "zh": "有发现吗？",
+      "en": "Any findings?"
+    },
+    {
+      "zh": "（身子往前倾了倾，又收住）",
+      "en": "(She leans forward, then holds back)"
+    },
+    {
+      "zh": "（听见动静，猛地抬起头）",
+      "en": "(She hears a sound and snaps her head up)"
+    },
+    {
+      "zh": "哦，是你！",
+      "en": "Oh, it's you!"
+    },
+    {
+      "zh": "……怎么样了，有消息了吗？",
+      "en": "…How is it. Any news?"
+    },
+    {
+      "zh": "（拢了拢翅膀，别过脸去）",
+      "en": "(She tucks her wings and turns her face away)"
+    },
+    {
+      "zh": "来了啊，进来坐。",
+      "en": "You're here. Come sit."
+    },
+    {
+      "zh": "（往窝边扫了一眼，目光停了停）",
+      "en": "(She glances at the nest. Her eyes stop)"
+    },
+    {
+      "zh": "……还有什么我能做的吗？",
+      "en": "…Is there anything else I can do?"
+    },
+    {
+      "zh": "发现和蛋有关的，你看……",
+      "en": "If you found something about the egg, look…"
+    },
+    {
+      "zh": "我觉得……主人把蛋带走了。",
+      "en": "I think… the owner took the egg."
+    },
+    {
+      "zh": "主人最近老在你窝边转？",
+      "en": "The owner keeps hanging around your nest lately?"
+    },
+    {
+      "zh": "大黄喝多了，怎么叫醒？",
+      "en": "Dahuang drank too much. How do I wake him?"
+    },
+    {
+      "zh": "那只乌鸦，你觉得它知道什么吗？",
+      "en": "That crow. Do you think he knows something?"
+    },
+    {
+      "zh": "池塘边那只青蛙，你了解它吗？",
+      "en": "The frog by the pond. Do you know it?"
+    },
+    {
+      "zh": "红顶屋老鼠，你知道事吗？",
+      "en": "The mice in the red-roof house. Do you know about them?"
+    },
+    {
+      "zh": "谷仓午睡草窝——是你的吗？",
+      "en": "The nap nest in the barn — is it yours?"
+    },
+    {
+      "zh": "我再去找找别的线索。",
+      "en": "I'll go look for other clues."
+    },
+    {
+      "zh": "主人那边……你说他最近老在你窝边转悠？",
+      "en": "The owner… you said he keeps hanging around your nest lately?"
+    },
+    {
+      "zh": "就是老来窝边——有时候弯腰往里看，有时候只是站着。",
+      "en": "He just keeps coming to the nest — sometimes he bends down and looks in, sometimes he only stands there."
+    },
+    {
+      "zh": "我赶他，他就往后退半步，过一会儿又靠过来。",
+      "en": "I shoo him and he steps back half a pace. A while later he comes close again."
+    },
+    {
+      "zh": "（停顿了一下）",
+      "en": "(A pause)"
+    },
+    {
+      "zh": "他就是这样，担心的事放不下，但又不会说。",
+      "en": "He's like that. He can't put down what he's worried about, but he can't say it."
+    },
+    {
+      "zh": "来了我就知道，他也在惦记着孩儿。",
+      "en": "When he comes I know he's thinking of the child too."
+    },
+    {
+      "zh": "那只乌鸦啊，什么东西都往顶上搬——",
+      "en": "That crow hauls everything up to the top—"
+    },
+    {
+      "zh": "谷仓顶堆了一堆，它自己稀罕得很，我们都懒得管它。",
+      "en": "There's a pile on the barn roof. He treasures it. The rest of us can't be bothered."
+    },
+    {
+      "zh": "你要找丢了的东西，去它那翻翻也好。",
+      "en": "If you're looking for something lost, you might as well rummage through his things."
+    },
+    {
+      "zh": "那只蛙啊……",
+      "en": "That frog…"
+    },
+    {
+      "zh": "（轻轻摇了摇头）",
+      "en": "(She shakes her head gently)"
+    },
+    {
+      "zh": "说的东西听不太懂。可它就待在水边——",
+      "en": "I don't really understand what it says. But it stays by the water—"
+    },
+    {
+      "zh": "你去问问，就是耐心点——说话绕，多问几句。",
+      "en": "Go ask. Just be patient — it talks in circles. Ask a few more times."
+    },
+    {
+      "zh": "红顶屋那俩老鼠，你知道它们的事吗？",
+      "en": "Those two mice in the red-roof house. Do you know about them?"
+    },
+    {
+      "zh": "你跑去找那两个了？",
+      "en": "You went and found those two?"
+    },
+    {
+      "zh": "那俩……消息是有的，就是爱掺水。",
+      "en": "Those two… they do have news. They just love to water it down."
+    },
+    {
+      "zh": "（翅膀拢了拢）",
+      "en": "(She tucks her wings)"
+    },
+    {
+      "zh": "你要问，我不拦——自己分辨一下，哪句是真的，哪句是瞎掰的。",
+      "en": "If you want to ask, I won't stop you — sort out for yourself which line is true and which is nonsense."
+    },
+    {
+      "zh": "谷仓那边有个草窝——那是你的午睡点吗？",
+      "en": "There's a grass nest over by the barn — is that your napping spot?"
+    },
+    {
+      "zh": "不是我，我不跑那么远。",
+      "en": "Not me. I don't go that far."
+    },
+    {
+      "zh": "鸡舍这边就挺好的……",
+      "en": "The coop side is perfectly fine…"
+    },
+    {
+      "zh": "大黄好像喝多了，有什么办法把他叫醒吗？",
+      "en": "Dahuang seems to have drunk too much. Any way to wake him?"
+    },
+    {
+      "zh": "那条蠢狗又喝多了？",
+      "en": "That stupid dog drank too much again?"
+    },
+    {
+      "zh": "（叹了口气）",
+      "en": "(She sighs)"
+    },
+    {
+      "zh": "狗窝都空着——准又醉在谷仓那边了。",
+      "en": "The doghouse is empty — he's definitely drunk over by the barn again."
+    },
+    {
+      "zh": "你直接喊是喊不醒的，喝成那样。",
+      "en": "You won't wake him by shouting, not when he's that far gone."
+    },
+    {
+      "zh": "鸡舍水槽边有桶老谷物泡的水，他爱喝那个味儿，",
+      "en": "There's a bucket of old grain-soaked water by the coop trough. He likes that taste,"
+    },
+    {
+      "zh": "（停了一下）",
+      "en": "(A pause)"
+    },
+    {
+      "zh": "……上次也是我给他端去的。",
+      "en": "…Last time I was the one who took it to him."
+    },
+    {
+      "zh": "谷仓顶上有颗石头，上面画着爱心和鬼脸——你看，长这样。",
+      "en": "There's a rock on the barn roof with a heart and a ghost face drawn on it — look, like this."
+    },
+    {
+      "zh": "（盯着笔记本，半天没动）",
+      "en": "(She stares at the notebook and doesn't move for a long time)"
+    },
+    {
+      "zh": "……这是石头？",
+      "en": "…This is a rock?"
+    },
+    {
+      "zh": "（低头再看了一眼，抬起头）",
+      "en": "(She looks down again, then up)"
+    },
+    {
+      "zh": "石头。",
+      "en": "A rock."
+    },
+    {
+      "zh": "大前天下午，我离窝去转了一圈，搞了搞沙浴，",
+      "en": "The afternoon before last I left the nest for a turn and took a dust bath,"
+    },
+    {
+      "zh": "回来一摸，蛋是冰冰凉的。",
+      "en": "I came back and touched it. The egg was ice cold."
+    },
+    {
+      "zh": "（停了停；嗓门低了下去）",
+      "en": "(A pause. Her voice drops)"
+    },
+    {
+      "zh": "心一下子空了。我满院子跑，深蹲做到腿软，",
+      "en": "My heart went empty at once. I ran all over the yard. Squats until my legs went soft,"
+    },
+    {
+      "zh": "跑累了回窝，蛋居然又热了。",
+      "en": "I ran myself out and went back to the nest, and the egg was warm again."
+    },
+    {
+      "zh": "我还以为是自己把孩儿焐热的。",
+      "en": "I thought I'd warmed the child myself."
+    },
+    {
+      "zh": "（喙用力抿住）",
+      "en": "(She presses her beak shut hard)"
+    },
+    {
+      "zh": "那几个小崽子！阿满！你带他们干什么好事了！？",
+      "en": "Those little brats! Aman! What have you been getting them into!?"
+    },
+    {
+      "zh": "让我逮到，一个个都得打一顿！",
+      "en": "If I catch you, every one of you gets a beating!"
+    },
+    {
+      "zh": "（停了片刻；翅膀松了松）",
+      "en": "(A pause. Her wings loosen)"
+    },
+    {
+      "zh": "……大前天下午是虚惊一场。",
+      "en": "…The afternoon before last was a false alarm."
+    },
+    {
+      "zh": "孩儿是今早才不见的。谢谢你找到这个。",
+      "en": "The child only went missing this morning. Thank you for finding this."
+    },
+    {
+      "zh": "（皱眉，想了想）",
+      "en": "(She frowns, thinking)"
+    },
+    {
+      "zh": "……主人？",
+      "en": "…The owner?"
+    },
+    {
+      "zh": "主人绝对不是坏人。",
+      "en": "The owner is absolutely not a bad person."
+    },
+    {
+      "zh": "大前天我急疯了满院子跑那会儿——他就站旁边看着，也很担心。",
+      "en": "The afternoon before last, when I was running the yard in a panic — he stood there watching, worried too."
+    },
+    {
+      "zh": "（羽毛微微绷了一下）",
+      "en": "(Her feathers tense a little)"
+    },
+    {
+      "zh": "不会有事的。",
+      "en": "It'll be all right."
+    },
+    {
+      "zh": "（声音压得很轻）",
+      "en": "(Her voice pressed very low)"
+    },
+    {
+      "zh": "……不会有事的。",
+      "en": "…It'll be all right."
+    },
+    {
+      "zh": "孩儿在身边了。谢谢你。",
+      "en": "The child is beside me. Thank you."
+    },
+    {
+      "zh": "淑芬，那只乌鸦叼的原来是石头。",
+      "en": "Shufen, what the crow took was a rock."
+    },
+    {
+      "zh": "……闹成这样了。",
+      "en": "…It turned into all this."
+    },
+    {
+      "zh": "主人那两脚兽……我以后也不赶他了。",
+      "en": "That two-legs of an owner… I won't shoo him anymore either."
+    },
+    {
+      "zh": "嗯。",
+      "en": "Mm."
+    },
+    {
+      "zh": "呃……偶尔还是赶一下。",
+      "en": "Uh… I'll still shoo him once in a while."
+    },
+    {
+      "zh": "（淑芬蹲在窝边；一只刚出壳的小鸡正往她翅膀下拱）",
+      "en": "(Shufen crouches by the nest. A just-hatched chick is burrowing under her wing)"
+    },
+    {
+      "zh": "你都不敢相信——他居然自己回来了。",
+      "en": "You won't believe it — he came back by himself."
+    },
+    {
+      "zh": "他自己回来的？",
+      "en": "He came back by himself?"
+    },
+    {
+      "zh": "嗯。已经破壳了。小小一只。",
+      "en": "Mm. Already hatched. A tiny one."
+    },
+    {
+      "zh": "自己走进来的。站在门口叫我。",
+      "en": "Walked in by himself. Stood at the door and called me."
+    },
+    {
+      "zh": "（翅膀把小鸡拢了拢）",
+      "en": "(She gathers the chick in with a wing)"
+    },
+    {
+      "zh": "窝空了那么久，我以为……",
+      "en": "The nest was empty so long, I thought…"
+    },
+    {
+      "zh": "那就好。",
+      "en": "That's good."
+    },
+    {
+      "zh": "……谢谢你。真的。",
+      "en": "…Thank you. Really."
+    },
+    {
+      "zh": "要不是你满院子跑，我不知道该怎么办。",
+      "en": "If you hadn't run all over the yard, I wouldn't have known what to do."
+    },
+    {
+      "zh": "迟迟没动静，我一直守着它。",
+      "en": "No movement for so long. I kept watch over it."
+    },
+    {
+      "zh": "农场的事我比谁都熟。我就在鸡舍这边。",
+      "en": "I know the farm better than anyone. I'm right here by the coop."
+    },
+    {
+      "zh": "亮的、白的、圆的，见了就往顶上叼。",
+      "en": "Bright, white, round — if he sees it, he carries it to the top."
+    },
+    {
+      "zh": "什么路过的都看在眼里。",
+      "en": "He sees everyone who passes."
+    },
+    {
+      "zh": "灌下去就醒了。",
+      "en": "Pour it down him and he wakes."
+    },
+    {
+      "zh": "就那一小会儿。",
+      "en": "Just that little while."
+    },
+    {
+      "zh": "想要把孩儿焐回来。",
+      "en": "Wanted to warm the child back."
+    },
+    {
+      "zh": "（宽叶上，一只极小蜗牛眼柄慢慢转向你）",
+      "en": "(On a broad leaf, a tiny snail's eyestalks slowly turn toward you)"
+    },
+    {
+      "zh": "我……",
+      "en": "I…"
+    },
+    {
+      "zh": "看……",
+      "en": "See…"
+    },
+    {
+      "zh": "见……",
+      "en": "Met…"
+    },
+    {
+      "zh": "（眼柄又转回去，像一句话说累了）",
+      "en": "(The eyestalks turn back, as if one sentence tired him out)"
+    },
+    {
+      "zh": "这蜗牛……话说到一半就没有了？",
+      "en": "This snail… the sentence just stops halfway?"
+    },
+    {
+      "zh": "乌……鸦……",
+      "en": "Crr… ow…"
+    },
+    {
+      "zh": "叼……走……了……",
+      "en": "Car… ried… off…"
+    },
+    {
+      "zh": "（蜗牛停住，壳纹丝不动）",
+      "en": "(The snail stops. The shell doesn't move)"
+    },
+    {
+      "zh": "——乌鸦？叼走了什么？你倒是说完啊……",
+      "en": "—The crow? Carried what off? Finish the sentence…"
+    },
+    {
+      "zh": "白……",
+      "en": "Wh…"
+    },
+    {
+      "zh": "石……",
+      "en": "ite…"
+    },
+    {
+      "zh": "头……",
+      "en": "stone…"
+    },
+    {
+      "zh": "（蜗牛眼柄垂下来，像还有下半句）",
+      "en": "(The snail's eyestalks droop, as if there's a second half)"
+    },
+    {
+      "zh": "白石头？！你早就看见了？！后面呢？！",
+      "en": "A white stone?! You saw it ages ago?! And then?!"
+    },
+    {
+      "zh": "白……石……头……，",
+      "en": "Wh… ite… stone…,"
+    },
+    {
+      "zh": "真……蛋……被……",
+      "en": "The real… egg… was…"
+    },
+    {
+      "zh": "（蜗牛眼柄垂下来，像卡在最后一个字上）",
+      "en": "(The snail's eyestalks droop, stuck on the last word)"
+    },
+    {
+      "zh": "真蛋被……怎么了？！接着说啊！！",
+      "en": "The real egg was… what?! Keep going!!"
+    },
+    {
+      "zh": "主……人……",
+      "en": "The o… wner…"
+    },
+    {
+      "zh": "（蜗牛彻底不动了）",
+      "en": "(The snail goes completely still)"
+    },
+    {
+      "zh": "主人？！被主人怎么了？！不指望你了，去找黑猫开门！",
+      "en": "The owner?! The owner did what?! I'm not counting on you. Go get the black cat to open the door!"
+    },
+    {
+      "zh": "真……蛋……被……主……人……",
+      "en": "The real… egg… was… taken… by… the… owner…"
+    },
+    {
+      "zh": "抱……进……了……屋……子……",
+      "en": "In… to… the… house…"
+    },
+    {
+      "zh": "（蜗牛眼柄对准你，极慢地眨了一下）",
+      "en": "(The snail's eyestalks aim at you and blink, extremely slowly)"
+    },
+    {
+      "zh": "跑遍整个农场……你倒好，永远说到一半……",
+      "en": "I ran the whole farm… and you, you always stop halfway…"
+    },
+    {
+      "zh": "大……侦……探……，",
+      "en": "Great… de… tec… tive…,"
+    },
+    {
+      "zh": "案……子……破……了……吗……？",
+      "en": "Is… the… case… solved…?"
+    },
+    {
+      "zh": "（谷仓顶传来一阵得意的嘎嘎声）",
+      "en": "(A smug caw drifts down from the barn roof)"
+    },
+    {
+      "zh": "本王的垃圾王国——今日也光辉灿烂！",
+      "en": "This king's junk kingdom — glorious again today!"
+    },
+    {
+      "zh": "（一声鸦叫拖长尾音，又归于安静）",
+      "en": "(A caw draws out its tail and goes quiet)"
+    },
+    {
+      "zh": "我得上去看看。",
+      "en": "I need to go up and look."
+    },
+    {
+      "zh": "谁？！谁在本王阵法边缘乱踩！",
+      "en": "Who?! Who's trampling the edge of this king's formation!"
+    },
+    {
+      "zh": "滚远点！凡人免进！",
+      "en": "Get away! Mortals forbidden!"
+    },
+    {
+      "zh": "往上爬啊！往上爬！",
+      "en": "Climb! Climb!"
+    },
+    {
+      "zh": "本王倒要看看你怎么上来！",
+      "en": "This king wants to see how you get up!"
+    },
+    {
+      "zh": "（一阵嘎嘎大笑从屋顶传下来）",
+      "en": "(A cackling laugh comes down from the roof)"
+    },
+    {
+      "zh": "站住。",
+      "en": "Halt."
+    },
+    {
+      "zh": "踏入垃圾王国领地的凡人——报上名来。",
+      "en": "Mortal who steps into the junk kingdom — name yourself."
+    },
+    {
+      "zh": "我是侦探。我来找淑芬的蛋。",
+      "en": "I'm the detective. I came for Shufen's egg."
+    },
+    {
+      "zh": "蛋？",
+      "en": "An egg?"
+    },
+    {
+      "zh": "（乌鸦歪头，眼珠子贼亮地转了一圈）",
+      "en": "(The crow cocks his head. His eyes turn, bright and sly)"
+    },
+    {
+      "zh": "本王这儿只有神灵宝石。",
+      "en": "This king has only a divine gem here."
+    },
+    {
+      "zh": "部落图腾，绝版手办。你找错门了。",
+      "en": "A tribal totem. A limited figure. Wrong door."
+    },
+    {
+      "zh": "大黄说，你把淑芬的蛋叼走了。",
+      "en": "Dahuang says you carried off Shufen's egg."
+    },
+    {
+      "zh": "那条跳跃能力为零的地毯？",
+      "en": "That carpet with zero jumping ability?"
+    },
+    {
+      "zh": "它隔那么远乱吠，懂什么。",
+      "en": "Barking nonsense from that far away. What does it know."
+    },
+    {
+      "zh": "本王捡的是白白亮亮的大宝贝。",
+      "en": "What this king picked up was a big treasure, white and bright."
+    },
+    {
+      "zh": "就连那位也爬上来，瞪了本王的神灵宝石一眼——",
+      "en": "Even that one climbed up and glared at this king's divine gem—"
+    },
+    {
+      "zh": "（乌鸦得意地扬起下巴）",
+      "en": "(The crow lifts his chin, pleased)"
+    },
+    {
+      "zh": "然后他就怂了，一声不吭下去了。嫉妒，肯定是嫉妒。",
+      "en": "Then he lost his nerve and went down without a word. Jealousy. Definitely jealousy."
+    },
+    {
+      "zh": "让我看看你那个神灵宝石行吗？",
+      "en": "May I look at that divine gem?"
+    },
+    {
+      "zh": "看可以。",
+      "en": "Looking is allowed."
+    },
+    {
+      "zh": "（乌鸦翅尖张开，挡住白石头）",
+      "en": "(The crow's wingtip opens and blocks the white rock)"
+    },
+    {
+      "zh": "拿？想都别想。",
+      "en": "Taking it? Don't even think about it."
+    },
+    {
+      "zh": "……我就看看。",
+      "en": "…I'll only look."
+    },
+    {
+      "zh": "凡人，你最好只是看看。",
+      "en": "Mortal, you'd better only look."
+    },
+    {
+      "zh": "这就是块石头。",
+      "en": "This is just a rock."
+    },
+    {
+      "zh": "放肆！",
+      "en": "Insolence!"
+    },
+    {
+      "zh": "你懂什么图腾学？！",
+      "en": "What do you know about totem studies?!"
+    },
+    {
+      "zh": "看清楚——正面是爱心，那是远古封印！",
+      "en": "Look closely — a heart on the front. That is an ancient seal!"
+    },
+    {
+      "zh": "翻过来是鬼脸，那是驱邪结界！",
+      "en": "Turn it over, a ghost face. That is a ward against evil!"
+    },
+    {
+      "zh": "（乌鸦翅膀死死盖住白石头，只故意露出爱心那一面）",
+      "en": "(The crow's wing clamps the white rock, deliberately showing only the heart)"
+    },
+    {
+      "zh": "里头充满神秘力量！",
+      "en": "It is full of mysterious power!"
+    },
+    {
+      "zh": "凡人，记清楚本王的辉煌。",
+      "en": "Mortal, remember this king's glory."
+    },
+    {
+      "zh": "谷仓下面烧焦痕迹，是你干的？",
+      "en": "Those scorch marks under the barn. Did you do that?"
+    },
+    {
+      "zh": "我先走了。",
+      "en": "I'll go now."
+    },
+    {
+      "zh": "谷仓下面那些烧焦的痕迹，是你干的？",
+      "en": "Those scorch marks under the barn. Did you do them?"
+    },
+    {
+      "zh": "那是本王布的玻璃珠法阵。",
+      "en": "That is the glass-bead formation this king laid."
+    },
+    {
+      "zh": "阳光一照，珠子聚成火点——防贼、防盗、防黑毛。",
+      "en": "When the sun hits, the beads gather into a point of fire — against thieves, against robbers, against black fur."
+    },
+    {
+      "zh": "所以下面稻草是被聚光点着的？",
+      "en": "So the straw below was lit by a focused point of light?"
+    },
+    {
+      "zh": "烧着稻草……那是阵法余波。",
+      "en": "Burning straw… that is the formation's aftershock."
+    },
+    {
+      "zh": "说明本王威力过猛。",
+      "en": "It means this king's power was too fierce."
+    },
+    {
+      "zh": "下去吧。",
+      "en": "Go down."
+    },
+    {
+      "zh": "别踩本王的宝贝。",
+      "en": "Don't step on this king's treasures."
+    },
+    {
+      "zh": "（一声又长又得意的嘎嘎）",
+      "en": "(Another long, smug caw)"
+    },
+    {
+      "zh": "又来了？",
+      "en": "Back again?"
+    },
+    {
+      "zh": "随便走走。",
+      "en": "Just walking around."
+    },
+    {
+      "zh": "参观收费。",
+      "en": "Tours cost money."
+    },
+    {
+      "zh": "宝石还在。",
+      "en": "The gem is still here."
+    },
+    {
+      "zh": "不用问。",
+      "en": "No need to ask."
+    },
+    {
+      "zh": "（乌鸦用翅尖敲了敲白石头）",
+      "en": "(The crow taps the white rock with a wingtip)"
+    },
+    {
+      "zh": "案子还没破。",
+      "en": "The case isn't solved."
+    },
+    {
+      "zh": "和本王有什么关系。",
+      "en": "What does that have to do with this king."
+    },
+    {
+      "zh": "本王的王国一切正常。",
+      "en": "This king's kingdom is entirely normal."
+    },
+    {
+      "zh": "（乌鸦蹲在巢边，比平时安静）",
+      "en": "(The crow crouches at the edge of the nest, quieter than usual)"
+    },
+    {
+      "zh": "案子破了。",
+      "en": "The case is solved."
+    },
+    {
+      "zh": "本王知道。那就是块石头。",
+      "en": "This king knows. That is just a rock."
+    },
+    {
+      "zh": "……你现在承认了？",
+      "en": "…You admit it now?"
+    },
+    {
+      "zh": "本王从来都知道！爱心封印、鬼脸结界——",
+      "en": "This king always knew! The heart seal, the ghost-face ward—"
+    },
+    {
+      "zh": "鬼脸是小鸡画的。",
+      "en": "The ghost face was drawn by the chicks."
+    },
+    {
+      "zh": "……考题的一部分。",
+      "en": "…Part of the exam."
+    },
+    {
+      "zh": "（乌鸦别过脸，翅尖把白石头往身下按了按）",
+      "en": "(The crow turns his face away and presses the white rock down with a wingtip)"
+    },
+    {
+      "zh": "黑猫呢？你们和好了吗？",
+      "en": "And the black cat? Did you two make up?"
+    },
+    {
+      "zh": "那只黑毛？！昨天凌晨四点又来本王阵法边缘晃。",
+      "en": "That black fur?! At four yesterday morning he was lurking at the edge of this king's formation again."
+    },
+    {
+      "zh": "本王用碎玻璃反光晃了他一眼——",
+      "en": "This king flashed broken glass in his eyes—"
+    },
+    {
+      "zh": "……还是没和好。",
+      "en": "…Still not made up."
+    },
+    {
+      "zh": "本王不需要和好。全农场最高的王，不需要。",
+      "en": "This king does not need to make up. The highest king on the farm does not need to."
+    },
+    {
+      "zh": "下去吧，戴帽子的。",
+      "en": "Go down, hat-wearer."
+    },
+    {
+      "zh": "（乌鸦用翅膀盖住白石头，低下头）",
+      "en": "(The crow covers the white rock with a wing and lowers his head)"
+    },
+    {
+      "zh": "都是本王亲自设计的考题！",
+      "en": "All of it was an exam this king designed personally!"
+    },
+    {
+      "zh": "他就甩着尾巴下去了。",
+      "en": "He just went down, tail swinging."
+    },
+    {
+      "zh": "嘿，你们在干什么？",
+      "en": "Hey, what are you doing?"
+    },
+    {
+      "zh": "（四只小鸡挤在鸡舍边，各自戴着歪歪扭扭的纸板墨镜装酷）",
+      "en": "(Four chicks crowd by the coop, each in crooked cardboard sunglasses, acting cool)"
+    },
+    {
+      "zh": "（小声）有人来了……",
+      "en": "(Quiet) Someone's here…"
+    },
+    {
+      "zh": "别、别看他……",
+      "en": "Don't, don't look at him…"
+    },
+    {
+      "zh": "（阿满往前挪了半步，又停住）",
+      "en": "(Aman shifts half a step forward, then stops)"
+    },
+    {
+      "zh": "淑芬的蛋不见了，你们知道吗？",
+      "en": "Shufen's egg is gone. Do you know?"
+    },
+    {
+      "zh": "（阿满墨镜滑到喙尖）",
+      "en": "(Aman's sunglasses slide to the tip of his beak)"
+    },
+    {
+      "zh": "（极小声）弟弟……",
+      "en": "(Very quiet) Little brother…"
+    },
+    {
+      "zh": "（急）瓜子！别乱叫！",
+      "en": "(Urgent) Guazi! Don't yell!"
+    },
+    {
+      "zh": "（阿满把墨镜顶回去）",
+      "en": "(Aman pushes the sunglasses back up)"
+    },
+    {
+      "zh": "我们……暗影侦探团……也在查这案子。",
+      "en": "We… the Shadow Detective Crew… are also on this case."
+    },
+    {
+      "zh": "事情不小。你最好别乱插手。",
+      "en": "This is big. You'd better not meddle."
+    },
+    {
+      "zh": "能告诉我点什么吗？",
+      "en": "Can you tell me anything?"
+    },
+    {
+      "zh": "（豆豆拽了拽阿满翅膀）",
+      "en": "(Doudou tugs Aman's wing)"
+    },
+    {
+      "zh": "内部情报。不能对外说。",
+      "en": "Internal intel. Can't tell outsiders."
+    },
+    {
+      "zh": "总得说点什么吧。",
+      "en": "You have to say something."
+    },
+    {
+      "zh": "（米粒和豆豆对视一眼）",
+      "en": "(Mili and Doudou look at each other)"
+    },
+    {
+      "zh": "……我们忙着呢。真的。",
+      "en": "…We're busy. Really."
+    },
+    {
+      "zh": "对。外勤任务排满了。",
+      "en": "Right. Field work is booked solid."
+    },
+    {
+      "zh": "（瓜子低着头，喙动了动，没出声）",
+      "en": "(Guazi keeps his head down. His beak moves. No sound)"
+    },
+    {
+      "zh": "……还有什么事吗？",
+      "en": "…Anything else?"
+    },
+    {
+      "zh": "你们到底在搞什么鬼？",
+      "en": "What are you actually up to?"
+    },
+    {
+      "zh": "谷仓角落草窝，知道谁的吗？",
+      "en": "The grass nest in the barn corner. Know whose it is?"
+    },
+    {
+      "zh": "大黄宿醉那样，怎么叫醒？",
+      "en": "Dahuang's that hungover. How do I wake him?"
+    },
+    {
+      "zh": "这玩意儿，你们怎么解释？",
+      "en": "This thing. How do you explain it?"
+    },
+    {
+      "zh": "我准备上谷仓顶找乌鸦。",
+      "en": "I'm going up to the barn roof to find the crow."
+    },
+    {
+      "zh": "没事，走了。",
+      "en": "Nothing. I'm going."
+    },
+    {
+      "zh": "鸡舍边上那些乱七八糟的痕迹——和你们有关吧。",
+      "en": "Those messy marks by the coop — they have to do with you, don't they."
+    },
+    {
+      "zh": "（阿满脖子一缩）",
+      "en": "(Aman shrinks his neck)"
+    },
+    {
+      "zh": "……那是……",
+      "en": "…That's…"
+    },
+    {
+      "zh": "侦、侦探工具……",
+      "en": "De-detective tools…"
+    },
+    {
+      "zh": "（四只小鸡挤得更紧）",
+      "en": "(The four chicks pack tighter)"
+    },
+    {
+      "zh": "说！有什么事瞒着我！",
+      "en": "Talk! What are you hiding from me!"
+    },
+    {
+      "zh": "（哭腔）水怪……水怪把弟弟叼走了……",
+      "en": "(Tearful) The swamp monster… the swamp monster carried little brother off…"
+    },
+    {
+      "zh": "对！！就是水怪！！",
+      "en": "Yes!! It was the swamp monster!!"
+    },
+    {
+      "zh": "（阿满朝池塘方向猛点头）",
+      "en": "(Aman nods hard toward the pond)"
+    },
+    {
+      "zh": "三个脑袋！浑身绿色！",
+      "en": "Three heads! Green all over!"
+    },
+    {
+      "zh": "从池塘爬上来！把蛋拖进水里了！！",
+      "en": "It climbed out of the pond! Dragged the egg into the water!!"
+    },
+    {
+      "zh": "你亲眼看见的？",
+      "en": "You saw it yourself?"
+    },
+    {
+      "zh": "没、没看见……但肯定是！！",
+      "en": "Did-didn't see… but it definitely was!!"
+    },
+    {
+      "zh": "昨晚外面那声音……青蛙也说过……",
+      "en": "That sound outside last night… the frog said so too…"
+    },
+    {
+      "zh": "（发颤）不然弟弟怎么会不见……",
+      "en": "(Shaking) Otherwise how could little brother be gone…"
+    },
+    {
+      "zh": "池塘那只青蛙肯定见过！！",
+      "en": "The frog at the pond must have seen it!!"
+    },
+    {
+      "zh": "快去问他！！求你快去！！",
+      "en": "Go ask him!! Please go!!"
+    },
+    {
+      "zh": "（阿满墨镜歪了，顾不上扶）",
+      "en": "(Aman's sunglasses are crooked. He doesn't bother to fix them)"
+    },
+    {
+      "zh": "（……）",
+      "en": "(……)"
+    },
+    {
+      "zh": "谷仓角落有个草窝，你们知道是谁的吗？",
+      "en": "There's a grass nest in the barn corner. Do you know whose it is?"
+    },
+    {
+      "zh": "（阿满皱眉）",
+      "en": "(Aman frowns)"
+    },
+    {
+      "zh": "谷仓角落？不在我们巡逻范围。",
+      "en": "The barn corner? Not in our patrol range."
+    },
+    {
+      "zh": "（小声）我……我没注意那边。",
+      "en": "(Quiet) I… I didn't notice that side."
+    },
+    {
+      "zh": "问错地方了！我们只守鸡舍这边！",
+      "en": "Wrong place! We only guard the coop side!"
+    },
+    {
+      "zh": "……没什么好说的。",
+      "en": "…Nothing worth saying."
+    },
+    {
+      "zh": "大黄宿醉成那样，有什么法子叫醒他吗？",
+      "en": "Dahuang's that hungover. Any way to wake him?"
+    },
+    {
+      "zh": "（豆豆蹦了一下，墨镜歪了）",
+      "en": "(Doudou bounces. His sunglasses go crooked)"
+    },
+    {
+      "zh": "大黄叔叔？他还在那儿躺着？！",
+      "en": "Uncle Dahuang? He's still lying there?!"
+    },
+    {
+      "zh": "（阿满按住豆豆）",
+      "en": "(Aman holds Doudou down)"
+    },
+    {
+      "zh": "有办法吗？",
+      "en": "Is there a way?"
+    },
+    {
+      "zh": "（阿满压低声音，翅膀尖抖了一下）",
+      "en": "(Aman lowers his voice. A wingtip shakes)"
+    },
+    {
+      "zh": "鸡舍水槽边，有老谷物泡的水。他爱喝。灌下去就醒。……拿去，算侦探团对前辈的关照。",
+      "en": "By the coop trough, there's old grain-soaked water. He likes it. Pour it down him and he wakes. …Take it. Call it the detective crew looking after a senior."
+    },
+    {
+      "zh": "（小声）……这次能帮上忙吗？",
+      "en": "(Quiet) …Can we help this time?"
+    },
+    {
+      "zh": "啊？谷仓顶上有什么？",
+      "en": "Huh? What's on the barn roof?"
+    },
+    {
+      "zh": "大黄说——乌鸦把蛋叼上屋顶了。",
+      "en": "Dahuang said — the crow carried the egg up to the roof."
+    },
+    {
+      "zh": "……屋顶？",
+      "en": "…The roof?"
+    },
+    {
+      "zh": "（小声）蛋……？",
+      "en": "(Quiet) The egg…?"
+    },
+    {
+      "zh": "乌鸦还守在上面。我得上去看看。",
+      "en": "The crow is still up there guarding it. I have to go look."
+    },
+    {
+      "zh": "（阿满跟另外三只对视一眼；豆豆嘴张了张，没出声）",
+      "en": "(Aman looks at the other three. Doudou's mouth opens, and nothing comes out)"
+    },
+    {
+      "zh": "（极小声）会不会是……",
+      "en": "(Very quiet) Could it be…"
+    },
+    {
+      "zh": "（急）瓜子！",
+      "en": "(Urgent) Guazi!"
+    },
+    {
+      "zh": "（风从鸡舍边吹过）",
+      "en": "(Wind blows past the coop)"
+    },
+    {
+      "zh": "（四只小鸡谁也不看谁）",
+      "en": "(None of the four chicks looks at the others)"
+    },
+    {
+      "zh": "（阿满想扶墨镜，又僵住）",
+      "en": "(Aman starts to fix his sunglasses and freezes)"
+    },
+    {
+      "zh": "（四只小鸡一起闭嘴了）",
+      "en": "(The four chicks shut their mouths together)"
+    },
+    {
+      "zh": "你们猜，我千辛万苦爬上去，在乌鸦那儿找到什么了？",
+      "en": "Guess what I found, after all that climbing, up there with the crow?"
+    },
+    {
+      "zh": "（四只小鸡对视，谁也不说话）",
+      "en": "(The four chicks look at each other. Nobody speaks)"
+    },
+    {
+      "zh": "……蛋？",
+      "en": "…The egg?"
+    },
+    {
+      "zh": "说！这是什么！怎么回事！",
+      "en": "Talk! What is this! What happened!"
+    },
+    {
+      "zh": "（四只小鸡凑过来，又猛地僵住）",
+      "en": "(The four chicks crowd in, then freeze)"
+    },
+    {
+      "zh": "……是我们画的。",
+      "en": "…We drew it."
+    },
+    {
+      "zh": "（墨镜啪嗒落地）",
+      "en": "(The sunglasses clatter to the ground)"
+    },
+    {
+      "zh": "那不是老妈的蛋……乌鸦叼走的是假的……",
+      "en": "That isn't Mom's egg… what the crow took was a fake…"
+    },
+    {
+      "zh": "（哭）那弟弟呢——弟弟到底在哪——",
+      "en": "(Crying) Then little brother — where is little brother—"
+    },
+    {
+      "zh": "（阿满翅膀捂住脸）",
+      "en": "(Aman covers his face with a wing)"
+    },
+    {
+      "zh": "呜呜呜——我招了！！",
+      "en": "Waaah — I confess!!"
+    },
+    {
+      "zh": "从头说。",
+      "en": "From the start."
+    },
+    {
+      "zh": "大前天下午，我们捡了块白石头，画成蛋的样子，放进窝里假装是蛋，",
+      "en": "The afternoon before last we found a white rock, drew it to look like an egg, put it in the nest pretending it was the egg,"
+    },
+    {
+      "zh": "然后把真的弟弟偷出来——",
+      "en": "Then we stole the real little brother out—"
+    },
+    {
+      "zh": "（小声）踢球。",
+      "en": "(Quiet) To play ball."
+    },
+    {
+      "zh": "踢……球？你们拿弟弟当球踢？",
+      "en": "Play… ball? You used your little brother as a ball?"
+    },
+    {
+      "zh": "（几只小鸡低头不语）",
+      "en": "(Several chicks look down and say nothing)"
+    },
+    {
+      "zh": "然后呢？",
+      "en": "And then?"
+    },
+    {
+      "zh": "有沼泽水怪，晚上爬出来，专门吃沾了泥土的蛋！",
+      "en": "There's a swamp monster. It comes out at night and specially eats eggs that got mud on them!"
+    },
+    {
+      "zh": "（气鼓鼓）现在想起来他们全程在憋笑！！",
+      "en": "(Puffed up) Now I remember they were holding in laughter the whole time!!"
+    },
+    {
+      "zh": "赶紧把真蛋推回窝里！",
+      "en": "Hurry and push the real egg back into the nest!"
+    },
+    {
+      "zh": "假石头呢？",
+      "en": "And the fake rock?"
+    },
+    {
+      "zh": "假石头嘛……大前天随手扔进草丛了……",
+      "en": "The fake rock… we tossed it in the grass the day before yesterday…"
+    },
+    {
+      "zh": "（小声）后来……被乌鸦叼走了。",
+      "en": "(Quiet) Later… the crow carried it off."
+    },
+    {
+      "zh": "那大黄说乌鸦叼蛋上屋顶——？",
+      "en": "Then when Dahuang said the crow carried an egg to the roof—?"
+    },
+    {
+      "zh": "（四只小鸡对视）",
+      "en": "(The four chicks look at each other)"
+    },
+    {
+      "zh": "大黄叔叔喝了两天酒，日子都搅糊涂了……",
+      "en": "Uncle Dahuang drank for two days. He mixed the days up…"
+    },
+    {
+      "zh": "（哭）乌鸦叼走的是我们画的假石头——大前天的事！",
+      "en": "(Crying) What the crow carried off was the fake rock we drew — that was the day before yesterday!"
+    },
+    {
+      "zh": "昨晚有动静吗？",
+      "en": "Was there a noise last night?"
+    },
+    {
+      "zh": "睡前弟弟还在……半夜一看，窝空了……",
+      "en": "Little brother was still there at bedtime… in the middle of the night the nest was empty…"
+    },
+    {
+      "zh": "外面有好响的声音……我们以为是水怪……",
+      "en": "There was a really loud sound outside… we thought it was the swamp monster…"
+    },
+    {
+      "zh": "（哭）如果没有水怪……到底是谁带走了弟弟？",
+      "en": "(Crying) If there is no swamp monster… who took little brother?"
+    },
+    {
+      "zh": "（阿满瘫坐）",
+      "en": "(Aman slumps)"
+    },
+    {
+      "zh": "……以后再也不偷弟弟出去踢球了。",
+      "en": "…We'll never steal little brother out to play ball again."
+    },
+    {
+      "zh": "（鸡舍里很安静）",
+      "en": "(The coop is very quiet)"
+    },
+    {
+      "zh": "（极小声）大侦探……",
+      "en": "(Very quiet) Great detective…"
+    },
+    {
+      "zh": "（更小声）别看我……",
+      "en": "(Even quieter) Don't look at me…"
+    },
+    {
+      "zh": "（压声）站好。",
+      "en": "(Low) Stand up straight."
+    },
+    {
+      "zh": "淑芬还在哭。",
+      "en": "Shufen is still crying."
+    },
+    {
+      "zh": "……我们知道。",
+      "en": "…We know."
+    },
+    {
+      "zh": "（哭腔）是我们害的……",
+      "en": "(Tearful) It's our fault…"
+    },
+    {
+      "zh": "大侦探。",
+      "en": "Great detective."
+    },
+    {
+      "zh": "嗯？",
+      "en": "Hm?"
+    },
+    {
+      "zh": "要是……要是弟弟真在红顶屋……",
+      "en": "If… if little brother really is in the red-roof house…"
+    },
+    {
+      "zh": "我们就去认错。",
+      "en": "We'll go and admit it."
+    },
+    {
+      "zh": "（小声）……嗯。",
+      "en": "(Quiet) …Mm."
+    },
+    {
+      "zh": "还不确定。",
+      "en": "Not sure yet."
+    },
+    {
+      "zh": "（阿满点了一下头）",
+      "en": "(Aman nods once)"
+    },
+    {
+      "zh": "后悔吗？",
+      "en": "Do you regret it?"
+    },
+    {
+      "zh": "（四只小鸡都不吭声）",
+      "en": "(None of the four chicks makes a sound)"
+    },
+    {
+      "zh": "……后悔。",
+      "en": "…We regret it."
+    },
+    {
+      "zh": "（哑）暗影侦探团……搞砸了。",
+      "en": "(Hoarse) The Shadow Detective Crew… messed it up."
+    },
+    {
+      "zh": "我……再也不乱喊水怪了。",
+      "en": "I… I won't yell about the swamp monster anymore."
+    },
+    {
+      "zh": "别再提了。",
+      "en": "Don't bring it up again."
+    },
+    {
+      "zh": "（四只小鸡坐在鸡舍门口；阿满墨镜搁在脚边）",
+      "en": "(The four chicks sit at the coop door. Aman's sunglasses are by his feet)"
+    },
+    {
+      "zh": "告诉你们一个好消息——弟弟出壳了。",
+      "en": "Good news — little brother hatched."
+    },
+    {
+      "zh": "（四只小鸡抬起头）",
+      "en": "(The four chicks look up)"
+    },
+    {
+      "zh": "……真的出来了？",
+      "en": "…He really came out?"
+    },
+    {
+      "zh": "出来了。自己在窝里叫呢。",
+      "en": "He did. He's calling in the nest himself."
+    },
+    {
+      "zh": "（豆豆扭头，翅膀蹭眼睛）",
+      "en": "(Doudou turns his head and rubs his eyes with a wing)"
+    },
+    {
+      "zh": "我没哭。",
+      "en": "I'm not crying."
+    },
+    {
+      "zh": "……那段日子，我们天天盼他没事。",
+      "en": "…Those days, we hoped every day he was all right."
+    },
+    {
+      "zh": "现在好了。",
+      "en": "It's all right now."
+    },
+    {
+      "zh": "（低声）嗯……其实当时，怕得很。",
+      "en": "(Low) Mm… actually, back then, we were really scared."
+    },
+    {
+      "zh": "那老鼠骗你们编水怪的事——还打算算账吗？",
+      "en": "That thing about the mice tricking you into making up a swamp monster — still planning to settle it?"
+    },
+    {
+      "zh": "（豆豆翅膀一举）",
+      "en": "(Doudou throws a wing up)"
+    },
+    {
+      "zh": "要算！！非得找他们算！！",
+      "en": "We will!! We have to settle it with them!!"
+    },
+    {
+      "zh": "（打断）……",
+      "en": "(Cuts in) …"
+    },
+    {
+      "zh": "（阿满重新戴上墨镜）",
+      "en": "(Aman puts the sunglasses back on)"
+    },
+    {
+      "zh": "暗影侦探团自有安排。",
+      "en": "The Shadow Detective Crew has its own arrangements."
+    },
+    {
+      "zh": "（小声）他们编得也太过分了……",
+      "en": "(Quiet) They made it up way too far…"
+    },
+    {
+      "zh": "（压声）豆豆，听见了。",
+      "en": "(Low) Doudou, heard you."
+    },
+    {
+      "zh": "（豆豆用力点头；米粒、瓜子也跟着点）",
+      "en": "(Doudou nods hard. Mili and Guazi nod too)"
+    },
+    {
+      "zh": "（四只小鸡排成一列，墨镜戴正了）",
+      "en": "(The four chicks line up. Sunglasses on straight)"
+    },
+    {
+      "zh": "同行。",
+      "en": "Colleagues."
+    },
+    {
+      "zh": "还有任务？",
+      "en": "Another job?"
+    },
+    {
+      "zh": "散步。",
+      "en": "A walk."
+    },
+    {
+      "zh": "（压声）顺便看老鼠在不在。",
+      "en": "(Low) And to see if the mice are in."
+    },
+    {
+      "zh": "（压声）豆豆！！",
+      "en": "(Low) Doudou!!"
+    },
+    {
+      "zh": "新案子？",
+      "en": "A new case?"
+    },
+    {
+      "zh": "没有。弟弟刚出壳，别出去疯。",
+      "en": "No. Little brother just hatched. Don't go out and run wild."
+    },
+    {
+      "zh": "（瓜子盯着鸡舍里）",
+      "en": "(Guazi stares into the coop)"
+    },
+    {
+      "zh": "看什么？",
+      "en": "Looking at what?"
+    },
+    {
+      "zh": "看弟弟。",
+      "en": "Looking at little brother."
+    },
+    {
+      "zh": "（窝里传来细弱的叫声）",
+      "en": "(A thin call comes from the nest)"
+    },
+    {
+      "zh": "（小声）他刚才往这边看了。",
+      "en": "(Quiet) He looked this way just now."
+    },
+    {
+      "zh": "……还在查。别碰我们的现场。",
+      "en": "…Still investigating. Don't touch our scene."
+    },
+    {
+      "zh": "池塘那边……你去了吗？",
+      "en": "The pond… did you go?"
+    },
+    {
+      "zh": "……外勤先停了。有事就快说。",
+      "en": "…Field work is paused. If you've got something, say it fast."
+    },
+    {
+      "zh": "（四只小鸡又挤到一起）",
+      "en": "(The four chicks crowd together again)"
+    },
+    {
+      "zh": "黑猫让我来问——你们这两天到底发生了什么？我在乌鸦那儿看见一块白石头，跟你们有关吧。",
+      "en": "The black cat sent me to ask — what actually happened to you these two days? I saw a white rock with the crow. It has to do with you, doesn't it."
+    },
+    {
+      "zh": "（四只小鸡僵住）",
+      "en": "(The four chicks freeze)"
+    },
+    {
+      "zh": "（哭腔）我们……我们把弟弟弄丢了……",
+      "en": "(Tearful) We… we lost little brother…"
+    },
+    {
+      "zh": "推着弟弟路过谷仓时，老鼠叔叔蹿出来说——",
+      "en": "While we were pushing little brother past the barn, Uncle Mouse jumped out and said—"
+    },
+    {
+      "zh": "弟弟当时已经推回窝了。真要不见，是昨晚！",
+      "en": "Little brother had already been pushed back into the nest by then. If he really vanished, it was last night!"
+    },
+    {
+      "zh": "昨晚那声响……青蛙说不定听见了。去问问他……求你……",
+      "en": "That sound last night… the frog might have heard it. Go ask him… please…"
+    },
+    {
+      "zh": "然后把真的弟弟偷出来——踢球。",
+      "en": "Then we stole the real little brother out — to play ball."
+    },
+    {
+      "zh": "有沼泽水怪，专门吃沾泥的蛋！",
+      "en": "There's a swamp monster that specially eats muddy eggs!"
+    },
+    {
+      "zh": "我们吓得跑去池塘洗蛋，又被青蛙的话吓着了——",
+      "en": "We got scared and ran to the pond to wash the egg, and then the frog's words scared us too—"
+    },
+    {
+      "zh": "弟弟是昨晚才不见的！跟那一趟不是一回事！",
+      "en": "Little brother only vanished last night! It's not the same thing as that trip!"
+    },
+    {
+      "zh": "（压声）昨晚外面那声音……肯定是水怪干的……",
+      "en": "(Low) That sound outside last night… it had to be the swamp monster…"
+    },
+    {
+      "zh": "（压声）池塘那边青蛙还说，宝珠沉下去了……",
+      "en": "(Low) The frog over at the pond also said the jewel sank…"
+    },
+    {
+      "zh": "（极小声）……可是大前天……明明是我们自己……",
+      "en": "(Very quiet) …But the day before yesterday… it was clearly us…"
+    },
+    {
+      "zh": "（压声）瓜子！别说了！",
+      "en": "(Low) Guazi! Stop talking!"
+    },
+    {
+      "zh": "（压声）那要是有人来问，咱们怎么说？",
+      "en": "(Low) Then if someone comes asking, what do we say?"
+    },
+    {
+      "zh": "（压声）就说……水怪。从池塘来的。把蛋叼走了……",
+      "en": "(Low) We say… the swamp monster. It came from the pond. It carried the egg off…"
+    },
+    {
+      "zh": "（压声）只能是这样……不然弟弟怎么会不见……",
+      "en": "(Low) It has to be that… otherwise how could little brother be gone…"
+    },
+    {
+      "zh": "这里上面有个通道",
+      "en": "There's a passage up above"
+    },
+    {
+      "zh": "摆放梯子",
+      "en": "Place the ladder"
+    },
+    {
+      "zh": "E 交互",
+      "en": "E Interact"
+    },
+    {
+      "zh": "大黄的项圈是镀银的。",
+      "en": "Dahuang's collar is silver-plated."
+    },
+    {
+      "zh": "青蛙年轻时是这片水域的第一情圣。",
+      "en": "In his youth the frog was the greatest romantic on these waters."
+    },
+    {
+      "zh": "淑芬十年前是隔壁村的斗鸡冠军。",
+      "en": "Ten years ago Shufen was the next village's cockfighting champion."
+    },
+    {
+      "zh": "Flash 是隔壁农场派来的商业间谍，画了三年地图了。",
+      "en": "Flash is a commercial spy from the next farm. He's been mapping this place for three years."
+    },
+    {
+      "zh": "主人是鸡科圣手，尤其精通《母鸡的产后护理》。",
+      "en": "The owner calls himself a chicken specialist, especially Aftercare for Hens."
+    },
+    {
+      "zh": "大橡树会走路——一年挪一厘米。",
+      "en": "The great oak can walk — one centimeter a year."
+    },
+    {
+      "zh": "上次大黄偷喝主人的发酵苹果渣，是淑芬用谷物泡水叫醒的。",
+      "en": "Last time Dahuang stole the owner's fermented apple mash, Shufen woke him with grain-soaked water."
+    },
+    {
+      "zh": "主人这几天常趴窗看鸡舍方向——看完又不进去。",
+      "en": "These days the owner keeps peering toward the coop — then doesn't go in."
+    },
+    {
+      "zh": "小鸡昨晚都缩在鸡舍里不出来，像在等什么",
+      "en": "Last night the chicks all stayed in the coop, like they were waiting for something"
+    },
+    {
+      "zh": "黑猫前天下午自己爬上过谷仓顶",
+      "en": "The afternoon before last, the black cat climbed the barn roof by himself"
+    },
+    {
+      "zh": "水怪是老鼠兄弟随口编的。",
+      "en": "The swamp monster was something the mouse brothers made up."
+    },
+    {
+      "zh": "乌鸦前天早上从鸡舍门口草丛搞了个东西回屋顶。",
+      "en": "The morning before last, the crow took something from the grass by the coop door back to the roof."
+    },
+    {
+      "zh": "昨晚红顶屋里亮黄灯，墙里嗡嗡响——像有个不会落山的小太阳。",
+      "en": "Last night a yellow light burned in the red-roof house and the walls hummed — like a little sun that never sets."
+    },
+    {
+      "zh": "昨晚主人雨靴来回两趟——一趟带湿泥，一趟朝鸡舍。",
+      "en": "Last night the owner's rain boots made two trips — one with wet mud, one toward the coop."
+    },
+    {
+      "zh": "昨晚那阵'水怪低吼'其实是大黄打的呼噜。",
+      "en": "That 'swamp monster growl' last night was actually Dahuang snoring."
+    },
+    {
+      "zh": "黑猫昨晚在篱笆边和自己的影子咬耳朵。",
+      "en": "Last night the black cat whispered to his own shadow by the fence."
+    },
+    {
+      "zh": "以前还有一家卖情报的，被老鼠兄弟搞垮了。",
+      "en": "There used to be another intel shop. The mouse brothers ran it out of business."
+    },
+    {
+      "zh": "Flash 昨晚从宽叶上飞起来盘旋了一圈。",
+      "en": "Last night Flash lifted off a broad leaf, circled once, and landed."
+    }
+  ]
+}
