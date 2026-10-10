@@ -24,6 +24,10 @@ namespace EggRescue
         static Sprite _white;
 
         GameObject _root;
+        MenuButtonColumn _buttonColumn;
+        Button _resume;
+        Button _save;
+        Button _mainMenu;
         TMP_Text _status;
         string _statusKey;
         readonly List<BoundLabel> _labels = new List<BoundLabel>();
@@ -140,10 +144,12 @@ namespace EggRescue
             var prefab = Resources.Load<GameObject>("UI/PauseMenuColumn");
             if (prefab == null) return false;
             var instance = Instantiate(prefab, card, false);
+            _buttonColumn = instance.GetComponent<MenuButtonColumn>();
             HookPrefabButton(instance.transform, "ResumeButton", "pause.resume", font, () => SetOpen(false));
             HookPrefabButton(instance.transform, "SaveButton", "pause.save", font, SaveProgress);
             HookPrefabButton(instance.transform, "MainMenuButton", "pause.main_menu", font, ReturnToMenu);
-            return instance.GetComponent<MenuButtonColumn>() != null;
+            FitPauseButtons();
+            return _buttonColumn != null;
         }
 
         void HookPrefabButton(Transform root, string name, string key, TMP_FontAsset font, UnityAction action)
@@ -160,6 +166,9 @@ namespace EggRescue
                 _labels.Add(new BoundLabel { Label = label, Key = key });
             }
             if (button == null) return;
+            if (name == "ResumeButton") _resume = button;
+            else if (name == "SaveButton") _save = button;
+            else if (name == "MainMenuButton") _mainMenu = button;
             var motion = button.GetComponent<MenuButtonMotion>();
             if (motion == null) motion = button.gameObject.AddComponent<MenuButtonMotion>();
             button.onClick.AddListener(() => motion.Play(action));
@@ -245,6 +254,25 @@ namespace EggRescue
                 }
             }
             SetStatus(_statusKey);
+            FitPauseButtons();
+        }
+
+        void FitPauseButtons()
+        {
+            if (_buttonColumn == null) return;
+            _buttonColumn.BeginLocalizedFit();
+            FitPauseButton(_resume, "pause.resume");
+            FitPauseButton(_save, "pause.save");
+            FitPauseButton(_mainMenu, "pause.main_menu");
+            _buttonColumn.EndLocalizedFit();
+        }
+
+        void FitPauseButton(Button button, string key)
+        {
+            if (button == null || _buttonColumn == null) return;
+            var reference = LocaleCatalog.Ui(key, false);
+            if (string.IsNullOrEmpty(reference) || reference == key) return;
+            _buttonColumn.FitButton(button, reference);
         }
 
         static void Stretch(RectTransform rt)

@@ -40,6 +40,7 @@ namespace EggRescue
         TMP_Text _volumeValue;
         TMP_Text _sensitivityValue;
         bool _entering;
+        MenuButtonColumn _column;
         readonly List<BoundLabel> _labels = new List<BoundLabel>();
 
         sealed class BoundLabel
@@ -66,6 +67,7 @@ namespace EggRescue
             CachePanelSprite();
             var font = ResolveFont();
             BindSceneButtons();
+            FitMenuColumn();
             BuildSettings(font);
             BuildCredits(font);
             BuildConfirm(font);
@@ -85,6 +87,7 @@ namespace EggRescue
 
         void Start()
         {
+            FitMenuColumn();
             if (EventSystem.current != null && _start != null)
                 EventSystem.current.SetSelectedGameObject(_start.gameObject);
         }
@@ -99,11 +102,33 @@ namespace EggRescue
 
         void BindSceneButtons()
         {
+            _column = FindObjectOfType<MenuButtonColumn>();
             _start = BindSceneButton("StartButton", "menu.start");
             _load = BindSceneButton("LoadButton", "menu.continue");
             _settings = BindSceneButton("SettingButton", "menu.settings");
             _credits = BindSceneButton("CreditsButton", "menu.credits");
             _quit = BindSceneButton("QuitButton", "menu.quit");
+        }
+
+        void FitMenuColumn()
+        {
+            if (_column == null) _column = FindObjectOfType<MenuButtonColumn>();
+            if (_column == null) return;
+            _column.BeginLocalizedFit();
+            FitMenuButton(_start, "menu.start");
+            FitMenuButton(_load, "menu.continue");
+            FitMenuButton(_settings, "menu.settings");
+            FitMenuButton(_credits, "menu.credits");
+            FitMenuButton(_quit, "menu.quit");
+            _column.EndLocalizedFit();
+        }
+
+        void FitMenuButton(Button button, string key)
+        {
+            if (button == null || _column == null) return;
+            var reference = LocaleCatalog.Ui(key, false);
+            if (string.IsNullOrEmpty(reference) || reference == key) return;
+            _column.FitButton(button, reference);
         }
 
         Button BindSceneButton(string name, string key)
@@ -405,6 +430,7 @@ namespace EggRescue
             }
             RefreshSaveState();
             RefreshLanguageButtons();
+            FitMenuColumn();
         }
 
         void RefreshLanguageButtons()

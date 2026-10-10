@@ -36,7 +36,14 @@ namespace EggRescue
         }
 
         readonly List<Slot> _slots = new List<Slot>();
+        readonly Dictionary<int, AuthoredButton> _authored = new Dictionary<int, AuthoredButton>();
         bool _previewing;
+
+        sealed class AuthoredButton
+        {
+            public float Width;
+            public float ReferenceWidth;
+        }
 
         public bool AlignLeft { get { return alignLeft; } }
 
@@ -215,6 +222,72 @@ namespace EggRescue
             for (var i = 0; i < buttons.Length; i++)
                 FitToLabel(buttons[i], alignLeft, labelPad);
             Rebuild();
+        }
+
+        /// <summary>
+        /// 场景里的宽度是按中文留白调好的。换成英文时只补上字宽差，左右留白保持不变。
+        /// </summary>
+        public void BeginLocalizedFit()
+        {
+            Restore();
+        }
+
+        public void FitButton(Button button, string referenceText)
+        {
+            if (button == null || string.IsNullOrEmpty(referenceText)) return;
+            var rt = button.transform as RectTransform;
+            var label = button.GetComponentInChildren<TMP_Text>();
+            if (rt == null || label == null || label.font == null) return;
+            var id = button.GetInstanceID();
+            if (!_authored.TryGetValue(id, out var authored))
+            {
+                var referenceWidth = Measure(label, referenceText);
+                if (referenceWidth < 1f)
+                {
+                    label.ForceMeshUpdate();
+                    return;
+                }
+                authored = new AuthoredButton { Width = rt.sizeDelta.x, ReferenceWidth = referenceWidth };
+                _authored[id] = authored;
+            }
+            var currentWidth = Measure(label, label.text);
+            label.ForceMeshUpdate();
+            if (currentWidth < 1f) return;
+            var width = Mathf.Abs(currentWidth - authored.ReferenceWidth) < 0.75f
+                ? authored.Width
+                : authored.Width + (currentWidth - authored.ReferenceWidth);
+            if (width < 64f) width = 64f;
+            ApplyWidth(rt, width, alignLeft);
+        }
+
+        public void EndLocalizedFit()
+        {
+            Rebuild();
+        }
+
+        static float Measure(TMP_Text label, string text)
+        {
+            if (label == null || label.font == null || string.IsNullOrEmpty(text)) return 0f;
+            label.enableWordWrapping = false;
+            return label.GetPreferredValues(text).x;
+        }
+
+        static void ApplyWidth(RectTransform rt, float width, bool alignLeft)
+        {
+            var pos = rt.anchoredPosition;
+            var height = rt.sizeDelta.y;
+            if (alignLeft)
+            {
+                var left = pos.x - rt.sizeDelta.x * rt.pivot.x;
+                rt.pivot = new Vector2(0f, 0.5f);
+                rt.sizeDelta = new Vector2(width, height);
+                rt.anchoredPosition = new Vector2(left, pos.y);
+                return;
+            }
+            var center = pos.x + (0.5f - rt.pivot.x) * rt.sizeDelta.x;
+            rt.pivot = new Vector2(0.5f, rt.pivot.y);
+            rt.sizeDelta = new Vector2(width, height);
+            rt.anchoredPosition = new Vector2(center, pos.y);
         }
 
         public static void FitToLabel(Button button, bool alignLeft, float pad)
