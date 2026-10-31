@@ -1,0 +1,906 @@
+﻿AI 工具使用日志 / 风车农场悬案
+Explore Lua game logic
+{
+  "id": "83651260-9fb6-4c37-ba8b-dc715a2a9006",
+  "title": "Explore Lua game logic",
+  "source_tool": "Cursor",
+  "model": "原始导出未标注模型",
+  "is_subagent": true,
+  "parent_id": "477b3e6c-4052-496b-8ff8-b5e7711a933f",
+  "created_at": "2026-08-14T13:46:46+08:00",
+  "updated_at": null,
+  "source_path": "<USER_PROFILE>\\.cursor\\projects\\c-Users-minpa-Documents-GitHub-Mystery-At-Windmill-Farm\\agent-transcripts\\477b3e6c-4052-496b-8ff8-b5e7711a933f\\subagents\\83651260-9fb6-4c37-ba8b-dc715a2a9006.jsonl",
+  "source_sha256": "359f05d2a9ef7f574823ad50f03c164ccd8118a79b4a7ccde7af70cbfa79d4fa",
+  "time_basis": "会话日期来自 Cursor 元数据；逐轮时间保留用户消息中的原始 timestamp；无时间的消息不推测时间。",
+  "event_count": 14,
+  "user_message_count": 1,
+  "text_file": "02_辅助任务/Cursor_83651260-9fb6-4c37-ba8b-dc715a2a9006.txt",
+  "jsonl_file": "02_辅助任务/Cursor_83651260-9fb6-4c37-ba8b-dc715a2a9006.jsonl"
+}
+
+以下为历史记录导出。原回复中的完成/测试结论仅代表当时记录，不代表本次重新验证。
+
+====================================================================
+记录 1 | user | Friday, Aug 14, 2026, 1:46 PM (UTC+8)
+<timestamp>Friday, Aug 14, 2026, 1:46 PM (UTC+8)</timestamp>
+<user_query>
+Explore the Unity game at <USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm. Focus on Lua game logic in Assets/luaScripts/.
+
+I need a thorough inventory of:
+1. Every .lua file in Assets/luaScripts/ - brief description of what it does, key APIs, Douyin SDK dependencies (DouyinInteractor, DouyinUIService, PlayAudio, NetGUID, OnPlayerTriggerEnter, isLocal, etc.)
+2. How player movement/interaction currently works (is it Douyin native walking? click to interact?)
+3. How audio is played (MainController PlayAudio, any music)
+4. How UI works (dialogue UI, notebook, cheese HUD, debug UI)
+5. Global variables system
+6. Dialogue system flow
+7. NPC visual state controllers (DaHuang, ShuFen, BeiShangWa, etc.)
+8. Cheese economy, mouse shop, comic ending, NG+
+
+Read the actual Lua files (at least the top comments, key functions, and SDK calls). Return a structured summary with file paths and the most important function names / Douyin APIs used.
+
+Be very thorough.
+</user_query>
+
+====================================================================
+记录 2 | assistant | 原记录未提供逐条时间
+I'll map `Assets/luaScripts/` and read the Lua modules to build a structured inventory of game logic, SDK usage, and systems.
+
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "UpdateCurrentStep",
+  "input": {
+    "current_step": "Exploring luaScripts inventory"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Glob",
+  "input": {
+    "glob_pattern": "**/*.lua",
+    "target_directory": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "pattern": "DouyinInteractor|DouyinUIService|PlayAudio|NetGUID|OnPlayerTriggerEnter|isLocal",
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts",
+    "output_mode": "content"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "pattern": "cheese|Cheese|mouse|Mouse|NG\\+|comic|DaHuang|ShuFen|BeiShangWa",
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts",
+    "-i": true,
+    "output_mode": "content"
+  }
+}
+
+====================================================================
+记录 3 | assistant | 原记录未提供逐条时间
+Reading all 27 Lua files for structure, APIs, and system flows.
+
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\MainController.lua",
+    "limit": 180
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\GlobalVariablesManager.lua",
+    "limit": 200
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\NpcDialogueManager.lua",
+    "limit": 200
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\BookController.lua",
+    "limit": 250
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\DialogueTrigger.lua",
+    "limit": 150
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\ClueTrigger.lua",
+    "limit": 150
+  }
+}
+
+====================================================================
+记录 4 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "offset": 200,
+    "limit": 200,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\DialogueTrigger.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "offset": 450,
+    "limit": 250,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\NpcDialogueManager.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "offset": 1200,
+    "limit": 200,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\NpcDialogueManager.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\DaHuang.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\ShuFen.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\BeiShangWa.lua"
+  }
+}
+
+====================================================================
+记录 5 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\MouseBrotherController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\EndingController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\ComicGateTrigger.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\CheesePickup.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\CheeseSpawner.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\CheeseRefreshManager.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\CheeseHud.lua"
+  }
+}
+
+====================================================================
+记录 6 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "limit": 200,
+    "offset": 200,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\GlobalVariablesManager.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\DialogueAreaTrigger.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\InteractionPointVfxController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\ClimbPathPoint.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\LevelTeleport.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\SecondFloorWindowController.lua"
+  }
+}
+
+====================================================================
+记录 7 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\E03EavesdropController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\E05GrainSoakController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\E06LadderController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\CrowInteractionController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\BlackCatInteractionController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\TreeInteractionController.lua"
+  }
+}
+
+====================================================================
+记录 8 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "pattern": "NetGUID|DouyinActorService|DouyinApplication|DouyinTaskService|GetDouyinScript|EnableInteraction|DisableInteraction|HandType|UIType",
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "limit": 250,
+    "offset": 700,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\NpcDialogueManager.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "limit": 200,
+    "offset": 450,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\GlobalVariablesManager.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "limit": 150,
+    "offset": 750,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\BookController.lua"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "pattern": "PlayAudio|PlayMusic|PlayBGM|StopBGM|audio_",
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts"
+  }
+}
+
+====================================================================
+记录 9 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\NpcDialogueManager.lua",
+    "pattern": "function ApplySetVariables|function CheckAndUnlockBranch|function GetNextNodeByCondition|RegisterDialogueManagerApi",
+    "-A": 40
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\Scripts\\MainCharacter.cs",
+    "limit": 80
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\docs\\IMPLEMENTATION.md",
+    "pattern": "movement|DouyinInteractor|walking|交互",
+    "head_limit": 30
+  }
+}
+
+====================================================================
+记录 10 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "limit": 120,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\docs\\IMPLEMENTATION.md"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm",
+    "pattern": "NetGUID",
+    "glob": "*.{lua,cs,md}",
+    "head_limit": 20
+  }
+}
+
+====================================================================
+记录 11 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "limit": 100,
+    "offset": 115,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\docs\\IMPLEMENTATION.md"
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Read",
+  "input": {
+    "limit": 80,
+    "offset": 180,
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\MainController.lua"
+  }
+}
+
+====================================================================
+记录 12 | assistant | 原记录未提供逐条时间
+[REDACTED]
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "Grep",
+  "input": {
+    "path": "<USER_PROFILE>\\Documents\\GitHub\\Mystery-At-Windmill-Farm\\Assets\\luaScripts\\BookController.lua",
+    "pattern": "^function |^local function ",
+    "head_limit": 40
+  }
+}
+
+[工具/附件记录]
+{
+  "type": "tool_use",
+  "name": "UpdateCurrentStep",
+  "input": {
+    "completed_subtitle": "Mapped all 27 Lua scripts",
+    "current_step": "Compiling structured summary",
+    "final_summary": "Complete inventory of all 27 files in `Assets/luaScripts/`: systems for movement/interaction (Douyin native walk + click/trigger), audio, UI, globals, dialogue, NPC visual controllers, cheese economy, mouse shop, comic ending, and NG+."
+  }
+}
+
+====================================================================
+记录 13 | assistant | 原记录未提供逐条时间
+# Lua Inventory: `Assets/luaScripts/` (27 files)
+
+All game logic runs on **DouyinScript** components in scene `Mechanics_Code.unity`. There is **no custom player movement Lua** — movement is Douyin SDK native walking. Interaction is **walk into zones + SDK screen button click**, plus some **trigger-enter** passive events.
+
+**NetGUID**: mentioned in `docs/IMPLEMENTATION.md` as a scene component on interaction points; **not referenced in any `.lua` file**.
+
+---
+
+## 1. Per-file inventory
+
+### Core / bootstrap
+
+| File | Purpose | Key functions / globals | Douyin SDK |
+|------|---------|-------------------------|------------|
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\MainController.lua` | Scene bootstrap: hide SDK fly/chat UI; register global audio/particle/BGM APIs | `Start`, `Update`, `PlayAudioByName`, `PlayParticleByName`, `PlayBGM`, `PlayMusicByName`, `StopBGM`, `GetAudioClipLength` → `_G["PlayAudio"]`, `_G["PlayParticle"]`, `_G["PlayBGM"]`, `_G["PlayMusic"]`, `_G["StopBGM"]` | `DouyinUIService.GetInteractionButton(HandType.Right, UIType.Fly)`, `DouyinApplication.Quit` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\GlobalVariablesManager.lua` | Load ~90 vars from `GlobalVariables.lua`; runtime get/set; side-effect hooks; dev debug panel | `GetGlobalVar`, `SetGlobalVar`, `GetGlobalVarType`, `ResetAllNPCBranchesToStart`, `BuildVarDebugScrollPanel` → `_G["_GlobalVariables"]`, `_G["GetGlobalVar"]`, `_G["SetGlobalVar"]`, `_G["_NPCDataConfig"]` | `DouyinActorService.GetLocalActor()` + `actor:Teleport()` (debug teleports); reads `DouyinScript` refs for `GlobalVariablesScript`, `NPCDataConfig` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\LevelTeleport.lua` | Teleport local player to spawn; registered as `_G["ResetPosition"]` for NG+ ending | `OnMoveBtnClick`, `Start` | `CS.DouyinActorService.GetLocalActor()`, `actor.position`, `actor.rotation` |
+
+### Dialogue system
+
+| File | Purpose | Key functions / globals | Douyin SDK |
+|------|---------|-------------------------|------------|
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\NpcDialogueManager.lua` | Full dialogue UI engine: typing, portraits, options, condition routing, var writes, branch unlock, chain dialogue, mouse shop hook | `Awake`, `StartDialogue`, `StartDialogueWithData`, `EndDialogue`, `JumpToDialogueNode`, `OnNextClick`, `UpdateDialogueUI`, `ApplySetVariables`, `CheckAndUnlockBranch`, `GetNextNodeByConditionDetailed`, `PerformOptionJump`, `OnOptionSelected`, `SaveBranchFlag`, `CheckBranchFlag`, `IsDialogueActive`, `TryChainDialogueFromNode` → `_G["_DialogueManager"]` | `DouyinUIService.SetUIVisible(false/true)` during dialogue; `DouyinActorService.GetLocalActor()` + `SetActorTag`/`GetActorTag` for branch flags; `_G["PlayAudio"]` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\DialogueTrigger.lua` | Load NPC dialogue by `NPCData_Config` branch → `DialogueData/{module}` DouyinScript; shared entry for click-to-talk | `LoadNPCScript`, `StartNpcDialogue`, `StartDialogue`, `LoadNPCConfig`, `NormalizeDialogueData` → `_G.StartNpcDialogue`, `_G.LoadNPCScript` | `DouyinScript` component on DialogueData children; `GameObject.Find("DialogueManager")` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\DialogueAreaTrigger.lua` | **Auto-fire** dialogue on trigger enter (no button); variable guards | `TryFireDialogue`, `OnPlayerTriggerEnter`, `OnPlayerTriggerExit`, `Update` | `douyinPlayer:GetActor()`, **`actor.isLocal`** gate |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\ClueTrigger.lua` | E-point click: write 1–2 global vars; reset all bools on Awake (test behavior) | `SetClue`, `SetVariable`, `ResetAllBoolVariablesToFalse` | Calls `_G.InteractionPointVfx_DiscoverFrom` |
+
+### UI: notebook, cheese HUD, debug
+
+| File | Purpose | Key functions / globals | Douyin SDK |
+|------|---------|-------------------------|------------|
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\BookController.lua` | Detective notebook: 33 entries, 15 links, 13 mods, page 4 mouse intel; fade/blink reveals, red dots | `BuildCatalog`, `CheckAllEntries`, `UnlockEntry`, `BookController_OnVarChanged`, `RebuildIntelFromSoldVars`, `OnOpenClick`, `OnCloseClick`, `GoToPage`, `TryRegisterEndingController` → `_G["BookController_OnVarChanged"]`, `_G["BookController_UnlockMouseIntel"]`, `_G["EndingController_Start"]` | `DouyinScript` on Ending prefab; Unity UI only otherwise; `_G["PlayAudio"]` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\CheeseHud.lua` | Cheese counter HUD; hidden until first pickup | `RefreshCheeseHud`, `OnCheeseCountChanged`, `RevealCheeseHud` → `_G["CheeseHud_Refresh"]`, `_G["OnCheeseCountChanged"]` | None |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\GlobalVariablesManager.lua` (debug section) | Runtime bool/int toggle panel (`VAR_DEBUG_UI_ENABLED = false`) | `BuildVarDebugScrollPanel`, teleport cheats, `AddCheeseFive` | `DouyinActorService.GetLocalActor()` |
+
+### NPC visual / interaction state controllers
+
+| File | Purpose | Key vars watched | Douyin SDK |
+|------|---------|------------------|------------|
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\DaHuang.lua` | Dog sleep/awake models; barn vs red-roof spot swap at `DogStatus>=4` | `DogStatus` | `self:GetDouyinScript("DouyinInteractor")`, `InteractionArea`, **`DisableInteraction`** (never `EnableInteraction` on open) |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\ShuFen.lua` | Three interaction spots: commission / hub / NG+ | `Shufen_CommissionDone`, `NGPlus`; gate collider | Same interactor pattern; `_G["PlayParticle"]` on spot hide |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\BeiShangWa.lua` | Sad frog before/after mint fish + E12 cushion spot | `MintFish_Obtained` | Same interactor pattern |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\BlackCatInteractionController.lua` | Cat model visibility + clickability by story phase | `Dog_BlackCatSummoned`, `BlackCat_Entered`, `NGPlus`, `Comic_Revealed`, `BlackCat_StoneRevealShown` | `GetDouyinScript("DouyinInteractor")`, `DisableInteraction` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\TreeInteractionController.lua` | Tree Force zone (1-A auto) vs Click zone (1-B) | `Dog_BlackCatSummoned`, `BlackCat_TreeShakeStarted`, `BlackCat_TreeHardShown` | Interactor on `clickZone`; **never EnableInteraction** when opening |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\CrowInteractionController.lua` | Crow only clickable after roof intro | `Crow_RoofIntroShown` | **`EnableInteraction`** when enabling (exception to pattern) |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\E03EavesdropController.lua` | E03 eavesdrop point closes after overheard or chick confession | `E03_Overheard`, `ChickStatus>=3` | `GetDouyinScript("DouyinInteractor")` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\E05GrainSoakController.lua` | E05 grain soak: hide model + close point after pickup | `E05_GrainSoakGet`; defers close if dialogue active | `DisableInteraction` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\E06LadderController.lua` | Ladder borrow/place at barn; dynamic button text; climb path unlock | `E06_LadderBorrowed`, `E06_LadderPlaced`, `E06_ViewNeedLadder`, `DogStatus` | `GetDouyinScript("DouyinInteractor")`, `ButtonConfigs[1].Text`, `GetInteractorButton(1)`; `_G["E06Ladder_Place"]`, `_G.ClimbPath_Refresh("barn")` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\SecondFloorWindowController.lua` | E19 closed window ↔ E20 open window | `BlackCat_Entered` | Interactor pattern; `_G["SecondFloorWindow_Refresh"]` |
+
+### Cheese economy
+
+| File | Purpose | Key functions / globals | Douyin SDK |
+|------|---------|-------------------------|------------|
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\CheeseSpawner.lua` | Instantiate cheese prefabs at marker transforms | `SpawnAll` → `_G["CheeseSpawner_Respawn"]` | None |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\CheesePickup.lua` | Walk-over pickup; increments `CheeseCount` | `TryPickup`, `OnPlayerTriggerEnter`, `ApplyVisibility` → `_G._CheesePickupState`, `_G._CheesePickupRegistry`, `_G["CheesePickup_Refresh"]` | **`OnPlayerTriggerEnter`**, **`actor.isLocal`**, `_G["PlayAudio"]("audio_cheese") |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\CheeseRefreshManager.lua` | NG+ resets all pickup state + respawn | `OnNGPlusActivated`, `RefreshAllPickups` → `_G["CheeseRefresh_OnNGPlus"]` | None |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\MouseBrotherController.lua` | Mouse shop: blind-box intel, spend cheese, derived flags | `TrySpendCheese`, `MouseShop_HandleAction`, `RefreshDerivedFlags`, `PickCheapIntel`, `PickPremiumIntel`, `GoToHub` → `_G["MouseShop_HandleAction"]`, `_G["MouseBrother_RefreshDerivedFlags"]`, `_G["MouseBrother_TrySpendCheese"]` | Uses `_DialogueManager.JumpToDialogueNode` |
+
+### Ending / NG+
+
+| File | Purpose | Key functions / globals | Douyin SDK |
+|------|---------|-------------------------|------------|
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\ComicGateTrigger.lua` | E20 attic window → comic ending | `OnComicInteract` → sets `Comic_Revealed`, calls `_G["EndingController_Start"]` | `_G.ClimbPath_Advance("roof", 2)` |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\EndingController.lua` | Comic slideshow: black fade, preEnding SFX, ending BGM loop, NG+ flag, teleport, Terminal event | `EndingController_Start`, `OnAdvanceClick`, `ApplyTeleportAndFlags`, `FinishEndingCleanup` → `_G["EndingController_Start"]` | `DouyinApplication.isSimulator`, `CS.DouyinTaskService.SendEvent(Terminal)`, `DouyinUIService.SetNativeUIVisible(true)`, `_G["ResetPosition"]`, `SetGlobalVar("NGPlus", true)` |
+
+### World helpers
+
+| File | Purpose | Key functions / globals | Douyin SDK |
+|------|---------|-------------------------|------------|
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\InteractionPointVfxController.lua` | Yellow/pink “!” VFX on first inspect; session-level hide | `Discover`, `Start` → `_G.InteractionPointVfx_DiscoverFrom` | None |
+| `<USER_PROFILE>\Documents\GitHub\Mystery-At-Windmill-Farm\Assets\luaScripts\ClimbPathPoint.lua` | Sequential climb VFX waypoints (barn/roof) | `ClimbPath_Refresh`, `ClimbPath_Advance`, `OnPlayerTriggerEnter` → `_G.ClimbPath_Refresh`, `_G.ClimbPath_Advance` | **`OnPlayerTriggerEnter`**, **`isLocal`** |
+
+---
+
+## 2. Player movement & interaction
+
+```mermaid
+flowchart TD
+    A[Douyin SDK native walk] --> B{Interaction type}
+    B --> C[Walk into DouyinInteractor zone]
+    C --> D[SDK shows screen interaction button]
+    D --> E[Click → DialogueTrigger.StartDialogue / ClueTrigger.SetClue / custom handler]
+    B --> F[Walk into trigger collider]
+    F --> G[OnPlayerTriggerEnter if isLocal]
+    G --> H[CheesePickup / ClimbPathPoint / DialogueAreaTrigger]
+    B --> I[DialogueAreaTrigger zone]
+    I --> J[Auto StartNpcDialogue without button]
+```
+
+**Movement**: Douyin platform handles avatar locomotion. `MainController.Update` **disables the SDK fly button** every frame (`HandType.Right, UIType.Fly`). No walk logic in Lua; `MainCharacter.cs` is an empty stub.
+
+**Interaction patterns**:
+1. **Click-to-interact** (primary): NPCs and most E-points have `DouyinInteractor` + `DialogueTrigger` or `ClueTrigger`. Player walks into `InteractionArea` → SDK button appears → click fires Lua.
+2. **Trigger-enter** (passive): `CheesePickup`, `ClimbPathPoint`, `DialogueAreaTrigger` use `OnPlayerTriggerEnter(douyinPlayer)` with **`actor.isLocal`** check (multiplayer-safe).
+3. **Forced dialogue**: `DialogueAreaTrigger` — enter box collider, no button (tree 1-A, mouse E39, crow roof, etc.).
+4. **Dynamic enable/disable**: Controllers toggle `InteractionArea.enabled` + colliders; closing always calls **`DisableInteraction()`** to clear stuck SDK buttons. Convention: **never call `EnableInteraction` when opening** (except `CrowInteractionController`).
+
+**Teleport**: `LevelTeleport` / debug / ending use `DouyinActorService.GetLocalActor()` → `actor:Teleport()` or direct `position`/`rotation`.
+
+---
+
+## 3. Audio system
+
+**Central hub**: `MainController.lua` on `MianController` scene object.
+
+| Global API | Behavior |
+|------------|----------|
+| `_G["PlayAudio"](name)` | One-shot via `audioSource:PlayOneShot` — clips matched by **AudioClip.name** in Inspector `audioClips[]` |
+| `_G["PlayMusic"](name)` | Loop on `bgmSource` (swap clip, loop=true) |
+| `_G["PlayBGM"]()` | Restore original scene BGM clip |
+| `_G["StopBGM"]()` | Stop BGM |
+| `_G["PlayParticle"](name, pos)` | Particle by name |
+| `_G["GetAudioClipLength"](name)` | Used by ending for preEnding timing |
+
+**Known clip names used in Lua**:
+- `audio_hello`, `audio_nextSentence`, `audio_shock`, `audio_question` — dialogue
+- `audio_openNote`, `audio_closeNote`, `audio_switchPage`, `audio_showClue`, `audio_unlockClue` — notebook
+- `audio_cheese` — pickup
+- `audio_preEnding`, `audio_endingLoop` — ending sequence
+
+**BGM flow**: Scene plays default loop on `bgmSource`. Ending stops BGM → plays `audio_preEnding` one-shot → switches to `audio_endingLoop` → after comic, restores original BGM via `PlayBGM()`.
+
+**Multiplayer note** (from docs): shared triggers must check `isLocal` before `PlayAudio` — implemented in `CheesePickup`.
+
+---
+
+## 4. UI systems
+
+### Dialogue UI (`NpcDialogueManager.lua`)
+- Inspector refs: `dialoguePanel`, `npcNamePanel`, `playerNamePanel`, portrait Images, `next` button, option buttons on `playerPanel`
+- Typing effect (0.05s/char), option stagger animation
+- Hides native Douyin UI: `DouyinUIService.SetUIVisible(false)` on start, `true` on `EndDialogue`
+- Player emotion: exclamation/question overlays + SFX
+- NPC portraits keyed by Chinese sprite names (守望, 醉倒, 兜售, etc.)
+
+### Detective notebook (`BookController.lua`)
+- 4 pages, 33 `entry_*` objects unlocked by condition strings on global vars
+- 15 `link_*` connection lines, 13 `mod_*` modifiers
+- Page 4: mouse intel prefabs (`intelCheapPrefab` / `intelPremiumPrefab`) spawned from `Mouse_CheapSold_*` / `Mouse_PremiumSold_*`
+- Red dot on icon + page tabs for unseen unlocks; bounce animation on first clue
+- Opens/closes with HUD hide list (`hideOnOpen`); registers ending controller lazily
+
+### Cheese HUD (`CheeseHud.lua`)
+- Hidden until `CheeseCount > 0`; shows count text; bounce on gain
+
+### Debug UI (`GlobalVariablesManager.lua`)
+- `VAR_DEBUG_UI_ENABLED = false` (must stay false for release)
+- Scroll panel toggling all bool vars; increment int vars; cheat teleports + cheese +5
+
+---
+
+## 5. Global variables system
+
+**Source**: `Assets/Data/GlobalData/GlobalVariables.lua` → loaded via `GlobalVariablesScript` DouyinScript into `GlobalVariableList`.
+
+**Runtime API** (registered in `GlobalVariablesManager.Start`):
+```lua
+GetGlobalVar(name)              -- nil if missing
+SetGlobalVar(name, value, type) -- "bool" | "int"; syncs list + debug UI
+GetGlobalVarType(name)
+_G["_GlobalVariables"]          -- { name = { type, value } }
+_G["_NPCDataConfig"]             -- NPC branch routing
+```
+
+**SetGlobalVar side effects**:
+| Variable pattern | Callback |
+|------------------|----------|
+| `CheeseCount` | `_G["OnCheeseCountChanged"]` → CheeseHud |
+| `Mouse_*` | `_G["MouseBrother_RefreshDerivedFlags"]` |
+| `NGPlus = true` | `_G["CheeseRefresh_OnNGPlus"]` → reset pickups |
+| `BlackCat_Entered` | `SecondFloorWindow_Refresh`, `ClimbPath_Refresh("roof")` |
+| `E05_GrainSoakGet` | `E05GrainSoak_Refresh` |
+| Any | `_G["BookController_OnVarChanged"]` |
+
+**Startup**: `ResetAllNPCBranchesToStart()` sets all NPC `currentBranchId → 1` unless `KEEP_NPC_BRANCH_FOR_TEST = true`.
+
+**Test quirk**: `ClueTrigger.Awake()` resets **all bool vars to false** — not production save behavior.
+
+---
+
+## 6. Dialogue system flow
+
+```mermaid
+sequenceDiagram
+    participant Player
+    participant Trigger as DialogueTrigger / AreaTrigger
+    participant Loader as LoadNPCScript
+    participant Mgr as NpcDialogueManager
+    participant Vars as SetGlobalVar
+
+    Player->>Trigger: click or enter zone
+    Trigger->>Loader: StartNpcDialogue(npcName, startId)
+    Loader->>Loader: NPCData currentBranchId → lua module
+    Loader->>Loader: DialogueData/{module}.DouyinScript.DialogueConfig
+    Loader->>Mgr: StartDialogueWithData(config, startId)
+    Mgr->>Mgr: UpdateDialogueUI (skip empty dispatchers / RotatePool)
+    Mgr->>Vars: ApplySetVariables
+    Mgr->>Mgr: CheckAndUnlockBranch (mutate currentBranchId)
+    alt Normal node
+        Mgr->>Mgr: typing → Next click
+        Mgr->>Mgr: GetNextNodeByConditionDetailed or Next
+    else Question node
+        Mgr->>Mgr: filter Options by DisplayConditions
+        Mgr->>Mgr: OnOptionSelected → PerformOptionJump
+        Note over Mgr: ShopAction → MouseShop_HandleAction
+    end
+    Mgr->>Mgr: EndDialogue → ChainDialogue? → next NPC
+```
+
+**Key node fields** (in DialogueConfig Lua tables): `Type`, `NpcName`, `Dialogue`, `Next`, `ConditionBranches`, `SetVariables`, `UnlockBranches`, `Options[]` with `DisplayConditions`, `ShopAction`, `BranchFlag`, `ChainDialogue`, `RotatePool`, `DocTag`.
+
+**Branch unlock**: `CheckAndUnlockBranch` writes `npc.currentBranchId` in memory `_NPCDataConfig`; next click loads new lua file from `storyGraphs[].luaAssetPath`.
+
+**Mouse shop integration**: Question options with `ShopAction` (`cheap`, `premium`, `pay8_mint`, `pay8_frog`) delegate to `MouseShop_HandleAction` before normal jump.
+
+---
+
+## 7. NPC visual state controllers (summary)
+
+| NPC | Script | State machine |
+|-----|--------|-----------------|
+| **DaHuang** | `DaHuang.lua` | `DogStatus`: sleep/wake models; barn spot active when `<4`, red-roof "大黄 2" when `>=4`; awake at `>=3` |
+| **ShuFen** | `ShuFen.lua` | `!NGPlus && !Shufen_CommissionDone` → commissionSpot; `!NGPlus && done` → hubSpot; `NGPlus` → ngPlusSpot; gate collider off when commission done |
+| **BeiShangWa** | `BeiShangWa.lua` | `!MintFish_Obtained` → beforeSpot + cushionSpot (E12); after → afterSpot only |
+| **Black cat** | `BlackCatInteractionController.lua` | Hidden until `Dog_BlackCatSummoned`; disabled after `BlackCat_Entered` except NG+/comic stone reveal path |
+| **Tree** | `TreeInteractionController.lua` | Force zone until hard shown; then click zone; both off after black cat summoned/shake started |
+| **Crow** | `CrowInteractionController.lua` | Disabled until `Crow_RoofIntroShown` |
+| **E03** | `E03EavesdropController.lua` | Closes after overheard or `ChickStatus>=3` |
+| **E05** | `E05GrainSoakController.lua` | Closes after `E05_GrainSoakGet` |
+| **E06 ladder** | `E06LadderController.lua` | Barn ladder visibility; placed ladder; button text discover/place |
+| **2F window** | `SecondFloorWindowController.lua` | E19/E20 swap on `BlackCat_Entered` |
+
+**Shared interactor convention**: Open = enable `InteractionArea` + colliders only. Close = `DisableInteraction()` + disable colliders (+ often `SetActive(false)` with `vfx_characterChange` particle).
+
+---
+
+## 8. Cheese economy, mouse shop, comic ending, NG+
+
+### Cheese economy
+- **Currency**: `CheeseCount` (int, max 99 in debug)
+- **Sources**: `CheesePickup` walk-over triggers (`C01`/`C02` markers via `CheeseSpawner`); some pickups `requiresNGPlus`
+- **HUD**: `CheeseHud` reveals on first gain
+- **Spending**: `MouseBrotherController.TrySpendCheese` — cheap 1, premium 5, mint fish 8
+
+### Mouse shop (`MouseBrotherController.lua`)
+- Hub nodes: `100` (first greet), `95` (revisit), `910` (NG+ hub)
+- **Cheap pool**: 10 intel nodes (500–590), random unsold, costs 1 cheese
+- **Premium pool**: 8 nodes (600–670); only 2 available until `Mouse_PremiumPoolUnlocked`
+- On purchase: dialogue node sets `Mouse_CheapSold_XX` / `Mouse_PremiumSold_XX` → notebook page 4 + `BookController_UnlockMouseIntel`
+- **Derived flags** (auto-refreshed): `Mouse_CheapPoolAvailable`, `Mouse_PremiumPoolAvailable`, `Mouse_CanAffordMint8InGame` (wallet + unpicked scene cheese)
+- **Mint fish pay8**: sets `Mouse_MintFishPaid`, unlocks full premium pool; insufficient funds → node 260
+
+### Comic ending
+1. Player opens attic window (`ComicGateTrigger` / `ComicGate_OnInteract`)
+2. Sets `Comic_Revealed = true`
+3. `EndingController_Start`: fade to black, `audio_preEnding`, stop farm BGM
+4. Comic panels: click to advance, crossfade, `audio_endingLoop`
+5. Final panel fade → **black hold** → `ApplyTeleportAndFlags`:
+   - `DouyinTaskService.SendEvent(Terminal)` (skipped in simulator)
+   - `SetGlobalVar("NGPlus", true)`
+   - `_G["ResetPosition"]()` (spawn teleport)
+   - `DouyinUIService.SetNativeUIVisible(true)`
+6. Fade out black, restore farm BGM, show HUD again
+
+### NG+ (`NGPlus = true`)
+- **ShuFen**: switches to `ngPlusSpot` (淑芬3 dialogue point)
+- **Cheese**: `CheeseRefreshManager` clears `_CheesePickupState`, respawns via `CheeseSpawner_Respawn`; C02 NG-only pickups become available
+- **Black cat**: different interaction rules (`NGPlus` path in `BlackCatInteractionController`)
+- **Mouse shop**: routes to `NGPLUS_HUB_ID = 910`
+- NPC branches reset to 1 on each session start (unless test flag); NG+ persists via `NGPlus` bool only (no full save system in Lua)
+
+---
+
+## Douyin SDK API usage summary
+
+| API | Used in |
+|-----|---------|
+| `DouyinUIService.SetUIVisible` | NpcDialogueManager |
+| `DouyinUIService.SetNativeUIVisible` | EndingController |
+| `DouyinUIService.GetInteractionButton(HandType, UIType)` | MainController |
+| `DouyinActorService.GetLocalActor()` | NpcDialogueManager, GlobalVariablesManager, LevelTeleport, EndingController |
+| `actor.isLocal` | CheesePickup, DialogueAreaTrigger, ClimbPathPoint |
+| `actor:Teleport()` / `position` / `rotation` | GlobalVariablesManager, LevelTeleport |
+| `actor:SetActorTag` / `GetActorTag` | NpcDialogueManager (branch flags) |
+| `self:GetDouyinScript("DouyinInteractor")` | DaHuang, E03, E05, E06, Crow, BlackCat |
+| `interactor.InteractionArea`, `DisableInteraction`, `EnableInteraction` | All interaction controllers |
+| `interactor.ButtonConfigs`, `GetInteractorButton` | E06LadderController |
+| `OnPlayerTriggerEnter(douyinPlayer)` | CheesePickup, DialogueAreaTrigger, ClimbPathPoint |
+| `DouyinApplication.Quit` / `isSimulator` | MainController, EndingController |
+| `DouyinTaskService.SendEvent(Terminal)` | EndingController |
+| `DouyinScript` component | DialogueTrigger, BookController, GlobalVariablesManager |
+
+**Not used in Lua**: `NetGUID` (scene-level only per architecture docs).
+
+---
+
+## Global `_G` registry (cross-script)
+
+| Key | Owner |
+|-----|-------|
+| `GetGlobalVar`, `SetGlobalVar`, `_GlobalVariables`, `_NPCDataConfig` | GlobalVariablesManager |
+| `_DialogueManager`, `StartNpcDialogue`, `LoadNPCScript` | DialogueTrigger + NpcDialogueManager |
+| `PlayAudio`, `PlayParticle`, `PlayBGM`, `PlayMusic`, `StopBGM`, `GetAudioClipLength` | MainController |
+| `BookController_OnVarChanged`, `BookController_UnlockMouseIntel` | BookController |
+| `OnCheeseCountChanged`, `CheeseHud_Refresh` | CheeseHud |
+| `MouseShop_HandleAction`, `MouseBrother_RefreshDerivedFlags` | MouseBrotherController |
+| `CheeseSpawner_Respawn`, `CheesePickup_Refresh`, `_CheesePickupState/Registry` | CheeseSpawner / CheesePickup |
+| `CheeseRefresh_OnNGPlus` | CheeseRefreshManager |
+| `EndingController_Start`, `EndingController_TryRegister` | EndingController / BookController |
+| `ComicGate_OnInteract` | ComicGateTrigger |
+| `ResetPosition` | LevelTeleport |
+| `InteractionPointVfx_DiscoverFrom` | InteractionPointVfxController |
+| `ClimbPath_Refresh`, `ClimbPath_Advance` | ClimbPathPoint |
+| `SecondFloorWindow_Refresh`, `E05GrainSoak_Refresh`, `E06Ladder_Place` | respective controllers |
+
+This covers all 27 Lua files with their roles, key entry points, and Douyin SDK touchpoints. Dialogue **content** lives in `Assets/Data/DialogueData/*.lua` (not in `luaScripts/`); routing reads those via scene `DialogueData` DouyinScript children.
+
+[REDACTED]
+
+====================================================================
+记录 14 | turn_ended | 原记录未提供逐条时间
+{
+  "source_line": 14,
+  "type": "turn_ended",
+  "status": "success"
+}

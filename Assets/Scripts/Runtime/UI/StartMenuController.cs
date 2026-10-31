@@ -38,6 +38,7 @@ namespace EggRescue
         Image _titleImage;
         [SerializeField] Sprite _titleChinese;
         [SerializeField] Sprite _titleEnglish;
+        [SerializeField] AudioClip _backgroundMusic;
         SettingsPanel _settingsPanel;
         GameObject _creditsRoot;
         GameObject _confirmRoot;
@@ -67,6 +68,7 @@ namespace EggRescue
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             GameSettings.Load();
+            BackgroundMusic.Play(_backgroundMusic);
             CachePanelSprite();
             var font = ResolveFont();
             BindSceneButtons();

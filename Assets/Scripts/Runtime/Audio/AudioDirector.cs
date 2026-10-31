@@ -13,7 +13,6 @@ namespace EggRescue
         [SerializeField] ParticleSystem[] particleSystems;
 
         AudioClip _originalBgm;
-        bool _adoptedSceneBgm;
         readonly Dictionary<string, AudioClip> _byName = new Dictionary<string, AudioClip>();
         readonly Dictionary<string, ParticleSystem> _spawnedParticles = new Dictionary<string, ParticleSystem>();
 
@@ -22,20 +21,14 @@ namespace EggRescue
             Instance = this;
             if (sfxSource == null) sfxSource = gameObject.AddComponent<AudioSource>();
             if (bgmSource == null) bgmSource = AdoptSceneBgmSource();
-            if (bgmSource == null)
-            {
-                bgmSource = gameObject.AddComponent<AudioSource>();
-                bgmSource.loop = true;
-                bgmSource.playOnAwake = false;
-            }
+            bgmSource = BackgroundMusic.Adopt(bgmSource);
             RebuildMap();
             LoadEditorClipsIfNeeded();
             if (bgmSource.clip != null) _originalBgm = bgmSource.clip;
         }
 
         /// <summary>
-        /// ???????????????? BGM AudioSource?
-        /// ???????? AudioDirector ???????? BGM ????
+        /// 从游戏场景取得 BGM 配置，交给跨场景声源播放。
         /// </summary>
         AudioSource AdoptSceneBgmSource()
         {
@@ -44,18 +37,22 @@ namespace EggRescue
             for (var i = 0; i < sources.Length; i++)
             {
                 var src = sources[i];
-                if (src == null || src == sfxSource) continue;
+                if (src == null || src == sfxSource || src == BackgroundMusic.CurrentSource) continue;
                 if (src.gameObject == gameObject) continue;
-                // BGM ?????? + ????(????) + 2D?
+                // 只接管自动播放、循环的 2D 音乐。
                 if (!src.loop) continue;
                 if (!src.playOnAwake && !src.isPlaying) continue;
                 if (src.spatialBlend > 0.5f) continue;
                 if (best == null) best = src;
-                else src.Stop(); // ?????????????????????
+                else
+                {
+                    src.Stop();
+                    src.playOnAwake = false;
+                    src.enabled = false;
+                }
             }
             if (best != null)
             {
-                _adoptedSceneBgm = true;
                 Debug.Log("[AudioDirector] adopted scene BGM source: " + best.gameObject.name);
             }
             return best;
@@ -63,25 +60,12 @@ namespace EggRescue
 
         void Start()
         {
-            // ????? BGM ?????????????? audio_bgm ???????????
-            if (_adoptedSceneBgm && bgmSource != null && bgmSource.clip != null)
-            {
-                if (!bgmSource.isPlaying)
-                {
-                    bgmSource.loop = true;
-                    bgmSource.Play();
-                }
-                return;
-            }
-            if (_byName.ContainsKey("audio_bgm"))
-                PlayBGM();
-            else if (_byName.ContainsKey("bgm"))
-            {
-                bgmSource.clip = _byName["bgm"];
-                bgmSource.loop = true;
-                bgmSource.Play();
-                _originalBgm = bgmSource.clip;
-            }
+            PlayBGM();
+        }
+
+        void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
         }
 
         public void SetClips(AudioClip[] clips)
@@ -132,17 +116,10 @@ namespace EggRescue
         public static void PlayBGM()
         {
             if (Instance == null) return;
-            if (Instance._originalBgm != null)
-                Instance.bgmSource.clip = Instance._originalBgm;
-            else
-            {
-                AudioClip clip;
-                if (Instance._byName.TryGetValue("audio_bgm", out clip) || Instance._byName.TryGetValue("bgm", out clip))
-                    Instance.bgmSource.clip = clip;
-            }
-            Instance.bgmSource.loop = true;
-            if (Instance.bgmSource.clip != null)
-                Instance.bgmSource.Play();
+            var clip = Instance._originalBgm;
+            if (clip == null && !Instance._byName.TryGetValue("audio_bgm", out clip))
+                Instance._byName.TryGetValue("bgm", out clip);
+            BackgroundMusic.Play(clip);
         }
 
         public static void StopBGM()

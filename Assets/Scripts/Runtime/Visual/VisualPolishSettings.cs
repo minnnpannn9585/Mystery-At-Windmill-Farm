@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 namespace WindmillFarm.Visual
 {
@@ -113,6 +114,18 @@ namespace WindmillFarm.Visual
         void OnEnable() => Apply();
         void OnValidate() => Apply();
 
+        void Start()
+        {
+            if (!Application.isPlaying) return;
+
+            // LoadScene 时 OnEnable 可能早于活动场景切换；Start 时再应用到新场景。
+            Apply();
+            // 本场景使用未烘焙的天空盒环境光，切场景后需要重新生成环境探针。
+            // 只在进入场景时刷新，避免每帧提交 GPU 回读。
+            if (gameObject.scene == SceneManager.GetActiveScene() && ambientMode == AmbientMode.Skybox)
+                DynamicGI.UpdateEnvironment();
+        }
+
         [ContextMenu("应用（Apply）")]
         public void Apply()
         {
@@ -198,12 +211,17 @@ namespace WindmillFarm.Visual
             }
 
             // 3) 环境光与内置雾
-            RenderSettings.ambientMode = ambientMode;
-            RenderSettings.ambientSkyColor = ambientSky;
-            RenderSettings.ambientEquatorColor = ambientEquator;
-            RenderSettings.ambientGroundColor = ambientGround;
-            RenderSettings.ambientIntensity = ambientIntensity;
-            RenderSettings.fog = false;   // 内置雾关掉，避免与 FlatKit 雾叠加
+            // RenderSettings 指向活动场景，不能在加载过程中写到仍然活动的主菜单。
+            if (gameObject.scene == SceneManager.GetActiveScene())
+            {
+                RenderSettings.ambientMode = ambientMode;
+                RenderSettings.ambientSkyColor = ambientSky;
+                RenderSettings.ambientEquatorColor = ambientEquator;
+                RenderSettings.ambientGroundColor = ambientGround;
+                RenderSettings.ambientIntensity = ambientIntensity;
+                RenderSettings.fog = false;   // 内置雾关掉，避免与 FlatKit 雾叠加
+                if (sun != null) RenderSettings.sun = sun;
+            }
 
             // 4) 主光
             if (sun != null)

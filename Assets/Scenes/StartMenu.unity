@@ -1800,6 +1800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleChinese: {fileID: 21300000, guid: 29a3077c4ae7e9e49af66c58824e0c6a, type: 3}
   _titleEnglish: {fileID: 21300000, guid: 09b0f811b97d67a40b57f21fc27a15fe, type: 3}
+  _backgroundMusic: {fileID: 8300000, guid: cdfbff43a2a9fee4aa29f656c9a9e441, type: 3}
 --- !u!1 &682517604
 GameObject:
   m_ObjectHideFlags: 0

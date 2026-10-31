@@ -1,0 +1,438 @@
+风车农场悬案 Steamworks 中英文文案
+Mystery at Windmill Farm — Steamworks Copy
+整理日期：2026 年 10 月 30 日
+
+本套按“先上线即将推出页面，2027 年 5 月正式发售”准备。
+开发者／发行商：MSG Studio
+计划平台：Windows、macOS（Apple M 系列）
+将中文和英文分别放入 Steamworks 对应语言页，不要把两种语言拼在同一个简介字段里。
+
+短介绍和长介绍可作为发布文案使用；最低配置是待实测的暂定值。辅助字段中标为“按最终内容核对”或“待填写”的部分，不应当作已经验证的事实提交。本文是填写用稿件，未操作 Steamworks 后台。
+
+==================================================
+一 基本信息 / Basic Information
+==================================================
+
+游戏名称（简体中文）：风车农场悬案
+Game title (English): Mystery at Windmill Farm
+
+开发者 / Developer: MSG Studio
+发行商 / Publisher: MSG Studio
+
+对外发售时间（中文）：2027 年 5 月
+Public release window (English): May 2027
+
+后台将日期展示方式设为“月份和年份”。Steamworks 另需一个内部的具体预计日期；目前只确定到月，具体日子由你确定，不要把 5 月 1 日误当成已定档。
+
+游戏类型建议 / Suggested genres:
+冒险 / Adventure
+休闲 / Casual
+独立 / Indie
+
+主要模式 / Primary mode:
+单人 / Single-player
+
+发布方式：
+本稿按正式版发售前的 Coming Soon 页面准备。“即将推出”不等于“抢先体验”。目前无需为 Early Access 编写六项承诺；如果实际决定付费抢先体验，再依据那时的可玩版本、开发计划及价格方案填写。
+
+==================================================
+二 简短描述 / Short Description
+==================================================
+
+【简体中文｜116 字符，含标点和空格】
+
+一颗爱心蛋失踪了，整个农场都有话要说。扮演绿头鸭侦探芦笛，探索色彩明快的微缩农场，搜集物证、追问证词，翻开手帐回顾线索，再用奶酪向老鼠兄弟换点内幕。这是一场充满冷幽默与乌龙的 3D 轻推理冒险。听完所有说法，你还会相信最初的猜测吗？
+
+【English｜273 characters, including spaces】
+
+One missing egg. A farm full of stories that don't quite add up. Play as Reed, a duck detective, in a cozy 3D mystery. Explore a colorful miniature farm, question eccentric animals, follow the clues in your notebook, and trade cheese for gossip. Can you untangle the truth?
+
+填写方式：单段纯文本，不加标题、列表、链接或日期。本套两种语言均控制在 300 字符以内；实际字段限制以后台显示为准。
+
+==================================================
+三 关于此游戏 / About This Game
+==================================================
+
+以下为 Steam 格式标记文本。支持格式标记的编辑方式可直接粘贴；若可视化编辑器把 [h2] 等显示成正文，请通过编辑器应用标题、粗体和列表样式，再移除标记。保存后预览中英文页面。
+
+【简体中文】
+
+[h2]一颗蛋不见了，整个农场都有话要说。[/h2]
+淑芬那颗画着爱心的宝贝蛋失踪了。
+
+小鸡侦探团似乎已经有了结论，看门狗的记忆却有点靠不住，池塘边的青蛙更是把每句话都说成了谜语。它们究竟看见了什么？又有多少，是自己脑补出来的？
+
+现在，轮到你这只鸭子来理清头绪了。
+
+《风车农场悬案》是一款融合探索、对话与轻推理的单人 3D 冒险。化身绿头鸭侦探芦笛，在一座色彩明快的微缩农场里寻找物证、追问证词，把一场越传越离谱的失踪案，一点点拼回原来的样子。
+
+[h2]听懂动物们的「跨频道聊天」[/h2]
+这里的每只动物都有自己的脾气，也都有自己的说法。认真听，接着问，再带着新发现回来：一句信誓旦旦的证词，可能会被一根不起眼的羽毛推翻。冷幽默、误会和煞有介事的推理，藏在一来一回的对话里。
+
+[h2]迈开鸭掌，去现场看看[/h2]
+沿着池塘走走，绕到谷仓背后，再跳上高处换个角度。留意羽毛、脚印与那些不太对劲的小细节，找出能让调查继续推进的线索。农场不大，值得你多看一眼的地方却不少。
+
+[h2]让手帐记住你的每一次发现[/h2]
+找到的线索、听到的证词和逐渐成形的推测，会随着调查自动记入侦探笔记本。新证据出现，旧结论被划掉；翻回前页，看看自己是从哪一步开始想岔的。
+
+[h2]奶酪到位，情报好说[/h2]
+藏在墙缝里的老鼠兄弟有自己的消息渠道，也有自己的价目表。探索途中捡起散落的奶酪碎，换取情报和八卦。至于哪些话值得当真，还得靠侦探自己判断。
+
+[h2]把一个小小的谜团，认真查到底[/h2]
+明亮的低多边形农场、个性鲜明的动物邻居，以及一段由荒诞误会串起的故事，等你慢慢翻开。你追查的是一颗蛋，也是在听懂这群动物眼中的世界。
+
+[list]
+[*]扮演绿头鸭侦探，体验第三人称探索与轻度跳跃。
+[*]调查环境物证，通过分支对话和物证质询推进案件。
+[*]用自动更新的手帐笔记本回顾线索与推理过程。
+[*]收集奶酪碎，向老鼠兄弟换取情报。
+[*]体验以故事为核心的单人冒险，支持简体中文与英文文本。
+[/list]
+
+[b]带上你的好奇心。农场里还有几句话，值得再问一遍。[/b]
+
+【English】
+
+[h2]One missing egg. Everyone has a story.[/h2]
+Mabel's precious egg—the one with a heart drawn on it—has vanished.
+
+The Chick Detectives seem to have solved the case already. The guard dog's memory is a little hazy. And the frog by the pond makes every answer sound like a riddle. What did they actually see, and what did they just imagine?
+
+Time for a duck to sort things out.
+
+Mystery at Windmill Farm is a single-player 3D adventure built around exploration, conversation, and light deduction. Play as Reed, a mallard detective, and investigate a colorful miniature farm. Gather evidence, question the locals, and untangle a missing-egg case that's getting more outlandish with every telling.
+
+[h2]Get to the bottom of some very odd conversations[/h2]
+Every animal has a personality, an opinion, and a version of events. Listen closely, ask another question, then return with what you've found. One overlooked feather might unravel a very confident statement. Expect deadpan humor, crossed wires, and some impressively questionable detective work.
+
+[h2]Put your webbed feet to work[/h2]
+Wander along the pond, poke around the barn, and hop up high for a different view. Look for feathers, footprints, and little details that don't quite fit. This farm may be small, but there's plenty to make a curious duck stop and look.
+
+[h2]Keep the case in your notebook[/h2]
+Your detective notebook automatically records clues, testimony, and emerging theories as the investigation unfolds. Watch old conclusions get crossed out when new evidence arrives, then flip back through the pages to see where your thinking took a wrong turn.
+
+[h2]Good gossip costs cheese[/h2]
+The Mouse Brothers have their sources—and their prices. Pick up scattered cheese crumbs as you explore and trade them for information and gossip. Deciding what to believe is still your job.
+
+[h2]Give a little mystery your full attention[/h2]
+Explore a bright, low-poly farm and get to know its eccentric residents through a story full of absurd misunderstandings. You're looking for an egg, but you're also learning how each animal sees the world.
+
+[list]
+[*]Play as a mallard detective in a third-person adventure with light platforming.
+[*]Examine environmental clues and use evidence to open up new lines of questioning.
+[*]Revisit clues and theories in an automatically updated detective notebook.
+[*]Collect cheese crumbs to trade for information with the Mouse Brothers.
+[*]Enjoy a story-focused solo adventure with English and Simplified Chinese text.
+[/list]
+
+[b]Bring your curiosity. There's always one more question worth asking.[/b]
+
+==================================================
+四 标签及功能选项 / Tags and Features
+==================================================
+
+建议优先顺序（中英文为标签对照，实际以后台 Tag Wizard 可选名称为准）：
+1. 侦探 / Detective
+2. 悬疑 / Mystery
+3. 剧情丰富 / Story Rich
+4. 探索 / Exploration
+5. 欢乐 / Funny
+6. 可爱 / Cute
+7. 放松 / Relaxing
+8. 冒险 / Adventure
+9. 休闲 / Casual
+10. 第三人称 / Third Person
+11. 风格化 / Stylized
+12. 3D / 3D
+13. 单人 / Singleplayer
+14. 喜剧 / Comedy
+
+独立游戏属性可放在类型字段中；标签先突出侦探、故事和探索体验。
+不建议使用“农场模拟”“开放世界”“恐怖”“多人”“多结局”等标签：它们会把玩家预期引向当前游戏不提供的内容。“解谜 / Puzzle”可在最终调查玩法确定后再考虑提高排序。
+
+功能选项：
+可以按当前核心玩法选择：单人。
+Steam 成就、Steam 云存档、完整／部分控制器支持、创意工坊和多人功能：完成对应接入和测试后再勾选。当前本地存档不等于 Steam 云存档，键鼠操作不等于完整手柄支持。
+
+语言目标：
+简体中文 / Simplified Chinese：界面、字幕／对话文本。
+英语 / English：界面、字幕／对话文本。
+完整音频 / Full Audio：两种语言均不勾选；当前以文字对话和音效表达，没有完整配音。
+
+核对说明：
+项目已具备中英文 UI、角色名称和对白目录。当前运行时对白／选项文本的英文目录覆盖已检查；这不等于完成全流程英文实机验收。发布前仍需检查笔记本、漫画、场景文字及图片内文字，再确认完整语言勾选。暂不添加繁体中文等未制作的语言。
+
+==================================================
+五 Windows 最低配置 / Windows Minimum Requirements
+==================================================
+
+状态：开发阶段的预计最低配置，未做目标硬件实测。
+Status: Provisional development estimates, not verified on the listed hardware.
+
+【简体中文】
+
+需要 64 位处理器和操作系统
+操作系统：Windows 10 / Windows 11（64 位）
+处理器：Intel Core i5-4460 / AMD Ryzen 3 1200
+内存：8 GB RAM
+显卡：NVIDIA GeForce GTX 750 Ti（2 GB）/ AMD Radeon R7 260X（2 GB）
+DirectX 版本：11
+存储空间：需要 4 GB 可用空间
+附注：需要键盘和鼠标。配置要求为开发阶段预估，可能在发行前调整。
+
+【English】
+
+Requires a 64-bit processor and operating system
+OS: Windows 10 / Windows 11 (64-bit)
+Processor: Intel Core i5-4460 / AMD Ryzen 3 1200
+Memory: 8 GB RAM
+Graphics: NVIDIA GeForce GTX 750 Ti (2 GB) / AMD Radeon R7 260X (2 GB)
+DirectX: Version 11
+Storage: 4 GB available space
+Additional Notes: Keyboard and mouse required. System requirements are provisional and may change before release.
+
+==================================================
+六 macOS 最低配置 / macOS Minimum Requirements
+==================================================
+
+状态：面向 Apple M 系列的预计最低配置；当前没有已验证的 Mac 成品构建。
+Status: Provisional targets for Apple silicon Macs; a Mac release build has not yet been verified.
+
+【简体中文】
+
+操作系统：macOS 12 Monterey 或更高版本
+处理器：Apple M1 或更新的 Apple M 系列芯片
+内存：8 GB RAM（统一内存）
+显卡：Apple M1 集成图形处理器或更高，支持 Metal
+存储空间：需要 4 GB 可用空间
+附注：仅支持搭载 Apple M 系列芯片的 Mac，不支持 Intel Mac。需要键盘和鼠标。配置要求为开发阶段预估，可能在发行前调整。
+
+【English】
+
+OS: macOS 12 Monterey or later
+Processor: Apple M1 or a newer Apple M-series chip
+Memory: 8 GB RAM (unified memory)
+Graphics: Apple M1 integrated GPU or better, with Metal support
+Storage: 4 GB available space
+Additional Notes: Requires an Apple M-series Mac. Intel-based Macs are not supported. Keyboard and mouse required. System requirements are provisional and may change before release.
+
+Mac 不填 DirectX 字段。Apple 芯片使用统一内存，不额外填写“需要 2 GB 独立显存”。
+
+【配置估算依据，仅供开发者参考】
+
+当前工程为团结引擎 1.10.1（Unity 2022.3 系列），使用 URP 和第三人称 3D 场景。实际启用的渲染配置包含 HDR、4 倍 MSAA 和级联软阴影，不能只因画面是 Lowpoly 就承诺所有老旧核显均可流畅运行。
+
+上面的 CPU、显卡和 M1 是建议用来测试的起点，不是已证明的性能下限。内存 8 GB 为保守初稿；4 GB 可用空间是暂留值，不能由工程源素材大小推导，需用正式打包后的安装体积复核。未承诺帧率、分辨率或“低画质”档位。
+
+Windows 正式包和 Mac ARM64 正式包完成后，应在代表性设备验证启动、全流程、图形、存读档和内存占用，再确定配置。Mac 还需完成相应平台构建、发布配置及实机验证。2027 年 5 月发售前复核 Steam 客户端支持的系统版本。
+
+==================================================
+七 AI 内容披露 / AI Content Disclosure
+==================================================
+
+用途：Steamworks 内容调查中的 AI 使用说明，不必重复塞入“关于此游戏”。
+状态：依据现有项目文档撰写，提交前按最终入包素材核对。
+
+【简体中文】
+
+开发过程中，我们使用生成式 AI 辅助制作了部分角色设定和三维模型初稿。这些内容经过开发者审阅、修改，以及模型清理和细化后，整合进游戏。游戏运行时不会使用生成式 AI 生成新的对话、剧情或美术内容。
+
+【English】
+
+During development, we used generative AI tools to assist with some character concepts and initial 3D model drafts. We reviewed and revised these materials, including cleaning up and refining models, before integrating them into the game. The game does not use generative AI to create new dialogue, story content, or artwork at runtime.
+
+【提交时的判断依据】
+
+项目作品说明记录了 GPT 参与角色草案、Tripo 与混元参与模型起稿，并在人工处理后进入工程。应核对“预生成 / Pre-Generated”项；人工修改生成素材并不自动使其变成“未使用 AI”。
+
+当前 C# 玩法代码中没有发现运行时生成式 AI 服务调用，现有对话来自静态数据；“实时生成 / Live-Generated”按最终发行构建的实际情况填写。
+
+若最终游戏还包含 AI 辅助制作的插画、漫画、音乐、音效、叙事文本或翻译，需在上面说明中补充实际类别。仅用于策划的概念图不自动等于发行包里的素材。代码辅助工具本身与玩家消费的生成内容也应区分，不能只写“AI 用于编程”来代替实际美术内容披露。
+
+==================================================
+八 内容说明 / Content Description
+==================================================
+
+用途：如果内容调查要求解释相关内容，可使用下文。它是描述草稿，不是年龄评级结论。
+
+【简体中文】
+
+游戏包含轻度悬疑情节、围绕一颗蛋失踪的担忧、带有误导性的惊悚描述，关于饮酒和醉酒的幽默对白，以及少量轻微粗口和死亡的比喻性表达。整体以风格化动物角色和轻喜剧方式呈现。
+
+【English】
+
+The game contains mild suspense, concern about a missing egg, misleadingly ominous descriptions, humorous references to alcohol and drunkenness, occasional mild language, and figurative references to death. These elements are presented through stylized animal characters and light comedy.
+
+后台涉及饮酒、恐惧、暴力或其他内容的具体问题，按最终游戏中的出现方式逐项回答；不要因为美术可爱就全部选择“无”。不要自行添加“全年龄评级”“PEGI 3”或其他尚未取得的分级。
+
+==================================================
+九 其他后台字段 / Other Store Fields
+==================================================
+
+技术支持邮箱 / Support email:
+待填写 MSG Studio 实际用于玩家支持的邮箱。不能虚构地址。
+
+技术支持网站 / Support website:
+有真实页面则填写；没有则在允许留空时留空。
+
+官方网站与社交媒体 / Website and social links:
+只填写实际已建立且准备公开的链接，使用 Basic Info 中对应字段。
+
+第三方账号 / Third-party account:
+当前单机玩法未发现强制外部账号流程；按最终成品判断，不把 Steam 账号重复填成额外第三方账号。
+
+第三方 DRM、反作弊、应用内购买及订阅：
+没有实际接入时不添加营销或功能声明。平台调查中的最终选项按发行构建确认。
+
+版权文字 / Copyright text:
+如果后台需要、且 MSG Studio 确实是相应权利主体，可使用：
+© 2027 MSG Studio. All rights reserved.
+年份按实际首次发行年份调整；第三方资产的署名另按其授权要求保留。这不是新增的 EULA。
+
+EULA:
+没有专门的最终用户协议时，不凭空写一份占位协议。
+
+奖项 / Awards:
+仅填写真实获得的奖项。本稿不填。
+
+媒体评价 / Reviews:
+仅使用真实媒体原文及获准使用的出处。本稿不填。
+
+价格、具体发行日、支持邮箱、网站和第三方权利主体都属于真实运营信息，文案无法替代。目前仍需你实际补齐的是支持联系方式及后台具体预计发行日；价格另在定价流程中决定。
+
+==================================================
+十 可选宣传文字 / Optional Promotional Copy
+==================================================
+
+以下不是必须的 Steamworks 字段，可用于预告片、公告或详情页素材。常规商店胶囊图优先只放游戏名称和美术，不要把愿望单号召、宣传句或日期塞进基础胶囊。
+
+【主宣传句 / Main tagline】
+
+中文：一颗蛋不见了，整个农场都有话要说。
+English: One missing egg. Everyone has a story.
+
+【预告片标题 / Trailer title】
+
+中文：《风车农场悬案》实机预告
+English: Mystery at Windmill Farm — Gameplay Trailer
+
+【预告片文字卡 / Trailer text cards】
+
+1.
+一颗画着爱心的蛋，不见了。
+An egg with a heart on it has vanished.
+
+2.
+每只动物，都有自己的说法。
+Every animal has a different story.
+
+3.
+迈开鸭掌，调查现场。
+Put your webbed feet to work.
+
+4.
+拿出证据，再问一次。
+Find the evidence. Ask again.
+
+5.
+风车农场悬案
+Mystery at Windmill Farm
+
+6.
+2027 年 5 月｜加入愿望单
+May 2027 | Wishlist on Steam
+
+【愿望单号召 / Wishlist call to action】
+
+中文：把《风车农场悬案》加入愿望单，准备和芦笛一起，问清这颗蛋的下落。
+English: Wishlist Mystery at Windmill Farm and get ready to join Reed on the trail of a very important egg.
+
+【商店页上线公告草稿 / Store Page Announcement Draft】
+
+使用条件：商店页公开以后再发布。这里先提供稿件，不表示商店已经上线。
+
+中文标题：
+芦笛侦探准备出发，《风车农场悬案》Steam 商店页上线！
+
+中文正文：
+大家好，我们是 MSG Studio。
+
+一颗画着爱心的宝贝蛋失踪了，小鸡侦探团已经开始推理，看门狗还在努力回忆，池塘边的青蛙则把事情说得越来越神秘。这座农场需要一位愿意认真听、仔细查的侦探。
+
+于是，一只绿头鸭来了。
+
+在《风车农场悬案》中，你将扮演芦笛，探索微缩农场、搜集物证、追问动物们各执一词的证词，让手帐记下调查中的发现与误判。路上别忘了捡奶酪：老鼠兄弟的消息可不是免费的。
+
+游戏计划于 2027 年 5 月发售，目标平台为 Windows 和搭载 Apple M 系列芯片的 Mac，提供简体中文与英文文本。
+
+如果你喜欢动物角色、冷幽默和慢慢拼出真相的感觉，欢迎把游戏加入愿望单。农场里见！
+
+English title:
+Detective Reed Is on the Case — Our Steam Store Page Is Live!
+
+English body:
+Hello from MSG Studio!
+
+An egg with a heart drawn on it has vanished. The Chick Detectives are busy theorizing, the guard dog is trying to remember what happened, and the frog by the pond is making everything sound suspicious. This farm needs someone who will listen carefully and take a closer look.
+
+Enter one curious duck.
+
+In Mystery at Windmill Farm, you play as Reed, exploring a miniature farm, gathering evidence, and questioning animals whose stories don't quite agree. Your notebook keeps track of each discovery—and the theories that don't survive the next conversation. Pick up cheese along the way: the Mouse Brothers don't give away their information for free.
+
+We're aiming to release in May 2027 on Windows and Apple M-series Macs, with English and Simplified Chinese text.
+
+If you enjoy eccentric animals, deadpan humor, and piecing together a mystery, we'd love to have you along. Add the game to your wishlist, and we'll see you at the farm!
+
+==================================================
+十一 发布文案的范围说明
+==================================================
+
+已纳入：
+绿头鸭主角、失踪爱心蛋、微缩农场、第三人称探索和跳跃、对话质询、环境物证、自动更新的笔记本、奶酪换情报、单人故事、中英文本目标。
+
+没有承诺：
+19 个独立 2D 调查小游戏、完整二周目、多结局、自由拖拽推理板、战斗、农场经营、开放世界、全语音、手柄支持、Steam 成就与云存档。部分内容只有策划或尚未完成接入，不应在此时写成确定功能。
+
+“约一小时”目前来自设计目标，未作为实测通关时长写入商店介绍。正式盲测后，如时长相符，可补充：
+中文：一段约一小时的探案小冒险，适合留一个悠闲的晚上慢慢玩。
+English: A little detective adventure lasting around an hour, made for a leisurely evening.
+正式写入时再核对实际分布，避免把目标时长当作承诺。
+
+保留悬念：
+没有在公开正文写出蛋的真实去向、关键人物动机、最终揭晓方式或“谁是替罪羊”。
+
+“初版约五万人游玩”虽然在项目文档中有记录，本稿没有将其写成 Steam 玩家数、销量、评测或口碑证明。
+
+==================================================
+十二 核对来源
+==================================================
+
+项目依据：
+- MissingEggDoc-main/docs/01-项目概述与目标.md
+- MissingEggDoc-main/docs/03-核心玩法与循环.md
+- MissingEggDoc-main/docs/06-角色与关系网.md
+- MissingEggDoc-main/docs/12-音频方向.md
+- docs/风车农场悬案-UNITY挑战赛作品说明文档.md
+- docs/IMPLEMENTATION.md
+- Assets/Scripts/Runtime/ 中的移动、对话、笔记本、奶酪及结局代码
+- Assets/Resources/Localization/catalog.json
+- ProjectSettings/ProjectVersion.txt、GraphicsSettings.asset 及实际启用的 URP 配置
+
+Steam 官方文档（核对日期：2026-10-30）：
+商店文字说明：https://partner.steamgames.com/doc/store/page/description
+审核要求：https://partner.steamgames.com/doc/store/review_process
+发行日期展示：https://partner.steamgames.com/doc/store/release_dates
+语言设置：https://partner.steamgames.com/doc/store/localization
+标签：https://partner.steamgames.com/doc/store/tags
+内容调查与 AI 披露：https://partner.steamgames.com/doc/gettingstarted/contentsurvey
+即将推出：https://partner.steamgames.com/doc/store/coming_soon
+抢先体验：https://partner.steamgames.com/doc/store/earlyaccess
+图形素材规则：https://partner.steamgames.com/doc/store/assets/rules
+平台设置：https://partner.steamgames.com/doc/store/application/platforms
+
+配置参考：
+团结 1.10 Player 系统要求：https://docs.unity.cn/cn/tuanjiemanual/1.10/Manual/system-requirements.html
+Steam 对 macOS 11 的支持说明：https://help.steampowered.com/en/faqs/view/659D-A19E-018A-81A6
+
+官方引擎支持范围只证明引擎的平台能力，不代表本游戏已在某台机器上通过性能测试。
+
