@@ -28,7 +28,7 @@ Shader "WindmillFarm/Sky/CloudCard"
         [HDR] _Tint ("Tint", Color) = (1, 1, 1, 1)
         _AlphaScale ("Alpha Scale", Range(0, 1)) = 1
         [Header(Bend)]
-        _Bend ("Bend Amount", Range(0, 2)) = 1
+        _Bend ("Bend Amount", Range(0, 99)) = 1
         [Header(Horizon Fade)]
         _HorizonFadeStart ("Fade Start Angle (deg)", Range(-5, 60)) = 8
         _HorizonFadeEnd ("Fade End Angle (deg)", Range(0, 90)) = 26
@@ -100,17 +100,33 @@ Shader "WindmillFarm/Sky/CloudCard"
                 UNITY_SETUP_INSTANCE_ID(input);
                 UNITY_TRANSFER_INSTANCE_ID(input, output);
 
-                float3 posWS = TransformObjectToWorld(input.positionOS.xyz);
-
-                // 卡片中心（物体原点）到玩家的距离 = 这张卡片要在的球半径
+                // 卡片中心（物体原点）的世界坐标。网格在局部 XY 平面、Z 指向玩家。
                 float3 centreWS = TransformObjectToWorld(float3(0.0, 0.0, 0.0));
                 float3 toCentre = centreWS - _SkyCenter.xyz;
                 float radius = max(length(toCentre), 1.0);
 
-                // 顶点径向投到该球面上
-                float3 toVert = posWS - _SkyCenter.xyz;
-                float len = max(length(toVert), 0.0001);
-                float3 projected = _SkyCenter.xyz + (toVert / len) * radius;
+                // 球面弯曲：把卡片当成天球（球心 = 玩家）内表面的一块曲面。
+                // 卡片局部 X = 沿天球的横向（方位角方向），局部 Y = 沿天球的纵向
+                // （极角/俯仰方向）。顶点在球面上的位置 = 球心 + 半径 * 单位方向，
+                // 方向由「中心方向」加上「卡片局部切向偏移」得到。
+                //
+                // 关键区别（修 bug）：旧实现是沿「玩家→顶点」视线径向推到球面，
+                // 只改变深度、不改变屏幕切向位置，卡片正对玩家时轮廓仍是直线，
+                // 看起来就是平的。正确做法是把卡片的横向/纵向映射成球面的
+                // 方位角/极角偏移，让上下左右边缘真的沿球面「往后收」。
+                float3 posWS = TransformObjectToWorld(input.positionOS.xyz);
+                float3 localOffset = posWS - centreWS;         // 顶点相对中心的世界偏移
+                float3 dir = toCentre / radius;                // 中心单位方向（指向玩家）
+                // 在中心处建立正交基：right = 水平切向, up = 天顶切向
+                float3 upRef = abs(dir.y) > 0.99 ? float3(1.0, 0.0, 0.0) : float3(0.0, 1.0, 0.0);
+                float3 right = normalize(cross(upRef, dir));
+                float3 upv = cross(dir, right);
+                // 顶点在卡片局部平面内的横向/纵向分量（米）
+                float u = dot(localOffset, right);
+                float v = dot(localOffset, upv);
+                // 弧度 = 切向偏移 / 半径（小角度近似），折成真正的球面方向
+                float3 bentDir = normalize(dir + (right * u + upv * v) / radius);
+                float3 projected = _SkyCenter.xyz + bentDir * radius;
 
                 posWS = lerp(posWS, projected, _Bend);
 

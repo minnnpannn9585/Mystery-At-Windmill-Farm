@@ -24,16 +24,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: db3d00bd1775fa9429fc06f11b7defed, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5f8bbad63739dff40835cc6f58016fc4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AlphaScale: 1
-    - _Bend: 1
-    - _HorizonFadeEnd: 26
-    - _HorizonFadeStart: 8
-    - _HorizonMinOpacity: 0.3
+    - _Bend: 2
+    - _HorizonFadeEnd: 3.9
+    - _HorizonFadeStart: -5
+    - _HorizonMinOpacity: 1
     m_Colors:
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

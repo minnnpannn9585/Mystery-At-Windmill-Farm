@@ -277,7 +277,7 @@ public static class SkyCloudBuilder
         cloud.distance = cfg.distance;
         cloud.azimuth = cfg.azimuth;
         cloud.height = cfg.height;
-        cloud.size = cfg.size;
+        cloud.sizeX = cfg.size;
         cloud.angularSpeed = cfg.speed;
         cloud.roll = cfg.roll;
         cloud.fadeStartAngle = cfg.fadeStart;

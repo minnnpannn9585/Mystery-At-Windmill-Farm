@@ -20,6 +20,7 @@
 // 注意：位置请在 Inspector 改字段，不要直接拖物体——下次改任何字段时
 // 位置会被字段值重算覆盖。
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace WindmillFarm.Visual
 {
@@ -45,8 +46,12 @@ namespace WindmillFarm.Visual
         public float height = 120f;
 
         [Header("尺寸与朝向")]
-        [Tooltip("云朵宽度（米）。高度按贴图宽高比自动算")]
-        public float size = 140f;
+        [Tooltip("云朵宽度（米）")]
+        [FormerlySerializedAs("size")]
+        public float sizeX = 140f;
+
+        [Tooltip("云朵高度（米）。设为 0 则按贴图宽高比自动计算（保持原比例）；填正值可单独控制高度，实现 X/Y 独立调节")]
+        public float sizeY = 0f;
 
         [Tooltip("绕视线方向的额外倾角（度），避免所有云一个朝向")]
         [Range(-45f, 45f)]
@@ -115,7 +120,7 @@ namespace WindmillFarm.Visual
         public void Apply()
         {
             var parent = transform.parent;
-            var centre = parent != null ? parent.position : Vector3.zero;
+            var centre = ResolveCenter(parent);
 
             var az = azimuth * Mathf.Deg2Rad;
             var pos = centre + new Vector3(Mathf.Sin(az) * distance, height, Mathf.Cos(az) * distance);
@@ -132,11 +137,26 @@ namespace WindmillFarm.Visual
             ApplyProperties();
         }
 
+        // 分布圆心 = 天空云场配置的球心。云朵位置与弯曲必须绕同一个点，
+        // 否则填了 skyCenter 后云会绕父节点分布、却绕别处弯曲，脱节。
+        static Vector3 ResolveCenter(Transform parent)
+        {
+            if (parent == null) return Vector3.zero;
+            var field = parent.GetComponent<SkyCloudField>();
+            if (field != null)
+            {
+                return field.useSelfAsCenter ? parent.position : field.skyCenter;
+            }
+            return parent.position;
+        }
+
         void ApplyScale()
         {
             var tex = CardTexture();
             var aspect = tex != null && tex.height > 0 ? (float)tex.width / tex.height : 2f;
-            transform.localScale = new Vector3(size, size / aspect, 1f);
+            // sizeY > 0 时单独控制高度；否则按贴图宽高比自动算（兼容旧行为）
+            var h = sizeY > 0f ? sizeY : sizeX / aspect;
+            transform.localScale = new Vector3(sizeX, h, 1f);
         }
 
         Texture2D CardTexture()

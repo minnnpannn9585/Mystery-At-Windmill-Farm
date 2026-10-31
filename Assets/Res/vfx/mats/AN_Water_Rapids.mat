@@ -82,7 +82,7 @@ Material:
     - _Float2: 0.1
     - _Float3: 0
     - _FlowAccent: 0.14
-    - _FlowAngle: 51.9575
+    - _FlowAngle: 29
     - _FlowFoamScale: 4.13
     - _FlowFoamSteps: 2
     - _FlowHeightCurve: 1
