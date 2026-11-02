@@ -7,7 +7,7 @@ namespace EggRescue
     {
         public Text countText;
         const float BounceDuration = 0.4f;
-        const float BouncePeak = 1.5f;
+        const float BouncePeak = 1.08f;
 
         GameObject _root;
         Vector3 _baseScale;

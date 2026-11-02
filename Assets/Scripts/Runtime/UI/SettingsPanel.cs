@@ -182,7 +182,7 @@ namespace EggRescue
             listRt.anchoredPosition = new Vector2(0f, -46f - listHeight * 0.5f);
             var listImage = list.GetComponent<Image>();
             listImage.color = Paper;
-            ApplySolid(listImage);
+            HudPaperStyle.ApplyShape(listImage, 16f);
             var outline = list.AddComponent<Outline>();
             outline.effectColor = PaperEdge;
             outline.effectDistance = new Vector2(2f, -2f);
@@ -298,7 +298,7 @@ namespace EggRescue
             rt.sizeDelta = size;
             var image = go.GetComponent<Image>();
             image.color = Paper;
-            ApplySolid(image);
+            HudPaperStyle.ApplyShape(image, 24f);
             var outline = go.AddComponent<Outline>();
             outline.effectColor = PaperEdge;
             outline.effectDistance = new Vector2(2f, -2f);
@@ -318,7 +318,7 @@ namespace EggRescue
             var image = go.GetComponent<Image>();
             image.color = Plate;
             image.raycastTarget = false;
-            ApplySolid(image);
+            HudPaperStyle.ApplyShape(image, 16f);
             var outline = go.AddComponent<Outline>();
             outline.effectColor = new Color(PaperEdge.r, PaperEdge.g, PaperEdge.b, 0.34f);
             outline.effectDistance = new Vector2(2f, -2f);
@@ -361,7 +361,7 @@ namespace EggRescue
             rt.sizeDelta = size;
             var image = go.GetComponent<Image>();
             image.color = Color.white;
-            ApplySolid(image);
+            HudPaperStyle.ApplyShape(image, 12f);
             var button = go.GetComponent<Button>();
             button.gameObject.AddComponent<MenuButtonMotion>();
             var labelGo = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
@@ -401,12 +401,7 @@ namespace EggRescue
             if (image != null)
             {
                 image.color = Color.white;
-                var buttonSprite = UiFontCatalog.LoadButtonSprite();
-                if (buttonSprite != null)
-                {
-                    image.sprite = buttonSprite;
-                    image.type = Image.Type.Sliced;
-                }
+                HudPaperStyle.ApplyShape(image, 12f);
                 button.targetGraphic = image;
             }
             var colors = button.colors;
@@ -431,7 +426,7 @@ namespace EggRescue
             rt.anchoredPosition = pos;
             rt.sizeDelta = new Vector2(600f, 28f);
 
-            var background = CreateImage(go.transform, "Background", new Color(0.76f, 0.80f, 0.69f, 1f));
+            var background = CreateImage(go.transform, "Background", new Color(0.76f, 0.80f, 0.69f, 1f), 8f);
             Stretch(background.rectTransform);
 
             var fillArea = new GameObject("Fill Area", typeof(RectTransform));
@@ -440,7 +435,7 @@ namespace EggRescue
             Stretch(fillAreaRt);
             fillAreaRt.offsetMin = new Vector2(6f, 5f);
             fillAreaRt.offsetMax = new Vector2(-6f, -5f);
-            var fill = CreateImage(fillArea.transform, "Fill", ButtonNormal);
+            var fill = CreateImage(fillArea.transform, "Fill", ButtonNormal, 4f);
             Stretch(fill.rectTransform);
 
             var handleArea = new GameObject("Handle Slide Area", typeof(RectTransform));
@@ -449,7 +444,7 @@ namespace EggRescue
             Stretch(handleAreaRt);
             handleAreaRt.offsetMin = new Vector2(10f, 0f);
             handleAreaRt.offsetMax = new Vector2(-10f, 0f);
-            var handle = CreateImage(handleArea.transform, "Handle", ButtonNormal);
+            var handle = CreateImage(handleArea.transform, "Handle", ButtonNormal, 8f);
             handle.rectTransform.sizeDelta = new Vector2(22f, 36f);
 
             var slider = go.AddComponent<Slider>();
@@ -463,13 +458,13 @@ namespace EggRescue
             return slider;
         }
 
-        static Image CreateImage(Transform parent, string name, Color color)
+        static Image CreateImage(Transform parent, string name, Color color, float radius)
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(parent, false);
             var image = go.GetComponent<Image>();
             image.color = color;
-            ApplySolid(image);
+            HudPaperStyle.ApplyShape(image, radius);
             return image;
         }
 
@@ -487,13 +482,6 @@ namespace EggRescue
             rt.offsetMin = Vector2.zero;
             rt.offsetMax = Vector2.zero;
             rt.pivot = new Vector2(0.5f, 0.5f);
-        }
-
-        static void ApplySolid(Image image)
-        {
-            if (image == null) return;
-            image.sprite = WhiteSprite();
-            image.type = Image.Type.Simple;
         }
 
         static Sprite WhiteSprite()

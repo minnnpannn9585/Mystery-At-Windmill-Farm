@@ -1,7 +1,5 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace EggRescue
 {
@@ -124,7 +122,6 @@ namespace EggRescue
             player.layer = 2;
             BindCameraToPlayer(player);
             ApplySavedPose(player);
-            CreatePrompt(player.GetComponent<PlayerInteraction>());
         }
 
         GameObject SpawnPlayer()
@@ -269,31 +266,6 @@ namespace EggRescue
             return Quaternion.LookRotation(forward.normalized, Vector3.up);
         }
 
-        void CreatePrompt(PlayerInteraction interaction)
-        {
-            var canvasGo = new GameObject("InteractionPromptCanvas");
-            var canvas = canvasGo.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasGo.AddComponent<CanvasScaler>();
-            canvasGo.AddComponent<GraphicRaycaster>();
-            var textGo = new GameObject("Prompt");
-            textGo.transform.SetParent(canvasGo.transform, false);
-            var text = textGo.AddComponent<TextMeshProUGUI>();
-            var font = UiFontCatalog.Load();
-            if (font != null) text.font = font;
-            text.fontSize = 28;
-            text.alignment = TextAlignmentOptions.Bottom;
-            text.color = Color.white;
-            text.raycastTarget = false;
-            var rt = text.rectTransform;
-            rt.anchorMin = new Vector2(0.3f, 0.08f);
-            rt.anchorMax = new Vector2(0.7f, 0.16f);
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
-            text.gameObject.SetActive(false);
-            if (interaction != null) interaction.SetPromptLabel(text);
-        }
-
         void EnsureSystems()
         {
             if (GetComponent<PauseMenu>() == null)
@@ -411,6 +383,7 @@ namespace EggRescue
             }
             if (go.GetComponent<Interactable>() == null)
                 go.AddComponent<Interactable>();
+            AddIfMissing<InteractionPointVfx>(go);
         }
 
         static void WireAreaTriggers()

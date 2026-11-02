@@ -24,8 +24,6 @@ namespace EggRescue
         static readonly Color ButtonDisabled = new Color(0.75f, 0.72f, 0.67f, 0.68f);
 
         static Sprite _white;
-        static Sprite _panelSprite;
-        static bool _panelSliced;
 
         public const string TitleChinesePath = "Assets/Res/Sprites/StartUi/title_final_ch.png";
         public const string TitleEnglishPath = "Assets/Res/Sprites/StartUi/title_final_en.png";
@@ -69,7 +67,6 @@ namespace EggRescue
             Cursor.visible = true;
             GameSettings.Load();
             BackgroundMusic.Play(_backgroundMusic);
-            CachePanelSprite();
             var font = ResolveFont();
             BindSceneButtons();
             FitMenuColumn();
@@ -229,11 +226,11 @@ namespace EggRescue
         void BuildCredits(TMP_FontAsset font)
         {
             _creditsRoot = CreateOverlay("CreditsOverlay");
-            var card = CreatePaper(_creditsRoot.transform, new Vector2(720f, 620f), true);
+            var card = CreatePaper(_creditsRoot.transform, new Vector2(720f, 620f));
             AddLabel(card, "menu.credits", new Vector2(0f, 230f), new Vector2(560f, 72f), 44f, Ink, font);
             var body = AddLabel(card, "menu.credits_body", new Vector2(0f, 20f), new Vector2(560f, 320f), 30f, InkSoft, font);
             body.lineSpacing = 16f;
-            var back = CreateButton(card, "menu.back", new Vector2(0f, -230f), new Vector2(260f, 60f), font, true);
+            var back = CreateButton(card, "menu.back", new Vector2(0f, -230f), new Vector2(260f, 60f), font);
             Press(back, () => SetOpen(_creditsRoot, false));
         }
 
@@ -245,11 +242,11 @@ namespace EggRescue
         void BuildConfirm(TMP_FontAsset font)
         {
             _confirmRoot = CreateOverlay("ConfirmOverlay");
-            var card = CreatePaper(_confirmRoot.transform, new Vector2(640f, 360f), true);
+            var card = CreatePaper(_confirmRoot.transform, new Vector2(640f, 360f));
             AddLabel(card, "menu.confirm_title", new Vector2(0f, 90f), new Vector2(520f, 56f), 36f, Ink, font);
             AddLabel(card, "menu.confirm_body", new Vector2(0f, 20f), new Vector2(520f, 72f), 22f, InkSoft, font);
-            var ok = CreateButton(card, "menu.confirm_ok", new Vector2(-120f, -100f), new Vector2(180f, 56f), font, true);
-            var cancel = CreateButton(card, "menu.confirm_cancel", new Vector2(120f, -100f), new Vector2(180f, 56f), font, true);
+            var ok = CreateButton(card, "menu.confirm_ok", new Vector2(-120f, -100f), new Vector2(180f, 56f), font);
+            var cancel = CreateButton(card, "menu.confirm_cancel", new Vector2(120f, -100f), new Vector2(180f, 56f), font);
             Press(ok, ConfirmNewGame);
             Press(cancel, () => SetOpen(_confirmRoot, false));
         }
@@ -274,7 +271,7 @@ namespace EggRescue
             return go;
         }
 
-        static RectTransform CreatePaper(Transform parent, Vector2 size, bool solid = false)
+        static RectTransform CreatePaper(Transform parent, Vector2 size)
         {
             var go = new GameObject("Paper", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(parent, false);
@@ -284,8 +281,7 @@ namespace EggRescue
             rt.sizeDelta = size;
             var image = go.GetComponent<Image>();
             image.color = Paper;
-            if (solid) ApplySolid(image);
-            else ApplyPanelSprite(image);
+            HudPaperStyle.ApplyShape(image, 24f);
             var outline = go.AddComponent<Outline>();
             outline.effectColor = PaperEdge;
             outline.effectDistance = new Vector2(2f, -2f);
@@ -314,7 +310,7 @@ namespace EggRescue
             return label;
         }
 
-        Button CreateButton(RectTransform parent, string key, Vector2 pos, Vector2 size, TMP_FontAsset font, bool solid = false)
+        Button CreateButton(RectTransform parent, string key, Vector2 pos, Vector2 size, TMP_FontAsset font)
         {
             var go = new GameObject(key, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
             go.transform.SetParent(parent, false);
@@ -325,8 +321,6 @@ namespace EggRescue
             rt.sizeDelta = size;
             var image = go.GetComponent<Image>();
             image.color = Color.white;
-            if (solid) ApplySolid(image);
-            else ApplyPanelSprite(image);
             var button = go.GetComponent<Button>();
             button.gameObject.AddComponent<MenuButtonMotion>();
             var labelGo = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
@@ -363,12 +357,7 @@ namespace EggRescue
             if (image != null)
             {
                 image.color = Color.white;
-                var buttonSprite = UiFontCatalog.LoadButtonSprite();
-                if (buttonSprite != null)
-                {
-                    image.sprite = buttonSprite;
-                    image.type = Image.Type.Sliced;
-                }
+                HudPaperStyle.ApplyShape(image, 12f);
                 button.targetGraphic = image;
             }
             var colors = button.colors;
@@ -446,35 +435,6 @@ namespace EggRescue
             rt.offsetMin = Vector2.zero;
             rt.offsetMax = Vector2.zero;
             rt.pivot = new Vector2(0.5f, 0.5f);
-        }
-
-        void CachePanelSprite()
-        {
-            var images = GetComponentsInChildren<Image>(true);
-            for (var i = 0; i < images.Length; i++)
-            {
-                var sprite = images[i] != null ? images[i].sprite : null;
-                if (sprite == null) continue;
-                _panelSprite = sprite;
-                _panelSliced = sprite.border.sqrMagnitude > 0.01f;
-                return;
-            }
-            _panelSprite = WhiteSprite();
-            _panelSliced = false;
-        }
-
-        static void ApplyPanelSprite(Image image)
-        {
-            if (image == null) return;
-            image.sprite = _panelSprite != null ? _panelSprite : WhiteSprite();
-            image.type = _panelSliced ? Image.Type.Sliced : Image.Type.Simple;
-        }
-
-        static void ApplySolid(Image image)
-        {
-            if (image == null) return;
-            image.sprite = WhiteSprite();
-            image.type = Image.Type.Simple;
         }
 
         static Sprite WhiteSprite()

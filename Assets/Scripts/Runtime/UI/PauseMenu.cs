@@ -142,7 +142,7 @@ namespace EggRescue
             cardRt.sizeDelta = new Vector2(560f, 700f);
             var cardImage = card.GetComponent<Image>();
             cardImage.color = Paper;
-            cardImage.sprite = WhiteSprite();
+            HudPaperStyle.ApplyShape(cardImage, 24f);
             cardImage.raycastTarget = true;
             var cardOutline = card.AddComponent<Outline>();
             cardOutline.effectColor = PaperEdge;
@@ -224,6 +224,9 @@ namespace EggRescue
                 _labels.Add(new BoundLabel { Label = label, Key = key });
             }
             if (button == null) return;
+            var background = button.targetGraphic as Image;
+            if (background == null) background = button.GetComponent<Image>();
+            HudPaperStyle.ApplyShape(background, 12f);
             if (name == "ResumeButton") _resume = button;
             else if (name == "SaveButton") _save = button;
             else if (name == "SettingsButton") _settings = button;
@@ -276,7 +279,6 @@ namespace EggRescue
             rt.sizeDelta = new Vector2(400f, 64f);
             var image = go.GetComponent<Image>();
             image.color = Color.white;
-            image.sprite = WhiteSprite();
             var button = go.GetComponent<Button>();
             var motion = go.AddComponent<MenuButtonMotion>();
             button.onClick.AddListener(() => motion.Play(onClick));
@@ -294,12 +296,7 @@ namespace EggRescue
             if (image != null)
             {
                 image.color = Color.white;
-                var buttonSprite = UiFontCatalog.LoadButtonSprite();
-                if (buttonSprite != null)
-                {
-                    image.sprite = buttonSprite;
-                    image.type = Image.Type.Sliced;
-                }
+                HudPaperStyle.ApplyShape(image, 12f);
                 button.targetGraphic = image;
             }
             var colors = button.colors;

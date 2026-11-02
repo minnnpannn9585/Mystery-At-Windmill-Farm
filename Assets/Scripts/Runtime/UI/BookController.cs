@@ -42,7 +42,7 @@ namespace EggRescue
         const float BlinkDuration = 0.35f;
         const float BlinkMin = 0.15f;
         const float IconBounceDuration = 0.4f;
-        const float IconBouncePeak = 2f;
+        const float IconBouncePeak = 1.18f;
 
         sealed class EntryDef { public GameObject Go; public string Cond; }
         sealed class LinkDef { public GameObject Go; public GameObject[] Gos; public string A; public string B; }
@@ -100,6 +100,7 @@ namespace EggRescue
         void Start()
         {
             AutoBindFields();
+            GameplayHud.Install(this);
             BuildCatalog();
             if (boolPanel != null) boolPanel.SetActive(false);
             var leftHud = transform.Find("LeftHUD");
@@ -548,7 +549,7 @@ namespace EggRescue
         void RefreshOpenInteractable()
         {
             if (open == null) return;
-            var can = !GameEvents.DialogueActive;
+            var can = !GameEvents.DialogueActive && !GameEvents.Paused;
             if (_lastOpenInteractable == can) return;
             _lastOpenInteractable = can;
             open.interactable = can;

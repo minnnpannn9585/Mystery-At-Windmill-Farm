@@ -13,6 +13,14 @@ namespace EggRescue
 
         public static IEnumerable<string> DiscoveredIds { get { return Discovered; } }
 
+        public static bool IsDiscoveredFrom(GameObject go)
+        {
+            if (go == null) return false;
+            var controller = go.GetComponent<InteractionPointVfx>();
+            var id = controller != null ? controller.Id : go.name;
+            return Discovered.Contains(id);
+        }
+
         string Id
         {
             get { return string.IsNullOrEmpty(pointId) ? gameObject.name : pointId; }
@@ -58,6 +66,8 @@ namespace EggRescue
             }
             var self = go.GetComponent<InteractionPointVfx>();
             if (self != null) self.Discover();
+            // A clue can use the same saved discovery state without having a particle marker.
+            else if (go.GetComponent<ClueTrigger>() != null) Discovered.Add(id);
         }
 
         public static void MarkDiscovered(string id)

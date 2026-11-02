@@ -10,8 +10,27 @@ namespace EggRescue
         [SerializeField] TMP_Text promptText;
 
         Interactable _current;
+        WorldInteractionPrompt _worldPrompt;
 
-        public void SetPromptLabel(TMP_Text label) { promptText = label; }
+        // Keep older scene/prefab bindings compatible, but retire their bottom-screen label.
+        public void SetPromptLabel(TMP_Text label)
+        {
+            if (promptText != null) promptText.gameObject.SetActive(false);
+            promptText = label;
+            if (promptText != null) promptText.gameObject.SetActive(false);
+        }
+
+        void Awake()
+        {
+            SetPromptLabel(promptText);
+            _worldPrompt = GetComponent<WorldInteractionPrompt>();
+            if (_worldPrompt == null) _worldPrompt = gameObject.AddComponent<WorldInteractionPrompt>();
+        }
+
+        void OnDisable()
+        {
+            SetCurrent(null);
+        }
 
         void Update()
         {
@@ -21,18 +40,19 @@ namespace EggRescue
                 return;
             }
 
-            var hit = RaycastInteractable();
-            if (hit == null) hit = ProximityInteractable();
+            var camera = Camera.main;
+            var hit = RaycastInteractable(camera);
+            if (hit == null) hit = ProximityInteractable(camera);
             SetCurrent(hit);
 
             if (_current != null && Input.GetKeyDown(KeyCode.E))
                 _current.Interact();
         }
 
-        Interactable RaycastInteractable()
+        Interactable RaycastInteractable(Camera camera)
         {
-            var ray = Camera.main != null
-                ? Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f))
+            var ray = camera != null
+                ? camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f))
                 : new Ray(transform.position + Vector3.up, transform.forward);
             var hits = Physics.RaycastAll(ray, rayDistance, mask, QueryTriggerInteraction.Collide);
             Interactable best = null;
@@ -52,13 +72,13 @@ namespace EggRescue
             return best;
         }
 
-        Interactable ProximityInteractable()
+        Interactable ProximityInteractable(Camera camera)
         {
             var origin = transform.position + Vector3.up * 0.9f;
             var cols = Physics.OverlapSphere(origin, rayDistance, mask, QueryTriggerInteraction.Collide);
             Interactable best = null;
             var bestScore = float.MaxValue;
-            var cam = Camera.main != null ? Camera.main.transform : transform;
+            var cam = camera != null ? camera.transform : transform;
             for (var i = 0; i < cols.Length; i++)
             {
                 var col = cols[i];
@@ -81,17 +101,8 @@ namespace EggRescue
         void SetCurrent(Interactable next)
         {
             _current = next;
-            if (promptText == null) return;
-            if (next == null)
-            {
-                promptText.gameObject.SetActive(false);
-            }
-            else
-            {
-                promptText.gameObject.SetActive(true);
-                promptText.text = string.IsNullOrEmpty(next.Prompt) ? GameLocale.T("prompt.interact") : GameLocale.Line(next.Prompt);
-                promptText.ForceMeshUpdate();
-            }
+            if (promptText != null) promptText.gameObject.SetActive(false);
+            if (_worldPrompt != null) _worldPrompt.SetTarget(next);
         }
     }
 }

@@ -69,6 +69,8 @@ namespace EggRescue
             bool enabled;
             string label;
             ComputeInteract(out enabled, out label);
+            if (_interactable != null)
+                _interactable.ShowPromptAfterDiscovery = borrowed && !placed;
             if (force || _lastInteract != enabled)
             {
                 _lastInteract = enabled;
