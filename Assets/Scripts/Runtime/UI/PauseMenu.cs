@@ -74,6 +74,8 @@ namespace EggRescue
                 AudioListener.pause = !settingsOpen;
             _settingsWasOpen = settingsOpen;
             if (!Input.GetKeyDown(KeyCode.Escape)) return;
+            // 小游戏开着时 Esc 归它自己处理（退出确认浮层），这里让路（§16.3）
+            if (EggRescue.MiniGame.MiniGameHost.IsOpen) return;
             if (_settingsPanel != null && _settingsPanel.HandleEscape()) return;
             if (_root == null) return;
             SetOpen(!_root.activeSelf);

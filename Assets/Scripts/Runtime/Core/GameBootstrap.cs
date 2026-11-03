@@ -64,6 +64,10 @@ namespace EggRescue
             }
             if (Input.GetKeyDown(KeyCode.F5)) SaveService.Save();
             if (Input.GetKeyDown(KeyCode.F9)) SaveService.Load();
+            // M1 自检：F7 开一局 Debug 小游戏，验开关 / 暂停 / 退出 / 续局 / 入册演出。
+            // 不能占 F8 —— PlayerController 的 F8 是调试倍速开关，两件事撞一起会分不清谁生效。
+            if (Input.GetKeyDown(KeyCode.F7) && !EggRescue.MiniGame.MiniGameHost.IsOpen)
+                EggRescue.MiniGame.MiniGameHost.Open(EggRescue.MiniGame.MiniGameRegistry.DebugId);
         }
 
         /// <summary>

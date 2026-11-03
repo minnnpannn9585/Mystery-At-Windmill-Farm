@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using EggRescue.MiniGame;
 using UnityEngine;
 
 namespace EggRescue
@@ -52,6 +53,7 @@ namespace EggRescue
             NpcRegistry.Load();
             CheeseRegistry.ClearPicked();
             InteractionPointVfx.ClearDiscovered();
+            MiniGameSave.ResetAll();
             ClearPose();
             return Save();
         }
@@ -109,6 +111,9 @@ namespace EggRescue
                 sb.Append("\"").Append(Escape(id)).Append("\"");
             }
             sb.Append("]");
+            // 小游戏局内进度（MiniGameSystem §15.5）。只在有值时写，旧档读进来是空数组。
+            sb.Append(",\n  \"miniGames\": ");
+            MiniGameSave.AppendJson(sb);
             AppendPlayer(sb);
             sb.Append("\n}\n");
             File.WriteAllText(Path, sb.ToString(), Encoding.UTF8);
@@ -170,6 +175,7 @@ namespace EggRescue
                 InteractionPointVfx.MarkDiscovered(id.AsString());
             foreach (var flag in json["branchFlags"].AsArray())
                 GameState.SaveBranchFlag(flag.AsString());
+            MiniGameSave.Read(json["miniGames"]);
             ReadPose(json["player"]);
             Debug.Log("[SaveService] loaded " + Path);
             return true;
