@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_InteractiveWaterPool
+  m_Shader: {fileID: 4800000, guid: 9ebb31884097de94b9040384d506bd11, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FoamMask:
+        m_Texture: {fileID: 2800000, guid: 37d4cdbd7cc62cf4b8c1b717bce7afd0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 1cbf06d13cb48b940afb094efd2ac1e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0.95
+    - _ClipSoft: 0.06
+    - _ContactDepth: 1.2
+    - _ContactEdgeNoise: 0.55
+    - _ContactFalloff: 0.16
+    - _ContactStrength: 1
+    - _DebugMode: 0
+    - _EdgeStrength: 1.2
+    - _EdgeWidth: 0.1
+    - _FlowContrast: 0.54
+    - _FlowFoamScale: 1.9
+    - _FlowSpeed: 0.45
+    - _FlowStretch: 4.5
+    - _FlowTurbulence: 0.85
+    - _FoamAmount: 0.12
+    - _FoamBoil: 0.45
+    - _FoamBoilSpeed: 0.7
+    - _FoamEdgeWidth: 0.3
+    - _FoamSteps: 2
+    - _ImpactRadius: 1.7
+    - _ImpactStrength: 1
+    - _NoiseScale: 4
+    - _Radius: 1
+    - _ReceiveInteraction: 0
+    - _RimPower: 4
+    - _RimStrength: 0
+    - _StreakAmount: 0.25
+    - _TailLength: 0
+    - _TexBlend: 1
+    - _TexDrift: 0.018
+    - _TexDriftSpeed: 1.1
+    - _TexScroll: 0
+    - _TexWarp: 0.14
+    - _TexWarpSpeed: 0.42
+    - _TopDownRadius: 1
+    - _TopFoamHeight: 0.02
+    - _UseSceneDepth: 0
+    - _WaveAmplitude: 0.09
+    - _WaveFrequency: 1.2
+    - _WaveSpeed: 1
+    m_Colors:
+    - _DeepColor: {r: 0.11, g: 0.561, b: 0.753, a: 1}
+    - _EdgeColor: {r: 0.92, g: 1, b: 1, a: 1}
+    - _FoamColor: {r: 0.9, g: 0.98999995, b: 1, a: 1}
+    - _ImpactCenter: {r: 0, g: 0.02, b: 0.45, a: 0}
+    - _RimColor: {r: 0.75, g: 0.97999996, b: 1, a: 1}
+    - _ScrollTiling: {r: 3, g: 3, b: 0, a: 0}
+    - _ShallowColor: {r: 0.169, g: 0.663, b: 0.82, a: 1}
+    - _TexTiling: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
