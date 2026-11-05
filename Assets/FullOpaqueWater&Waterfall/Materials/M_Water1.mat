@@ -212,7 +212,7 @@ Material:
     - _Surface: 0
     - _TargetTurbulence: 1
     - _TargetTurbulenceSize: 1.5
-    - _TargetTurbulenceStep: 0.5
+    - _TargetTurbulenceStep: 0.1666667
     - _WaterfallTurbulence: 1
     - _WaterfallTurbulenceSize: 10
     - _WaterfallTurbulenceSpeed: 0.2

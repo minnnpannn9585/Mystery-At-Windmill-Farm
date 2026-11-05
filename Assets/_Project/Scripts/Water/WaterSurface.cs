@@ -43,8 +43,28 @@ namespace WindmillFarm.Water
         [Tooltip("XZ 判定时向外扩一点，避免边缘物体被判成不在水里")]
         public float edgePadding = 0.15f;
 
+        [Tooltip("是否参与「水下水面下表面」渲染。瀑布这类竖直水体请取消勾选 —— 它的「水面」是包围盒顶，会糊住整个区域")]
+        public bool underwaterShell = true;
+
         static readonly List<WaterSurface> s_all = new List<WaterSurface>();
         public static IReadOnlyList<WaterSurface> All { get { return s_all; } }
+
+        static readonly HashSet<int> s_waterColliderIds = new HashSet<int>();
+
+        /// <summary>
+        /// 把 Collider 登记成「水」。相机避让必须跳过它：
+        /// Physics.IgnoreCollision 只影响两个碰撞体之间的碰撞解算，**不影响 Raycast / SphereCast 查询**，
+        /// 所以玩家能穿过水面，相机的 SphereCast 照样被水面挡住，臂长瞬间缩到 0（贴脸）。
+        /// </summary>
+        public static void RegisterWaterCollider(Collider c)
+        {
+            if (c != null) s_waterColliderIds.Add(c.GetInstanceID());
+        }
+
+        public static bool IsWaterCollider(Collider c)
+        {
+            return c != null && s_waterColliderIds.Contains(c.GetInstanceID());
+        }
 
         Renderer _r;
 
@@ -58,6 +78,24 @@ namespace WindmillFarm.Water
         void OnEnable()
         {
             if (!s_all.Contains(this)) s_all.Add(this);
+            RegisterOwnColliders();
+        }
+
+        /// <summary>把这片水身上的 Collider 登记给相机避让用（自身 + 子级 + 父级都覆盖）。</summary>
+        void RegisterOwnColliders()
+        {
+            var self = GetComponent<Collider>();
+            if (self != null) RegisterWaterCollider(self);
+
+            var cols = GetComponentsInChildren<Collider>(true);
+            for (int i = 0; i < cols.Length; i++) RegisterWaterCollider(cols[i]);
+
+            // 水面模型把 Collider 挂在父级空物体上的情况很常见
+            if (transform.parent != null)
+            {
+                var parentCol = transform.parent.GetComponent<Collider>();
+                if (parentCol != null) RegisterWaterCollider(parentCol);
+            }
         }
 
         void OnDisable()

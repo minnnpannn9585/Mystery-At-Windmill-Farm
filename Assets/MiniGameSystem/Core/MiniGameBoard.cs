@@ -443,7 +443,7 @@ namespace EggRescue.MiniGame
         void TickPointer()
         {
             Vector2 local;
-            var inside = TryBodyPointer(out local);
+            var inside = TryCarryPoint(out local);
 
             if (_carryPiece != null && _carryPiece.Handle.Active)
             {
@@ -462,6 +462,16 @@ namespace EggRescue.MiniGame
             var canPick = TryPickupPoint(out pick);
             _pressWasInside = canPick;
             if (canPick) TryBeginCarry(pick);
+        }
+
+        /// <summary>
+        /// 携带物的「可跟手区」：指针落在这里才算还在操作。返回的坐标**一律是 Body 局部坐标**。
+        /// 默认就是主区；T4 的图块要从右栏拖出来，得把右栏也算进来，否则指针还在栏里的那一段
+        /// 携带物会冻在原地（玩家看到的就是「拖进主区才开始跟手」）。
+        /// </summary>
+        protected virtual bool TryCarryPoint(out Vector2 local)
+        {
+            return TryBodyPointer(out local);
         }
 
         /// <summary>

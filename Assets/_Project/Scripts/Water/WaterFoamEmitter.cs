@@ -50,6 +50,11 @@ namespace WindmillFarm.Water
         [Tooltip("不勾 autoScaleToBounds 时使用的世界直径（米）")]
         public float scale = 1f;
 
+        [Tooltip("特效整体缩放倍率（1 = 保持原始尺寸，0.333 ≈ 三分之一）。\n" +
+                 "非 1 时只改子物体的 localScale，不动粒子参数；对「已摆好的场景特效」同样生效")]
+        [Range(0.05f, 4f)]
+        public float scaleMultiplier = 1f;
+
         [Tooltip("只在物体位于水面以下时才显示（玩家用，出水立刻消失）")]
         public bool visibleOnlyWhenInWater;
 
@@ -70,10 +75,17 @@ namespace WindmillFarm.Water
 
         bool _warnedNoWater;
         bool _triedSpawn;
+        CharacterController _cc;
+
+        // 原始 localScale 必须序列化：本组件是 [ExecuteAlways]，
+        // 不存下来的话每次域重载都会把「已缩小的值」当成原始值，越缩越小。
+        [SerializeField, HideInInspector] Vector3 baseLocalScale = Vector3.one;
+        [SerializeField, HideInInspector] bool baseScaleCaptured;
 
         void OnEnable()
         {
             _triedSpawn = false;
+            if (_cc == null) _cc = GetComponent<CharacterController>();
             ApplyEmissionRate();
         }
 
@@ -142,8 +154,11 @@ namespace WindmillFarm.Water
                 WarnNoWaterOnce();
             }
 
-            // 只在水中显示：判定就是「中心在水面以下」
-            if (visibleOnlyWhenInWater && !(hasWater && p.y < waterY))
+            // 只在水中显示：判定必须和 PlayerController 的入水判定同源（脚底 vs 水面）。
+            // 用 transform.position（胶囊中心）会漏：玩家半身入水时中心已在水面之上。
+            if (_cc == null) _cc = GetComponent<CharacterController>();
+            bool submerged = _cc != null ? _cc.bounds.min.y < waterY : p.y < waterY;
+            if (visibleOnlyWhenInWater && !(hasWater && submerged))
             {
                 if (foamInstance.gameObject.activeSelf) foamInstance.gameObject.SetActive(false);
                 return;
@@ -164,10 +179,32 @@ namespace WindmillFarm.Water
             ApplyWorldScale();
         }
 
+        /// <summary>
+        /// 记下子物体「原始」localScale，供 scaleMultiplier 换算用。
+        /// 只抓一次并序列化：之后怎么调倍率都是「原始尺寸 × 倍率」，不会累积。
+        /// </summary>
+        void CaptureBaseScale()
+        {
+            if (baseScaleCaptured) return;
+            baseLocalScale = foamInstance.localScale;
+            baseScaleCaptured = true;
+        }
+
         /// <summary>把子物体缩放到「世界直径 = 目标直径」，抵消父级缩放。</summary>
         void ApplyWorldScale()
         {
-            if (!driveScale) return;   // 场景里已摆好的特效：原样保留它的缩放
+            if (!driveScale)
+            {
+                // 不接管缩放（场景里已摆好的特效 / 玩家 PlayerFoam）：
+                // 只在倍率不是 1 时，按「第一次看到的 localScale」乘一下，其余参数一个字不动。
+                if (Mathf.Approximately(scaleMultiplier, 1f)) return;
+
+                CaptureBaseScale();
+                Vector3 wantFixed = baseLocalScale * scaleMultiplier;
+                if ((foamInstance.localScale - wantFixed).sqrMagnitude > 1e-8f)
+                    foamInstance.localScale = wantFixed;
+                return;
+            }
 
             float diameter = Mathf.Max(0.01f, scale);
             if (autoScaleToBounds)
@@ -179,6 +216,8 @@ namespace WindmillFarm.Water
                     diameter = Mathf.Max(0.01f, Mathf.Max(sz.x, sz.z) * Mathf.Max(0.01f, autoScaleFactor));
                 }
             }
+            // 倍率放在最后乘：自动按包围盒算直径时才不会把倍率吃掉
+            diameter *= Mathf.Max(0.01f, scaleMultiplier);
 
             Vector3 ls = transform.lossyScale;
             Vector3 want = new Vector3(

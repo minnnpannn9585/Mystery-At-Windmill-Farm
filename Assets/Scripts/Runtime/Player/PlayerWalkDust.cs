@@ -64,6 +64,8 @@ namespace EggRescue
             }
 
             var speed = dist / Mathf.Max(Time.deltaTime, 0.0001f);
+            // 水里不扬尘：浅水踩底时 isGrounded 仍为真，不加这条会在水里拖土
+            if (PlayerController.Instance != null && PlayerController.Instance.IsSwimming) return;
             if (!_cc.isGrounded || speed < MinSpeed) return;
             _step += dist;
             if (_step < StepDistance) return;

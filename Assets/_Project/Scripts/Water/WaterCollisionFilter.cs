@@ -84,6 +84,9 @@ namespace WindmillFarm.Water
                     Collider wc = cols[i];
                     if (wc == null) continue;
 
+                    // 登记给相机避让（SphereCast 不受 IgnoreCollision 影响）
+                    WaterSurface.RegisterWaterCollider(wc);
+
                     if (disableWaterColliders)
                     {
                         if (wc.enabled) wc.enabled = false;

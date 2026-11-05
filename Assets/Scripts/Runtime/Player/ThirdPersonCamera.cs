@@ -1,4 +1,5 @@
 using UnityEngine;
+using WindmillFarm.Water;
 
 namespace EggRescue
 {
@@ -34,7 +35,7 @@ namespace EggRescue
         Transform _rendererRoot;
         bool _playerFaded;
 
-        /// <summary>???????? PlayerController ????????????????</summary>
+        /// <summary>鼠标控制的偏航角：PlayerController 用它在世界空间解算移动方向。</summary>
         public float Yaw { get { return _yaw; } }
         public float Pitch { get { return _pitch; } }
 
@@ -235,6 +236,8 @@ namespace EggRescue
                 var hit = Hits[i];
                 if (hit.collider == null || hit.collider.isTrigger) continue;
                 if (IsPlayer(hit.collider)) continue;
+                // 水面不是遮挡物：玩家能穿过水，相机也不该被水挡住缩臂
+                if (WaterSurface.IsWaterCollider(hit.collider)) continue;
                 // A cast starting overlapped reports distance zero even when moving away
                 // from the wall. Only ignore it when the pivot is outside and moving away.
                 if (hit.distance <= 0f)
@@ -284,7 +287,12 @@ namespace EggRescue
                 System.Array.Resize(ref Overlaps, count + 1);
             }
             for (var i = 0; i < count; i++)
-                if (Overlaps[i] != null && !IsPlayer(Overlaps[i])) return true;
+            {
+                var col = Overlaps[i];
+                if (col == null || IsPlayer(col)) continue;
+                if (WaterSurface.IsWaterCollider(col)) continue;
+                return true;
+            }
             return false;
         }
 

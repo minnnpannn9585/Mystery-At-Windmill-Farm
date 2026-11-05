@@ -60,6 +60,13 @@ namespace EggRescue.MiniGame
         // ---------------- 层级（§4.1 / §19 风险 6） ----------------
         public const int CanvasSortingOrder = 400;
 
+        /// <summary>
+        /// 黑底模糊层的排序值。**必须是负的**：它要压在 3D 场景之上、压在全部 UI 之下。
+        /// 现有 Overlay 画布的排序值：小游戏 400 / 暂停菜单 300 / 玩家 80 / 世界提示 10 /
+        /// HUD 与笔记本 0（场景内预制体默认值）。取负就天然低于以上全部。
+        /// </summary>
+        public const int BackdropSortingOrder = -100;
+
         // ---------------- 通用尺寸 ----------------
         public const float ButtonRadius = 12f;
         public const float PanelRadius = 16f;

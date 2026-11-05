@@ -157,10 +157,10 @@ namespace EggRescue.MiniGame
 
             _root.gameObject.SetActive(true);
 
-            // 黑底 + 模糊先建：它 SetAsFirstSibling，所以永远压在板子下面。
-            // 拍帧要关掉小游戏画布，时机放在板子 Initialize 之前最省事。
-            _backdrop = MiniGameBackdrop.Create(_root);
-            _backdrop.Begin(this, _canvas);
+            // 黑底 + 模糊：自己开一张负排序值的画布，压在场景之上、全部 UI 之下。
+            // 拍帧要关掉其它所有画布（HUD / 笔记本也关），时机放在板子 Initialize 之前最省事。
+            _backdrop = MiniGameBackdrop.Create();
+            _backdrop.Begin(this);
 
             EnterLock();
 

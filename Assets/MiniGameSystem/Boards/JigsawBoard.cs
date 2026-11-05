@@ -227,8 +227,30 @@ namespace EggRescue.MiniGame.Boards
         /// <summary>指针落在主区或右栏都算合法起点（右栏里才有待拼的块）。</summary>
         protected override bool TryPickupPoint(out Vector2 local)
         {
+            return PointerInBodyOrRail(out local);
+        }
+
+        /// <summary>拖出过程中同样认右栏，否则指针还在栏里那一段携带物会冻住。</summary>
+        protected override bool TryCarryPoint(out Vector2 local)
+        {
+            return PointerInBodyOrRail(out local);
+        }
+
+        /// <summary>
+        /// 主区 ∪ 右栏，返回的坐标**一律是 Body 局部**。
+        ///
+        /// 之前栏内分支直接返回 `RailSlots` 的局部坐标，却被当作主区坐标去钳制——
+        /// 栏坐标只有 0~259 × 0~−380，落到主区里就是左上角那一块，
+        /// 所以图块一抓起来就跑去了主区角上，要等指针进主区才开始跟手。
+        /// </summary>
+        bool PointerInBodyOrRail(out Vector2 local)
+        {
             if (TryBodyPointer(out local)) return true;
-            return MiniGameUIKit.ScreenToLocal(RailSlots, Input.mousePosition, out local);
+
+            Vector2 rail;
+            if (!MiniGameUIKit.ScreenToLocal(RailSlots, Input.mousePosition, out rail)) return false;
+            if (RailSlots == null || !RailSlots.rect.Contains(rail)) return false;
+            return MiniGameUIKit.ScreenToLocal(Body, Input.mousePosition, out local);
         }
 
         protected override bool TryBeginCarry(Vector2 bodyLocal)
