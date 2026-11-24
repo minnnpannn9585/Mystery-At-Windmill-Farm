@@ -35,7 +35,11 @@ namespace VFX
         {
             if (Application.isPlaying)
             {
+#if UNITY_EDITOR
                 UpdateShader((float)EditorApplication.timeSinceStartup);
+#else
+                UpdateShader(Time.time);
+#endif
             }
         }
 

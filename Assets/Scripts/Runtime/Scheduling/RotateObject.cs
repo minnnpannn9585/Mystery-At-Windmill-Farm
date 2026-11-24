@@ -33,8 +33,8 @@ namespace WindmillFarm.Scheduling
         [SerializeField] Space space = Space.Self;
 
         [Header("开关")]
-        [Tooltip("是否启用旋转。")]
-        [SerializeField] bool enabled = true;
+        [Tooltip("是否启用旋转。注意这是本组件自己的开关，与 Behaviour.enabled 无关，故用 new 显式隐藏。")]
+        [SerializeField] new bool enabled = true;
 
         /// <summary>实际旋转的目标（target 为空时退回本物体）。</summary>
         Transform Target => target != null ? target : transform;

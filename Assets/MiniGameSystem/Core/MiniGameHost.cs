@@ -53,6 +53,9 @@ namespace EggRescue.MiniGame
                 Debug.LogWarning("[MiniGame] content not ready: " + def.Id + "（M3 补 Data/ 后才有）");
                 return false;
             }
+            // 注册表 / 样例返回的是共享内容。模板运行时会改写 Cards（T7 的 Debug 增减卡），
+            // 不隔离的话上一局的改动会带进下一局。每局拿自己那份浅拷贝。
+            content = content.Clone();
             var ok = Runner.OpenDef(def, content, onReturn);
             // 开局成败各留一行：M1 自检全靠这行判断「按了键到底有没有开起来」，
             // 只报错不报成功的话，失败和「键没生效」在控制台里长得一模一样。

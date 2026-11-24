@@ -53,7 +53,7 @@ public static class EggRescuePublishMenu
         {
             string relativePath = Path.GetRelativePath(sourceFull, sourceFile);
             string destFile = Path.Combine(destFull, relativePath);
-            string? destDirName = Path.GetDirectoryName(destFile);
+            string destDirName = Path.GetDirectoryName(destFile);
             if (!string.IsNullOrEmpty(destDirName))
             {
                 Directory.CreateDirectory(destDirName);

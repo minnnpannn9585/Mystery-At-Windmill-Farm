@@ -167,6 +167,9 @@ namespace WindmillFarm.Water
 
         static bool s_autoScanDone;
         static float s_nextAutoScan;
+        // 无水面是合法状态（小游戏 / 测试场景 / 纯陆地区域），但 AutoRegisterIfNeeded 每秒会重扫一次。
+        // 没有这个标记，同一句话会每秒刷一条警告，把 Console 淹没、掩盖真正的问题。
+        static bool s_warnedNoWater;
         static readonly int WaterProbeId = Shader.PropertyToID("_WaterfallTurbulencePose");
 
         /// <summary>
@@ -205,8 +208,11 @@ namespace WindmillFarm.Water
 
             if (added > 0)
                 Debug.Log("[WaterSurface] 自动注册了 " + added + " 片水面（材质带 _WaterfallTurbulencePose 的 Renderer）。");
-            else if (s_all.Count == 0)
-                Debug.LogWarning("[WaterSurface] 场景里没找到任何水面：没有任何 Renderer 的材质带 _WaterfallTurbulencePose。游泳 / 泡沫都不会生效。");
+            else if (s_all.Count == 0 && !s_warnedNoWater)
+            {
+                s_warnedNoWater = true;
+                Debug.LogWarning("[WaterSurface] 场景里没找到任何水面：没有任何 Renderer 的材质带 _WaterfallTurbulencePose。游泳 / 泡沫都不会生效。（此提示整个会话只报一次）");
+            }
         }
 
         /// <summary>查询某点是否在水面以下（真正泡在水里）。</summary>

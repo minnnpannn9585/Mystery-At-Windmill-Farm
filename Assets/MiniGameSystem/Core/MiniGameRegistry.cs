@@ -193,16 +193,21 @@ namespace EggRescue.MiniGame
         static MiniGameDef Def(string id, MiniGameTemplate template, string objective,
             string submitVar, string countVar, string source)
         {
+            // 标题行 / 提示行逐字取自任务线（§12.6.1 不压缩、照搬、标点原样）。
+            // 缺行时退回模板名 / 空提示，不静默吞掉——自检局与样例局不受影响。
+            var titleRow = MiniGameScript.TitleRow(id);
+            var hintRow = MiniGameScript.HintRow(id);
             return new MiniGameDef
             {
                 Id = id,
                 Template = template,
                 Title = TitleOf(template),
-                Objective = objective,
+                Objective = !string.IsNullOrEmpty(titleRow) ? titleRow : objective,
                 SubmitVar = submitVar,
                 CountVar = countVar,
                 SourceId = source,
                 ContentKey = id,
+                Hints = !string.IsNullOrEmpty(hintRow) ? new[] { hintRow } : new string[0],
             };
         }
 

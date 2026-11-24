@@ -168,6 +168,27 @@ namespace EggRescue.MiniGame
             return null;
         }
 
+        /// <summary>
+        /// 浅拷贝一份供单局专用。注册表 / 样例里的内容是共享的，
+        /// 模板运行时（尤其 Debug 增减卡）会改写 Cards，不隔离就会污染下一局。
+        /// 数组元素本身在运行时不被改写，浅拷贝足够。
+        /// </summary>
+        public MiniGameContent Clone()
+        {
+            return new MiniGameContent
+            {
+                Key = Key,
+                BackgroundKey = BackgroundKey,
+                Targets = (MiniGameTarget[])Targets.Clone(),
+                Labels = (string[])Labels.Clone(),
+                SlotCount = SlotCount,
+                Slots = (MiniGameSlot[])Slots.Clone(),
+                Cards = (MiniGameCard[])Cards.Clone(),
+                Segments = (MiniGameSegment[])Segments.Clone(),
+                Faces = (MiniGameFace[])Faces.Clone(),
+            };
+        }
+
         /// <summary>M1 自检用的最小内容：三张卡、三个槽。</summary>
         public static MiniGameContent DebugDefault()
         {

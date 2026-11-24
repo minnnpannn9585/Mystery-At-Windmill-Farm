@@ -21,6 +21,7 @@ namespace EggRescue.MiniGame
         int _flashesLeft;
         bool _playing;
         bool _pulse = true;
+        bool _restoreOnEnd = true;
 
         public static TargetHighlight Create(Transform parent, string name = "Highlight")
         {
@@ -54,12 +55,17 @@ namespace EggRescue.MiniGame
             ApplyAlpha(1f);
         }
 
-        /// <summary>闪烁 N 次后停在描边态（T4 错位格：红闪 2 次）。</summary>
-        public void Flash(RectTransform target, Color color, int times, float period = 0.24f, float margin = 6f)
+        /// <summary>
+        /// 闪烁 N 次。默认闪完自动隐藏、颜色完全复原（T7 错误卡：闪红后恢复）。
+        /// restoreOnEnd=false 时才停在描边态（T4 错位格要一直标着）。
+        /// </summary>
+        public void Flash(RectTransform target, Color color, int times, float period = 0.24f,
+            float margin = 6f, bool restoreOnEnd = true)
         {
             if (target == null) return;
             _color = color;
             _pulse = false;
+            _restoreOnEnd = restoreOnEnd;
             _flashes = Mathf.Max(1, times);
             _flashesLeft = _flashes * 2;   // 一亮一灭算一次
             _elapsed = 0f;
@@ -101,10 +107,10 @@ namespace EggRescue.MiniGame
                 ApplyAlpha(phase < period * 0.5f ? 1f : 0f);
                 if (_elapsed >= _life)
                 {
-                    // 闪完停在描边态，让玩家回头还能找到它
                     _flashes = 0;
                     _playing = false;
-                    ApplyAlpha(1f);
+                    if (_restoreOnEnd) Hide();          // 颜色完全复原（T7 错误卡）
+                    else ApplyAlpha(1f);                // 停在描边态（T4 错位格）
                 }
                 return;
             }

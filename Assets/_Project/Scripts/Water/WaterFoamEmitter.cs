@@ -73,7 +73,10 @@ namespace WindmillFarm.Water
 
         public const string DefaultResourcePath = "Water/PlayerFoam";
 
-        bool _warnedNoWater;
+        // 查不到水面时用自身高度兜底是预期行为（小游戏 / 无水面场景），
+        // 每个 emitter 各报一条、换场景/重进 Play 又报一遍会淹没 Console。
+        // 改成整个会话只报一次，保留「场景本该有水却没检测到」的诊断价值。
+        static bool s_warnedNoWater;
         bool _triedSpawn;
         CharacterController _cc;
 
@@ -231,10 +234,17 @@ namespace WindmillFarm.Water
 
         void WarnNoWaterOnce()
         {
-            if (_warnedNoWater || !Application.isPlaying) return;
-            _warnedNoWater = true;
+            if (!Application.isPlaying) return;
+
+            // 分清两种情况，别把「站岸上」误报成「没注册水面」：
+            //   1) 场景里一片 WaterSurface 都没有 —— 才是真的异常，提示一次；
+            //   2) 已经注册了水面，只是当前 XZ 不在任何水面范围内（玩家出生在岸上）——
+            //      这是正常状态，UpdatePlacement 已经用物体自身高度兜底，不需要警告。
+            if (WaterSurface.All.Count > 0) return;
+            if (s_warnedNoWater) return;
+            s_warnedNoWater = true;
             Debug.LogWarning("[WaterFoamEmitter] " + name + " 在 " + transform.position +
-                " 查不到水面，已改用物体自身高度兜底（当前注册的水面数 = " + WaterSurface.All.Count + "）。", this);
+                " 查不到水面：当前没有任何 WaterSurface 注册（注册数 = 0），已改用物体自身高度兜底。此提示整个会话只报一次。", this);
         }
 
         void OnValidate()

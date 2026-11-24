@@ -49,8 +49,8 @@ namespace EggRescue.MiniGame.Boards
         /// <summary>主区四周留白：格子方阵在留白之内取最大。</summary>
         const float BoardPadding = 24f;
 
-        /// <summary>线索集里图块的边长（与格子的正方形比例一致，缩略图不失真）。</summary>
-        const float ThumbSide = 84f;
+        /// <summary>线索集里图块的边长。两列塞进 124 宽的便签内卡，单格约 59，缩略图取 52。</summary>
+        const float ThumbSide = 52f;
 
         const int RailColumns = 2;
 
@@ -133,9 +133,9 @@ namespace EggRescue.MiniGame.Boards
                 if (railLabel != null)
                 {
                     var slotSize = RailSlotSize(RailColumns);
-                    if (railText != null) railText.fontSize = 17f;
+                    if (railText != null) railText.fontSize = 12f;
                     MiniGameUIKit.Place((RectTransform)railLabel, new Vector2(0f, 0f), new Vector2(0f, 0f),
-                        new Vector2(6f, 2f), new Vector2(slotSize.x - 10f, 22f));
+                        new Vector2(4f, 2f), new Vector2(slotSize.x - 6f, 18f));
                 }
 
                 _cells.Add(new CellView
@@ -226,12 +226,6 @@ namespace EggRescue.MiniGame.Boards
 
         /// <summary>指针落在主区或右栏都算合法起点（右栏里才有待拼的块）。</summary>
         protected override bool TryPickupPoint(out Vector2 local)
-        {
-            return PointerInBodyOrRail(out local);
-        }
-
-        /// <summary>拖出过程中同样认右栏，否则指针还在栏里那一段携带物会冻住。</summary>
-        protected override bool TryCarryPoint(out Vector2 local)
         {
             return PointerInBodyOrRail(out local);
         }

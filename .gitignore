@@ -15,6 +15,9 @@
 /[Uu]ser[Ss]ettings/
 *.log
 
+# Local machine path for the Unity-MCP server binary (machine-specific, do not commit)
+/.env
+
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
 *.blend1
 *.blend1.meta

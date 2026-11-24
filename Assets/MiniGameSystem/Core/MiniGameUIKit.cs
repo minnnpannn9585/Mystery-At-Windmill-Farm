@@ -56,6 +56,45 @@ namespace EggRescue.MiniGame
             return (RectTransform)go.transform;
         }
 
+        /// <summary>
+        /// 上宽下窄的梯形面板（P5 不规则 UI）。用自定义 TrapezoidGraphic 画 mesh，
+        /// 不走 Sliced Image——否则九宫格会把斜边拉回矩形。默认右边界内收，与便签斜边同向。
+        /// </summary>
+        public static RectTransform TrapezoidPanel(Transform parent, string name, Color color,
+            float leftInset = 0f, float rightInset = 0.14f, bool raycast = false)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer),
+                typeof(TrapezoidGraphic));
+            go.transform.SetParent(parent, false);
+            var g = go.GetComponent<TrapezoidGraphic>();
+            g.color = color;
+            g.LeftInset = leftInset;
+            g.RightInset = rightInset;
+            g.raycastTarget = raycast;
+            return (RectTransform)go.transform;
+        }
+
+        /// <summary>
+        /// 把组件 PNG 当作全画布美术层贴上来。组件都是 1920×1080 的透明图，
+        /// alpha 边界就是原稿落位，所以整张对齐画布即可，不裁切、不改尺寸。
+        /// 用 Image（不是 RawImage）：Image 会按 Sprite 的 pixelsPerUnit 与 uiScaleMode 正确缩放。
+        /// color 走乘算 —— 纸背板靠它从原稿色 (250,116,71) 染成七色卡。
+        /// </summary>
+        public static RectTransform SpriteArt(Transform parent, string name, string resourcePath, Color color)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            go.transform.SetParent(parent, false);
+            var image = go.GetComponent<Image>();
+            var sprite = Resources.Load<Sprite>(resourcePath);
+            if (sprite != null) image.sprite = sprite;
+            image.color = color;
+            image.raycastTarget = false;
+            image.preserveAspect = false;
+            var rect = (RectTransform)go.transform;
+            PlaceArt(rect, MiniGameTheme.PaperFull);
+            return rect;
+        }
+
         public static TMP_Text Label(Transform parent, string name, float size, Color color,
             TextAlignmentOptions align = TextAlignmentOptions.Center)
         {
@@ -133,6 +172,24 @@ namespace EggRescue.MiniGame
                 MiniGameTheme.RefHeight * 0.5f - art.y);
             rect.sizeDelta = new Vector2(art.width, art.height);
             rect.localScale = Vector3.one;
+        }
+
+        /// <summary>
+        /// 把「逻辑尺寸 source」的容器等比缩放后摆进美术安全区 target。
+        /// rect 的 sizeDelta 仍是 source（子元素坐标不变），只靠 localScale + 位置适配——
+        /// 这样各 Board 不用改一个坐标，ScreenPointToLocalPointInRectangle 会自动处理缩放。
+        /// </summary>
+        public static void PlaceArtFit(RectTransform rect, Rect source, Rect target)
+        {
+            if (rect == null) return;
+            var fit = MiniGameLayout.FitInside(source, target);
+            rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0f, 1f);
+            rect.sizeDelta = new Vector2(source.width, source.height);
+            rect.anchoredPosition = new Vector2(fit.x - MiniGameTheme.RefWidth * 0.5f,
+                MiniGameTheme.RefHeight * 0.5f - fit.y);
+            rect.localScale = Vector3.one * Mathf.Min(target.width / source.width,
+                target.height / source.height);
         }
 
         public static void Place(RectTransform rect, Vector2 anchor, Vector2 pivot,

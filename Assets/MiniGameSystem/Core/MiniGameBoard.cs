@@ -39,8 +39,12 @@ namespace EggRescue.MiniGame
         public RectTransform Rect;
         public CarryHandle Handle;
         public Vector2 HomePos;
+        /// <summary>本次拖拽开始前的真实位置。拒绝落位时回到这里——「回到没拖之前」的语义。</summary>
+        public Vector2 DragOrigin;
         public DropTarget Home;
         public bool Placed;
+        /// <summary>拒绝回位动画期间为 true：不接受起手，避免新拖拽与回位补间抢同一个 rect。</summary>
+        public bool Returning;
 
         /// <summary>热区补到 64×64（§4.4 交互下限），图形小的时候靠它。</summary>
         public float MinHitSize = 64f;
@@ -114,10 +118,21 @@ namespace EggRescue.MiniGame
         protected virtual string RailTitle { get { return "已发现"; } }
 
         /// <summary>
-        /// 落位被拒或丢在空白处时，物件要不要弹回原位。
-        /// T1 的镜片必须留在松手的地方——弹回去玩家根本点不到它（§6.3 的跟手是持续的，不是每次归位）。
+        /// 「落进了某个目标、但判定被拒」时，物件要不要回位。
+        /// 注意：丢在空白处（hit == null）一律就地留下、不回原位——玩家要像在桌上摆线索那样
+        /// 把组件放到屏幕任意一处，这条路径不受本开关影响（2026-11-24 用户口径）。
+        /// T1 的镜片、T4 的图块即使落进目标被拒也不回位，弹回去玩家根本点不到它。
         /// </summary>
         protected virtual bool ReturnHomeOnReject { get { return true; } }
+
+        /// <summary>拒绝落位时用「渐入回位」代替弹性回位。T7 错误卡专用（柔和、不弹跳）。</summary>
+        protected virtual bool RejectUsesFade { get { return false; } }
+
+        /// <summary>
+        /// 拒绝回位前的延迟秒数。默认 0（立即回位）。
+        /// T7 设为闪烁时长，保证「闪烁播完 → 才回位」的严格顺序。
+        /// </summary>
+        protected virtual float RejectReturnDelay { get { return 0f; } }
 
         protected virtual string FooterText { get { return "拖动 ｜ 按住拖动 · 松手放下 ｜ 提示 1/2"; } }
 
@@ -163,53 +178,71 @@ namespace EggRescue.MiniGame
 
         void BuildChrome()
         {
-            var top = MiniGameUIKit.Panel(Root, "TopBar", MiniGameTheme.Cream, 0f);
-            MiniGameUIKit.PlaceArt(top, MiniGameTheme.TopBar);
+            // ============ M3 骨架层：组件 PNG 原稿 ============
+            // 三层纸 + 回形针 + X 都是 1920×1080 透明图，1:1 贴满画布即还原 UI 标准。
+            // 纸背板按模板染成七色便签；纸面盖在背板上，露出右侧便签条与投影。
+            var template = Def != null ? Def.Template : MiniGameTemplate.Debug;
+            MiniGameUIKit.SpriteArt(Root, "PaperStack", MiniGameTheme.ArtPaperStack, Color.white);
+            // 七色便签纸逐色预染成 PNG，不做 color 乘算（乘算会把青绿/蓝压暗失真）
+            MiniGameUIKit.SpriteArt(Root, "PaperBack", MiniGameTheme.ArtPaperBack(template), Color.white);
+            MiniGameUIKit.SpriteArt(Root, "PaperFace", MiniGameTheme.ArtPaperFace, Color.white);
+            MiniGameUIKit.SpriteArt(Root, "PaperClip", MiniGameTheme.ArtPaperClip, Color.white);
 
-            var back = MiniGameUIKit.Btn(top, "Back", "← 返回调查", MiniGameTheme.Cream, MiniGameTheme.Deep, 20f, 10f);
-            MiniGameUIKit.Place((RectTransform)back.transform, new Vector2(0f, 1f), new Vector2(0f, 1f),
-                new Vector2(24f, -24f), new Vector2(200f, 48f));
-            back.onClick.AddListener(RequestExit);
+            // X 关闭：PNG 图形 + 透明热区（热区略大于图形，保证点得到）
+            MiniGameUIKit.SpriteArt(Root, "CloseXArt", MiniGameTheme.ArtCloseX, Color.white);
+            var closeGo = new GameObject("CloseX", typeof(RectTransform), typeof(CanvasRenderer),
+                typeof(Image), typeof(Button));
+            closeGo.transform.SetParent(Root, false);
+            var closeImg = closeGo.GetComponent<Image>();
+            closeImg.color = new Color(1f, 1f, 1f, 0f);   // 透明：只做热区，图形由 CloseXArt 显示
+            closeImg.raycastTarget = true;
+            var closeBtn = closeGo.GetComponent<Button>();
+            closeBtn.targetGraphic = closeImg;
+            closeBtn.navigation = new Navigation { mode = Navigation.Mode.None };
+            MiniGameUIKit.PlaceArt((RectTransform)closeGo.transform, MiniGameLayout.CloseXArea);
+            closeBtn.onClick.AddListener(RequestExit);
 
-            _titleLabel = MiniGameUIKit.Label(top, "Title", 30f, MiniGameTheme.Deep);
-            MiniGameUIKit.Place(_titleLabel.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f),
-                new Vector2(0f, -22f), new Vector2(900f, 52f));
-            _titleLabel.text = Def != null ? Def.Title : "";
+            // ============ 标题行 / 提示行：项目字体 + 任务线文案 ============
+            // 文字层无底板（纸面由 PNG 提供），墨蓝左对齐，坐标按 §2.2 纸面口径。
+            // MiniGameUIKit.Label 用 MiniGameTheme.Font = 项目已装 MiSans（TMP）。
+            _titleLabel = MiniGameUIKit.Label(Root, "TitleRow", 30f, MiniGameTheme.Deep, TextAlignmentOptions.Left);
+            MiniGameUIKit.PlaceArt(_titleLabel.rectTransform, MiniGameLayout.TitleRow);
+            _titleLabel.text = Def != null && !string.IsNullOrEmpty(Def.Objective) ? Def.Objective :
+                               (Def != null ? Def.Title : "");
 
-            var help = MiniGameUIKit.Label(top, "Help", 20f, MiniGameTheme.Grey);
-            MiniGameUIKit.Place(help.rectTransform, new Vector2(1f, 1f), new Vector2(1f, 1f),
-                new Vector2(-24f, -32f), new Vector2(200f, 32f));
-            help.text = "操作帮助";
+            // 提示行 = 任务线一级提示（§12.6.1 照搬原文），底栏只作承载、不再画 Cream 底板。
+            // FooterText 是模板的操作说明，接在提示行前面，保持各模板的可用性。
+            FooterRoot = MiniGameUIKit.Node(Root, "Footer");
+            MiniGameUIKit.PlaceArt(FooterRoot, MiniGameLayout.FooterArea);
+            FooterLabel = MiniGameUIKit.Label(FooterRoot, "Text", 22f, MiniGameTheme.Deep, TextAlignmentOptions.Left);
+            FooterLabel.enableWordWrapping = true;
+            FooterLabel.overflowMode = TextOverflowModes.Overflow;
+            var footerRect = FooterLabel.rectTransform;
+            footerRect.anchorMin = Vector2.zero;
+            footerRect.anchorMax = Vector2.one;
+            footerRect.offsetMin = new Vector2(12f, 10f);
+            footerRect.offsetMax = new Vector2(-12f, -10f);
+            var hintRow = Def != null ? MiniGameScript.HintRow(Def.Id) : null;
+            FooterLabel.text = string.IsNullOrEmpty(hintRow) ? FooterText : (FooterText + "　｜　" + hintRow);
 
-            var objective = MiniGameUIKit.Panel(Root, "Objective", MiniGameTheme.Cream);
-            MiniGameUIKit.PlaceArt(objective, MiniGameTheme.Objective);
-            _objectiveLabel = MiniGameUIKit.Paragraph(objective, "Text", 26f, MiniGameTheme.Deep,
-                TextAlignmentOptions.Left);
-            var objRect = _objectiveLabel.rectTransform;
-            objRect.anchorMin = Vector2.zero;
-            objRect.anchorMax = Vector2.one;
-            objRect.offsetMin = new Vector2(24f, 12f);
-            objRect.offsetMax = new Vector2(-24f, -12f);
-            _objectiveLabel.text = Def != null ? Def.Objective : "";
+            // ============ 交互层：坐标保持旧口径，等 M3 逐项换算内容 ============
+            _objectiveLabel = MiniGameUIKit.Label(Root, "ObjectiveLegacy", 1f, MiniGameTheme.Deep);
+            _objectiveLabel.gameObject.SetActive(false);   // 保留字段兼容，不再显示
 
             // 主操作区。裁剪 + 统一的指针坐标系（所有落点都是它的局部坐标）
             Body = MiniGameUIKit.Node(Root, "Body");
-            MiniGameUIKit.PlaceArt(Body, MiniGameTheme.Body);
-            Body.gameObject.AddComponent<RectMask2D>();
+            // 逻辑尺寸仍是旧 Body（1285×637，各 Board 的坐标不用改），
+            // 但整块等比缩放 + 平移到纸面插图安全区，内容再也不会溢出纸外。
+            MiniGameUIKit.PlaceArtFit(Body, MiniGameTheme.Body, MiniGameLayout.BodyArea);
+            // 不启用 RectMask2D：玩家要能把卡片/镜片等拖到屏幕任意位置，像在桌面上摆线索。
+            // 之前开启它会把移出 Body 的组件裁掉（表现为「拖到边缘被切一半」）。
             var bodyBg = MiniGameUIKit.Panel(Body, "BodyBg", new Color(1f, 1f, 1f, 0.02f), 0f);
             MiniGameUIKit.Stretch(bodyBg);
 
             _hintButton = MiniGameUIKit.Btn(Root, "Hint", "提示 0/2", MiniGameTheme.Yellow, MiniGameTheme.Deep, 20f);
-            MiniGameUIKit.PlaceArt((RectTransform)_hintButton.transform, MiniGameTheme.HintButton);
+            MiniGameUIKit.PlaceArt((RectTransform)_hintButton.transform, MiniGameLayout.HintButtonArea);
             _hintLabel = _hintButton.GetComponentInChildren<TMP_Text>();
             _hintButton.onClick.AddListener(() => ShowHint(_hintLevel + 1));
-
-            FooterRoot = MiniGameUIKit.Panel(Root, "Footer", MiniGameTheme.Cream, 0f);
-            MiniGameUIKit.PlaceArt(FooterRoot, MiniGameTheme.Footer);
-            FooterLabel = MiniGameUIKit.Label(FooterRoot, "Text", 22f, MiniGameTheme.Deep, TextAlignmentOptions.Left);
-            MiniGameUIKit.Place(FooterLabel.rectTransform, new Vector2(0f, 0.5f), new Vector2(0f, 0.5f),
-                new Vector2(24f, 0f), new Vector2(1400f, 40f));
-            FooterLabel.text = FooterText;
 
             BuildConfirm();
             BuildBanner();
@@ -218,21 +251,31 @@ namespace EggRescue.MiniGame
         void BuildRail()
         {
             if (!HasRail) return;
-            Rail = MiniGameUIKit.Panel(Root, "Rail", MiniGameTheme.Cream);
-            MiniGameUIKit.PlaceArt(Rail, MiniGameTheme.RightRail);
+            // M3 骨架：便签内卡半透明白，透出底下的七色纸背板。
+            //
+            // 之前用 PlaceArtFit 把旧 RightRail（307×518）等比塞进细长便签区（144×544），
+            // 按宽度缩放只有 0.47 倍 => 高度缩到 243，内卡只占便签上半截、下面露出一大条粉色。
+            // 现在逻辑尺寸直接等于便签内接矩形，localScale=1，铺满整条便签。
+            //
+            // 便签内卡改成上宽下窄的梯形（P5 不规则 UI），不再用白色矩形——
+            // 白色太跳会盖掉便签本来的样子。改用当前模板便签色向墨色压暗的同色深版，
+            // 既和便签一体、又在深底上托得住浅色文字。
+            var noteDeep = MiniGameTheme.NoteDeep(Def != null ? Def.Template : MiniGameTemplate.Debug);
+            Rail = MiniGameUIKit.TrapezoidPanel(Root, "Rail", noteDeep, 0f, RailSlopeInset);
+            MiniGameUIKit.PlaceArt(Rail, MiniGameLayout.RailArea);
 
-            var title = MiniGameUIKit.Label(Rail, "RailTitle", 24f, MiniGameTheme.Deep, TextAlignmentOptions.Left);
+            var title = MiniGameUIKit.Label(Rail, "RailTitle", 17f, MiniGameTheme.NoteInk, TextAlignmentOptions.Left);
             MiniGameUIKit.Place(title.rectTransform, new Vector2(0f, 1f), new Vector2(0f, 1f),
-                new Vector2(24f, -20f), new Vector2(240f, 34f));
+                new Vector2(10f, -8f), new Vector2(124f, 28f));
             title.text = RailTitle;
 
             RailSlots = MiniGameUIKit.Node(Rail, "Slots");
             MiniGameUIKit.Place(RailSlots, new Vector2(0f, 1f), new Vector2(0f, 1f),
-                new Vector2(24f, -70f), new Vector2(259f, 380f));
+                new Vector2(10f, -52f), new Vector2(RailInnerWidth, RailSlotsHeight));
 
-            RailCount = MiniGameUIKit.Label(Rail, "RailCount", 28f, MiniGameTheme.Orange);
+            RailCount = MiniGameUIKit.Label(Rail, "RailCount", 20f, MiniGameTheme.NoteInk);
             MiniGameUIKit.Place(RailCount.rectTransform, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f),
-                new Vector2(0f, 22f), new Vector2(200f, 40f));
+                new Vector2(0f, 10f), new Vector2(124f, 32f));
             RailCount.text = "0 / 0";
         }
 
@@ -301,6 +344,8 @@ namespace EggRescue.MiniGame
                     Target = rect,
                     Area = Body,
                     SmoothTime = smoothTime,
+                    // 可移到屏幕任意处：不再把携带物 clamp 在 Body 内（桌面摆线索的手感）。
+                    ClampToArea = false,
                 },
             };
             rect.anchoredPosition = homePos;
@@ -316,10 +361,15 @@ namespace EggRescue.MiniGame
 
         // 右栏槽的几何常量。AddRailSlot 和 T4（要把图块摆回槽里）必须共用同一份，
         // 否则两处各算一遍，改一次栏宽就会有一处算错。
-        protected const float RailInnerWidth = 259f;
-        protected const float RailGap = 8f;
-        protected const float RailRowHeight = 118f;
-        protected const float RailSlotHeight = 114f;
+        // 便签内卡铺满后是 144 宽 × 544 高，RailSlots 内区 124×440，单行槽按窄栏重排。
+        protected const float RailInnerWidth = 124f;
+        protected const float RailGap = 6f;
+        protected const float RailRowHeight = 106f;
+        protected const float RailSlotHeight = 100f;
+        /// <summary>外层 Rail 的右斜边内收比例。内部 widget 只按行收宽，不各自切成梯形。</summary>
+        protected const float RailSlopeInset = 0.12f;
+        /// <summary>RailSlots 内区高度，用于把行号映射成斜边内收比例。</summary>
+        protected const float RailSlotsHeight = 440f;
 
         /// <summary>第 index 个槽在 RailSlots 里的**左上角**（RailSlots 轴心在左上，故左上即原点）。</summary>
         protected static Vector2 RailSlotTopLeft(int index, int columns)
@@ -347,15 +397,28 @@ namespace EggRescue.MiniGame
             if (RailSlots == null) return null;
 
             columns = Mathf.Max(1, columns);
-            var size = RailSlotSize(columns);
+            var baseSize = RailSlotSize(columns);
 
-            var slot = MiniGameUIKit.Panel(RailSlots, "Slot" + index, new Color(1f, 1f, 1f, 0.45f), 10f);
+            // 用户口径：按钮本身不做成单个梯形。外层 Rail 已经是整块上宽下窄的梯形，
+            // 内部 widget 保持矩形，只让「每一行的右边界」跟着外层斜边收窄。
+            // 这样整片槽位凑在一起看是同一条斜边，而不是一堆各自斜切的小块。
+            var row = Mathf.Max(0, index / columns);
+            var rowTop = row * RailRowHeight;
+            var slope = 1f - RailSlopeInset * Mathf.Clamp01(rowTop / RailSlotsHeight);
+            var size = new Vector2(baseSize.x * slope, baseSize.y);
+
+            // 底色取便签主色向纸白提亮一档，比深内卡浅、但仍是同色系。
+            var noteSoft = Color.Lerp(
+                MiniGameTheme.NoteColor(Def != null ? Def.Template : MiniGameTemplate.Debug),
+                MiniGameTheme.Cream, 0.42f);
+            var slot = MiniGameUIKit.Panel(RailSlots, "Slot" + index, noteSoft, 4f);
             MiniGameUIKit.Place(slot, new Vector2(0f, 1f), new Vector2(0f, 1f),
                 RailSlotTopLeft(index, columns), size);
 
-            var text = MiniGameUIKit.Label(slot, "Label", 20f, MiniGameTheme.Grey, TextAlignmentOptions.Left);
+            // 便签内卡只有 124 宽，两列时单槽约 59：字号与留白跟着缩，别再溢出槽外。
+            var text = MiniGameUIKit.Label(slot, "Label", 15f, MiniGameTheme.Deep, TextAlignmentOptions.Left);
             MiniGameUIKit.Place(text.rectTransform, new Vector2(0f, 0.5f), new Vector2(0f, 0.5f),
-                new Vector2(18f, 0f), new Vector2(size.x - 24f, 40f));
+                new Vector2(7f, 0f), new Vector2(size.x - 10f, 32f));
             text.text = label;
             return slot;
         }
@@ -375,11 +438,92 @@ namespace EggRescue.MiniGame
         }
 
         protected void FlashHighlight(RectTransform target, Color color,
-            int times = MiniGameMotion.HighlightFlashesOnReject)
+            int times = MiniGameMotion.HighlightFlashesOnReject, bool restoreOnEnd = true)
         {
             if (target == null) return;
             // 每次单独一个实例：T4 点提示时要同时点亮全部错位格（评审 J 条）
-            NewHighlight("Flash").Flash(target, color, times);
+            NewHighlight("Flash").Flash(target, color, times, restoreOnEnd: restoreOnEnd);
+        }
+
+        /// <summary>
+        /// 错误落位后的「渐入回位」：边淡出边平滑滑回原位，到位后恢复不透明。
+        /// 与 ReturnHome 的弹性回位不同——错误反馈要柔和，不能弹跳（T7 反馈第 3 点）。
+        /// </summary>
+        readonly Dictionary<string, Coroutine> _fadeReturns = new Dictionary<string, Coroutine>();
+        readonly Dictionary<string, Coroutine> _rejectDelays = new Dictionary<string, Coroutine>();
+
+        /// <summary>
+        /// 确定性的拒绝回位：锁定该件 → 回到本次拖拽前的真实位置（DragOrigin）→ 同步 Handle 内部坐标 → 解锁。
+        /// 供子类在「闪烁播完」之后调用，保证顺序是「先闪后回」，且回位途中不接受新的起手。
+        /// </summary>
+        protected void ReturnHomeFade(MiniGamePiece piece)
+        {
+            if (piece == null || piece.Rect == null) return;
+            // 按 piece 停：连续拖错同一张卡时，前一条回位还在跑就先停掉，
+            // 但不要影响别的卡的回位动画。
+            Coroutine prev;
+            if (_fadeReturns.TryGetValue(piece.Id, out prev) && prev != null) StopCoroutine(prev);
+            _fadeReturns[piece.Id] = StartCoroutine(ReturnHomeFadeRoutine(piece));
+        }
+
+        /// <summary>
+        /// 拒绝回位的统一入口：从松手那一刻就锁定该件，等闪烁播完，再交给 ReturnHomeFade 做确定性回位。
+        /// 同一件连续出错时先停掉旧协程，避免两条补间抢同一个 rect。
+        /// </summary>
+        IEnumerator DelayedRejectReturn(MiniGamePiece piece)
+        {
+            piece.Returning = true;
+            if (RejectReturnDelay > 0f)
+                yield return new WaitForSecondsRealtime(RejectReturnDelay);
+
+            _rejectDelays.Remove(piece.Id);
+            // 回位目标在松手瞬间已定；这里无条件交给 ReturnHomeFade（内部解锁）。
+            ReturnHomeFade(piece);
+        }
+
+        IEnumerator ReturnHomeFadeRoutine(MiniGamePiece piece)
+        {
+            // src 不能是 Rect 当前位置：闪烁期间若发生任何位移，from 会被污染。
+            // 用 CarryHandle 的未旋转中心作为「松手处的真实位置」。
+            var from = piece.Handle != null ? piece.Handle.LocalPosition : piece.Rect.anchoredPosition;
+            // 终点固定为「这次拖拽开始前」的位置，不能用 HomePos（成功吸附时被改写过）。
+            var to = piece.DragOrigin;
+
+            piece.Returning = true;                       // 回位期间不接受起手，杜绝与下一拖拽打架
+
+            var group = piece.Rect.GetComponent<CanvasGroup>();
+            if (group == null) group = piece.Rect.gameObject.AddComponent<CanvasGroup>();
+            group.alpha = 1f;
+            piece.Rect.anchoredPosition = from;
+
+            var dur = MiniGameMotion.ReturnDuration;
+            for (var t = 0f; t < dur; t += Time.unscaledDeltaTime)
+            {
+                var k = Mathf.Clamp01(t / dur);
+                var e = k * k * (3f - 2f * k);            // smoothstep：无过冲
+                var pos = Vector2.Lerp(from, to, e);
+                piece.Rect.anchoredPosition = pos;
+                if (piece.Handle != null) piece.Handle.SyncTo(pos);   // 内部坐标同步，防止下次起手跳变
+                group.alpha = Mathf.Lerp(1f, 0.35f, Mathf.Sin(k * Mathf.PI));
+                yield return null;
+            }
+
+            // 强制钉死到终点：协程被时间切片截断时也不会停在槽位半路。
+            piece.Rect.anchoredPosition = to;
+            if (piece.Handle != null) piece.Handle.SyncTo(to);
+            group.alpha = 1f;
+            piece.HomePos = to;                            // 下次的默认家也回到起手处
+            piece.Returning = false;
+            _fadeReturns.Remove(piece.Id);
+            SpringReturn.ScaleTo(this, piece.Rect, MiniGameMotion.PickScale, 1f,
+                MiniGameMotion.PickDuration);
+        }
+
+        /// <summary>闪烁时长：period × (次数 × 2 次明暗)。与 TargetHighlight.Flash 保持一致。</summary>
+        protected const float RejectFlashPeriod = 0.24f;
+        protected static float RejectFlashDuration(int times)
+        {
+            return RejectFlashPeriod * Mathf.Max(1, times) * 2f;
         }
 
         protected void HideHighlight()
@@ -443,14 +587,15 @@ namespace EggRescue.MiniGame
         void TickPointer()
         {
             Vector2 local;
-            var inside = TryCarryPoint(out local);
+            // 携带中只换算坐标，不再要求指针留在 Body 内；纸外、屏幕边缘都继续跟手。
+            var hasLocal = TryCarryPoint(out local);
 
             if (_carryPiece != null && _carryPiece.Handle.Active)
             {
                 Phase = InteractionPhase.Carry;
-                if (inside) _carryPiece.Handle.MoveTo(local, Time.unscaledDeltaTime);
+                if (hasLocal) _carryPiece.Handle.MoveTo(local, Time.unscaledDeltaTime);
                 if (!_carryPiece.Handle.RequirePress || !Input.GetMouseButton(0))
-                    ReleaseCarry(inside ? (Vector2?)local : null);
+                    ReleaseCarry(hasLocal ? (Vector2?)local : null);
                 return;
             }
 
@@ -465,13 +610,15 @@ namespace EggRescue.MiniGame
         }
 
         /// <summary>
-        /// 携带物的「可跟手区」：指针落在这里才算还在操作。返回的坐标**一律是 Body 局部坐标**。
-        /// 默认就是主区；T4 的图块要从右栏拖出来，得把右栏也算进来，否则指针还在栏里的那一段
-        /// 携带物会冻在原地（玩家看到的就是「拖进主区才开始跟手」）。
+        /// 携带中的跟手坐标换算。返回坐标一律是 Body 局部。
+        /// 用户口径（2026-11-24）：所有可拖组件都能移到屏幕任意一处，像在桌上摆线索。
+        /// 所以这里**不做 Rect.Contains 判定**——旧版 TryBodyPointer 一旦指针离开 Body
+        /// 就返回 false，卡片会冻在纸边，表现为「拖不出主范围 / 到边缘被切住」。
+        /// 起手判定仍走 TryPickupPoint（必须点在组件上），那是另一回事。
         /// </summary>
         protected virtual bool TryCarryPoint(out Vector2 local)
         {
-            return TryBodyPointer(out local);
+            return MiniGameUIKit.ScreenToLocal(Body, Input.mousePosition, out local);
         }
 
         /// <summary>
@@ -491,6 +638,7 @@ namespace EggRescue.MiniGame
                 var piece = Pieces[i];
                 if (piece == null || piece.Rect == null) continue;
                 if (piece.Placed) continue;
+                if (piece.Returning) continue;     // 错误回位动画中，别让新拖拽把它从半路又抓走
                 if (!HitTest(piece, local)) continue;
                 BeginCarry(piece, local);
                 return true;
@@ -506,6 +654,9 @@ namespace EggRescue.MiniGame
         {
             if (piece == null) return;
             piece.Handle.RequirePress = true;
+            // 记下「拖拽前」的位置。拒绝落位必须回这里，不能用 HomePos——
+            // HomePos 在成功吸附到槽后会被改写成槽位，拿起来再放错就回不到发牌位了。
+            piece.DragOrigin = piece.Rect != null ? piece.Rect.anchoredPosition : piece.HomePos;
             piece.Handle.Begin(local);
             _carryPiece = piece;
             Phase = InteractionPhase.Carry;
@@ -576,9 +727,20 @@ namespace EggRescue.MiniGame
             }
 
             Phase = InteractionPhase.Idle;
-            if (ReturnHomeOnReject)
+            // 用户口径（2026-11-24）：丢在空白处 = 把线索摆在桌上任意位置，就地留下、不回原位。
+            // 只有「落进了槽位/目标，但判定被拒」才按模板规则回位（T7 即闪红后回拖拽前位置）。
+            // 因此这里第一步先看 hit 是否为 null，null 直接就地留下，不再进入任何回位代码路径。
+            if (hit != null && ReturnHomeOnReject)
             {
-                ReturnHome(piece);
+                if (RejectReturnDelay > 0f || RejectUsesFade)
+                {
+                    Coroutine oldDelay;
+                    if (_rejectDelays.TryGetValue(piece.Id, out oldDelay) && oldDelay != null)
+                        StopCoroutine(oldDelay);
+                    _rejectDelays[piece.Id] = StartCoroutine(DelayedRejectReturn(piece));
+                }
+                else
+                    ReturnHome(piece);
             }
             else
             {
@@ -594,7 +756,8 @@ namespace EggRescue.MiniGame
         protected void ReturnHome(MiniGamePiece piece)
         {
             if (piece == null || piece.Rect == null) return;
-            SpringReturn.MoveTo(this, piece.Rect, piece.Rect.anchoredPosition, piece.HomePos,
+            // 与 ReturnHomeFade 同语义：回本次拖拽前的真实位置。
+            SpringReturn.MoveTo(this, piece.Rect, piece.Rect.anchoredPosition, piece.DragOrigin,
                 MiniGameMotion.ReturnDuration, MiniGameMotion.ReturnOvershoot);
             SpringReturn.ScaleTo(this, piece.Rect, MiniGameMotion.PickScale, 1f,
                 MiniGameMotion.PickDuration);

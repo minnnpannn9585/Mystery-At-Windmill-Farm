@@ -64,10 +64,13 @@ namespace EggRescue
             }
             if (Input.GetKeyDown(KeyCode.F5)) SaveService.Save();
             if (Input.GetKeyDown(KeyCode.F9)) SaveService.Load();
-            // M1 自检：F7 开一局 Debug 小游戏，验开关 / 暂停 / 退出 / 续局 / 入册演出。
+            // F7 自检：直接开 T7（证词归位）。之前这里开的是 M1 的 DEBUG-01，
+            // 它按设计「错位留存」，跟 T7 的「错误卡闪后回位」相反，导致按 F7 永远测不到 T7 的回位逻辑。
+            // 用 def 重载打开 sample（sample def 不进 Registry 的 Index，Open(id) 找不到）。
             // 不能占 F8 —— PlayerController 的 F8 是调试倍速开关，两件事撞一起会分不清谁生效。
             if (Input.GetKeyDown(KeyCode.F7) && !EggRescue.MiniGame.MiniGameHost.IsOpen)
-                EggRescue.MiniGame.MiniGameHost.Open(EggRescue.MiniGame.MiniGameRegistry.DebugId);
+                EggRescue.MiniGame.MiniGameHost.Open(
+                    EggRescue.MiniGame.MiniGameRegistry.Sample(EggRescue.MiniGame.MiniGameTemplate.Testimony));
         }
 
         /// <summary>
