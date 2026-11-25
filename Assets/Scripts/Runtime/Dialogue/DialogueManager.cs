@@ -85,6 +85,12 @@ namespace EggRescue
         static readonly HashSet<string> PlayerPortraitKeys = new HashSet<string> { "正常", "惊讶", "疑惑", "无奈" };
         Text _playerNameLabel;
 
+        // ---- 证词局节点级拦截（19 文档 §19.3.2）----
+        // 末节点对白照常播完，但 SetVariables 延迟到小游戏成功才写。
+        // _gatedNode 非 null 表示当前正停在拦截节点，变量处于「暂缓」状态。
+        EggRescue.MiniGame.Hooks.MiniGameDialogueGate _gate;
+        DialogueNode _gatedNode;
+        bool _gateResumed;   // 小游戏回调期间防止重复触发
 
         public bool IsDialogueActive
         {
@@ -221,6 +227,12 @@ namespace EggRescue
                 PerformOptionJump(opt, false);
                 return;
             }
+            // 证词局：末节点对白已播完，玩家点「下一句」准备离开 —— 此刻拦截开小游戏。
+            if (_gate != null && _gatedNode != null && !_gateResumed)
+            {
+                TriggerGate();
+                return;
+            }
             var data = GetNode(_currentId);
             if (data == null) { EndDialogue(); return; }
             var nextId = ConditionEvaluator.NextFromBranches(data.ConditionBranches);
@@ -271,7 +283,23 @@ namespace EggRescue
 
             _current = GetNode(_currentId);
             if (_current == null) { EndDialogue(); return; }
-            ApplyNodeSideEffects(_current);
+
+            // 证词局拦截：进入末节点时先记下来，暂缓写 SetVariables。
+            // 只有小游戏成功后才补写（见 TriggerGate / ResumeGate）。
+            var gate = EggRescue.MiniGame.Hooks.MiniGameDialogueGates.Find(_graph.Module, _current.Id);
+            if (gate != null && !_gateResumed && !IsGateSubmitted(gate))
+            {
+                _gate = gate;
+                _gatedNode = _current;
+                // 依旧解锁分支、但不 ApplySetVariables —— 线索变量要等小游戏成功。
+                UnlockBranches(_current);
+            }
+            else
+            {
+                _gate = null;
+                _gatedNode = null;
+                ApplyNodeSideEffects(_current);
+            }
             SetNextVisible(false);
             if (playerPanel != null) playerPanel.SetActive(false);
             ClearOptionButtons();
@@ -282,6 +310,84 @@ namespace EggRescue
         {
             UnlockBranches(data);
             ApplySetVariables(data);
+        }
+
+        // ---------------- 证词局节点级拦截（19 文档 §19.3.2）----------------
+
+        bool IsGateSubmitted(EggRescue.MiniGame.Hooks.MiniGameDialogueGate gate)
+        {
+            var def = EggRescue.MiniGame.MiniGameRegistry.Get(gate.DefId);
+            if (def == null) return false;
+            // Q05/Q08/Q13 提交的是 int 状态；bool 局看 SubmitVar。
+            return EggRescue.MiniGame.MiniGameHost.IsSubmitted(def);
+        }
+
+        /// <summary>
+        /// 末节点对白播毕、玩家准备离开时开小游戏。
+        /// 变量此刻还没写（进入节点时已被暂缓），符合「成功前不发线索」。
+        /// </summary>
+        void TriggerGate()
+        {
+            var gate = _gate;
+            var node = _gatedNode;
+            if (gate == null || node == null) return;
+
+            // Q04 可选偷听作废：若其间 ChickStatus>=3，作废未结算记录，
+            // 保持原交互关闭 —— 不写 E03_Overheard、不发 D02、不计数（§19.3.2）。
+            if (!string.IsNullOrEmpty(gate.VoidIfVar) && GameState.GetInt(gate.VoidIfVar) >= gate.VoidIfValue)
+            {
+                EggRescue.MiniGame.MiniGameSave.Clear(gate.DefId);
+                // 作废：绝不补写 E03_Overheard。传 false 只走原出口、不发线索、不计数。
+                ResumeGate(false);
+                return;
+            }
+
+            var def = EggRescue.MiniGame.MiniGameRegistry.Get(gate.DefId);
+            if (def == null)
+            {
+                ResumeGate(false);   // 缺 def：按原出口继续，不阻断剧情
+                return;
+            }
+            if (EggRescue.MiniGame.MiniGameHost.IsSubmitted(def))
+            {
+                // 已完成：末节点原有 SetVariables 本就该写（那是这段对白的正常副作用），
+                // 只是不能再开一局。补写后走原出口，去重靠 IsSubmitted。
+                ResumeGate(true);
+                return;
+            }
+
+            _gateResumed = true;
+            if (!EggRescue.MiniGame.MiniGameHost.Open(def, () => ResumeGate(
+                    EggRescue.MiniGame.MiniGameHost.IsSubmitted(def))))
+            {
+                // 打开失败（内容未就绪等）：不能把玩家卡在末节点，放行对白。
+                _gateResumed = false;
+                ResumeGate(false);
+            }
+        }
+
+        /// <summary>
+        /// 小游戏结束（完成或中途退出）后接回对白。
+        /// submitted=true 才补写末节点原有 SetVariables；否则只走原出口、不发线索。
+        /// </summary>
+        void ResumeGate(bool submitted)
+        {
+            var node = _gatedNode;
+            if (node != null && submitted)
+            {
+                ApplySetVariables(node);
+                // Q06 补录成功后，E12_ViewGreenPad 由 node 的 SetVariables 写；
+                // 但 Q06 的 SubmitVar 也是它，IsSubmitted 已成立，不会重复发。
+            }
+            _gate = null;
+            _gatedNode = null;
+
+            if (node == null) { EndDialogue(); return; }
+            var nextId = ConditionEvaluator.NextFromBranches(node.ConditionBranches);
+            if (!nextId.HasValue) nextId = node.Next;
+            _gateResumed = false;
+            if (nextId.Value == -1 || GetNode(nextId.Value) == null) EndDialogue();
+            else AdvanceTo(nextId.Value);
         }
 
         void ApplySetVariables(DialogueNode data)
@@ -705,6 +811,10 @@ namespace EggRescue
         public void EndDialogue()
         {
             var chain = _current;
+            // 对白被外部强制结束（读档 / 切场景）时，别把 gate 残留到下一次对话。
+            _gate = null;
+            _gatedNode = null;
+            _gateResumed = false;
             _currentId = -1;
             _waitingChoice = false;
             _waitingNextAfterOption = false;

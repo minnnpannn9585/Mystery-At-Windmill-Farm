@@ -545,7 +545,7 @@ def build(doc):
     table(doc,
           ["局", "对象", "轴 / 停靠角", "两个目标", "提交变量", "计数"],
           [
-              ["Q02", "短木炭（炭尖初始朝右）", "水平 / 0°·180°", "磨平的炭尖 · 蹭在草叶上的炭粉", "`E01_ViewCharcoal=true`", "`ChickTraceCount+1`"],
+              ["Q02", "短木炭（炭尖初始朝右）+ 尾部可交互树叶，共 **2 件**（§8.11；背景树叶/绿叶/石子全在底图）", "水平 / 0°·180°", "磨平的炭尖（翻碳条使尖尖朝玩家后点）· 蹭在草叶上的炭粉（翻尾叶后点）", "`E01_ViewCharcoal=true`", "`ChickTraceCount+1`"],
               ["Q12", "白圆石", "水平 / 0°·180°（**实心轮廓强制**）", "正面爱心 · 背面鬼脸", "`E10_ViewWhiteStone=true`", "D07 划掉 + 旁注"],
               ["Q15", "陶瓷食碗（初始略倾）", "垂直 / 0°·55°（换面）", "碗沿爪印 · 内底余渣", "`E15_ViewFoodBowl=true`", "`TreeClueCount+1`"],
               ["Q18", "倒扣水桶", "水平 / 0°·180°", "桶里是空的 · 外底湿泥细沙", "`E17_ViewEmptyBucket=true`", "—"],
@@ -572,6 +572,51 @@ def build(doc):
                "**中点 ±18°**。松手时按最终吸附角反推，玩家不用把角度拖到 90° 以上；实测调这个值比调动画曲线更有效"],
           ],
           widths=[0.8, 6.0, 9.4], size=9, align_center_cols=[0])
+
+    h(doc, "8.11　多物体翻转框架与 Q02 两可交互物（底图 · 右栏渐显总则 · v2.15）", 2)
+    callout(doc, "总则：除交互目标外，一切皆底图",
+            "凡玩家不能点击 / 翻转 / 拖动的对象（背景树叶、干扰绿叶、小石子、场景色块……）一律由**底图**承载，"
+            "程序侧不建对象、美术侧不单列素材编号。19-文档里「木炭放在亮绿草叶上」「两片完整绿叶 + 一颗小石子作无判定背景」"
+            "这类描述属于底图内容，**不是程序对象、不是素材需求**。这一条适用于全部 19 局，不只 Q02。")
+    body(doc, "§8.2–8.10 的 `FlipSpec` 只描述**一个**物件的两面，够用 Q12 / Q15 / Q18；19-文档 Q02 则需要**两件各自可翻转、且上下叠放**的物件。v2.10 补了多物体框架，v2.11 修了布局坐标坑，v2.12 按用户手绘把 Q02 收敛为**两件可交互物**：`charcoal` 短木炭与 `tail_leaf` 尾部树叶；原 v2.10/v2.11 摆的垫底草叶、遮挡草叶、两片绿叶、小石子全部撤掉，归底图。")
+    body(doc, "**向后兼容**：新模型加在 `MiniGameContent.FlipObjects`，非空时 `RotateBoard` 才走多物体路径；Q12 / Q15 / Q18 的 `FlipObjects` 为空，仍走原单物体 `Faces` 路径，§8 既有结论与手感参数一概不改。框架字段 `isDecoy` / `occludesObjectId` 保留给将来确有遮挡/干扰需求的局使用，Q02 当前不使用。")
+    body(doc, "**交互结构（用户手绘定稿）**：碳条放在**背景图层的一片树叶上**（底图，程序不管），尖尖初始朝右；玩家翻转碳条使尖尖朝向玩家 → 点磨平端（第一处 `T3-01` / `flat_tip`）；碳条尾部盖着**一片可交互树叶**（`tail_leaf`），翻转它 → 露出炭迹（第二处 `T3-02` / `leaf_powder`）。", size=9.5)
+
+    code(doc, [
+        "[Serializable]",
+        "public class MiniGameFlipObject",
+        "{",
+        "    public string id, label;",
+        "    public Vector2 pos, size;          // 主区美术坐标（左上原点，y 向下）",
+        "    public string spritePath;          // 可选 Resources 贴图；空则程序化形状占位",
+        "    public MiniGameFace[] faces;       // 该物件自己的正反面与目标",
+        "    public int    sortOrder;           // 越大越靠前（叠放层级）",
+        "    public bool   isDecoy;             // 纯干扰：不可翻、不可点、不判定（保留字段，Q02 不用）",
+        "    public bool   flippable = true;    // 固定物设 false（保留字段，Q02 两物皆可翻）",
+        "    public string occludesObjectId;    // 盖住哪个物件（保留字段；v2.12 Q02 不用遮挡，留空）",
+        "}",
+    ])
+    body(doc, "判定规则（Q02 · v2.12）：一个目标可确认 ⇔ **所属物件翻到该目标所在面**（`CanConfirmMulti` 里 `face.Back == owner.ShowingBack`）。Q02 两件可交互物各自持有自己的目标：碳尖 `flat_tip` 挂在 `charcoal` 的背面（翻炭条使尖尖朝玩家后可点），炭粉 `leaf_powder` 挂在 `tail_leaf` 的背面（翻尾叶后可点）。两者互不遮挡、彼此独立，均为 2/2。框架仍保留 `occludesObjectId` 遮挡判定供将来需要的局使用，Q02 不涉及。")
+
+    table(doc,
+          ["Q02 可交互物（仅此两件）", "层", "性质", "美术编号 / 作用"],
+          [
+              ["短木炭 charcoal（sortOrder 1）", "上", "可翻转", "`M-04` 460×150；正面「尖尖朝右（侧视）」无目标；背面「尖尖朝玩家（磨平面）」挂目标 `flat_tip` `T3-01`"],
+              ["尾部树叶 tail_leaf（sortOrder 2）", "盖在碳条尾部", "可翻转", "`M-15` 220×140；正面「叶背（盖着）」无目标；背面「叶面（炭迹）」挂目标 `leaf_powder` `T3-02`"],
+          ],
+          widths=[5.0, 2.0, 2.6, 6.6], size=9)
+    body(doc, "**底图承担（程序不建、美术不列编号）**：碳条所在的背景树叶、19-文档写的「两片完整绿叶 + 一颗普通小石子」——全部画进 `B-01` 底图。它们是纯画面内容，不可点击、不可翻转、不写变量。", size=9.5)
+    body(doc, "**布局坐标坑（v2.11 修）**：Body 的子节点以**左上角**为锚 `(0,1)`、`BodyPoint(x,y)=(x,-y)`；多物体最初误用锚 `(0.5,0.5)`，等于每件又被多推半个 Body，全部挤到右下角与提示按钮重叠。已改回 `(0,1)`。", size=9.5)
+    body(doc, "**原型占位口径（v2.12）**：两件可交互物一律用**单个最简形状**（碳条=圆角矩形、尾叶=椭圆）+ 文档色值占位（炭 `#6E6A66`、尾叶 `#8FA86A`），**不画碎叶、不自创配色、不叠加多层、不建背景物**；`spritePath` 留空走占位，填编号路径后自动换真图，判定不变。", size=9.5)
+    body(doc, "交互与验收：水平拖动碳条在 0° / 180° 间翻转（沿用 §8.4 的 0.6°/px 与吸附参数），尖尖朝玩家后点磨平端确认 `flat_tip`；拖动尾叶翻转后点炭迹确认 `leaf_powder`；Two-target 2/2 提交 `E01_ViewCharcoal=true` 并首次 `ChickTraceCount+1`。", size=9.5)
+    body(doc, "**二级提示的最终口径（v2.13 定稿）**：19-文档二级行（如「先出现转动箭头，再轮廓高亮尚缺的一处」）是**写给开发的动作说明，不显示给玩家**；底栏提示文字两级共用同一段一级文案，点第二次只让按钮计数变为「提示 2/2」，文字不变。视觉动作按美术文档 `W-04` 选项 C：逐个未确认目标——所属物件还没翻到目标面的，在该物件上方渐显弧形箭头（原型用「↻」占位、不响应点击、淡入 0.35s / 停留 1.5s / 淡出 0.4s）+ 高亮该物件；两件都未点未翻则一起出现；**已确认的目标整个跳过，不高亮不给箭头**；已翻到目标面但还没点的只高亮、不再给箭头。", size=9.5)
+    body(doc, "**翻面自由（v2.13 定稿）**：线索点出现后不点它也能随时翻回，翻面判定范围保持物件 Rect 最大值、不因线索点而改变。`TickMulti` 移除了旧「命中可确认目标即 return」的拦截：现在统一走 `TopFlippableUnderPointer` 几何判定（不依赖射线、不受线索点黄圈影响）——拖动即翻面（pointer 移出后 Button.onClick 自然不触发），纯点击才确认线索点且角度 snap 回原位（确认不丢）。", size=9.5)
+    body(doc, "**概念图接入（v2.14）**：美术文档第一套概念图已落进 Unity `Assets/Resources/MiniGameArt/`——`FlipArrow_W04`（W-04 墨蓝弧形箭头，替换二级提示的文字 ↻ 占位）、`HintBulb_G20B`（G-20b 提示按钮灯泡）、`ConceptB01_Haystack`（B-01 稻草堆，Q02/T1 底图概念参考）。三者均导入为 Sprite；箭头与灯泡已在运行时实装，底图概念图作参考（正式 B-01 需透明底素材）。", size=9.5)
+    body(doc, "**断点续玩根因（v2.14 修）**：老 `ClueTrigger` 与小游戏入口不能共存。它 `Awake()` 订阅 `OnInteract`、交互瞬间就写 `SubmitVar`（E01 即 `E01_ViewCharcoal=true`），导致小游戏没完成却被判「已完成」——表现为中途退出后再点交互点不再开游戏。`GameBootstrap.WireClueAndDesc` 现在对挂了 `MiniGameClueTrigger` / `MiniGameDialogueHook` 的点**跳过挂老 ClueTrigger 并清掉场景残留的那个**（`Destroy`，因 `enabled=false` 挡不住已订阅的事件）。这样 SubmitVar 只由小游戏完成时写，中途退出保留 false，重进可继续（`ApplyProgress` 恢复已确认目标与翻面角度，实测通过）。", size=9.5)
+    body(doc, "**底图数据驱动（v2.15）**：`MiniGameContent.BackgroundResource` 新增，基类 `MiniGameBoard.BuildChrome` 统一在 Body 里铺一张 `SetAsFirstSibling` 的底图，局数据填 Resources 路径即可。Q02 已实贴 B-01 稻草堆概念图（`MiniGameArt/ConceptB01_Haystack`），MCP 截图确认底图进主区。全案总则不变：**除可交互目标外一切归底图**，程序不建背景对象、美术不单列编号。", size=9.5)
+    body(doc, "**右栏发现后渐显（v2.15）**：`AddRailSlot(..., hiddenUntilFound:true)` 让线索条目开局 `CanvasGroup.alpha=0 / blocksRaycasts=false`，玩家确认对应目标后才由 `RevealRail()` 协程淡入。T1/T2/T3/T6 已接入（发现/确认后渐显）；T4/T7 右栏是操作元素（线索集 / 槽位），保持常显。MCP 实测 Q02 开局 slot alpha=0、确认 `flat_tip` 后 slot0 alpha=1。", size=9.5)
+    body(doc, "**未完成退出交互点保持原样（v2.14–v2.15）**：`DialogueTrigger.discoverOnInteract` 开关，小游戏点设为 false——描述对话不点亮 VFX；`MiniGameClueTrigger.OnReturn` 只在 `IsSubmitted` 时 `DiscoverFrom`。未完成退出后交互点的粉色特效与靠近提示都在、可再次进入续玩（MCP 实测 E01 `IsDiscovered=false`、VFX 子物体仍 active）。", size=9.5)
+    body(doc, "实现文件：`Data/MiniGameContent.cs`（`MiniGameFlipObject` / `FlipShape` / `FlipObjects` / `BackgroundResource`）、`Boards/RotateBoard.cs`（`FlipObjectView` + `BuildMultiBoard` / `TickMulti` / `CanConfirmMulti` / `ApplyHintMulti`+`SpawnHintArrow`+`FadeHintArrowsRoutine` / 多物体角度存档）、`Core/MiniGameBoard.cs`（底图铺设 + `hiddenUntilFound` + `RevealRail` + `ShowHint` 两级共用一级文案 + 提示灯泡）、`Core/GameBootstrap.cs`（`WireMiniGameClue` / `WireClueAndDesc` 跳过小游戏点）、`Hooks/MiniGameDialogueGates.cs`（证词局节点拦截表）、`Dialogue/DialogueManager.cs`（gate 暂缓与恢复）、`Data/MiniGameContents.cs`（Q02 两可交互物布局）。", size=9, color=GREY)
 
     # ================= 9 T4 观察图拼合 =================
     page_break(doc)
@@ -1390,38 +1435,84 @@ def build(doc):
     page_break(doc)
     h(doc, "16　接入改造清单与技术确认", 1, rule=True)
 
-    h(doc, "16.1　两种入口", 2)
-    body(doc, "19 局分两类：环境物证（点了场景里的东西）与证词（听完一段对白）。两类的接入方式不同。")
+    h(doc, "16.1　两种入口（v2.15 全量实装）", 2)
+    body(doc, "19 局分两类：环境物证（点了场景里的东西）与证词（听完一段对白）。两类入口都已在运行时统一接线，且都遵循同一条铁律——**提交变量只由小游戏成功时写，交互/对白播完那一刻绝不写**。笔记入册是变量驱动的（`GameState.Set → GameEvents.VariableChanged → BookController`），所以写对 SubmitVar 即自动入册、计数、去重。")
+
+    h(doc, "16.1.1　环境物证：12 点批量换钩子", 3)
+    body(doc, "场景里 13 个 E 点中，E01（Q02）为早期试点已手工挂好；其余 12 个由 `GameBootstrap.WireClues` 在启动时统一换钩子并清掉老 `ClueTrigger`。老 `ClueTrigger` 必须 `Destroy` 组件本体（它 `Awake` 已订阅 `OnInteract`，`enabled=false` 挡不住），否则会在交互瞬间写变量、点亮 VFX，造成「没做完就算完成 / 中途退出后再点不开局」。")
     code(doc, [
-        "// A. 环境物证：替换 ClueTrigger",
-        "[RequireComponent(typeof(Interactable))]",
-        "public sealed class MiniGameClueTrigger : MonoBehaviour {",
-        "    [SerializeField] string defId;   // \"Q11\"",
-        "    void OnInteract() => MiniGameHost.Open(defId, OnReturn);",
-        "    void OnReturn() => InteractionPointVfx.DiscoverFrom(gameObject);",
-        "}",
+        "// GameBootstrap.WireClues（运行时统一接线）",
+        "WireClueAndDesc(\"E01\", \"E01_ViewCharcoal\", 1);  // 试点，场景已挂钩子",
+        "WireMiniGameClue(\"E02\", \"Q03\", 2);   // 黄绒毛",
+        "WireMiniGameClue(\"E05\", \"Q09\", 90);  // 谷物泡水",
+        "WireMiniGameClue(\"E07\", \"Q10\", 14);  // 午睡草窝",
+        "WireMiniGameClue(\"E08\", \"Q11\", 12);  // 烧焦稻草",
+        "WireMiniGameClue(\"E10\", \"Q12\", 19);  // 白石头（Q12→Q12B 两段无缝）",
+        "WireMiniGameClue(\"E12\", \"Q06\", 3);   // 蛙身绿垫（环境入口）",
+        "WireMiniGameClue(\"E14\", \"Q14\", 24);  // 猫门",
+        "WireMiniGameClue(\"E15\", \"Q15\", 27);  // 食碗",
+        "WireMiniGameClue(\"E16\", \"Q16\", 29);  // 兽毛",
+        "WireMiniGameClue(\"E17\", \"Q18\", 21);  // 空水桶",
+        "WireMiniGameClue(\"E18\", \"Q19\", 23);  // 雨靴印",
+        "WireMiniGameClue(\"E28\", \"Q17\", 26);  // 树根抓痕",
         "",
-        "// B. 证词局：挂在对话结束后的 Hook",
-        "public sealed class MiniGameDialogueHook : MonoBehaviour {",
-        "    [SerializeField] string defId;     // \"Q01\"",
-        "    [SerializeField] string npcName;   // \"淑芬\"",
-        "    [SerializeField] int    startNode; // 1",
-        "    [SerializeField] int    hubNode;   // 回访 hub",
-        "    public void Begin() {",
-        "        DialogueManager.Instance.StartNpc(npcName, startNode);",
-        "        _waiting = true;",
-        "    }",
-        "    void Update() {",
-        "        if (!_waiting) return;",
-        "        if (DialogueManager.Instance.IsDialogueActive) return;",
-        "        _waiting = false;",
-        "        MiniGameHost.Open(defId, () => DialogueManager.Instance.JumpToNode(hubNode));",
-        "    }",
+        "static void WireMiniGameClue(string token, string defId, int miaosuId) {",
+        "    var go = FindNamedContains(token);",
+        "    var stale = go.GetComponent<ClueTrigger>();",
+        "    if (stale != null) Destroy(stale);              // 清残留老触发器",
+        "    var hook = go.GetComponent<MiniGameClueTrigger>();",
+        "    if (hook == null) hook = go.AddComponent<MiniGameClueTrigger>();",
+        "    hook.defId = defId;",
+        "    var dt = go.GetComponent<DialogueTrigger>();     // 描述对话不点亮 VFX",
+        "    if (dt == null) dt = go.AddComponent<DialogueTrigger>();",
+        "    dt.discoverOnInteract = false;                  // 未完成退出交互点保持原样",
+        "    ... // 补 Interactable / InteractionPointVfx",
         "}",
     ])
+    body(doc, "非 19 局的 7 个普通环境点（E09/E13/E23/E25/E27/E34 及 E01 的对照点）仍走老 `ClueTrigger`，不受影响。", size=9, color=GREY)
 
-    h(doc, "16.2　技术确认：对话节点能否回调（已选定方案 B）", 2)
-    body(doc, "结论先说：**能，而且可以做到不改对话系统一行代码。**")
+    body(doc, "**结果描述只在成功后播（v2.16 修）**：环境的 miaosu 描述文本本身含结论（如 Q02「炭尖磨平、草叶蹭着炭粉」、Q15「碗沿爪印、碗底食渣」），交互那一刻播等于提前泄题、中途退出也看得到结论。修复：`DialogueTrigger` 加 `deferToMiniGame`，小游戏点的描述对话在交互时静默不播；改由 `MiniGameClueTrigger` 在本局**成功提交后**调 `PlayDeferredDescription()` 播出——完成态再次交互也会重播。中途退出什么都不播、不点亮（MCP 实测 Q02：交互开局无描述、退出无描述且「E 交互」提示保留、提交后才显示结论文本）。", size=9.5)
+
+    body(doc, "**接线顺序坑（v2.16 修）**：`WireMiniGameClue` 是 `AddComponent<MiniGameClueTrigger>()` **之后**才填 `defId`；而原 `MiniGameClueTrigger.Awake` 见 defId 空就 `enabled=false` 自禁用——结果 12 个批量点的钩子全被禁用、点了没反应（早期 E01 试点因在场景里手工预填 defId 才正常，这正是「其它局测不到」的根因）。修复：钩子改为 Awake 无条件订阅 `OnInteract`，defId 空时改在 `HandleInteract` 里静默返回；`WireMiniGameClue` 设完 defId 再显式 `enabled=true`。MCP 实测 13/13 点钩子 enabled=true、defId 正确，主角走到 E02 按 E 正常开 Q03。", size=9.5)
+
+    h(doc, "16.1.2　证词局：末节点级拦截（变量暂缓到成功才写）", 3)
+    body(doc, "证词局不能用「对白结束再开局」的轮询方案：Q05/Q07/Q13 的末节点 `Next` 不是 -1 而是回 hub，对白不会在那结束；更要命的是变量在对白节点**进入时**就已写（`DialogueManager.ApplySetVariables`），等对白播完线索早发了。最终改为**末节点级拦截**：末节点对白照常播完，但 `SetVariables` 暂缓；玩家点「下一句」准备离开时开小游戏，成功才补写变量、走原出口。")
+    body(doc, "拦截点用「对话模块名 + 节点 id」外部表精确匹配，**不改任何 FROM_DOC 对话 JSON**——数据保持权威、可随时改回。8 个拦截点：淑芬 1-A#13b(201)→Q01、E03 1-A#7(7)→Q04（带作废规则）、小鸡 2-B#21(44)→Q05、蛙 2-D#16(39)→Q07、大黄 1-A#10(10)→Q08、小鸡 2-E#37(110)/2-G#17(216)→Q13、蛙 3-A#supplement#set(423)→Q06 补录。")
+    code(doc, [
+        "// MiniGameDialogueGates：模块名+节点id → 局（外部表，不动对话 JSON）",
+        "Gate(\"shufang_01_FROM_DOC\", 201, \"Q01\")",
+        "Gate(\"xiaojiZTT_e03_FROM_DOC\", 7,  \"Q04\", voidIfVar:\"ChickStatus\", voidIfValue:3)",
+        "Gate(\"xiaojiZTT_01_FROM_DOC\", 44,  \"Q05\")",
+        "Gate(\"qingwa_01_FROM_DOC\",    39,  \"Q07\")",
+        "Gate(\"dahuang_01_FROM_DOC\",   10,  \"Q08\")",
+        "Gate(\"xiaojiZTT_01_FROM_DOC\", 110, \"Q13\")   // 入口 A 2-E",
+        "Gate(\"xiaojiZTT_01_FROM_DOC\", 216, \"Q13\")   // 入口 B 2-G 补漏",
+        "Gate(\"qingwa_01_FROM_DOC\",    423, \"Q06\")   // 3-A 补录",
+        "",
+        "// DialogueManager：进入末节点暂缓变量，离开时开小游戏",
+        "if (gate != null && !IsGateSubmitted(gate)) {",
+        "    _gate = gate; _gatedNode = _current;",
+        "    UnlockBranches(_current);       // 分支照常解锁，但 ApplySetVariables 暂缓",
+        "} else ApplyNodeSideEffects(_current);",
+        "",
+        "void OnNextClick() {",
+        "    ... // 打字/选项分支保持不变",
+        "    if (_gate != null && _gatedNode != null) { TriggerGate(); return; }",
+        "    AdvanceTo(nextId);",
+        "}",
+        "void TriggerGate() {",
+        "    if (Q04作废条件成立) { ResumeGate(false); return; }  // 不发 E03_Overheard",
+        "    MiniGameHost.Open(def, () => ResumeGate(IsSubmitted(def)));",
+        "}",
+        "void ResumeGate(bool submitted) {",
+        "    if (submitted) ApplySetVariables(_gatedNode);  // 成功才补写末节点原变量",
+        "    AdvanceTo(原 nextId);                          // 走回 hub / 原出口",
+        "}",
+    ])
+    body(doc, "Q04 作废规则：恢复前若 `ChickStatus>=3`，清掉未结算偷听进度、`ResumeGate(false)` 只走出口——不发 D02、不写 `E03_Overheard`、不计 `ChickTraceCount`（§19.3.2）。Q06 补录：`Mouse_MintFishPaid` 付费路线进 3-A 时 gate(423) 拦截先做 Q06，成功后补写 `E12_ViewGreenPad`、回 3-A 第一轮对暗号。", size=9)
+
+    h(doc, "16.2　技术确认：对话节点能否回调（最终采用方案 A 增强版）", 2)
+    body(doc, "结论先说：**能。** 早期评审选定方案 B（外部轮询、零改动）；全量实装时发现它有两个硬伤，v2.15 最终升级为方案 A 增强版（节点级 gate + 变量暂缓），仍**不改任何对话 JSON、不新增对话核心字段**——拦截点在 `DialogueManager` 内约 40 行，用外部表匹配模块名+节点 id。下表保留两方案原始对照以便回溯。")
 
     table(doc,
           ["检查项", "结果", "证据"],
@@ -1475,15 +1566,16 @@ def build(doc):
         "    AdvanceTo(nextId.Value);",
         "}",
     ])
-    body(doc, "**已选定方案 B**（评审意见 I）。理由：不动对话系统一行代码，符合「不要动已有核心」的原则；`Next=-1` 的改动在 lua 数据里，可随时改回。方案 A 仅作为后续优化记录保留——若日后对话系统需要统一的「节点播完回调」，再随那次改造一并实现。")
+    body(doc, "**为什么从方案 B 升级到方案 A 增强版（v2.15）**：① Q05/Q07/Q13 的末节点 `Next=182/205`（回 hub），对白根本不在那结束，方案 B 的 `IsDialogueActive` 由真变假要等到 hub 退出，早就错过时机；② 变量在对白节点**进入时**就写，方案 B 等对话结束再开局时线索已发，违反「成功前不发线索」。最终采用方案 A 的增强形态：拦截点仍在 `OnNextClick`，但节点归属由外部表（`MiniGameDialogueGates`）按「模块名+节点 id」给出，既不改对话 JSON、也不给 `DialogueNode` 加字段；且新增「变量暂缓」——末节点 `SetVariables` 不立即执行，小游戏成功才补写。上方代码块是方案 A 的原始形态，最终实现以 §16.1.2 为准。")
 
     h(doc, "16.3　改造清单", 2)
     table(doc,
           ["现有资产", "改动", "影响面"],
           [
-              ["`ClueTrigger`", "**保留不动**（非小游戏线索点仍用它）", "无"],
-              ["E01/E02/E03/E05/E07/E08/E10/E12/E14/E15/E16/E17/E18/E28 交互点", "把 `ClueTrigger` 换为 `MiniGameClueTrigger` 并填 `defId`", "13 处"],
-              ["对话节点末（淑芬 1-A、小鸡 2-B/2-E/2-G、蛙 2-D、大黄 1-A、E03 偷听）", "末节点 `Next` 改 -1 + 场景挂 `MiniGameDialogueHook`", "6 处"],
+              ["`ClueTrigger`", "**保留不动**（7 个非小游戏环境点仍用它）", "无"],
+              ["E01/E02/E05/E07/E08/E10/E12/E14/E15/E16/E17/E18/E28 交互点", "运行时 `WireMiniGameClue` 挂 `MiniGameClueTrigger`+填 defId、`Destroy` 残留老 ClueTrigger、描述对话 `discoverOnInteract=false`", "13 点（Q02 试点 + 12 批量）"],
+              ["证词局末节点（淑芬 1-A、E03 偷听、小鸡 2-B/2-E/2-G、蛙 2-D、大黄 1-A、蛙 3-A 补录）", "不改对话 JSON；`MiniGameDialogueGates` 外部表按模块名+节点 id 配 8 个 gate，`DialogueManager` 暂缓末节点变量、离开时开小游戏", "8 gate / 6 局"],
+              ["`DialogueManager`", "加 `_gate/_gatedNode/_gateResumed` + `TriggerGate/ResumeGate`（末节点变量暂缓与恢复），非 gate 节点逻辑零变化", "1 处，约 40 行"],
               ["`BookController`", "加来源角标白名单（约 3 行：`Unlock` 时按 `minigameSources` 列表置 `SourceTag` 显隐）", "1 处，增量"],
               ["`Notebook.prefab`", "每个条目加一个空子物体 `SourceTag`（占位符），默认 inactive", "25 个条目"],
               ["`global_variables.txt`", "**不新增**（小游戏进度存 `MiniGameSave`，不污染变量表）", "0"],
@@ -1778,10 +1870,94 @@ def build(doc):
     ])
     body(doc, "推荐统一用第一种（pivot 左上、anchoredPosition 直接填美术坐标），与策划文档的坐标表一一对应，不需要每次换算。")
 
+    # ================= 20 19 文档细节落地补记 =================
+    h(doc, "20　19 文档细节落地补记（v2.9 · 架构不变）", 1, rule=True)
+    body(doc, "本节记录 2026-11-25 的落地口径：**架构沿用本文档（七模板 / Def-Content-Registry / Host-Save-Hook 结构不改），细节与交互流程以 `19-关键线索调查解谜.md` 为准**。UI 规格（1920×1080 骨架、便签梯形、色卡）不改动。")
+    body(doc, "技术文档已评审改写的四处在本次保持不动：Q19 错位块留存（§9.3）、T5 不做复位（§10.5）、Q13 按放入顺序排齐（§12.10）、碗走「压缩 → 换图 → 展开」（§8.2）。它们是本文档对 19 文档的显式偏离，不是遗漏。", size=9.5)
+
+    h(doc, "20.1　两级提示文案全量补齐", 2)
+    body(doc, "此前 `MiniGameScript` 每局只存题面 + 一级提示，`Def.Hints` 只有 1 条，`Hint(2)` 回退成同一句——按钮显示「提示 2/2」但文案没变。本次扩成三段（题面 / 一级 / 二级），19 局二级提示逐字取自 19 文档各局「提示一级／二级」行，标点原样（§12.6.1）。Registry 的 `Hints` 改为一次取两条。实机验证：19/19 局两级提示均非空且互不相同。")
+
+    h(doc, "20.2　T7 重听：文本回顾（§12.6 / §12.6.1）", 2)
+    body(doc, "六个证词局（Q01 / Q04 / Q05 / Q07 / Q08 / Q13）新增「重听」按钮，点击打开 0.72 黑底、纯文字、可滚动的回顾浮层，不播音频、不重开对话树。")
+    bullet(doc, "**数据源**：`MiniGameContent` 新增 `ReplayModule` / `ReplayTag` 两个字段，只存模块名 + DocTag 前缀；运行时从 `DialogueDatabase.Get(module)` 按前缀取节点、按 id 排序逐句显示。**Content 里不存台词副本**——对话一改词，副本就会和原文不同步且不会报错（§12.6.1）。")
+    bullet(doc, "**为什么用 DocTag 前缀而不是 id 区间**：对话表里有插入的分支句（如淑芬 1-A 的 `1-A#6b` 节点 id 是 200、大黄 1-A 的 `1-A#1b` 是 820）。连续区间会漏掉这些句子；按前缀取可完整还原整段。")
+    bullet(doc, "**六局定位**：Q01=`shufang_01_FROM_DOC`/`1-A`（15 句）、Q04=`xiaojiZTT_e03_FROM_DOC`/`1-A`（7 句）、Q05=`xiaojiZTT_01_FROM_DOC`/`2-B`（20 句）、Q07=`qingwa_01_FROM_DOC`/`2-D`（16 句）、Q08=`dahuang_01_FROM_DOC`/`1-A`（11 句）、Q13=`xiaojiZTT_01_FROM_DOC`/`2-E`（40 句）。实机取到的原文含完整说话人与语气词，标点未改。")
+    bullet(doc, "**浮层行为**：打开时屏蔽主区输入（Esc 先关浮层再谈退出），从第一句看起；这是阅读记录，不是可操作状态。")
+
+    h(doc, "20.3　Q12 → Q12B 无缝续段（§7.8）", 2)
+    body(doc, "19 文档 Q12 原文是「拨开 + 翻转同一局」；本文档框架是「一 Def 一模板」，M3 已拆成 Q12（T2 拨草）+ Q12B（T3 翻面）两段，但运行时没有缝合，玩家拨完草会直接退回场景。本次补上：")
+    bullet(doc, "`MiniGameDef` 新增 `ContinuationId` 字段，Q12 指向 `Q12B`；`MiniGameRegistry.Get(\"Q12B\")` 可查到续段（仍不进 19 局主表，统计不受污染）。")
+    bullet(doc, "`MiniGameHostRunner` 在本段提交 + 入册演出 + 拆板子之后，若续段未完成则自动打开续段，并把原「回场景」回调转交给续段——玩家体验是两次交互、一次回场景。续段已完成（读档 / 重进）时不接，直接回原出口。")
+
+    h(doc, "20.4　Q04 可选偷听作废规则（§19.3.2）", 2)
+    body(doc, "Q04 的 gate（E03 1-A#7 节点 7，`MiniGameDialogueGates`）带 `voidIfVar=\"ChickStatus\" / voidIfValue=3`。玩家点「下一句」离开末节点时，若其间 `ChickStatus>=3`，`TriggerGate` 先清掉未结算偷听进度、再 `ResumeGate(false)` 只走原出口——不发 D02、不写 `E03_Overheard`、不计 `ChickTraceCount`，沿用原 E03 关闭规则。该可选内容不阻挡主线。（v2.15 从早期 `MiniGameDialogueHook.voidIfChickStatusReached` 轮询方案迁到节点 gate，判定口径不变。）")
+
+    h(doc, "20.5　提交、计数与入册边界（复核结论）", 2)
+    bullet(doc, "**成功前不发线索**：本轮复核通过。变量、计数只在 `HandleSubmit → WriteSubmit` 写；退出 / 复位只 `MiniGameSave.Capture` 局内进度，不发线索（§19.3.1 / §14.5）。")
+    bullet(doc, "**入册 / 连线 / 划掉**：仍走本文档 §14.1「不新增任何笔记本 API」——`GameState.Set*` 触发 `GameEvents.RaiseVariableChanged`，笔记本侧自行更新条目与连线。Q08 的 E04 / D07、Q13 的 D03 / D09、Q06 的 D12→D13 补连线，均由对应变量变化驱动，本次不新增变量或笔记 API。")
+    bullet(doc, "**计数去重**：`ChickTraceCount`（Q02 / Q03 / Q04 首次成功 +1）与 `TreeClueCount`（Q14 / Q15 / Q16 / Q17）保持 `firstTime` 判定，重复进入不重复加（§15.4）。")
+    bullet(doc, "**E17 / E18 汇报分流**：空桶与雨靴的成功只发物证，仍由黑猫案情汇报菜单的 `2-B-A` / `2-B-B` 单独汇报；本模块不改 `BlackCat_CaseLine*` 变量（§19.3.3）。")
+
+    h(doc, "20.6　验收记录", 2)
+    body(doc, "新增 `Assets/Tests/PlayMode/M19DetailsTests.cs`（19 局两级提示、六局重听定位与原文句数、Q12 续段字段）。因用户编辑器有未保存的手工场景摆放，Test Runner 无法直接跑；改用 Unity MCP 在已打开的编辑器内脚本验证，结果与结论：")
+    table(doc, ["验证项", "结果"], [
+        ["19 局两级提示非空且互不相同", "19/19 通过"],
+        ["六局重听模块 + DocTag 定位", "6/6 通过"],
+        ["六局原文按前缀取到的句数", "15 / 7 / 20 / 16 / 11 / 40"],
+        ["Q12.ContinuationId = Q12B、Get(Q12B) 可查", "通过"],
+        ["Q01 实机开板：重听按钮 + 浮层生成", "通过"],
+        ["Q01 重听浮层打开后取到 314 字原文（说话人 + 语气词 + 标点原样）", "通过"],
+        ["点击二级提示：按钮显示「提示 2/2」", "通过"],
+        ["编译错误 / 运行期新错误", "0"],
+    ], widths=[11.0, 5.0], size=9)
+    body(doc, "验证结束已退回 Edit 态，编辑器保持打开、场景未保存改动未被触碰。", size=9, color=GREY)
+
     h(doc, "附录 C　修订记录", 1, rule=True)
     table(doc,
           ["版本", "日期", "内容"],
           [
+              ["**v2.16**", "2026-11-25", "**结果描述延迟到成功播 + 批量接线顺序修复**（用户实测反馈）：\n"
+                            "① 「中途退出还显示结论文本」：`DialogueTrigger.deferToMiniGame` 让小游戏点交互时不播描述；`MiniGameClueTrigger` 在成功提交后（`OnReturn` / 已完成再交互）才调 `PlayDeferredDescription` 播结果描述，中途退出什么都不播、不点亮\n"
+                            "② 「其它局测不到」根因：`WireMiniGameClue` 先 `AddComponent` 后填 defId，而钩子 `Awake` 见 defId 空就 `enabled=false`，导致 12 个批量点钩子全禁用、点不动；改为 Awake 无条件订阅、defId 空在 `HandleInteract` 静默返回，设完 defId 显式 `enabled=true`\n"
+                            "③ MCP 实机（控制主角走到交互点按 E + 截图）：13/13 钩子 enabled；Q02 交互开局无描述、退出无描述且提示保留、提交后才显结论；Q03 同链路正常"],
+              ["**v2.15**", "2026-11-25", "**19 局全量接入 + 底图/右栏渐显通用机制**：\n"
+                            "① 12 个环境物证点批量接线：`GameBootstrap.WireMiniGameClue` 挂 `MiniGameClueTrigger{defId}`、`Destroy` 残留老 ClueTrigger、描述对话 `discoverOnInteract=false`（E02→Q03 / E05→Q09 / E07→Q10 / E08→Q11 / E10→Q12 / E12→Q06 / E14→Q14 / E15→Q15 / E16→Q16 / E17→Q18 / E18→Q19 / E28→Q17）；MCP 实测 12 点 defId 全对、老触发器全清\n"
+                            "② 6 个证词局节点级拦截：`MiniGameDialogueGates` 外部表按模块名+节点 id 配 8 个 gate（不改对话 JSON），`DialogueManager` 进入末节点暂缓 `SetVariables`、点「下一句」开小游戏、成功才补写并走原出口；含 Q04 作废（ChickStatus>=3）、Q06 3-A 补录、Q13 双入口。最终放弃早期方案 B（Q05/Q07/Q13 末节点非 Next=-1 且变量进入时已写）\n"
+                            "③ 通用机制：`MiniGameContent.BackgroundResource` 数据驱动底图（Q02 已实贴 B-01）；`AddRailSlot(hiddenUntilFound)` + `RevealRail` 右栏发现后渐显（T1/T2/T3/T6）；未完成退出交互点保持原样\n"
+                            "④ 端到端 MCP 验证 Q01：进入 gate201 变量 false → 点下一句开 Q01 且变量仍 false → 提交后 `Shufen_CommissionDone=true` → 入册演出 → 对白回原出口；20/20 局 def+Content 全解析。§16 两种入口 / §8.11 通用机制 / §20.4 作废规则同步更新"],
+              ["**v2.14**", "2026-11-25", "**断点续玩根因修复 + 概念图接入 Unity**：\n"
+                            "① 修「中途退出后再点交互点不再开游戏」：根因是老 `ClueTrigger` 与小游戏入口共存，交互瞬间就写 `SubmitVar=true` 让系统误判已完成；`GameBootstrap.WireClueAndDesc` 对已挂 `MiniGameClueTrigger`/`MiniGameDialogueHook` 的点跳过挂老 ClueTrigger 并 `Destroy` 场景残留。SubmitVar 只由小游戏完成时写，中途退出保留 false、重进可继续（进度恢复实测通过）\n"
+                            "② 第一套概念图落进 Unity `Assets/Resources/MiniGameArt/`（均导入为 Sprite）：`FlipArrow_W04` 实装二级提示箭头（替换文字 ↻）、`HintBulb_G20B` 实装提示按钮灯泡、`ConceptB01_Haystack` 作 Q02 底图概念参考\n"
+                            "③ MCP 实机验证：E01 运行时不再有老 ClueTrigger、中途退出 SubmitVar=false、再点交互点重开 Q02；灯泡/箭头 sprite 加载成功"],
+              ["**v2.13**", "2026-11-25", "**二级提示改纯视觉动作 + 翻面自由**（用户实测反馈）：\n"
+                            "① 二级文本（如「先出现转动箭头，再轮廓高亮尚缺的一处」）是给开发的动作说明，不显示给玩家；底栏两级共用一级文案，点第二次只改按钮计数、文字不变（`ShowHint`）\n"
+                            "② 二级视觉按美术文档 `W-04` 选项 C：未点且未翻到目标面的物件上方渐显弧形箭头（原型「↻」占位、不响应点击、0.35s 淡入/1.5s 停留/0.4s 淡出）+ 高亮该物件；两件都未点未翻则一起出现；已确认目标跳过、不参与提示；已翻到目标面的只高亮不给箭头（`ApplyHintMulti`/`SpawnHintArrow`/`FadeHintArrowsRoutine`）\n"
+                            "③ 翻面自由：移除 `TickMulti` 旧「命中可确认目标即 return」拦截，翻面判定走物件几何、不因线索点改变；线索点出现后不点也能随时翻回，纯点击仍确认且 snap 回原角度\n"
+                            "④ MCP 实机验证：点提示1显一级文案无箭头、点提示2文字不变+2箭头2高亮、翻碳条后箭头1、点掉 flat_tip 后高亮1箭头1、翻面状态机不回归；Q02 存档还原"],
+              ["**v2.12**", "2026-11-25", "**Q02 收敛为两可交互物 + 全案「除交互目标外皆底图」总则**（用户手绘定稿）：\n"
+                            "① 总则：凡玩家不能点击/翻转/拖动的对象（背景树叶、干扰绿叶、小石子、场景色块）一律归底图，程序不建对象、美术不列编号；适用于全部 19 局\n"
+                            "② Q02 重做交互层级：碳条放在背景树叶（底图）上、尖尖初始朝右 → 翻转碳条使尖尖朝玩家后点 `flat_tip`（第一处）；碳条尾部盖一片可交互树叶 `M-15` → 翻转露炭迹点 `leaf_powder`（第二处）\n"
+                            "③ 撤掉 v2.11 的垫底草叶 / 遮挡草叶 / 两片绿叶 / 小石子（程序对象与美术编号双删），Q02 只剩 `charcoal` + `tail_leaf` 两件可交互物，美术文档撤销 `M-16`/`M-17`\n"
+                            "④ 判定简化为「所属物件翻到目标所在面」，两目标互不遮挡；框架字段 `isDecoy`/`occludesObjectId` 保留供他局，Q02 不用\n"
+                            "⑤ 美术文档升 v1.0、技术文档 §8.11 重写；MCP 编译 + Play 验证两物件翻转/两目标判定/2/2 提交，Q15/Q18 单物体路径回归"],
+              ["**v2.11**", "2026-11-25", "**修 Q02 布局 bug + 原型占位回归美术文档口径**：\n"
+                            "① 布局：多物体锚点误用 `(0.5,0.5)` 导致物件多偏半个 Body、挤在右下角 → 改回 `(0,1)`，与 BodyPoint 坐标系一致\n"
+                            "② 视觉：删掉自我发挥的垫底草叶与碎叶片堆叠；物件改按美术文档编号（`M-04` 炭 / `M-15` 遮挡叶 / `M-16` 绿叶×2 / `M-17` 石子）用单个最简形状 + 文档色值占位\n"
+                            "③ 美术文档补 `M-15/16/17`（v0.9，原清单漏项）；Q02 由 6 件减为 5 件，`spritePath` 留空走占位、填路径换真图\n"
+                            "④ MCP 实机截图验证布局正常；遮挡状态机（炭尖可点 / 炭粉被遮 / 翻走遮挡叶后炭粉可点）与 2/2 提交不回归"],
+              ["**v2.10**", "2026-11-25", "**T3 补多物体翻转与重叠遮挡框架（§8.11），Q02 按 19 文档重配；单物体局不受影响**：\n"
+                            "① 新增 `MiniGameFlipObject` / `FlipShape` 与 `Content.FlipObjects`：一个物件自有正反面、坐标、层级、遮挡声明与干扰标记\n"
+                            "② `RotateBoard` 增多物体路径（按 `FlipObjects` 非空切换）：多物件各自翻转、按 `sortOrder` 层叠、目标须「所属面朝前且未被高层物件遮挡」才可点；高度存档记多物件角度\n"
+                            "③ Q02 配成 6 件：垫底草叶 + 木炭 + 遮挡草叶（`occludesObjectId=charcoal`，翻走才露炭粉）+ 完整绿叶×2 + 小石子（干扰），仍为 2/2\n"
+                            "④ 向后兼容：Q12 / Q15 / Q18 的 `FlipObjects` 为空，继续走原单物体路径\n"
+                            "⑤ MCP 实机验证：状态机（初始炭尖可点 / 炭粉被遮 / 翻木炭+翻遮挡叶后炭粉可点）与 2/2 提交写 `E01_ViewCharcoal`+`ChickTraceCount+1` 全部通过，Q15/Q18 回归正常"],
+              ["**v2.9**", "2026-11-25", "**按 19-文档落实细节与交互流程（架构不变，见新增 §20）**：\n"
+                            "① 19 局两级提示文案补齐（题面 / 一级 / 二级逐字取自 19 文档，二级此前全线缺失）\n"
+                            "② T7 六局重听实现：Content 只存对话模块 + DocTag 前缀，运行时从 `DialogueDatabase` 取原文逐句显示，不存副本（§12.6.1）\n"
+                            "③ Q12 → Q12B 无缝续段：`Def.ContinuationId` + Host 自动衔接，保留「一 Def 一模板」架构（§7.8）\n"
+                            "④ Q04 可选偷听作废规则：`MiniGameDialogueHook.voidIfChickStatusReached`，`ChickStatus>=3` 时清未结算记录（§19.3.2）\n"
+                            "⑤ 新增 `M19DetailsTests` 数据验收；MCP 实机验证 19 局提示、六局重听原文、Q12 续段全部通过。"],
               ["**v2.8.1**", "2026-11-24", "**§17 编号统一**：按编号族 `G/B/T/M/W/F/N` 重列总账，有效编号 **93**、真实画量 **79 张**（登记 103）；`G-01/03/08` 停用不回收；§18.2.2 骨架表改纸面板口径；§4.2 加色值口径注记。"],
               ["**v2.8**", "2026-11-24", "**§4.1 全面改写，对齐美术文档 v0.3 的新模板**：\n"
                             "① 纸面板三层（纸背板 / 纸叠层 / 纸面）取代原顶栏 + 目标句；插图区 1285×637 → **1037×583（16:9）**，定案不补偿\n"

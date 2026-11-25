@@ -60,13 +60,17 @@ def _row_height(row, cm):
     trPr.append(el)
 
 
-def ref_slot(doc, code, hint, height_cm=2.8):
-    """一个虚线占位框：上半截写明这是谁的参考图位，下半截留白供贴图。"""
+def ref_slot(doc, code, hint, height_cm=2.8, image=None, img_width_cm=13.0):
+    """一个虚线框：上半截写明图位，下半截贴图。
+
+    image 为空时是留白的「▢ 参考图位」（美术补图用）；传入 image 时变成
+    「▣ 概念图（第一套·AI 生成）」，并在框内居中放入该图 —— M4 前根据
+    文档规格生成的第一套概念参考，供美术对齐风格与形制。
+    """
     tbl = doc.add_table(rows=1, cols=1)
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
     tbl.autofit = False
     _fix_tbl_width(tbl, [CONTENT_W_CM])
-    _row_height(tbl.rows[0], height_cm)
 
     cell = tbl.cell(0, 0)
     _dashed_borders(cell)
@@ -76,8 +80,12 @@ def ref_slot(doc, code, hint, height_cm=2.8):
     p = cell.paragraphs[0]
     p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(2)
-    r = p.add_run("▢  " + code + "　参考图位")
-    set_run_font(r, size=9, color=GREY, bold=True)
+    if image:
+        r = p.add_run("▣  " + code + "　概念图（第一套 · AI 生成，供美术对齐风格 / 形制）")
+        set_run_font(r, size=9, color=DEEP, bold=True)
+    else:
+        r = p.add_run("▢  " + code + "　参考图位")
+        set_run_font(r, size=9, color=GREY, bold=True)
 
     p2 = cell.add_paragraph()
     p2.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -85,9 +93,23 @@ def ref_slot(doc, code, hint, height_cm=2.8):
     r2 = p2.add_run(hint)
     set_run_font(r2, size=8.5, color=GREY)
 
-    # 留白：贴图用
-    cell.add_paragraph()
-    cell.add_paragraph()
+    if image:
+        _row_height(tbl.rows[0], 0.6)  # 让行高随图片撑开，不锁死
+        pic_p = cell.add_paragraph()
+        pic_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        pic_p.paragraph_format.space_before = Pt(4)
+        pic_p.paragraph_format.space_after = Pt(2)
+        pic_p.add_run().add_picture(image, width=Cm(img_width_cm))
+        note_p = cell.add_paragraph()
+        note_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        note_p.paragraph_format.space_after = Pt(2)
+        nr = note_p.add_run("注：概念图仅用于确认风格与形制，非最终 sprite；尺寸 / 色号以本节规格表为准")
+        set_run_font(nr, size=8, color=GREY)
+    else:
+        _row_height(tbl.rows[0], height_cm)
+        # 留白：贴图用
+        cell.add_paragraph()
+        cell.add_paragraph()
 
     gap = doc.add_paragraph()
     gap.paragraph_format.space_after = Pt(4)

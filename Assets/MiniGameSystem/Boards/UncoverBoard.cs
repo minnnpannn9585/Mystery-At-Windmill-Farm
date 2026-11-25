@@ -78,7 +78,7 @@ namespace EggRescue.MiniGame.Boards
                     Rect = rect,
                     Button = button,
                     Group = group,
-                    Rail = AddRailSlot(spec.Label, i),
+                    Rail = AddRailSlot(spec.Label, i, hiddenUntilFound: true),
                 });
             }
 
@@ -254,6 +254,7 @@ namespace EggRescue.MiniGame.Boards
         void MarkRailDone(TargetView target)
         {
             if (target.Rail == null) return;
+            RevealRail(target.Rail);
             var label = target.Rail.GetComponentInChildren<TMP_Text>();
             if (label == null) return;
             label.text = "✓ " + target.Spec.Label;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using EggRescue.MiniGame.Hooks;
 
 namespace EggRescue
 {
@@ -341,24 +342,30 @@ namespace EggRescue
 
         static void WireClues()
         {
+            // ---------------- 19 局环境物证入口（19 文档 §19.3.1）----------------
+            // 这些点必须走 MiniGameClueTrigger：变量由小游戏成功时一次性写（WriteSubmit），
+            // 交互瞬间绝不写。老 ClueTrigger 会在点下去的那一刻就写变量、点亮 VFX，
+            // 造成「小游戏还没做完线索就有了 / 中途退出后再点不开局」——必须清掉。
+            // 映射：E01→Q02（场景已挂，WireClueAndDesc 会跳过老 ClueTrigger）
             WireClueAndDesc("E01", "E01_ViewCharcoal", 1);
-            WireClueAndDesc("E02", "E02_ViewFeather", 2);
-            WireClueAndDesc("E05", "E05_GrainSoakGet", 90);
-            WireClueAndDesc("E07", "E07_ViewNapSpot", 14);
-            WireClueAndDesc("E08", "E08_ViewBurnMark", 12);
+            WireMiniGameClue("E02", "Q03", 2);       // 黄绒毛
+            WireMiniGameClue("E05", "Q09", 90);      // 谷物泡水
+            WireMiniGameClue("E07", "Q10", 14);      // 午睡草窝
+            WireMiniGameClue("E08", "Q11", 12);      // 烧焦稻草
+            WireMiniGameClue("E10", "Q12", 19);      // 白石头（Q12→Q12B 两段无缝）
+            WireMiniGameClue("E12", "Q06", 3);       // 蛙身绿垫（环境入口；3-A 补录入口另接）
+            WireMiniGameClue("E14", "Q14", 24);      // 猫门
+            WireMiniGameClue("E15", "Q15", 27);      // 食碗
+            WireMiniGameClue("E16", "Q16", 29);      // 兽毛
+            WireMiniGameClue("E17", "Q18", 21);      // 空水桶
+            WireMiniGameClue("E18", "Q19", 23);      // 雨靴印
+            WireMiniGameClue("E28", "Q17", 26);      // 树根抓痕
+            // ---------------- 非 19 局的普通环境点：保持老 ClueTrigger ----------------
             WireClueAndDesc("E09", "E09_AnimalPawPrints", 16);
-            WireClueAndDesc("E10", "E10_ViewWhiteStone", 19);
-            WireClueAndDesc("E12", "E12_ViewGreenPad", 3);
             WireClueAndDesc("E13", "E13_ViewDoorBlocked", 30);
-            WireClueAndDesc("E14", "E14_ViewCatDoor", 24);
-            WireClueAndDesc("E15", "E15_ViewFoodBowl", 27);
-            WireClueAndDesc("E16", "E16_ViewFur", 29);
-            WireClueAndDesc("E17", "E17_ViewEmptyBucket", 21);
-            WireClueAndDesc("E18", "E18_ViewBootprints", 23);
             WireClueAndDesc("E23", "E23_dabble", 7);
             WireClueAndDesc("E25", "E25_ChickenFootprints", 5);
             WireClueAndDesc("E27", "E27_ColorReflective", 17);
-            WireClueAndDesc("E28", "E28_ViewTreeScratch", 26);
             WireClueAndDesc("E34", "E34_Glass", 38);
             WireDesc("E11", 36);
             WireDesc("E21", 55);
@@ -485,10 +492,77 @@ namespace EggRescue
             return a;
         }
 
+        /// <summary>
+        /// 把一个环境交互点接成 19 局小游戏入口（§19.3.1）。
+        /// 与 WireClueAndDesc 的关键差别：绝不挂老 ClueTrigger（它交互瞬间写变量），
+        /// 改挂 MiniGameClueTrigger —— 只有小游戏成功提交时才由 WriteSubmit 写变量、入册、计数。
+        /// 未完成退出时钩子不动 VFX、描述对话不 discover，交互点保持原样可再次进入续玩。
+        /// </summary>
+        static void WireMiniGameClue(string token, string defId, int miaosuId)
+        {
+            var go = FindNamedContains(token);
+            if (go == null) { Debug.LogWarning("[GameBootstrap] 找不到小游戏交互点 " + token + " → " + defId); return; }
+
+            // 清掉场景里残留的旧 ClueTrigger（含它已订阅的 OnInteract）。
+            var stale = go.GetComponent<ClueTrigger>();
+            if (stale != null) Destroy(stale);
+
+            // 挂小游戏入口钩子，填入 defId。
+            var hook = go.GetComponent<MiniGameClueTrigger>();
+            if (hook == null) hook = go.AddComponent<MiniGameClueTrigger>();
+            hook.defId = defId;
+            hook.enabled = true;   // 确保不被场景残留的禁用状态影响（defId 是 AddComponent 后才填的）
+
+            // 描述对话是「结果描述」：文本本身含结论（如「炭尖磨平、草叶蹭炭粉」），
+            // 交互那一刻绝不播——否则提前泄露答案、中途退出也看到结论。
+            // 由 MiniGameClueTrigger 在本局成功提交后才调 PlayDeferredDescription 播出。
+            var dt = go.GetComponent<DialogueTrigger>();
+            if (dt == null) dt = go.AddComponent<DialogueTrigger>();
+            if (string.IsNullOrEmpty(dt.npcName))
+            {
+                dt.npcName = "描述";
+                dt.startId = miaosuId;
+            }
+            dt.discoverOnInteract = false;
+            dt.deferToMiniGame = true;
+
+            if (go.GetComponent<Interactable>() == null) go.AddComponent<Interactable>();
+            if (go.GetComponent<InteractionPointVfx>() == null) go.AddComponent<InteractionPointVfx>();
+        }
+
         static void WireClueAndDesc(string token, string varName, int miaosuId)
         {
             var go = FindNamedContains(token);
             if (go == null) return;
+
+            // 已接进小游戏的点由小游戏自己在完成时写 SubmitVar。
+            // 这里绝不能再挂老 ClueTrigger：它会在「交互那一刻」就把 varName 写成 true，
+            // 导致小游戏还没完成就被判定已完成——表现为中途退出后再点交互点不再开游戏。
+            if (go.GetComponent<MiniGameClueTrigger>() != null ||
+                go.GetComponent<MiniGameDialogueHook>() != null)
+            {
+                // 清掉场景里可能残留的旧 ClueTrigger（它 Awake 已订阅 OnInteract，
+                // 仅 enabled=false 挡不住；必须 Destroy 组件本体）。
+                var stale = go.GetComponent<ClueTrigger>();
+                if (stale != null) Destroy(stale);
+
+                // 仅保证描述对话/交互组件齐全，不写线索变量。
+                var dtSkip = go.GetComponent<DialogueTrigger>();
+                if (dtSkip == null) dtSkip = go.AddComponent<DialogueTrigger>();
+                if (string.IsNullOrEmpty(dtSkip.npcName))
+                {
+                    dtSkip.npcName = "描述";
+                    dtSkip.startId = miaosuId;
+                }
+                // 小游戏点：描述对话是「结果描述」，交互瞬间不播（含结论会泄题），
+                // 由 MiniGameClueTrigger 成功后播；同时不点亮线索 VFX。
+                dtSkip.discoverOnInteract = false;
+                dtSkip.deferToMiniGame = true;
+                if (go.GetComponent<Interactable>() == null) go.AddComponent<Interactable>();
+                if (go.GetComponent<InteractionPointVfx>() == null) go.AddComponent<InteractionPointVfx>();
+                return;
+            }
+
             var clue = go.GetComponent<ClueTrigger>();
             if (clue == null) clue = go.AddComponent<ClueTrigger>();
             if (string.IsNullOrEmpty(clue.varName1))

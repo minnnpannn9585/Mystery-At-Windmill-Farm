@@ -35,7 +35,7 @@ def main():
     hp = sec.header.paragraphs[0]
     hp.text = ""
     hp.alignment = 1
-    r = hp.add_run("《风车农场悬案》　MiniGame 美术需求文档　v0.6（七色卡降饱和 / 偏暖偏灰）")
+    r = hp.add_run("《风车农场悬案》　MiniGame 美术需求文档　v1.1（概念图导入 Unity · 19 局接入）")
     set_run_font(r, size=8.5, color=RGBColor(0x9A, 0xA3, 0xAA))
     para_bottom_border(hp, "E3EAEE", 4)
 

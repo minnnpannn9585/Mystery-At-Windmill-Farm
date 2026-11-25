@@ -81,6 +81,7 @@ namespace EggRescue.MiniGame
         RectTransform _banner;
         TMP_Text _bannerLabel;
         int _hintLevel;
+        MiniGameReplay _replay;
 
         // ---------------- 交互 ----------------
         protected readonly List<MiniGamePiece> Pieces = new List<MiniGamePiece>();
@@ -222,8 +223,10 @@ namespace EggRescue.MiniGame
             footerRect.anchorMax = Vector2.one;
             footerRect.offsetMin = new Vector2(12f, 10f);
             footerRect.offsetMax = new Vector2(-12f, -10f);
-            var hintRow = Def != null ? MiniGameScript.HintRow(Def.Id) : null;
-            FooterLabel.text = string.IsNullOrEmpty(hintRow) ? FooterText : (FooterText + "　｜　" + hintRow);
+            // 底栏开局只显示模板操作说明，不显示提示文字。
+            // 提示必须玩家点「提示」按钮后才出现（ShowHint 里再拼进去），
+            // 不能在建骨架时就写死一级提示——那样等于没点就泄露了第一段提示。
+            FooterLabel.text = FooterText;
 
             // ============ 交互层：坐标保持旧口径，等 M3 逐项换算内容 ============
             _objectiveLabel = MiniGameUIKit.Label(Root, "ObjectiveLegacy", 1f, MiniGameTheme.Deep);
@@ -239,10 +242,53 @@ namespace EggRescue.MiniGame
             var bodyBg = MiniGameUIKit.Panel(Body, "BodyBg", new Color(1f, 1f, 1f, 0.02f), 0f);
             MiniGameUIKit.Stretch(bodyBg);
 
+            // 主区底图（概念图/正式图）：Content.BackgroundResource 有值就铺一张，
+            // 层级在物件之下（BuildBoard 之后建的物件天然盖在它上面）。资源缺失静默跳过。
+            if (Content != null && !string.IsNullOrEmpty(Content.BackgroundResource) &&
+                Resources.Load<Sprite>(Content.BackgroundResource) != null)
+            {
+                var bgArt = MiniGameUIKit.SpriteArt(Body, "BodyBackdrop", Content.BackgroundResource, Color.white);
+                MiniGameUIKit.Stretch(bgArt);
+                bgArt.SetAsFirstSibling();   // 贴在最底，BodyBg 之下也不影响（BodyBg 近乎全透明）
+            }
+
             _hintButton = MiniGameUIKit.Btn(Root, "Hint", "提示 0/2", MiniGameTheme.Yellow, MiniGameTheme.Deep, 20f);
             MiniGameUIKit.PlaceArt((RectTransform)_hintButton.transform, MiniGameLayout.HintButtonArea);
             _hintLabel = _hintButton.GetComponentInChildren<TMP_Text>();
             _hintButton.onClick.AddListener(() => ShowHint(_hintLevel + 1));
+
+            // 提示按钮左侧灯泡图标（美术文档 G-20b）：用概念图 HintBulb_G20B，
+            // 资源缺失时静默跳过、按钮只剩文字（不阻塞）。
+            if (Resources.Load<Sprite>("MiniGameArt/HintBulb_G20B") != null)
+            {
+                var bulb = MiniGameUIKit.SpriteArt(_hintButton.transform, "HintBulb",
+                    "MiniGameArt/HintBulb_G20B", Color.white);
+                MiniGameUIKit.Place(bulb, new Vector2(0f, 0.5f), new Vector2(0.5f, 0.5f),
+                    new Vector2(28f, 0f), new Vector2(40f, 40f));
+                // 文字右移给灯泡腾位
+                if (_hintLabel != null)
+                {
+                    var lr = _hintLabel.rectTransform;
+                    lr.offsetMin = new Vector2(50f, lr.offsetMin.y);
+                    _hintLabel.alignment = TextAlignmentOptions.Left;
+                }
+            }
+
+            // ============ T7 重听（§12.6）：只有配了 ReplayModule 的证词局才有 ============
+            // 按钮放在底栏右端、提示按钮左边，避开底栏文字；不改 UI 规格常量。
+            var replayModule = Content != null ? Content.ReplayModule : null;
+            if (!string.IsNullOrEmpty(replayModule))
+            {
+                var replayBtn = MiniGameUIKit.Btn(Root, "Replay", "重听", MiniGameTheme.NoteColor(
+                    Def != null ? Def.Template : MiniGameTemplate.Testimony), MiniGameTheme.Cream, 18f);
+                var hintArt = MiniGameLayout.HintButtonArea;
+                MiniGameUIKit.PlaceArt((RectTransform)replayBtn.transform,
+                    new Rect(hintArt.x - 116f, hintArt.y, 104f, hintArt.height));
+                _replay = new MiniGameReplay(Root);
+                var module = replayModule;
+                var tag = Content.ReplayTag;
+                replayBtn.onClick.AddListener(() => _replay.Open(module, tag));
+            }
 
             BuildConfirm();
             BuildBanner();
@@ -392,7 +438,8 @@ namespace EggRescue.MiniGame
         /// 右栏一排一个槽。columns &gt; 1 时按多列排，槽宽自动均分——
         /// T4 有六块待拼图，单列会撑出栏外，两列三行刚好放得下。
         /// </summary>
-        protected RectTransform AddRailSlot(string label, int index, int columns = 1)
+        protected RectTransform AddRailSlot(string label, int index, int columns = 1,
+            bool hiddenUntilFound = false)
         {
             if (RailSlots == null) return null;
 
@@ -420,7 +467,43 @@ namespace EggRescue.MiniGame
             MiniGameUIKit.Place(text.rectTransform, new Vector2(0f, 0.5f), new Vector2(0f, 0.5f),
                 new Vector2(7f, 0f), new Vector2(size.x - 10f, 32f));
             text.text = label;
+
+            // 已发现线索槽：开局隐藏，玩家发现对应线索后才渐显（用户口径）。
+            // T4 线索集/ T7 槽位是操作元素、不隐藏（调用方不传 hiddenUntilFound）。
+            if (hiddenUntilFound)
+            {
+                var group = slot.gameObject.AddComponent<CanvasGroup>();
+                group.alpha = 0f;
+                group.interactable = false;
+                group.blocksRaycasts = false;
+            }
             return slot;
+        }
+
+        /// <summary>发现线索后渐显对应的右栏槽（底+字一起）。重复调用不叠加。</summary>
+        protected void RevealRail(RectTransform slot)
+        {
+            if (slot == null) return;
+            var group = slot.GetComponent<CanvasGroup>();
+            if (group == null || group.alpha >= 1f || RevealingRails.Contains(slot)) return;
+            StartCoroutine(RevealRailRoutine(slot, group));
+        }
+
+        readonly HashSet<RectTransform> RevealingRails = new HashSet<RectTransform>();
+
+        System.Collections.IEnumerator RevealRailRoutine(RectTransform slot, CanvasGroup group)
+        {
+            RevealingRails.Add(slot);
+            const float duration = 0.45f;
+            var t = 0f;
+            while (t < duration)
+            {
+                t += Time.unscaledDeltaTime;
+                group.alpha = Mathf.Clamp01(t / duration);
+                yield return null;
+            }
+            group.alpha = 1f;
+            RevealingRails.Remove(slot);
         }
 
         protected void RefreshRailCount()
@@ -531,7 +614,7 @@ namespace EggRescue.MiniGame
             if (_activeHighlight != null) _activeHighlight.Hide();
         }
 
-        TargetHighlight NewHighlight(string name = "Highlight")
+        protected TargetHighlight NewHighlight(string name = "Highlight")
         {
             var hl = TargetHighlight.Create(Root, name);
             _highlights.Add(hl);
@@ -563,11 +646,14 @@ namespace EggRescue.MiniGame
 
             if (Input.GetKeyDown(KeyCode.Escape) && State == MiniGameState.Play)
             {
-                if (_confirm != null && _confirm.gameObject.activeSelf) CloseConfirm();
+                if (_replay != null && _replay.IsOpen) _replay.Close();
+                else if (_confirm != null && _confirm.gameObject.activeSelf) CloseConfirm();
                 else RequestExit();
                 return;
             }
             if (_confirm != null && _confirm.gameObject.activeSelf) return;
+            // 重听浮层打开时不吃主区输入：这是一份阅读记录，不是可操作状态。
+            if (_replay != null && _replay.IsOpen) return;
 
             // 输入只在 Play 里响应（Enter / Complete / Exit 都不吃输入），
             // 但模板自己的每帧动画不能跟着停：Feedback 那 0.3s 一停，
@@ -889,13 +975,16 @@ namespace EggRescue.MiniGame
             if (Def == null) return;
             _hintLevel = Mathf.Clamp(level, 1, 2);
             if (_hintLabel != null) _hintLabel.text = "提示 " + _hintLevel + "/2";
-            var text = Def.Hint(_hintLevel);
-            if (string.IsNullOrEmpty(text))
-            {
-                Debug.Log("[MiniGame] " + Def.Id + " 没有第 " + _hintLevel + " 级提示（M3 补文案）");
-                return;
-            }
-            ApplyHint(_hintLevel, text);
+
+            // 底栏的提示文字只在点按钮后出现，且**两级共用同一段一级提示**：
+            // Row(id,2)（二级文本）是写给开发看的动作说明（「先出现转动箭头，再高亮…」），
+            // 不是给玩家的文案——二级点击只改按钮计数并触发 ApplyHint 视觉动作，不改文字。
+            var displayText = Def.Hint(1);
+            if (FooterLabel != null && !string.IsNullOrEmpty(displayText))
+                FooterLabel.text = string.IsNullOrEmpty(FooterText) ? displayText : (FooterText + "　｜　" + displayText);
+
+            var actionText = Def.Hint(_hintLevel);
+            ApplyHint(_hintLevel, actionText);
         }
 
         /// <summary>模板实现：一级给方向，二级标位置（§4.4 交互下限）。</summary>

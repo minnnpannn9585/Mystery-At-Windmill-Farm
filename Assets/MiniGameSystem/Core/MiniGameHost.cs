@@ -204,12 +204,25 @@ namespace EggRescue.MiniGame
 
         // ---------------- 提交 ----------------
 
+        /// <summary>本局成功后要无缝接上的续段（Q12 → Q12B）。仅在提交完成时设置。</summary>
+        MiniGameDef _pendingContinuation;
+
         void HandleSubmit(MiniGameBoard board)
         {
             var def = board.Definition;
             WriteSubmit(def);
             MiniGameSave.Clear(def.Id);
             SaveService.Save();
+
+            // §7.8 Q12「拨开 + 翻面同一局」：拨草段完成先记住续段，等入册演出 + 拆板子后再开。
+            // 续段本身已完成时不接（读档 / 重复进入直接回原出口）。
+            _pendingContinuation = null;
+            if (!string.IsNullOrEmpty(def.ContinuationId))
+            {
+                var next = MiniGameRegistry.Get(def.ContinuationId);
+                if (next != null && !IsSubmitted(next) && MiniGameRegistry.Content(next) != null)
+                    _pendingContinuation = next;
+            }
 
             MiniGameResultFlight.Play(_canvas, board, () => Teardown(true));
         }
@@ -294,6 +307,18 @@ namespace EggRescue.MiniGame
             var callback = _onReturn;
             _onReturn = null;
             _closing = false;
+
+            // 续段优先：按住原 callback（回场景出口），先无缝开续段；
+            // 续段关闭时再把 callback 交给它，保证「两次交互、一次回场景」。
+            var continuation = _pendingContinuation;
+            _pendingContinuation = null;
+            if (continuation != null && submitted)
+            {
+                var returnToScene = callback;
+                if (MiniGameHost.Open(continuation, () => { if (returnToScene != null) returnToScene(); }))
+                    return;
+            }
+
             if (callback != null) callback();
         }
 

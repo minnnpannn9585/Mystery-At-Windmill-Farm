@@ -25,6 +25,8 @@ namespace EggRescue.MiniGame
             // 自检局不进 Defs —— §15.1 那张表只放正式 19 局，多一条会污染 ByTemplate 统计。
             // 但它必须能被查出来，否则自检入口会停在「unknown def id」。
             if (id == DebugId) return DebugDef;
+            // Q12 的续段同样不进主表（维持 19 局统计），但要能被 Host 按 id 查到做无缝衔接。
+            if (id == "Q12B") return Q12Continuation;
             return null;
         }
 
@@ -57,12 +59,19 @@ namespace EggRescue.MiniGame
         public static MiniGameContent Content(MiniGameDef def)
         {
             if (def == null) return null;
-            // M1：只有自检局有内容；19 局的内容在 M3 随 Data/ 一起补
+            // M1：自检局
             if (def.Id == DebugId) return MiniGameContent.DebugDefault();
-            // M2：七个模板各有示例内容，只为「板子能单独开起来验收」，19 局真数据仍在 M3
+            // M2：七个模板的示例内容，只为「板子能单独开起来验收」
             if (def.Id != null && def.Id.StartsWith(MiniGameSamples.Prefix))
                 return MiniGameSamples.For(def.Template);
-            return null;
+            // M3：19 局正式内容（含 Q12 的 T2 前半）。按 ContentKey 取，与 Def 解耦。
+            if (!string.IsNullOrEmpty(def.ContentKey))
+            {
+                var content = MiniGameContents.For(def.ContentKey);
+                if (content != null) return content;
+            }
+            // 兜底：ContentKey 缺失时按 Id 找（避免漏配 ContentKey 就打不开）
+            return MiniGameContents.For(def.Id);
         }
 
         // ---------------- M2：模板自检局 ----------------
@@ -163,7 +172,7 @@ namespace EggRescue.MiniGame
 
         static List<MiniGameDef> Build()
         {
-            return new List<MiniGameDef>
+            var list = new List<MiniGameDef>
             {
                 // ---------------- 第一章 ----------------
                 Def("Q01", MiniGameTemplate.Testimony, "2 槽 3 卡（1 干扰）", "Shufen_CommissionDone", null, "淑芬 1-A 播毕"),
@@ -177,7 +186,8 @@ namespace EggRescue.MiniGame
                 Def("Q09", MiniGameTemplate.Magnifier, "2 处", "E05_GrainSoakGet", null, "E05 水槽"),
                 Def("Q10", MiniGameTemplate.Uncover, "拨 2 束 + 2 确认", "E07_ViewNapSpot", null, "E07 草窝"),
                 Def("Q11", MiniGameTemplate.Magnifier, "2 处", "E08_ViewBurnMark", null, "E08 稻草皮毛"),
-                Def("Q12", MiniGameTemplate.Uncover, "拨 3 束 + 双面 2 处", "E10_ViewWhiteStone", null, "E10 白石头"),
+                // Q12 跨 T2→T3：主表这段只拨草，提交变量挪到 Q12Continuation（双面 2/2 才写 E10_ViewWhiteStone）
+                Def("Q12", MiniGameTemplate.Uncover, "拨 3 束巢草（前半，续 Q12B 翻转）", null, null, "E10 白石头（拨草段）"),
                 Def("Q13", MiniGameTemplate.Testimony, "2 槽 3 卡（一槽多卡）", null, null, "小鸡 2-E / 2-G 播毕", "ChickStatus", 3),
 
                 // ---------------- 第二章 ----------------
@@ -188,15 +198,18 @@ namespace EggRescue.MiniGame
                 Def("Q18", MiniGameTemplate.Rotate, "2 处（内部 / 桶底）", "E17_ViewEmptyBucket", null, "E17 空桶"),
                 Def("Q19", MiniGameTemplate.Jigsaw, "6/6 + 朝鸡舍", "E18_ViewBootprints", null, "E18 雨靴印"),
             };
+            // Q12 拨草段成功后自动接 Q12B 翻面段（§7.8「同局无缝切」，框架拆成两 Def 后由 Host 缝合）。
+            for (var i = 0; i < list.Count; i++)
+                if (list[i].Id == "Q12") list[i].ContinuationId = "Q12B";
+            return list;
         }
 
         static MiniGameDef Def(string id, MiniGameTemplate template, string objective,
             string submitVar, string countVar, string source)
         {
-            // 标题行 / 提示行逐字取自任务线（§12.6.1 不压缩、照搬、标点原样）。
+            // 标题行 / 两级提示逐字取自 19 文档（§12.6.1 不压缩、照搬、标点原样）。
             // 缺行时退回模板名 / 空提示，不静默吞掉——自检局与样例局不受影响。
             var titleRow = MiniGameScript.TitleRow(id);
-            var hintRow = MiniGameScript.HintRow(id);
             return new MiniGameDef
             {
                 Id = id,
@@ -207,7 +220,8 @@ namespace EggRescue.MiniGame
                 CountVar = countVar,
                 SourceId = source,
                 ContentKey = id,
-                Hints = !string.IsNullOrEmpty(hintRow) ? new[] { hintRow } : new string[0],
+                Mode = ModeOf(id),
+                Hints = MiniGameScript.Hints(id),
             };
         }
 
@@ -220,6 +234,48 @@ namespace EggRescue.MiniGame
             def.IntSubmitValue = intValue;
             def.SubmitIsInt = true;
             return def;
+        }
+
+        /// <summary>
+        /// 判定模式按局固定（§11.3 / §10.2）。默认 Discrete：命中一处算一步。
+        /// T6 两局刻意不同：Q16 是「夹起→放入」两步（Step），Q03 是「放入才计分」（Count）。
+        /// T5 的 Q17 按覆盖率判定（三段各 ≥80%），走 Coverage。
+        /// </summary>
+        static JudgeMode ModeOf(string id)
+        {
+            switch (id)
+            {
+                case "Q03": return JudgeMode.Count;
+                case "Q16": return JudgeMode.Step;
+                case "Q17": return JudgeMode.Coverage;
+                default: return JudgeMode.Discrete;
+            }
+        }
+
+        /// <summary>
+        /// Q12 的第二段：T3 翻转查验白石头双面。
+        /// 原文要求「拨开＋翻转同一局」，框架是一 Def 一模板，故拆成 Q12（主表）+ 这段续局。
+        /// 流程侧在 Q12 成功后打开它；提交变量 E10_ViewWhiteStone 挂这里，双面都确认才写。
+        /// 不进 Defs 主表，避免 §15.1 那张 19 局表被污染。
+        /// </summary>
+        public static MiniGameDef Q12Continuation
+        {
+            get
+            {
+                return new MiniGameDef
+                {
+                    Id = "Q12B",
+                    Template = MiniGameTemplate.Rotate,
+                    Title = TitleOf(MiniGameTemplate.Rotate),
+                    Objective = MiniGameScript.TitleRow("Q12"),
+                    SubmitVar = "E10_ViewWhiteStone",
+                    CountVar = null,
+                    SourceId = "E10 白石头（翻转段）",
+                    ContentKey = "Q12B",
+                    Mode = JudgeMode.Discrete,
+                    Hints = MiniGameScript.Hints("Q12"),
+                };
+            }
         }
 
         static string TitleOf(MiniGameTemplate template)

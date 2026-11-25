@@ -22,6 +22,13 @@ namespace EggRescue.MiniGame.Hooks
         [Tooltip("完成后是否还跳 hub；关掉就只留在原地")]
         public bool jumpToHubOnClose = true;
 
+        /// <summary>
+        /// Q04（E03 可选偷听）专用：恢复前检查 ChickStatus，若已 >=3 则作废未结算的偷听记录
+        /// （19 文档 §19.3.2 / Q04）。作废时清掉本局进度，不发 D02、不写 E03_Overheard、不计数。
+        /// 其它局保持 false，不受影响。
+        /// </summary>
+        public bool voidIfChickStatusReached;
+
         bool _seenActive;
         bool _fired;
 
@@ -46,6 +53,16 @@ namespace EggRescue.MiniGame.Hooks
             if (def == null)
             {
                 Debug.LogError("[MiniGame] " + name + " 的 defId 不存在: " + defId, this);
+                return;
+            }
+
+            // Q04 可选偷听：其间若已推进到 ChickStatus>=3，作废未结算记录，
+            // 沿用原 E03 关闭规则，不补发 D02 / E03 状态与计数（§19.3.2）。
+            if (voidIfChickStatusReached && GameState.GetInt("ChickStatus") >= 3)
+            {
+                MiniGameSave.Clear(defId);
+                SaveService.Save();
+                JumpToHub();
                 return;
             }
 

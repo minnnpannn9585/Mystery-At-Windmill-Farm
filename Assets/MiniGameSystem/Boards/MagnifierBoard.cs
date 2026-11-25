@@ -50,7 +50,7 @@ namespace EggRescue.MiniGame.Boards
                 {
                     Spec = spec,
                     Dot = dot,
-                    Rail = AddRailSlot(spec.Label, i),
+                    Rail = AddRailSlot(spec.Label, i, hiddenUntilFound: true),
                 });
             }
 
@@ -140,6 +140,7 @@ namespace EggRescue.MiniGame.Boards
 
             if (target.Rail != null)
             {
+                RevealRail(target.Rail);
                 var label = target.Rail.GetComponentInChildren<TMP_Text>();
                 if (label != null)
                 {
@@ -223,6 +224,7 @@ namespace EggRescue.MiniGame.Boards
                     if (image != null) image.color = MiniGameTheme.Yellow;
                     if (t.Rail != null)
                     {
+                        RevealRail(t.Rail);
                         var label = t.Rail.GetComponentInChildren<TMP_Text>();
                         if (label != null)
                         {

@@ -109,6 +109,66 @@ namespace EggRescue.MiniGame
     }
 
     /// <summary>
+    /// T3 多物体翻转框架里的一个可翻转 / 可遮挡物件（§8.10）。
+    ///
+    /// 旧模型只有一层 Faces（一个物体的正反面），无法表达 19-文档 Q02 的
+    /// 「木炭压在草叶上 / 背侧草叶遮住炭粉 / 另有两片绿叶+石子干扰」这类重叠关系。
+    /// 一个 FlipObject 就是一个独立可翻转的物件：有自己的两面、自己的坐标尺寸、自己的层级。
+    /// </summary>
+    [Serializable]
+    public sealed class MiniGameFlipObject
+    {
+        public string Id;
+        public string Label;
+        /// <summary>物件中心，主区美术坐标（左上原点、y 向下，同 MiniGameTarget.Pos）。</summary>
+        public Vector2 Pos;
+        public Vector2 Size = new Vector2(460f, 400f);
+        /// <summary>可选：Resources 下的 Sprite 路径；留空则用 Shape + Color 程序化画。</summary>
+        public string SpritePath;
+        public Color Color = Color.white;
+        /// <summary>程序化形状，供无贴图时区分炭块 / 叶片 / 石子。</summary>
+        public FlipShape Shape = FlipShape.Rect;
+
+        /// <summary>这一物件正反面。干扰物可留空。</summary>
+        public MiniGameFace[] Faces = new MiniGameFace[0];
+
+        /// <summary>渲染层级：数字越大越靠前（遮挡数字小的）。Q02：底草叶 0 &lt; 木炭 1 &lt; 遮挡草叶 2。</summary>
+        public int SortOrder;
+
+        /// <summary>true = 纯背景干扰物，不可翻转、不可点、不参与判定（绿叶 / 小石子）。</summary>
+        public bool IsDecoy;
+
+        /// <summary>false = 固定不动（如垫在木炭下的草叶）；true = 可水平拖动翻转。</summary>
+        public bool Flippable = true;
+
+        /// <summary>
+        /// 本物件在背面时会遮挡住哪个物件的目标（被遮目标的所属物件 Id）。
+        /// Q02：遮挡草叶在背面挡住 charcoal 的 leaf_powder。留空 = 不遮挡任何目标。
+        /// </summary>
+        public string OccludesObjectId;
+
+        public MiniGameFlipObject() { }
+
+        public MiniGameFlipObject(string id, string label, Vector2 pos, Vector2 size, int sortOrder)
+        {
+            Id = id;
+            Label = label;
+            Pos = pos;
+            Size = size;
+            SortOrder = sortOrder;
+        }
+    }
+
+    /// <summary>程序化形状（无贴图时的占位；有 SpritePath 时忽略）。</summary>
+    public enum FlipShape
+    {
+        Rect,
+        Ellipse,
+        /// <summary>细长叶片：椭圆旋转一个角度。</summary>
+        Leaf,
+    }
+
+    /// <summary>
     /// 单局的内容数据：文案、卡面、目标坐标、资源引用。
     /// 模板代码只认这份数据，换局 = 换一份 Content + 一条 Def，不写新代码（§15.4 / §18.1 M3）。
     /// </summary>
@@ -117,6 +177,23 @@ namespace EggRescue.MiniGame
     {
         public string Key;
         public string BackgroundKey;
+
+        /// <summary>
+        /// T7 重听用的对话节点定位（§12.6 / §12.6.1）：只存模块名 + 语义节点前缀（DocTag），
+        /// 运行时从 DialogueDatabase 取原文逐句显示，Content 里绝不存台词副本（会与原表不同步）。
+        /// 用前缀而非 id 区间，是因为对话表里有插入的分支句（如 1-A#6b 的 id 是 200），
+        /// 连续区间会漏；运行时按 DocTag 前缀取、按 id 排序即可完整还原该段。
+        /// ReplayModule 为空表示该局不提供重听（非证词局）。
+        /// </summary>
+        public string ReplayModule;
+        public string ReplayTag;
+
+        /// <summary>
+        /// 主区底图：Resources 下的 sprite 路径（相对 Resources，如 "MiniGameArt/ConceptB01_Haystack"）。
+        /// 概念图/正式图到位后填这里，MiniGameBoard 在 Body 里统一铺一张、层级在可交互物之下。
+        /// 空则不贴图（沿用透明 BodyBg）。资源缺失时静默跳过，不阻塞玩法。
+        /// </summary>
+        public string BackgroundResource;
 
         /// <summary>
         /// 主区里的目标点。Pos 用「主区左上为原点、y 向下」的美术坐标（§4.1），
@@ -141,8 +218,14 @@ namespace EggRescue.MiniGame
         /// <summary>T5 的三段揭露区。</summary>
         public MiniGameSegment[] Segments = new MiniGameSegment[0];
 
-        /// <summary>T3 的两个观察面。</summary>
+        /// <summary>T3 的两个观察面（单物体简写；多物体局改用 FlipObjects）。</summary>
         public MiniGameFace[] Faces = new MiniGameFace[0];
+
+        /// <summary>
+        /// T3 多物体翻转布局（§8.10）。非空时 RotateBoard 走多物体路径；
+        /// 空数组时走旧的单物体 Faces 路径，Q12 / Q15 / Q18 不受影响。
+        /// </summary>
+        public MiniGameFlipObject[] FlipObjects = new MiniGameFlipObject[0];
 
         public MiniGameTarget Target(string id)
         {
@@ -179,6 +262,9 @@ namespace EggRescue.MiniGame
             {
                 Key = Key,
                 BackgroundKey = BackgroundKey,
+                ReplayModule = ReplayModule,
+                ReplayTag = ReplayTag,
+                BackgroundResource = BackgroundResource,
                 Targets = (MiniGameTarget[])Targets.Clone(),
                 Labels = (string[])Labels.Clone(),
                 SlotCount = SlotCount,
@@ -186,6 +272,7 @@ namespace EggRescue.MiniGame
                 Cards = (MiniGameCard[])Cards.Clone(),
                 Segments = (MiniGameSegment[])Segments.Clone(),
                 Faces = (MiniGameFace[])Faces.Clone(),
+                FlipObjects = (MiniGameFlipObject[])FlipObjects.Clone(),
             };
         }
 

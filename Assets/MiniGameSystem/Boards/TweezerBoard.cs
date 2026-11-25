@@ -99,7 +99,7 @@ namespace EggRescue.MiniGame.Boards
                 piece.MinHitSize = 64f;
 
                 _items.Add(new ItemView { Spec = spec, Rect = rect, Piece = piece, Home = home });
-                AddRailSlot(spec.Label, i);
+                AddRailSlot(spec.Label, i, hiddenUntilFound: true);
             }
 
             // 镊子：按住才出现，不是常驻光标（§11.4）
@@ -234,6 +234,7 @@ namespace EggRescue.MiniGame.Boards
         {
             var index = _items.IndexOf(item);
             if (RailSlots == null || index < 0 || index >= RailSlots.childCount) return;
+            if (done) RevealRail(RailSlots.GetChild(index) as RectTransform);
             var label = RailSlots.GetChild(index).GetComponentInChildren<TMP_Text>();
             if (label == null) return;
             label.text = done ? "✓ " + item.Spec.Label : item.Spec.Label;

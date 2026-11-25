@@ -57,6 +57,13 @@ namespace EggRescue.MiniGame
         /// </summary>
         public JudgeMode Mode = JudgeMode.Discrete;
 
+        /// <summary>
+        /// 跨模板续段局 id（§7.8 Q12 的 T2→T3「同局无缝切」）。
+        /// 本段成功提交后若续段尚未完成，Host 自动打开续段；续段完成才回原场景出口。
+        /// 目前只有 Q12 = "Q12B"；其余局为 null。
+        /// </summary>
+        public string ContinuationId;
+
         /// <summary>两级提示文案：0 = 一级（给方向），1 = 二级（标位置）。</summary>
         public string[] Hints = new string[0];
 
