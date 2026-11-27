@@ -44,7 +44,7 @@ def build(doc):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(30)
-    r = p.add_run("v2.16　｜　T1–T7 全量定稿 · 19 局全量接入 · 结果描述成功后播 + 接线顺序修复 · 底图/右栏渐显 · M4 美术替换前　｜　Unity 2022.3.62t13 · URP 14.2.0-t1")
+    r = p.add_run("v2.17　｜　T1–T7 全量定稿 · 19 局全量接入 · ComfyUI 实机模板重生成 35 张素材投入 · 三个 sprite 接线字段 · M4 美术替换中　｜　Unity 2022.3.62t13 · URP 14.2.0-t1")
     set_run_font(r, size=9.5, color=GREY)
 
     # 封面概念图

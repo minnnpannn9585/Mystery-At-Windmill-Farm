@@ -1917,6 +1917,13 @@ def build(doc):
     table(doc,
           ["版本", "日期", "内容"],
           [
+              ["**v2.17**", "2026-11-27", "**ComfyUI 实机模板重生成素材投入 + 三个 sprite 接线字段**：\n"
+                            "① 用户桌面《各任务板块概念图实机参考.docx》17 张实机截图 → 本地 ComfyUI（FLUX.1-dev fp8 + `FLUX_flat_colour_anime_v3.4` 平涂卡通 LoRA + ControlNet Union Pro Canny 锁构图）重生成 35 张正式素材并投入 `Assets/Resources/MiniGameArt/`，美术文档升 v1.2（§5.1.3）\n"
+                            "② 7 张满幅底图（`BG_B01`~`BG_B07`）接 `MiniGameContent.BackgroundResource`：Q02/Q03/Q06/Q09/Q10/Q11/Q12/Q12B/Q14/Q15/Q16/Q17/Q18/Q19 共 14 个局；T7 六局无底图口径不变\n"
+                            "③ 新增两个数据字段（均 Clone 复制、留空走原占位）：`MiniGameContent.ObjectSpritePath`（T3 单物体翻转局的物件贴图，`RotateBoard.BuildSingleBoard` 有值则正反铺 sprite）；`MiniGameCard.IconPath`（T7 卡面图标，`TestimonyBoard.CreateCard` 有值则铺 sprite）。Q02 的 `FlipObjects[].SpritePath` 既可（M-04/M-15）\n"
+                            "④ 已实装：Q02 底图 + 木炭 + 尾叶、Q12B 白石、Q15 食碗、Q18 水桶、Q01/Q04/Q05/Q07/Q08/Q13 共 18 张卡面图标；M-11 黄绒毛/M-12 兽毛/W-01 放大镜/W-06 镊子/M-01 草束资源已导入待各模板接线\n"
+                            "⑤ MCP 验证：compile 0 warning；Q02 截图确认 B-01 底图 + 尾叶 sprite 进主区；Q01 截图确认 3 张卡显示新图标（iconsWithSprite=3）；退出 Play 后清存档\n"
+                            "⑥ 前景口径：白底生成 → alpha 边缘漫水键控 → 包围盒裁切 + 2px 透明边 → 等比 fit 规格；底图 1024×576；无 AI 水印"],
               ["**v2.16**", "2026-11-25", "**结果描述延迟到成功播 + 批量接线顺序修复**（用户实测反馈）：\n"
                             "① 「中途退出还显示结论文本」：`DialogueTrigger.deferToMiniGame` 让小游戏点交互时不播描述；`MiniGameClueTrigger` 在成功提交后（`OnReturn` / 已完成再交互）才调 `PlayDeferredDescription` 播结果描述，中途退出什么都不播、不点亮\n"
                             "② 「其它局测不到」根因：`WireMiniGameClue` 先 `AddComponent` 后填 defId，而钩子 `Awake` 见 defId 空就 `enabled=false`，导致 12 个批量点钩子全禁用、点不动；改为 Awake 无条件订阅、defId 空在 `HandleInteract` 静默返回，设完 defId 显式 `enabled=true`\n"

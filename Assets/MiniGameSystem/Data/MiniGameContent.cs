@@ -56,6 +56,8 @@ namespace EggRescue.MiniGame
         public string SlotId;
         /// <summary>排序题的序号（Q07）；归类题填 0。</summary>
         public int Order;
+        /// <summary>可选：Resources 路径的 96x96 卡面图标（T7-01~18）。留空则用色块占位。</summary>
+        public string IconPath;
 
         public MiniGameCard() { }
 
@@ -65,6 +67,12 @@ namespace EggRescue.MiniGame
             Text = text;
             SlotId = slotId;
             Order = order;
+        }
+
+        public MiniGameCard WithIcon(string iconPath)
+        {
+            IconPath = iconPath;
+            return this;
         }
     }
 
@@ -222,6 +230,13 @@ namespace EggRescue.MiniGame
         public MiniGameFace[] Faces = new MiniGameFace[0];
 
         /// <summary>
+        /// T3 单物体翻转局的正式物件贴图（Resources 路径，如 MiniGameArt/SP_M06_bowl_Q15）。
+        /// 留空则 BuildSingleBoard 用纯色块占位；有值则正反两面各铺一张 sprite。
+        /// 多物体局（FlipObjects 非空）忽略此字段，各物件用自己的 SpritePath。
+        /// </summary>
+        public string ObjectSpritePath;
+
+        /// <summary>
         /// T3 多物体翻转布局（§8.10）。非空时 RotateBoard 走多物体路径；
         /// 空数组时走旧的单物体 Faces 路径，Q12 / Q15 / Q18 不受影响。
         /// </summary>
@@ -272,6 +287,7 @@ namespace EggRescue.MiniGame
                 Cards = (MiniGameCard[])Cards.Clone(),
                 Segments = (MiniGameSegment[])Segments.Clone(),
                 Faces = (MiniGameFace[])Faces.Clone(),
+                ObjectSpritePath = ObjectSpritePath,
                 FlipObjects = (MiniGameFlipObject[])FlipObjects.Clone(),
             };
         }

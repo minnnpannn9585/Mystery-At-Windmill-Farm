@@ -36,7 +36,7 @@ def main():
     hp = sec.header.paragraphs[0]
     hp.text = ""
     hp.alignment = 1
-    r = hp.add_run("《风车农场悬案》　MiniGameSystem 设计案　v2.16（结果描述延迟成功 + 接线顺序修复）")
+    r = hp.add_run("《风车农场悬案》　MiniGameSystem 设计案　v2.17（ComfyUI 实机模板重生成素材投入）")
     set_run_font(r, size=8.5, color=_C(0x9A, 0xA3, 0xAA))
     para_bottom_border(hp, "E3EAEE", 4)
 

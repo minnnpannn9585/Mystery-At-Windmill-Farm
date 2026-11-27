@@ -434,6 +434,13 @@ def build(doc):
     table(doc,
           ["版本", "内容"],
           [
+              ["**v1.2**（2026-11-27）",
+               "① 按《各任务板块概念图实机参考.docx》17 张实机截图，用本地 ComfyUI（FLUX.1-dev fp8 + `FLUX_flat_colour_anime_v3.4` 平涂卡通 LoRA + ControlNet Union Pro Canny 锁构图）重生成 35 张正式素材并投入 Unity `Assets/Resources/MiniGameArt/`（见 §5.1.3）\n"
+               "② 7 张满幅底图（`BG_B01`~`BG_B07`）接入 14 个局的 `Content.BackgroundResource`；Q02 旧的 `ConceptB01_Haystack` 概念图换成 `BG_B01_Haystack`\n"
+               "③ 前景透明件：`M-04` 木炭 / `M-15` 尾叶接 `FlipObjects[].SpritePath`；`M-05` 白石 / `M-06` 食碗 / `M-07` 水桶接新增的 `Content.ObjectSpritePath`（单物体翻转路径支持贴图）；其余工具/物证资源已导入待接线\n"
+               "④ 18 张 T7 卡面图标（96×96）接新增的 `MiniGameCard.IconPath`，`TestimonyBoard` 有图标则铺 sprite；Q01 MCP 截图确认生效\n"
+               "⑤ 全部前景件白底生成后经 alpha 键控 + 包围盒裁切 + 2px 透明边 + 等比 fit 规格；底图 1024×576；无 AI 水印\n"
+               "⑥ 总则不变：除可交互目标外一切皆底图，T7 六局无背景板"],
               ["**v1.1**（2026-11-25）",
                "① 三张第一套概念图落进程序工程 `Assets/Resources/MiniGameArt/`（均导入 Sprite）：`ConceptB01_Haystack`（B-01 稻草堆）已作 Q02 主区底图实贴、`HintBulb_G20B`（G-20b 灯泡）实装提示按钮、`FlipArrow_W04`（W-04 弧形箭头）实装二级提示（见 §5.1.2）\n"
                "② 新增 `BackgroundResource` 数据驱动底图口径：局数据填 Resources 路径即可铺底，Q02 已实贴；正式 B-01 仍需透明底无水印定稿替换\n"

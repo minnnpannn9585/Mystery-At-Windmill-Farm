@@ -158,10 +158,20 @@ namespace EggRescue.MiniGame.Boards
             var shadowImage = shadow.GetComponent<UnityEngine.UI.Image>();
             if (shadowImage != null) shadowImage.raycastTarget = false;
 
-            // 图标位（M3 换真图）：这里用一枚色块代替，保证卡面不是纯文字
-            var icon = MiniGameUIKit.Panel(rect, "Icon", MiniGameTheme.Alpha(MiniGameTheme.Yellow, 0.85f), 10f);
-            MiniGameUIKit.Place(icon, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
-                new Vector2(0f, 46f), new Vector2(96f, 96f));
+            // 图标位：有正式卡面图标（T7-01~18）就铺 sprite，否则退回黄色色块占位。
+            RectTransform icon;
+            if (!string.IsNullOrEmpty(card.IconPath) && Resources.Load<Sprite>(card.IconPath) != null)
+            {
+                icon = MiniGameUIKit.SpriteArt(rect, "Icon", card.IconPath, Color.white);
+                MiniGameUIKit.Place(icon, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
+                    new Vector2(0f, 46f), new Vector2(96f, 96f));
+            }
+            else
+            {
+                icon = MiniGameUIKit.Panel(rect, "Icon", MiniGameTheme.Alpha(MiniGameTheme.Yellow, 0.85f), 10f);
+                MiniGameUIKit.Place(icon, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
+                    new Vector2(0f, 46f), new Vector2(96f, 96f));
+            }
 
             var text = MiniGameUIKit.Paragraph(rect, "Text", 22f, MiniGameTheme.Deep,
                 TextAlignmentOptions.Center);

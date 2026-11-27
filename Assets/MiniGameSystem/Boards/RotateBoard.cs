@@ -97,11 +97,24 @@ namespace EggRescue.MiniGame.Boards
             // 物件本体只是「可按住的地方」，不做点击语义；真正的点击落在目标上
             _objectButton.onClick.AddListener(() => { });
 
-            // 两面：正面奶白、背面冷一点。M3 换成真贴图。
-            var front = MiniGameUIKit.Panel(_object, "FaceFront", MiniGameTheme.Cream, 20f);
-            MiniGameUIKit.Stretch(front);
-            var back = MiniGameUIKit.Panel(_object, "FaceBack", MiniGameTheme.Alpha(MiniGameTheme.Deep, 0.28f), 20f);
-            MiniGameUIKit.Stretch(back);
+            // 两面：有正式贴图（ObjectSpritePath）就铺 sprite，否则退回纯色块占位。
+            RectTransform front, back;
+            if (!string.IsNullOrEmpty(Content.ObjectSpritePath) &&
+                Resources.Load<Sprite>(Content.ObjectSpritePath) != null)
+            {
+                front = MiniGameUIKit.SpriteArt(_object, "FaceFront", Content.ObjectSpritePath, Color.white);
+                MiniGameUIKit.Stretch(front);
+                back = MiniGameUIKit.SpriteArt(_object, "FaceBack", Content.ObjectSpritePath,
+                    MiniGameTheme.Alpha(MiniGameTheme.Deep, 0.28f));
+                MiniGameUIKit.Stretch(back);
+            }
+            else
+            {
+                front = MiniGameUIKit.Panel(_object, "FaceFront", MiniGameTheme.Cream, 20f);
+                MiniGameUIKit.Stretch(front);
+                back = MiniGameUIKit.Panel(_object, "FaceBack", MiniGameTheme.Alpha(MiniGameTheme.Deep, 0.28f), 20f);
+                MiniGameUIKit.Stretch(back);
+            }
 
             _faces.Add(new FaceView { Spec = FaceOf(false), Skin = front.GetComponent<Image>() });
             _faces.Add(new FaceView { Spec = FaceOf(true), Skin = back.GetComponent<Image>() });

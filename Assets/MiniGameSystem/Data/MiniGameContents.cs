@@ -69,9 +69,11 @@ namespace EggRescue.MiniGame
             return new MiniGameSegment(id, label, new Vector2(x, y), new Vector2(w, h));
         }
 
-        static MiniGameCard K(string id, string text, string slotId, int order = 0)
+        static MiniGameCard K(string id, string text, string slotId, int order = 0, string icon = null)
         {
-            return new MiniGameCard(id, text, slotId, order);
+            var card = new MiniGameCard(id, text, slotId, order);
+            if (!string.IsNullOrEmpty(icon)) card.IconPath = "MiniGameArt/IC_" + icon;
+            return card;
         }
 
         static MiniGameContent New(string key, string bg)
@@ -85,6 +87,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q06()
         {
             var c = New("Q06", "E12_PondPad");
+            c.BackgroundResource = "MiniGameArt/BG_B05_Pond";  // BG_B05_Pond（ComfyUI 实机模板重生成）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -98,6 +101,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q09()
         {
             var c = New("Q09", "E05_Trough");
+            c.BackgroundResource = "MiniGameArt/BG_B05_Pond";  // BG_B05_Pond（ComfyUI 实机模板重生成）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -111,6 +115,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q11()
         {
             var c = New("Q11", "E08_Straw");
+            c.BackgroundResource = "MiniGameArt/BG_B01_Haystack";  // BG_B01_Haystack（ComfyUI 实机模板重生成）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -124,6 +129,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q14()
         {
             var c = New("Q14", "E14_CatDoor");
+            c.BackgroundResource = "MiniGameArt/BG_B06_CatDoor";  // BG_B06_CatDoor（ComfyUI 实机模板重生成）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -139,6 +145,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q10()
         {
             var c = New("Q10", "E07_NapNest");
+            c.BackgroundResource = "MiniGameArt/BG_B02_NapNest";  // BG_B02_NapNest（ComfyUI 实机模板重生成）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -158,6 +165,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q12()
         {
             var c = New("Q12", "E10_NestStone");
+            c.BackgroundResource = "MiniGameArt/BG_B03_CrowNest";  // BG_B03_CrowNest（ComfyUI 实机模板重生成）
             c.SlotCount = 1;
             c.Targets = new[]
             {
@@ -188,7 +196,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q02()
         {
             var c = New("Q02", "E01_Charcoal");
-            c.BackgroundResource = "MiniGameArt/ConceptB01_Haystack";  // B-01 稻草堆概念图（美术效果预览）
+            c.BackgroundResource = "MiniGameArt/BG_B01_Haystack";  // B-01 稻草堆（ComfyUI 实机模板重生成）
             c.SlotCount = 2;
             // 主区 1285×637。碳条横向居中偏右、尖尖朝右；尾叶盖在碳条左端（尾部）。
             c.Targets = new[]
@@ -214,6 +222,7 @@ namespace EggRescue.MiniGame
                     new Vector2(460f, 150f), 1)
                 {
                     Shape = FlipShape.Rect,
+                    SpritePath = "MiniGameArt/SP_M04_charcoal_Q02",  // 正式素材（ComfyUI 重生成）
                     Color = coalColor,
                     Faces = new[]
                     {
@@ -227,6 +236,7 @@ namespace EggRescue.MiniGame
                     new Vector2(220f, 140f), 2)
                 {
                     Shape = FlipShape.Ellipse,
+                    SpritePath = "MiniGameArt/SP_M15_tailleaf_Q02",  // 正式素材（ComfyUI 重生成）
                     Color = leafColor,
                     Faces = new[]
                     {
@@ -243,6 +253,8 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q15()
         {
             var c = New("Q15", "E15_FoodBowl");
+            c.BackgroundResource = "MiniGameArt/BG_B07_FloorBowl";  // BG_B07_FloorBowl（ComfyUI 实机模板重生成）
+            c.ObjectSpritePath = "MiniGameArt/SP_M06_bowl_Q15";  // M-06 陶瓷食碗（正式素材）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -261,6 +273,8 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q18()
         {
             var c = New("Q18", "E17_Bucket");
+            c.BackgroundResource = "MiniGameArt/BG_B06_CatDoor";  // BG_B06_CatDoor（ComfyUI 实机模板重生成）
+            c.ObjectSpritePath = "MiniGameArt/SP_M07_bucket_Q18";  // M-07 倒扣水桶（正式素材）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -282,6 +296,8 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q12B()
         {
             var c = New("Q12B", "E10_NestStone");
+            c.BackgroundResource = "MiniGameArt/BG_B03_CrowNest";  // BG_B03_CrowNest（ComfyUI 实机模板重生成）
+            c.ObjectSpritePath = "MiniGameArt/SP_M05_whitestone_Q12";  // M-05 白圆石（正式素材）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -302,6 +318,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q19()
         {
             var c = New("Q19", "E18_Bootprints");
+            c.BackgroundResource = "MiniGameArt/BG_B07_FloorBowl";  // BG_B07_FloorBowl（ComfyUI 实机模板重生成）
             c.SlotCount = 6;
             const float w = 200f, h = 160f, gap = 8f;
             const float ox = 334f, oy = 154f; // (1285-616)/2, (637-328)/2 —— 六格在主区居中
@@ -325,6 +342,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q17()
         {
             var c = New("Q17", "E28_TreeScratch");
+            c.BackgroundResource = "MiniGameArt/BG_B04_TreeRoot";  // BG_B04_TreeRoot（ComfyUI 实机模板重生成）
             c.SlotCount = 3;
             c.Segments = new[]
             {
@@ -342,6 +360,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q03()
         {
             var c = New("Q03", "E02_Feathers");
+            c.BackgroundResource = "MiniGameArt/BG_B01_Haystack";  // BG_B01_Haystack（ComfyUI 实机模板重生成）
             c.SlotCount = 3;
             c.Targets = new[]
             {
@@ -357,6 +376,7 @@ namespace EggRescue.MiniGame
         static MiniGameContent Q16()
         {
             var c = New("Q16", "E16_BlackFur");
+            c.BackgroundResource = "MiniGameArt/BG_B06_CatDoor";  // BG_B06_CatDoor（ComfyUI 实机模板重生成）
             c.SlotCount = 2;
             c.Targets = new[]
             {
@@ -382,9 +402,9 @@ namespace EggRescue.MiniGame
             };
             c.Cards = new[]
             {
-                K("heart_egg", "画着爱心的蛋", "wanted"),
-                K("this_morning", "今天早上", "when"),
-                K("plain_egg", "普通的蛋", null), // 干扰
+                K("heart_egg", "画着爱心的蛋", "wanted", 0, "T7_01_heart_egg_Q01"),
+                K("this_morning", "今天早上", "when", 0, "T7_02_morning_Q01"),
+                K("plain_egg", "普通的蛋", null, 0, "T7_03_plain_egg_Q01"), // 干扰
             };
             return c;
         }
@@ -404,9 +424,9 @@ namespace EggRescue.MiniGame
             };
             c.Cards = new[]
             {
-                K("noise_guess", "昨晚外面那声音……肯定是水怪干的", "guess"),
-                K("bead_sank", "宝珠沉下去了", "frog_said"),
-                K("public", "就说……水怪。从池塘来的。把蛋叼走了……", "public_line"),
+                K("noise_guess", "昨晚外面那声音……肯定是水怪干的", "guess", 0, "T7_04_sound_guess_Q04"),
+                K("bead_sank", "宝珠沉下去了", "frog_said", 0, "T7_05_frog_said_Q04"),
+                K("public", "就说……水怪。从池塘来的。把蛋叼走了……", "public_line", 0, "T7_06_public_words_Q04"),
             };
             return c;
         }
@@ -426,9 +446,9 @@ namespace EggRescue.MiniGame
             };
             c.Cards = new[]
             {
-                K("three_heads", "三个脑袋！浑身绿色！", "shape"),
-                K("from_pond", "从池塘爬上来！", "origin"),
-                K("pond_frog", "池塘那只青蛙", "next"),
+                K("three_heads", "三个脑袋！浑身绿色！", "shape", 0, "T7_07_three_heads_Q05"),
+                K("from_pond", "从池塘爬上来！", "origin", 0, "T7_08_from_pond_Q05"),
+                K("pond_frog", "池塘那只青蛙", "next", 0, "T7_09_frog_object_Q05"),
             };
             return c;
         }
@@ -448,9 +468,9 @@ namespace EggRescue.MiniGame
             };
             c.Cards = new[]
             {
-                K("pure", "纯净，第一个死去。", "p1", 1),
-                K("vessel", "冰冷的器皿来了。生命之源在枯竭。", "p2", 2),
-                K("demon", "一个黑色的恶魔……它带走了宝珠。", "p3", 3),
+                K("pure", "纯净，第一个死去。", "p1", 1, "T7_10_first_Q07"),
+                K("vessel", "冰冷的器皿来了。生命之源在枯竭。", "p2", 2, "T7_11_second_Q07"),
+                K("demon", "一个黑色的恶魔……它带走了宝珠。", "p3", 3, "T7_12_third_Q07"),
             };
             return c;
         }
@@ -470,9 +490,9 @@ namespace EggRescue.MiniGame
             };
             c.Cards = new[]
             {
-                K("crow", "乌鸦……叼走了", "taker"),
-                K("barn_roof", "往谷仓屋顶飞了", "where"),
-                K("air", "只咬到一嘴空气", "chase"),
+                K("crow", "乌鸦……叼走了", "taker", 0, "T7_13_crow_egg_Q08"),
+                K("barn_roof", "往谷仓屋顶飞了", "where", 0, "T7_14_barn_roof_Q08"),
+                K("air", "只咬到一嘴空气", "chase", 0, "T7_15_air_Q08"),
             };
             return c;
         }
@@ -491,9 +511,9 @@ namespace EggRescue.MiniGame
             };
             c.Cards = new[]
             {
-                K("push_back", "白石画成假蛋，真蛋带出去又推回窝", "fake_stone", 1),
-                K("crow_took", "假石扔进草丛，后来被乌鸦叼走", "fake_stone", 2),
-                K("last_night", "弟弟是昨晚才不见的！跟那一趟不是一回事！", "real_egg", 3),
+                K("push_back", "白石画成假蛋，真蛋带出去又推回窝", "fake_stone", 1, "T7_16_fake_stone_Q13"),
+                K("crow_took", "假石扔进草丛，后来被乌鸦叼走", "fake_stone", 2, "T7_17_empty_nest_Q13"),
+                K("last_night", "弟弟是昨晚才不见的！跟那一趟不是一回事！", "real_egg", 3, "T7_18_pen_note_Q13"),
             };
             return c;
         }

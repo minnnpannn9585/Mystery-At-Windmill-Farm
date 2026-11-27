@@ -43,7 +43,7 @@ def build(doc):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(30)
-    r = p.add_run("资源清单 · 复用筛查 · 逐项规格　v1.1（概念图已导入 Unity / 19 局全量接入 / 除交互目标外皆底图）")
+    r = p.add_run("资源清单 · 复用筛查 · 逐项规格　v1.2（ComfyUI 实机模板重生成 · 35 张素材投入 Unity / 19 局全量接入 / 除交互目标外皆底图）")
     set_run_font(r, size=12, color=MID)
 
     figure(doc, img("01-magnifier-flat.png"), 13.6,
@@ -588,6 +588,20 @@ def build(doc):
           ],
           widths=[4.2, 3.6, 6.2, 2.8], size=8)
     body(doc, "说明：B-01 概念图为满幅不透明、带 AI 水印的评审稿，当前直接作 Q02 底图预览美术效果；**正式 B-01 仍需透明底、无水印的定稿素材**替换（替换时只改资源内容，`BackgroundResource` 路径与判定不变）。箭头与灯泡已按 W-04 / G-20b 规格在运行时使用，正式图到位可直接换 sprite。", size=9, color=GREY)
+
+    h(doc, "5.1.3　ComfyUI 实机模板重生成素材（v1.2）", 3)
+    body(doc, "按用户提供的《各任务板块概念图实机参考.docx》（Q1–Q19 实机截图共 17 张），以本地 ComfyUI（FLUX.1-dev fp8 + `FLUX_flat_colour_anime_v3.4` 平涂卡通 LoRA + ControlNet Union Pro 2.0 Canny 锁构图）重生成第一批正式素材。图生图以实机截图为构图模板，prompt 严格按 19-文档物件描述，输出硬边色块、无渐变无噪点的平涂卡通；前景件白底生成后做边缘漫水键控转透明、按本节规格重框、四周留 2px 透明边。全部导入 `Assets/Resources/MiniGameArt/` 为 Sprite (2D and UI)，已 MCP 截图确认在游戏内正常渲染。")
+    table(doc,
+          ["类别", "资源名（Resources）", "对应编号 / 局", "实装位置", "状态"],
+          [
+              ["满幅底图", "`BG_B01_Haystack` … `BG_B07_FloorBowl`（7 张）", "B-01~B-07 / Q02·Q03·Q06·Q09·Q10·Q11·Q12·Q12B·Q14·Q15·Q16·Q17·Q18·Q19", "各局 `Content.BackgroundResource` 铺主区底图", "**已实装**（Q02 MCP 截图确认）"],
+              ["前景可动物", "`SP_M04_charcoal_Q02`、`SP_M15_tailleaf_Q02`", "M-04 / M-15（Q02）", "`FlipObjects[].SpritePath`", "**已实装**"],
+              ["前景翻转件", "`SP_M05_whitestone_Q12`、`SP_M06_bowl_Q15`、`SP_M07_bucket_Q18`", "M-05 / M-06 / M-07", "单物体 `Content.ObjectSpritePath`（新增字段）", "**已实装**"],
+              ["前景工具/物证", "`SP_M11_yellowfluff_Q03`、`SP_M12_darkfur_Q16`、`SP_W01_magnifier`、`SP_W_tweezers_Q03Q16`、`SP_M01_strawbundle_Q10`", "M-11 / M-12 / W-01 / W-06 / M-01", "资源已就位，待对应模板接线", "**资源已导入**"],
+              ["卡面图标", "`IC_T7_01` … `IC_T7_18`（18 张，96×96）", "T7-01~18 / Q01·Q04·Q05·Q07·Q08·Q13", "`MiniGameCard.IconPath`（新增字段），`TestimonyBoard` 有图标则铺 sprite", "**已实装**（Q01 MCP 截图确认）"],
+          ],
+          widths=[2.4, 4.6, 3.8, 3.4, 2.6], size=8)
+    body(doc, "生成口径：底图 1024×576（16:9）按主区等比铺满；前景白底生成后经 alpha 键控 + alpha 包围盒裁切 + 2px 透明边 + 等比 fit 到规格尺寸（透明 PNG）。卡面图标统一 96×96。T7 六局仍无背景板（§9 口径不变）。", size=9, color=GREY)
 
     h(doc, "5.2　四局的背景板", 2)
     body(doc, "`B-01`（稻草堆，Q02 直接用）、`B-03`（巢草，Q12）、`B-07`（室内地面门脚，Q15 / Q18 换色）。**这四局不需要单独背景**，是本模板最大的省钱点。")
